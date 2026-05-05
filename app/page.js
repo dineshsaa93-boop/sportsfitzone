@@ -5,15 +5,17 @@ import Link from "next/link";
 export default function Home() {
   return (
     <div style={{
+      minHeight: "100vh",
       padding: 20,
       fontFamily: "Arial",
-      background: "#f5f5f5",
-      minHeight: "100vh"
+      background: "linear-gradient(135deg,#0f172a,#1e293b,#020617)",
+      color: "white"
     }}>
 
       {/* HEADER */}
       <h1 style={{
         textAlign: "center",
+        fontSize: 28,
         marginBottom: 5
       }}>
         🏆 Sports Fit Zone
@@ -21,13 +23,13 @@ export default function Home() {
 
       <p style={{
         textAlign: "center",
-        color: "gray",
-        marginBottom: 20
+        color: "#94a3b8",
+        marginBottom: 25
       }}>
         Train • Play • Improve
       </p>
 
-      {/* GRID */}
+      {/* GRID MENU */}
       <div style={{
         display: "grid",
         gridTemplateColumns: "1fr 1fr",
@@ -39,7 +41,7 @@ export default function Home() {
         </Link>
 
         <Link href="/store">
-          <div style={card}>🏪 Sports Store</div>
+          <div style={card}>🏪 Store</div>
         </Link>
 
         <Link href="/coach">
@@ -50,17 +52,38 @@ export default function Home() {
 
       </div>
 
+      {/* BOTTOM NAV */}
+      <div style={{
+        position: "fixed",
+        bottom: 10,
+        left: 10,
+        right: 10,
+        background: "rgba(255,255,255,0.1)",
+        backdropFilter: "blur(10px)",
+        borderRadius: 20,
+        display: "flex",
+        justifyContent: "space-around",
+        padding: 10
+      }}>
+        <a href="/">🏠</a>
+        <a href="/training">🏋️</a>
+        <a href="/store">🛒</a>
+        <a href="/coach">🤖</a>
+      </div>
+
     </div>
   );
 }
 
 const card = {
-  background: "white",
+  backdropFilter: "blur(12px)",
+  background: "rgba(255,255,255,0.1)",
   padding: 20,
   borderRadius: 15,
   textAlign: "center",
   fontWeight: "bold",
   fontSize: 16,
-  boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
-  cursor: "pointer"
+  border: "1px solid rgba(255,255,255,0.2)",
+  cursor: "pointer",
+  transition: "0.3s",
 };
