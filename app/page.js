@@ -24,7 +24,9 @@ export default function Home() {
         <Link href="/training">
           <div style={box}>🏋️ Training</div>
         </Link>
-
+<Link href="/coach">
+  <div style={box}>🤖 AI Coach</div>
+</Link>
         <Link href="/store">
           <div style={box}>🏪 DP Store</div>
         </Link>
