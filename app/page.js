@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Home() {
   const [cart, setCart] = useState([]);
@@ -10,8 +10,24 @@ export default function Home() {
     { id: 3, name: "⚽ Football", price: 799 },
   ];
 
+  // 👉 Load cart from localStorage
+  useEffect(() => {
+    const savedCart = JSON.parse(localStorage.getItem("cart")) || [];
+    setCart(savedCart);
+  }, []);
+
+  // 👉 Save cart to localStorage
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
+
   const addToCart = (product) => {
     setCart([...cart, product]);
+  };
+
+  const removeItem = (index) => {
+    const newCart = cart.filter((_, i) => i !== index);
+    setCart(newCart);
   };
 
   const total = cart.reduce((sum, item) => sum + item.price, 0);
@@ -42,6 +58,12 @@ export default function Home() {
           {cart.map((item, index) => (
             <li key={index}>
               {item.name} - ₹{item.price}
+              <button
+                onClick={() => removeItem(index)}
+                style={{ marginLeft: "10px" }}
+              >
+                ❌ Remove
+              </button>
             </li>
           ))}
         </ul>
