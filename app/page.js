@@ -1,83 +1,76 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export default function Home() {
-  const [user, setUser] = useState(null);
-  const [name, setName] = useState("");
-
-  const [cart, setCart] = useState([]);
+  const [search, setSearch] = useState("");
+  const [dark, setDark] = useState(false);
+  const [favorites, setFavorites] = useState([]);
 
   const products = [
-    { id: 1, name: "🏏 Cricket Bat", price: 999 },
-    { id: 2, name: "🎾 Badminton Racket", price: 499 },
-    { id: 3, name: "⚽ Football", price: 799 },
+    { id: 1, name: "Cricket Bat", price: 999 },
+    { id: 2, name: "Badminton Racket", price: 499 },
+    { id: 3, name: "Football", price: 799 },
   ];
 
-  // Load user + cart
-  useEffect(() => {
-    const savedUser = localStorage.getItem("user");
-    const savedCart = JSON.parse(localStorage.getItem("cart")) || [];
-
-    if (savedUser) setUser(savedUser);
-    setCart(savedCart);
-  }, []);
-
-  // Save cart
-  useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cart));
-  }, [cart]);
-
-  const login = () => {
-    if (name.trim() === "") return alert("Enter name");
-    localStorage.setItem("user", name);
-    setUser(name);
+  const toggleFav = (p) => {
+    if (favorites.find((f) => f.id === p.id)) {
+      setFavorites(favorites.filter((f) => f.id !== p.id));
+    } else {
+      setFavorites([...favorites, p]);
+    }
   };
 
-  const logout = () => {
-    localStorage.removeItem("user");
-    setUser(null);
-  };
+  const filtered = products.filter((p) =>
+    p.name.toLowerCase().includes(search.toLowerCase())
+  );
 
-  const addToCart = (p) => setCart([...cart, p]);
-  const total = cart.reduce((sum, item) => sum + item.price, 0);
-
-  // 👉 अगर login नहीं है
-  if (!user) {
-    return (
-      <div style={{ padding: 20 }}>
-        <h1>Login</h1>
-        <input
-          placeholder="Enter your name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-        <button onClick={login}>Login</button>
-      </div>
-    );
-  }
-
-  // 👉 login हो गया तो main app
   return (
-    <div style={{ padding: 20 }}>
-      <h1>Welcome {user} 👋</h1>
-      <button onClick={logout}>Logout</button>
+    <div
+      style={{
+        padding: 20,
+        fontFamily: "Arial",
+        background: dark ? "#111" : "#fff",
+        color: dark ? "#fff" : "#000",
+        minHeight: "100vh",
+      }}
+    >
+      <h1>Sports Fit Zone 🚀</h1>
+
+      {/* Dark Mode */}
+      <button onClick={() => setDark(!dark)}>
+        {dark ? "☀️ Light" : "🌙 Dark"}
+      </button>
+
+      {/* Search */}
+      <input
+        placeholder="Search product..."
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+        style={{ marginLeft: 10 }}
+      />
 
       <h2>Products</h2>
-      {products.map((p) => (
-        <div key={p.id}>
+
+      {filtered.map((p) => (
+        <div key={p.id} style={{ marginBottom: 10 }}>
           {p.name} - ₹{p.price}
-          <button onClick={() => addToCart(p)}>Add</button>
+          <button onClick={() => toggleFav(p)} style={{ marginLeft: 10 }}>
+            {favorites.find((f) => f.id === p.id) ? "❤️" : "🤍"}
+          </button>
         </div>
       ))}
 
-      <h2>Cart</h2>
-      {cart.map((item, i) => (
-        <div key={i}>
-          {item.name} - ₹{item.price}
-        </div>
-      ))}
+      <h2>⭐ Favorites</h2>
 
-      <h3>Total: ₹{total}</h3>
+      {favorites.length === 0 ? (
+        <p>No favorites yet</p>
+      ) : (
+        favorites.map((f) => (
+          <div key={f.id}>
+            {f.name} - ₹{f.price}
+          </div>
+        ))
+      )}
     </div>
   );
-}
+            }
