@@ -4,47 +4,63 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <div style={{ padding: 20, fontFamily: "sans-serif" }}>
+    <div style={{
+      padding: 20,
+      fontFamily: "Arial",
+      background: "#f5f5f5",
+      minHeight: "100vh"
+    }}>
 
-      {/* TOP BAR */}
-      <h1>🏆 Sports Fit Zone</h1>
+      {/* HEADER */}
+      <h1 style={{
+        textAlign: "center",
+        marginBottom: 5
+      }}>
+        🏆 Sports Fit Zone
+      </h1>
 
-      <p style={{ color: "gray" }}>
-        Level: Beginner 🔥 | XP: 120
+      <p style={{
+        textAlign: "center",
+        color: "gray",
+        marginBottom: 20
+      }}>
+        Train • Play • Improve
       </p>
 
-      {/* GRID MENU */}
+      {/* GRID */}
       <div style={{
         display: "grid",
         gridTemplateColumns: "1fr 1fr",
-        gap: 15,
-        marginTop: 20
+        gap: 15
       }}>
 
         <Link href="/training">
-          <div style={box}>🏋️ Training</div>
+          <div style={card}>🏋️ Training</div>
         </Link>
-<Link href="/coach">
-  <div style={box}>🤖 AI Coach</div>
-</Link>
+
         <Link href="/store">
-          <div style={box}>🏪 DP Store</div>
+          <div style={card}>🏪 Sports Store</div>
         </Link>
 
-        <div style={box}>❓ Doubts</div>
+        <Link href="/coach">
+          <div style={card}>🤖 AI Coach</div>
+        </Link>
 
-        <div style={box}>📊 Progress</div>
+        <div style={card}>📊 Progress</div>
 
       </div>
+
     </div>
   );
 }
 
-const box = {
+const card = {
   background: "white",
   padding: 20,
-  borderRadius: 12,
+  borderRadius: 15,
   textAlign: "center",
   fontWeight: "bold",
-  boxShadow: "0 2px 5px rgba(0,0,0,0.1)"
+  fontSize: 16,
+  boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
+  cursor: "pointer"
 };
