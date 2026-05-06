@@ -5,9 +5,11 @@ export default function Watch() {
 
       <iframe
         width="100%"
-        height="200"
-        src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+        height="220"
+        src="https://www.youtube.com/embed/pSWZ-fum9UY"
+        allowFullScreen
       ></iframe>
+
     </div>
   );
 }
