@@ -1,8 +1,11 @@
-<link rel="manifest" href="/manifest.json" />
-<meta name="theme-color" content="#0f172a" /><link rel="manifest" href="/manifest.json" />
-<meta name="theme-color" content="#0f172a" />export default function RootLayout({ children }) {
+export const metadata = {
+  title: "Sports Fit Zone",
+  description: "Ultimate Sports App",
+};
+
+export default function RootLayout({ children }) {
   return (
-    <html>
+    <html lang="en">
       <body>{children}</body>
     </html>
   );
