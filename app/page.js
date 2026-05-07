@@ -1,93 +1,120 @@
-import { useEffect } from "react";useEffect(() => {
-  if ("serviceWorker" in navigator) {
-    navigator.serviceWorker.register("/sw.js");
-  }
-}, []);"use client";
+"use client";
 
-import Link from "next/link";
+import { useState } from "react";
 
 export default function Home() {
+
+  const [xp, setXp] = useState(296);
+
   return (
     <div style={{
-      minHeight: "100vh",
-      padding: 20,
-      fontFamily: "Arial",
-      background: "linear-gradient(135deg,#0f172a,#1e293b,#020617)",
-      color: "white"
+      background:"#111827",
+      minHeight:"100vh",
+      color:"white",
+      padding:"20px",
+      fontFamily:"sans-serif"
     }}>
 
-      {/* HEADER */}
       <h1 style={{
-        textAlign: "center",
-        fontSize: 28,
-        marginBottom: 5
+        fontSize:"35px",
+        fontWeight:"bold"
       }}>
-        🏆 Sports Fit Zone
+        Sports Fit Zone 🚀
       </h1>
 
-      <p style={{
-        textAlign: "center",
-        color: "#94a3b8",
-        marginBottom: 25
-      }}>
-        Train • Play • Improve
-      </p>
-
-      {/* GRID MENU */}
       <div style={{
-        display: "grid",
-        gridTemplateColumns: "1fr 1fr",
-        gap: 15
+        background:"#1f2937",
+        padding:"20px",
+        borderRadius:"20px",
+        marginTop:"20px"
+      }}>
+        <h2>🏆 Your XP</h2>
+        <h1>{xp}</h1>
+
+        <button
+          onClick={() => setXp(xp + 10)}
+          style={{
+            padding:"10px",
+            borderRadius:"10px",
+            border:"none",
+            background:"#22c55e",
+            color:"white",
+            marginTop:"10px"
+          }}
+        >
+          Complete Challenge +10 XP
+        </button>
+      </div>
+
+      <div style={{
+        display:"grid",
+        gridTemplateColumns:"1fr 1fr",
+        gap:"15px",
+        marginTop:"20px"
       }}>
 
-        <Link href="/training">
-          <div style={card}>🏋️ Training</div>
-        </Link>
+        <div style={{
+          background:"#2563eb",
+          padding:"20px",
+          borderRadius:"20px"
+        }}>
+          <h2>🏏 Cricket</h2>
+          <p>Batting Masterclass</p>
+        </div>
 
-        <Link href="/store">
-          <div style={card}>🏪 Store</div>
-        </Link>
+        <div style={{
+          background:"#dc2626",
+          padding:"20px",
+          borderRadius:"20px"
+        }}>
+          <h2>⚽ Football</h2>
+          <p>Speed Training</p>
+        </div>
 
-        <Link href="/coach">
-          <div style={card}>🤖 AI Coach</div>
-        </Link>
+        <div style={{
+          background:"#16a34a",
+          padding:"20px",
+          borderRadius:"20px"
+        }}>
+          <h2>🏸 Badminton</h2>
+          <p>Smash Practice</p>
+        </div>
 
-        <div style={card}>📊 Progress</div>
+        <div style={{
+          background:"#9333ea",
+          padding:"20px",
+          borderRadius:"20px"
+        }}>
+          <h2>🧠 AI Coach</h2>
+          <p>Ask fitness doubts</p>
+        </div>
 
       </div>
 
-      {/* BOTTOM NAV */}
       <div style={{
-        position: "fixed",
-        bottom: 10,
-        left: 10,
-        right: 10,
-        background: "rgba(255,255,255,0.1)",
-        backdropFilter: "blur(10px)",
-        borderRadius: 20,
-        display: "flex",
-        justifyContent: "space-around",
-        padding: 10
+        background:"#f59e0b",
+        color:"black",
+        padding:"20px",
+        borderRadius:"20px",
+        marginTop:"20px"
       }}>
-        <a href="/">🏠</a>
-        <a href="/training">🏋️</a>
-        <a href="/store">🛒</a>
-        <a href="/coach">🤖</a>
+        <h2>🔥 Daily Challenge</h2>
+        <p>Do 20 pushups today</p>
+      </div>
+
+      <div style={{
+        background:"#1f2937",
+        padding:"20px",
+        borderRadius:"20px",
+        marginTop:"20px"
+      }}>
+        <h2>🛒 DP Store</h2>
+
+        <p>🏏 Cricket Bat - ₹999</p>
+        <p>🏸 Badminton Racket - ₹499</p>
+        <p>⚽ Football - ₹799</p>
       </div>
 
     </div>
   );
 }
-
-const card = {
-  backdropFilter: "blur(12px)",
-  background: "rgba(255,255,255,0.1)",
-  padding: 20,
-  borderRadius: 15,
-  textAlign: "center",
-  fontWeight: "bold",
-  fontSize: 16,
-  border: "1px solid rgba(255,255,255,0.2)",
-  cursor: "pointer",
-  transition: "0.3s",
-};
