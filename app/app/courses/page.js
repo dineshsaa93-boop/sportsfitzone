@@ -1,3 +1,3 @@
-<a href="/watch">
-  <button>Start Training</button>
-</a>
+"use client";
+
+export default function Page() {
