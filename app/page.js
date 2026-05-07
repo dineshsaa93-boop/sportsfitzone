@@ -2,111 +2,99 @@
 
 import {
   Menu,
-  Bell,
   Trophy,
   Flame,
-  BookOpen,
-  Brain,
-  Dumbbell,
-  ShoppingCart,
-  User,
+  Bell,
   PlayCircle,
   ClipboardList,
   MessageCircleQuestion,
+  BookOpen,
   Users,
-  Target,
   Bot,
   Calendar,
+  Dumbbell,
+  Brain,
+  ShoppingCart,
+  User,
   ChevronRight,
+  Play,
+  X,
 } from "lucide-react";
 
 export default function Home() {
   const features = [
     {
-      icon: <PlayCircle size={34} color="#39ff14" />,
+      icon: <PlayCircle size={40} color="#39ff14" />,
       title: "All Training",
     },
     {
-      icon: <ClipboardList size={34} color="#2f8cff" />,
+      icon: <ClipboardList size={40} color="#2f8cff" />,
       title: "All Tests",
     },
     {
-      icon: <MessageCircleQuestion size={34} color="#bb6cff" />,
+      icon: <MessageCircleQuestion size={40} color="#b967ff" />,
       title: "My Doubts",
     },
     {
-      icon: <BookOpen size={34} color="#ff9d2f" />,
+      icon: <BookOpen size={40} color="#ff9d2f" />,
       title: "Sports Books",
+      badge: "NEW",
     },
     {
-      icon: <Users size={34} color="#ffd43b" />,
+      icon: <Users size={40} color="#ffd43b" />,
       title: "Community",
     },
     {
-      icon: <Trophy size={34} color="#ff4d6d" />,
+      icon: <Trophy size={40} color="#ff4d6d" />,
       title: "Challenges",
     },
     {
-      icon: <Bot size={34} color="#00e5ff" />,
+      icon: <Bot size={40} color="#00e5ff" />,
       title: "AI Coach",
     },
     {
-      icon: <Calendar size={34} color="#4d7cff" />,
+      icon: <Calendar size={40} color="#4d7cff" />,
       title: "Events",
     },
   ];
 
   const sessions = [
     {
+      image:
+        "https://images.unsplash.com/photo-1624526267942-ab0ff8a3e972?q=80&w=1000&auto=format&fit=crop",
+      time: "03:00 PM",
       title: "Cricket Batting Masterclass",
       coach: "Rahul Dravid",
       desc: "Perfect your batting technique and timing",
-      time: "03:00 PM",
-      img: "https://images.unsplash.com/photo-1546519638-68e109498ffc?q=80&w=1000&auto=format&fit=crop",
     },
     {
+      image:
+        "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=1000&auto=format&fit=crop",
+      time: "04:30 PM",
       title: "Football Speed & Agility",
       coach: "Sunil Chhetri",
-      desc: "Increase your speed and performance",
-      time: "04:30 PM",
-      img: "https://images.unsplash.com/photo-1517466787929-bc90951d0974?q=80&w=1000&auto=format&fit=crop",
+      desc: "Increase your speed and on-field performance",
     },
   ];
 
   return (
-    <div
-      style={{
-        background:
-          "linear-gradient(to bottom,#000814,#001d3d,#000814)",
-        minHeight: "100vh",
-        color: "white",
-        paddingBottom: "120px",
-        fontFamily: "Arial",
-      }}
-    >
-      {/* TOP BAR */}
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          padding: "20px",
-        }}
-      >
+    <main className="app">
+      {/* TOP */}
+      <div className="topbar">
         <Menu size={34} />
 
-        <div style={{ display: "flex", gap: "18px" }}>
-          <div style={{ display: "flex", gap: "5px" }}>
+        <div className="top-right">
+          <div className="stat">
             <Trophy color="#ffd43b" />
             <span>12</span>
           </div>
 
-          <div style={{ display: "flex", gap: "5px" }}>
+          <div className="stat">
             <Flame color="#39ff14" />
             <span>3</span>
           </div>
 
-          <div style={{ display: "flex", gap: "5px" }}>
+          <div className="stat">
             <Brain color="#39ff14" />
             <span>468</span>
           </div>
@@ -116,342 +104,135 @@ export default function Home() {
       </div>
 
       {/* HERO */}
-      <div
-        style={{
-          margin: "0 18px",
-          borderRadius: "30px",
-          overflow: "hidden",
-          position: "relative",
-          backgroundImage:
-            "url('https://images.unsplash.com/photo-1547347298-4074fc3086f0?q=80&w=1200&auto=format&fit=crop')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          height: "270px",
-          padding: "22px",
-          border: "1px solid rgba(255,255,255,0.1)",
-        }}
-      >
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            background: "rgba(0,0,0,0.65)",
-          }}
-        />
+      <div className="hero">
+        <div className="overlay"></div>
 
-        <div style={{ position: "relative", zIndex: 2 }}>
-          <p
-            style={{
-              color: "#cfcfcf",
-              fontSize: "18px",
-              marginBottom: "10px",
-            }}
-          >
-            WELCOME BACK!
-          </p>
+        <div className="hero-content">
+          <p className="welcome">WELCOME BACK!</p>
 
-          <h1
-            style={{
-              fontSize: "52px",
-              lineHeight: "54px",
-              fontWeight: "900",
-              marginBottom: "12px",
-            }}
-          >
-            Sports Fit <br /> Zone ⚽
+          <h1>
+            Sports Fit Zone <span>⚽</span>
           </h1>
 
-          <p
-            style={{
-              color: "#d4d4d4",
-              fontSize: "22px",
-            }}
-          >
-            Train. Improve. Dominate.
-          </p>
+          <p className="subtitle">Train. Improve. Dominate.</p>
 
-          <button
-            style={{
-              marginTop: "24px",
-              background: "transparent",
-              color: "#39ff14",
-              border: "2px solid #39ff14",
-              padding: "14px 22px",
-              borderRadius: "18px",
-              fontSize: "20px",
-              fontWeight: "bold",
-              backdropFilter: "blur(10px)",
-            }}
-          >
-            PREMIUM UPGRADE PLAN →
+          <button className="premium-btn">
+            PREMIUM
+            <br />
+            UPGRADE PLAN →
           </button>
         </div>
       </div>
 
       {/* FEATURES */}
-      <div
-        style={{
-          margin: "20px 18px",
-          background: "rgba(255,255,255,0.04)",
-          borderRadius: "28px",
-          padding: "22px",
-          border: "1px solid rgba(255,255,255,0.08)",
-          backdropFilter: "blur(20px)",
-        }}
-      >
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr 1fr 1fr",
-            gap: "25px",
-            textAlign: "center",
-          }}
-        >
+      <div className="features-box">
+        <div className="features-grid">
           {features.map((item, i) => (
-            <div key={i}>
-              <div style={{ marginBottom: "12px" }}>{item.icon}</div>
+            <div className="feature-item" key={i}>
+              <div className="icon-wrap">
+                {item.icon}
 
-              <p
-                style={{
-                  fontSize: "17px",
-                  fontWeight: "600",
-                  lineHeight: "22px",
-                }}
-              >
-                {item.title}
-              </p>
+                {item.badge && (
+                  <div className="new-badge">{item.badge}</div>
+                )}
+              </div>
+
+              <p>{item.title}</p>
             </div>
           ))}
         </div>
 
-        <div style={{ textAlign: "center" }}>
-          <button
-            style={{
-              marginTop: "25px",
-              background: "rgba(255,255,255,0.08)",
-              color: "white",
-              border: "1px solid rgba(255,255,255,0.08)",
-              padding: "12px 26px",
-              borderRadius: "50px",
-              fontSize: "18px",
-            }}
-          >
-            Show more ▼
-          </button>
+        <div className="show-more-wrap">
+          <button className="show-btn">Show more ▼</button>
         </div>
       </div>
 
-      {/* UPCOMING */}
-      <div
-        style={{
-          padding: "0 18px",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          marginBottom: "14px",
-        }}
-      >
-        <h2 style={{ fontSize: "36px", fontWeight: "900" }}>
-          Upcoming Sessions
-        </h2>
+      {/* HEADING */}
+      <div className="heading-row">
+        <h2>Upcoming Sessions (8)</h2>
 
-        <p style={{ color: "#39ff14", fontSize: "22px" }}>
-          View All
-        </p>
+        <p>View All →</p>
       </div>
 
-      {/* SESSION CARDS */}
-      <div style={{ padding: "0 18px" }}>
+      {/* CARDS */}
+      <div className="cards-wrap">
         {sessions.map((item, i) => (
-          <div
-            key={i}
-            style={{
-              background: "rgba(255,255,255,0.04)",
-              borderRadius: "28px",
-              overflow: "hidden",
-              display: "flex",
-              marginBottom: "18px",
-              border: "1px solid rgba(255,255,255,0.08)",
-            }}
-          >
-            <img
-              src={item.img}
-              alt=""
-              style={{
-                width: "120px",
-                height: "140px",
-                objectFit: "cover",
-              }}
-            />
+          <div className="session-card" key={i}>
+            <img src={item.image} alt="" />
 
-            <div
-              style={{
-                padding: "16px",
-                flex: 1,
-              }}
-            >
-              <div
-                style={{
-                  display: "flex",
-                  gap: "12px",
-                  marginBottom: "10px",
-                  alignItems: "center",
-                }}
-              >
-                <span style={{ color: "#39ff14" }}>
-                  ⏰ {item.time}
-                </span>
+            <div className="card-content">
+              <div className="live-row">
+                <span className="time">🟢 {item.time}</span>
 
-                <span
-                  style={{
-                    background: "#ff2d55",
-                    padding: "4px 10px",
-                    borderRadius: "12px",
-                    fontSize: "13px",
-                    fontWeight: "bold",
-                  }}
-                >
-                  LIVE
-                </span>
+                <span className="live">LIVE</span>
               </div>
 
-              <h3
-                style={{
-                  fontSize: "28px",
-                  marginBottom: "8px",
-                }}
-              >
-                {item.title}
-              </h3>
+              <h3>{item.title}</h3>
 
-              <p
-                style={{
-                  color: "#d4d4d4",
-                  fontSize: "18px",
-                  marginBottom: "6px",
-                }}
-              >
-                By {item.coach}
-              </p>
+              <h4>By {item.coach}</h4>
 
-              <p
-                style={{
-                  color: "#9f9f9f",
-                  fontSize: "15px",
-                }}
-              >
-                {item.desc}
-              </p>
+              <p>{item.desc}</p>
             </div>
 
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                paddingRight: "14px",
-              }}
-            >
-              <ChevronRight size={34} />
+            <div className="arrow">
+              <ChevronRight size={30} />
             </div>
           </div>
         ))}
       </div>
 
       {/* PLAYER */}
-      <div
-        style={{
-          position: "fixed",
-          bottom: "88px",
-          left: "12px",
-          right: "12px",
-          background: "rgba(10,10,10,0.92)",
-          borderRadius: "22px",
-          padding: "14px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          border: "1px solid rgba(255,255,255,0.08)",
-          backdropFilter: "blur(20px)",
-        }}
-      >
-        <div style={{ display: "flex", gap: "12px" }}>
+      <div className="player">
+        <div className="player-left">
           <img
             src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=1000&auto=format&fit=crop"
-            style={{
-              width: "70px",
-              height: "70px",
-              borderRadius: "16px",
-              objectFit: "cover",
-            }}
+            alt=""
           />
 
-          <div>
-            <h3 style={{ fontSize: "24px" }}>
-              Full Body Workout
-            </h3>
+          <div className="play-btn">
+            <Play fill="white" size={26} />
+          </div>
 
-            <p style={{ color: "#cfcfcf" }}>
-              Build Power & Endurance
-            </p>
+          <div>
+            <h3>Full Body Strength Workout</h3>
+            <p>Build Power & Endurance</p>
           </div>
         </div>
 
-        <button
-          style={{
-            background: "#39ff14",
-            color: "black",
-            border: "none",
-            padding: "14px 20px",
-            borderRadius: "16px",
-            fontWeight: "bold",
-            fontSize: "18px",
-          }}
-        >
-          Resume
-        </button>
+        <div className="player-right">
+          <button>Resume</button>
+
+          <X color="#aaa" />
+        </div>
       </div>
 
-      {/* BOTTOM NAV */}
-      <div
-        style={{
-          position: "fixed",
-          bottom: "10px",
-          left: "10px",
-          right: "10px",
-          background: "rgba(10,10,10,0.92)",
-          borderRadius: "28px",
-          display: "flex",
-          justifyContent: "space-around",
-          padding: "16px 10px",
-          border: "1px solid rgba(255,255,255,0.08)",
-          backdropFilter: "blur(20px)",
-        }}
-      >
-        <div style={{ textAlign: "center", color: "#39ff14" }}>
+      {/* NAVBAR */}
+      <div className="navbar">
+        <div className="nav-item active">
           <User />
-          <p style={{ fontSize: "12px" }}>Home</p>
+          <span>Home</span>
         </div>
 
-        <div style={{ textAlign: "center" }}>
+        <div className="nav-item">
           <Dumbbell />
-          <p style={{ fontSize: "12px" }}>Training</p>
+          <span>Training</span>
         </div>
 
-        <div style={{ textAlign: "center" }}>
+        <div className="nav-item">
           <Brain />
-          <p style={{ fontSize: "12px" }}>AI Coach</p>
+          <span>AI Coach</span>
         </div>
 
-        <div style={{ textAlign: "center" }}>
+        <div className="nav-item">
           <ShoppingCart />
-          <p style={{ fontSize: "12px" }}>Store</p>
+          <span>Store</span>
         </div>
 
-        <div style={{ textAlign: "center" }}>
+        <div className="nav-item">
           <User />
-          <p style={{ fontSize: "12px" }}>Profile</p>
+          <span>Profile</span>
         </div>
       </div>
-    </div>
+    </main>
   );
-        }
+      }
