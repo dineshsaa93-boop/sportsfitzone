@@ -1,6 +1,8 @@
+import "./globals.css";
+
 export const metadata = {
   title: "Sports Fit Zone",
-  description: "Ultimate Sports App",
+  description: "Premium Sports Training App",
 };
 
 export default function RootLayout({ children }) {
