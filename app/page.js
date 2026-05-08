@@ -126,16 +126,36 @@ export default function HomePage() {
       <section className="feature-box">
         <div className="feature-grid">
           {features.map((item, index) => (
-            <div className="feature-card" key={index}>
-              <div className="feature-icon">
+              <Link
+  href={
+    item.title === "All Training"
+      ? "/training"
+      : item.title === "AI Coach"
+      ? "/ai-coach"
+      : item.title === "Sports Books"
+      ? "/store"
+      : item.title === "All Tests"
+      ? "/tests"
+      : item.title === "My Doubts"
+      ? "/doubts"
+      : item.title === "Community"
+      ? "/community"
+      : item.title === "Challenges"
+      ? "/challenges"
+      : item.title === "Events"
+      ? "/events"
+      : "/"
+  }
+  className="feature-card"
+  key={index}
+>           <div className="feature-icon">
                 {item.icon}
               </div>
 
               {item.badge && (
                 <div className="badge">
                   {item.badge}
-                </div>
-              )}
+              </Link>
 
               <p>{item.title}</p>
             </div>
