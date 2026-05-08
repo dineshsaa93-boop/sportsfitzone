@@ -1,3 +1,4 @@
+import Link from "next/link";
 "use client";
 
 import {
@@ -207,25 +208,33 @@ export default function Home() {
       </div>
 
       <Link href="/" className="nav-item">
-  <User />
-  <span>Home</span>
-</Link>
+<div className="bottom-nav">
 
-        <Link href="/ai-coach" className="nav-item">
-  <Brain />
-  <span>AI Coach</span>
-</Link>
+  <Link href="/" className="nav-item">
+    <User />
+    <span>Home</span>
+  </Link>
 
-        <div className="nav-item">
-          <Brain />
-          
-<Link href="/store" className="nav-item">
-  <ShoppingCart />
-  <span>Store</span>
-</Link>
-        <Link href="/profile" className="nav-item">
-  <User />
-  <span>Profile</span>
-</Link>
+  <Link href="/training" className="nav-item">
+    <Dumbbell />
+    <span>Training</span>
+  </Link>
+
+  <Link href="/ai-coach" className="nav-item">
+    <Brain />
+    <span>AI Coach</span>
+  </Link>
+
+  <Link href="/store" className="nav-item">
+    <ShoppingCart />
+    <span>Store</span>
+  </Link>
+
+  <Link href="/profile" className="nav-item">
+    <User />
+    <span>Profile</span>
+  </Link>
+
+</div>
   );
       }
