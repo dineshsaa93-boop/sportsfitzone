@@ -207,9 +207,6 @@ export default function Home() {
         </div>
       </div>
 
-      <Link href="/" className="nav-item">
-<div className="bottom-nav">
-
   <Link href="/" className="nav-item">
     <User />
     <span>Home</span>
