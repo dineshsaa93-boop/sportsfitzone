@@ -1,12 +1,12 @@
-import Link from "next/link";
 "use client";
 
+import Link from "next/link";
 import {
   Menu,
   Trophy,
   Flame,
   Bell,
-  PlayCircle,
+  MonitorPlay,
   ClipboardList,
   MessageCircleQuestion,
   BookOpen,
@@ -17,182 +17,166 @@ import {
   Brain,
   ShoppingCart,
   User,
+  PlayCircle,
   ChevronRight,
-  Play,
   X,
 } from "lucide-react";
 
-export default function Home() {
+export default function HomePage() {
   const features = [
     {
-      icon: <PlayCircle size={40} color="#39ff14" />,
+      icon: <MonitorPlay size={38} color="#22ff66" />,
       title: "All Training",
     },
     {
-      icon: <ClipboardList size={40} color="#2f8cff" />,
+      icon: <ClipboardList size={38} color="#2f8fff" />,
       title: "All Tests",
     },
     {
-      icon: <MessageCircleQuestion size={40} color="#b967ff" />,
+      icon: <MessageCircleQuestion size={38} color="#c266ff" />,
       title: "My Doubts",
     },
     {
-      icon: <BookOpen size={40} color="#ff9d2f" />,
+      icon: <BookOpen size={38} color="#ff9d2f" />,
       title: "Sports Books",
       badge: "NEW",
     },
     {
-      icon: <Users size={40} color="#ffd43b" />,
+      icon: <Users size={38} color="#ffd43b" />,
       title: "Community",
     },
     {
-      icon: <Trophy size={40} color="#ff4d6d" />,
+      icon: <Trophy size={38} color="#ff4d6d" />,
       title: "Challenges",
     },
     {
-      icon: <Bot size={40} color="#00e5ff" />,
+      icon: <Bot size={38} color="#00e5ff" />,
       title: "AI Coach",
     },
     {
-      icon: <Calendar size={40} color="#4d7cff" />,
+      icon: <Calendar size={38} color="#4d7cff" />,
       title: "Events",
     },
   ];
 
   const sessions = [
     {
-      image:
-        "https://images.unsplash.com/photo-1624526267942-ab0ff8a3e972?q=80&w=1000&auto=format&fit=crop",
-      time: "03:00 PM",
       title: "Cricket Batting Masterclass",
       coach: "Rahul Dravid",
+      time: "03:00 PM",
       desc: "Perfect your batting technique and timing",
+      image:
+        "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?q=80&w=800&auto=format&fit=crop",
     },
     {
-      image:
-        "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=1000&auto=format&fit=crop",
-      time: "04:30 PM",
       title: "Football Speed & Agility",
       coach: "Sunil Chhetri",
+      time: "04:30 PM",
       desc: "Increase your speed and on-field performance",
+      image:
+        "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=800&auto=format&fit=crop",
     },
   ];
 
   return (
-    <main className="app">
-      {/* TOP */}
+    <main className="home-page">
       <div className="topbar">
-        <Menu size={34} />
+        <Menu color="white" size={34} />
 
-        <div className="top-right">
-          <div className="stat">
-            <Trophy color="#ffd43b" />
+        <div className="stats">
+          <div className="stat-item">
+            <Trophy color="#ffcc33" size={24} />
             <span>12</span>
           </div>
 
-          <div className="stat">
-            <Flame color="#39ff14" />
+          <div className="stat-item">
+            <Flame color="#39ff14" size={24} />
             <span>3</span>
           </div>
 
-          <div className="stat">
-            <Brain color="#39ff14" />
+          <div className="stat-item">
+            <div className="xp-box">XP</div>
             <span>468</span>
           </div>
 
-          <Bell />
+          <Bell color="white" size={24} />
         </div>
       </div>
 
-      {/* HERO */}
-      <div className="hero">
-        <div className="overlay"></div>
-
-        <div className="hero-content">
+      <section className="hero-section">
+        <div className="overlay">
           <p className="welcome">WELCOME BACK!</p>
 
           <h1>
-            Sports Fit Zone <span>⚽</span>
+            Sports Fit Zone ⚽
           </h1>
 
-          <p className="subtitle">Train. Improve. Dominate.</p>
+          <p className="tagline">
+            Train. Improve. Dominate.
+          </p>
 
           <button className="premium-btn">
             PREMIUM
             <br />
-            UPGRADE PLAN →
+            UPGRADE PLAN
           </button>
         </div>
-      </div>
+      </section>
 
-      {/* FEATURES */}
-      <div className="features-box">
-        <div className="features-grid">
-          {features.map((item, i) => (
-            <div className="feature-item" key={i}>
-              <div className="icon-wrap">
+      <section className="feature-box">
+        <div className="feature-grid">
+          {features.map((item, index) => (
+            <div className="feature-card" key={index}>
+              <div className="feature-icon">
                 {item.icon}
-
-                {item.badge && (
-                  <div className="new-badge">{item.badge}</div>
-                )}
               </div>
+
+              {item.badge && (
+                <div className="badge">
+                  {item.badge}
+                </div>
+              )}
 
               <p>{item.title}</p>
             </div>
           ))}
         </div>
 
-        <div className="show-more-wrap">
-          <button className="show-btn">Show more ▼</button>
-        </div>
-      </div>
+        <button className="show-more">
+          Show more
+        </button>
+      </section>
 
-      {/* HEADING */}
-      <div className="heading-row">
+      <div className="section-header">
         <h2>Upcoming Sessions (8)</h2>
-
-        <p>View All →</p>
+        <span>View All</span>
       </div>
 
-      {/* CARDS */}
-      <div className="cards-wrap">
-        {sessions.map((item, i) => (
-          <div className="session-card" key={i}>
-            <img src={item.image} alt="" />
+      {sessions.map((item, index) => (
+        <div className="session-card" key={index}>
+          <img src={item.image} alt="session" />
 
-            <div className="card-content">
-              <div className="live-row">
-                <span className="time">🟢 {item.time}</span>
-
-                <span className="live">LIVE</span>
-              </div>
-
-              <h3>{item.title}</h3>
-
-              <h4>By {item.coach}</h4>
-
-              <p>{item.desc}</p>
+          <div className="session-info">
+            <div className="time-row">
+              <span>{item.time}</span>
+              <div className="live-badge">LIVE</div>
             </div>
 
-            <div className="arrow">
-              <ChevronRight size={30} />
-            </div>
+            <h3>{item.title}</h3>
+            <h4>By {item.coach}</h4>
+            <p>{item.desc}</p>
           </div>
-        ))}
-      </div>
 
-      {/* PLAYER */}
-      <div className="player">
+          <ChevronRight color="white" />
+        </div>
+      ))}
+
+      <div className="player-bar">
         <div className="player-left">
           <img
-            src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=1000&auto=format&fit=crop"
-            alt=""
+            src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=500&auto=format&fit=crop"
+            alt="workout"
           />
-
-          <div className="play-btn">
-            <Play fill="white" size={26} />
-          </div>
 
           <div>
             <h3>Full Body Strength Workout</h3>
@@ -202,36 +186,36 @@ export default function Home() {
 
         <div className="player-right">
           <button>Resume</button>
-
           <X color="#aaa" />
         </div>
       </div>
 
-  <Link href="/" className="nav-item">
-    <User />
-    <span>Home</span>
-  </Link>
+      <div className="bottom-nav">
+        <Link href="/" className="nav-item active">
+          <User />
+          <span>Home</span>
+        </Link>
 
-  <Link href="/training" className="nav-item">
-    <Dumbbell />
-    <span>Training</span>
-  </Link>
+        <Link href="/training" className="nav-item">
+          <Dumbbell />
+          <span>Training</span>
+        </Link>
 
-  <Link href="/ai-coach" className="nav-item">
-    <Brain />
-    <span>AI Coach</span>
-  </Link>
+        <Link href="/ai-coach" className="nav-item">
+          <Brain />
+          <span>AI Coach</span>
+        </Link>
 
-  <Link href="/store" className="nav-item">
-    <ShoppingCart />
-    <span>Store</span>
-  </Link>
+        <Link href="/store" className="nav-item">
+          <ShoppingCart />
+          <span>Store</span>
+        </Link>
 
-  <Link href="/profile" className="nav-item">
-    <User />
-    <span>Profile</span>
-  </Link>
-
-</div>
+        <Link href="/profile" className="nav-item">
+          <User />
+          <span>Profile</span>
+        </Link>
+      </div>
+    </main>
   );
-      }
+    }
