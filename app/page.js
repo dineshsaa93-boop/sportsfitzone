@@ -206,33 +206,26 @@ export default function Home() {
         </div>
       </div>
 
-      {/* NAVBAR */}
-      <div className="navbar">
-        <div className="nav-item active">
-          <User />
-          <span>Home</span>
-        </div>
+      <Link href="/" className="nav-item">
+  <User />
+  <span>Home</span>
+</Link>
 
-        <div className="nav-item">
-          <Dumbbell />
-          <span>Training</span>
-        </div>
+        <Link href="/ai-coach" className="nav-item">
+  <Brain />
+  <span>AI Coach</span>
+</Link>
 
         <div className="nav-item">
           <Brain />
-          <span>AI Coach</span>
-        </div>
-
-        <div className="nav-item">
-          <ShoppingCart />
-          <span>Store</span>
-        </div>
-
-        <div className="nav-item">
-          <User />
-          <span>Profile</span>
-        </div>
-      </div>
-    </main>
+          
+<Link href="/store" className="nav-item">
+  <ShoppingCart />
+  <span>Store</span>
+</Link>
+        <Link href="/profile" className="nav-item">
+  <User />
+  <span>Profile</span>
+</Link>
   );
       }
