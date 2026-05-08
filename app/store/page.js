@@ -1,13 +1,13 @@
-export default function TrainingPage() {
+export default function StorePage() {
   return (
     <div style={{
       minHeight: "100vh",
-      background: "#021224",
+      background: "#020817",
       color: "white",
       padding: "30px"
     }}>
-      <h1>Training Page</h1>
-      <p>All training videos will appear here 🔥</p>
+      <h1>Sports Store</h1>
+      <p>Sports items and equipment.</p>
     </div>
-  );
+  )
 }
