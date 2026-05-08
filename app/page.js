@@ -2,6 +2,10 @@
 
 import Link from "next/link";
 import {
+  User,
+  Dumbbell
+} from "lucide-react";
+import {
   Menu,
   Trophy,
   Flame,
