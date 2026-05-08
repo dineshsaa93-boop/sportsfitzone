@@ -1,26 +1,12 @@
-"use client";
-
-export default function Training() {
+export default function TrainingPage() {
   return (
-    <div style={{ padding: 20 }}>
-      <h1>🏋️ Training</h1>
-
-      <div style={card}>
-        <h3>🏏 Cricket Practice</h3>
-        <button>Start</button>
-      </div>
-
-      <div style={card}>
-        <h3>🏸 Badminton Drills</h3>
-        <button>Start</button>
-      </div>
+    <div style={{
+      background:"#020817",
+      color:"white",
+      minHeight:"100vh",
+      padding:"20px"
+    }}>
+      <h1>Training Page</h1>
     </div>
-  );
+  )
 }
-
-const card = {
-  background: "white",
-  padding: 15,
-  marginTop: 10,
-  borderRadius: 10
-};
