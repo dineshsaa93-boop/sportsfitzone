@@ -156,10 +156,11 @@ export default function HomePage() {
                 {item.icon}
               </div>
 
-              {item.badge && (
-                <div className="badge">
-                  {item.badge}
-              </Link>
+           {item.badge && (
+  <div className="badge">
+    {item.badge}
+  </div>
+)}   
 
               <p>{item.title}</p>
             </div>
