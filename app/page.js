@@ -163,7 +163,7 @@ export default function HomePage() {
 )}   
 
               <p>{item.title}</p>
-            </div>
+            </Link>
           ))}
         </div>
 
