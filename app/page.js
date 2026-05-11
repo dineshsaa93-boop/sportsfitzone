@@ -161,7 +161,7 @@ export default function HomePage() {
         </div>
 
         <button style={styles.showMore}>
-          Show more
+          🍎 Diet Planner
         </button>
       </div>
 
