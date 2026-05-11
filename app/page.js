@@ -368,8 +368,8 @@ const styles = {
     borderRadius: 20,
     padding: 20
   },
-
-  featureBox: {
+featureBox: {
+ minHeight: 650, 
     marginTop: 30,
     background: "#081120",
     borderRadius: 30,
