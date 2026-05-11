@@ -70,7 +70,17 @@ export default function HomePage() {
   icon: "🍎",
   link: "/diet"
 },
-      
+   {
+  title: "Progress",
+  icon: "📊",
+  link: "/progress"
+},
+
+{
+  title: "Sleep",
+  icon: "💤",
+  link: "/sleep"
+},   
     
   ];
 
