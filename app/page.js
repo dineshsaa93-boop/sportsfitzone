@@ -2,242 +2,279 @@
 
 import Link from "next/link";
 
-import {
-  Menu,
-  Trophy,
-  Flame,
-  Bell,
-  MonitorPlay,
-  ClipboardList,
-  MessageCircleQuestion,
-  BookOpen,
-  Users,
-  Bot,
-  Calendar,
-  Dumbbell,
-  Brain,
-  ShoppingCart,
-  User,
-  PlayCircle,
-  ChevronRight,
-  X,
-} from "lucide-react";
-
 export default function HomePage() {
-  const features = [
-    {
-      icon: <MonitorPlay size={38} color="#22ff66" />,
-      title: "All Training",
-    },
-    {
-      icon: <ClipboardList size={38} color="#2f8fff" />,
-      title: "All Tests",
-    },
-    {
-      icon: <MessageCircleQuestion size={38} color="#c266ff" />,
-      title: "My Doubts",
-    },
-    {
-      icon: <BookOpen size={38} color="#ff9d2f" />,
-      title: "Sports Books",
-      badge: "NEW",
-    },
-    {
-      icon: <Users size={38} color="#ffd43b" />,
-      title: "Community",
-    },
-    {
-      icon: <Trophy size={38} color="#ff4d6d" />,
-      title: "Challenges",
-    },
-    {
-      icon: <Bot size={38} color="#00e5ff" />,
-      title: "AI Coach",
-    },
-    {
-      icon: <Calendar size={38} color="#4d7cff" />,
-      title: "Events",
-    },
-  ];
-
-  const sessions = [
-    {
-      title: "Cricket Batting Masterclass",
-      coach: "Rahul Dravid",
-      time: "03:00 PM",
-      desc: "Perfect your batting technique and timing",
-      image:
-        "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?q=80&w=800&auto=format&fit=crop",
-    },
-    {
-      title: "Football Speed & Agility",
-      coach: "Sunil Chhetri",
-      time: "04:30 PM",
-      desc: "Increase your speed and on-field performance",
-      image:
-        "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=800&auto=format&fit=crop",
-    },
-  ];
-
   return (
-    <main className="home-page">
-      <div className="topbar">
-        <Menu color="white" size={34} />
-
-        <div className="stats">
-          <div className="stat-item">
-            <Trophy color="#ffcc33" size={24} />
-            <span>12</span>
-          </div>
-
-          <div className="stat-item">
-            <Flame color="#39ff14" size={24} />
-            <span>3</span>
-          </div>
-
-          <div className="stat-item">
-            <div className="xp-box">XP</div>
-            <span>468</span>
-          </div>
-
-          <Bell color="white" size={24} />
-        </div>
-      </div>
-
-      <section className="hero-section">
-        <div className="overlay">
-          <p className="welcome">WELCOME BACK!</p>
-
-          <h1>
-            Sports Fit Zone ⚽
+    <div
+      style={{
+        background:
+          "linear-gradient(to bottom,#020617,#0f172a)",
+        minHeight: "100vh",
+        color: "white",
+        padding: "20px",
+        paddingBottom: "120px",
+        fontFamily: "Arial",
+      }}
+    >
+      {/* TOP */}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <div>
+          <h1
+            style={{
+              fontSize: "38px",
+              fontWeight: "bold",
+            }}
+          >
+            Welcome Dinesh 👋
           </h1>
 
-          <p className="tagline">
-            Train. Improve. Dominate.
+          <p
+            style={{
+              color: "#94a3b8",
+              marginTop: "5px",
+            }}
+          >
+            Ready for today's workout?
           </p>
-
-          <button className="premium-btn">
-            PREMIUM
-            <br />
-            UPGRADE PLAN
-          </button>
-        </div>
-      </section>
-
-      <section className="feature-box">
-        <div className="feature-grid">
-          {features.map((item, index) => (
-              <Link
-  href={
-    item.title === "All Training"
-      ? "/training"
-      : item.title === "AI Coach"
-      ? "/ai-coach"
-      : item.title === "Sports Books"
-      ? "/store"
-      : item.title === "All Tests"
-      ? "/tests"
-      : item.title === "My Doubts"
-      ? "/doubts"
-      : item.title === "Community"
-      ? "/community"
-      : item.title === "Challenges"
-      ? "/challenges"
-      : item.title === "Events"
-      ? "/events"
-      : "/"
-  }
-  className="feature-card"
-  key={index}
->           <div className="feature-icon">
-                {item.icon}
-              </div>
-
-           {item.badge && (
-  <div className="badge">
-    {item.badge}
-  </div>
-)}   
-
-              <p>{item.title}</p>
-            </Link>
-          ))}
         </div>
 
-        <button className="show-more">
-          Show more
+        <div
+          style={{
+            background: "#1e293b",
+            padding: "15px",
+            borderRadius: "18px",
+            fontSize: "26px",
+          }}
+        >
+          🔥
+        </div>
+      </div>
+
+      {/* HERO */}
+      <div
+        style={{
+          marginTop: "30px",
+          background:
+            "linear-gradient(135deg,#2563eb,#22c55e)",
+          borderRadius: "28px",
+          padding: "30px",
+          boxShadow:
+            "0 0 40px rgba(34,197,94,0.4)",
+        }}
+      >
+        <h2
+          style={{
+            fontSize: "42px",
+            fontWeight: "bold",
+          }}
+        >
+          SPORTS FIT
+        </h2>
+
+        <p
+          style={{
+            marginTop: "10px",
+            fontSize: "20px",
+          }}
+        >
+          Train Hard. Become Stronger. 💪
+        </p>
+
+        <button
+          style={{
+            marginTop: "25px",
+            background: "white",
+            color: "black",
+            border: "none",
+            padding: "14px 24px",
+            borderRadius: "14px",
+            fontWeight: "bold",
+            fontSize: "18px",
+          }}
+        >
+          Start Workout 🚀
         </button>
-      </section>
-
-      <div className="section-header">
-        <h2>Upcoming Sessions (8)</h2>
-        <span>View All</span>
       </div>
 
-      {sessions.map((item, index) => (
-        <div className="session-card" key={index}>
-          <img src={item.image} alt="session" />
-
-          <div className="session-info">
-            <div className="time-row">
-              <span>{item.time}</span>
-              <div className="live-badge">LIVE</div>
-            </div>
-
-            <h3>{item.title}</h3>
-            <h4>By {item.coach}</h4>
-            <p>{item.desc}</p>
-          </div>
-
-          <ChevronRight color="white" />
-        </div>
-      ))}
-
-      <div className="player-bar">
-        <div className="player-left">
-          <img
-            src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=500&auto=format&fit=crop"
-            alt="workout"
-          />
-
-          <div>
-            <h3>Full Body Strength Workout</h3>
-            <p>Build Power & Endurance</p>
-          </div>
+      {/* STATS */}
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr",
+          gap: "15px",
+          marginTop: "30px",
+        }}
+      >
+        <div style={card}>
+          <h2 style={number}>2450</h2>
+          <p style={label}>XP Points</p>
         </div>
 
-        <div className="player-right">
-          <button>Resume</button>
-          <X color="#aaa" />
+        <div style={card}>
+          <h2 style={number}>12</h2>
+          <p style={label}>Workout Streak 🔥</p>
+        </div>
+
+        <div style={card}>
+          <h2 style={number}>580</h2>
+          <p style={label}>Calories Burned</p>
+        </div>
+
+        <div style={card}>
+          <h2 style={number}>Level 7</h2>
+          <p style={label}>Athlete Rank 🏆</p>
         </div>
       </div>
 
-      <div className="bottom-nav">
-        <Link href="/" className="nav-item active">
-          <User />
-          <span>Home</span>
+      {/* TODAY GOAL */}
+      <div
+        style={{
+          marginTop: "30px",
+          background: "#0f172a",
+          padding: "25px",
+          borderRadius: "24px",
+        }}
+      >
+        <h2
+          style={{
+            fontSize: "32px",
+            marginBottom: "20px",
+          }}
+        >
+          Today's Goal 🎯
+        </h2>
+
+        <div style={goalBox}>
+          ✅ 50 Pushups
+        </div>
+
+        <div style={goalBox}>
+          🏃 2km Running
+        </div>
+
+        <div style={goalBox}>
+          💧 Drink 8 Glass Water
+        </div>
+      </div>
+
+      {/* QUICK ACTIONS */}
+      <div
+        style={{
+          marginTop: "30px",
+        }}
+      >
+        <h2
+          style={{
+            fontSize: "32px",
+            marginBottom: "20px",
+          }}
+        >
+          Quick Actions ⚡
+        </h2>
+
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: "15px",
+          }}
+        >
+          <Link href="/training" style={action}>
+            🎥 Training
+          </Link>
+
+          <Link href="/ai-coach" style={action}>
+            🤖 AI Coach
+          </Link>
+
+          <Link href="/workout-timer" style={action}>
+            ⏱️ Timer
+          </Link>
+
+          <Link href="/music" style={action}>
+            🎵 Music
+          </Link>
+        </div>
+      </div>
+
+      {/* NAVBAR */}
+      <div
+        style={{
+          position: "fixed",
+          bottom: "10px",
+          left: "10px",
+          right: "10px",
+          background: "rgba(15,23,42,0.95)",
+          borderRadius: "25px",
+          padding: "16px",
+          display: "flex",
+          justifyContent: "space-around",
+          backdropFilter: "blur(20px)",
+        }}
+      >
+        <Link href="/" style={nav}>
+          🏠
         </Link>
 
-        <Link href="/training" className="nav-item">
-          <Dumbbell />
-          <span>Training</span>
+        <Link href="/training" style={nav}>
+          🎥
         </Link>
 
-        <Link href="/ai-coach" className="nav-item">
-          <Brain />
-          <span>AI Coach</span>
+        <Link href="/ai-coach" style={nav}>
+          🤖
         </Link>
 
-        <Link href="/store" className="nav-item">
-          <ShoppingCart />
-          <span>Store</span>
-        </Link>
-
-        <Link href="/profile" className="nav-item">
-          <User />
-          <span>Profile</span>
+        <Link href="/profile" style={nav}>
+          👤
         </Link>
       </div>
-    </main>
+    </div>
   );
-    }
+}
+
+const card = {
+  background: "#0f172a",
+  padding: "25px",
+  borderRadius: "22px",
+  textAlign: "center",
+};
+
+const number = {
+  fontSize: "34px",
+  fontWeight: "bold",
+};
+
+const label = {
+  marginTop: "10px",
+  color: "#94a3b8",
+};
+
+const goalBox = {
+  background: "#1e293b",
+  padding: "16px",
+  borderRadius: "14px",
+  marginBottom: "14px",
+  fontSize: "18px",
+};
+
+const action = {
+  background: "#2563eb",
+  padding: "20px",
+  borderRadius: "18px",
+  textAlign: "center",
+  color: "white",
+  textDecoration: "none",
+  fontSize: "20px",
+  fontWeight: "bold",
+};
+
+const nav = {
+  color: "white",
+  fontSize: "28px",
+  textDecoration: "none",
+};
