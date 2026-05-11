@@ -3,7 +3,8 @@
 import { useState } from "react";
 
 export default function WaterTracker() {
-  const [glasses, setGlasses] =
+
+  const [water, setWater] =
     useState(0);
 
   return (
@@ -13,62 +14,43 @@ export default function WaterTracker() {
         minHeight: "100vh",
         color: "white",
         padding: "20px",
+        fontFamily: "sans-serif"
       }}
     >
       <h1
         style={{
-          fontSize: "42px",
-          marginBottom: "25px",
+          color: "#38bdf8"
         }}
       >
-        Water Tracker 💧
+        💧 Water Tracker
       </h1>
 
-      <div
+      <h2
         style={{
-          background: "#0f172a",
-          padding: "25px",
-          borderRadius: "20px",
-          textAlign: "center",
+          marginTop: "30px",
+          fontSize: "45px"
         }}
       >
-        <h2
-          style={{
-            fontSize: "60px",
-            color: "#38bdf8",
-          }}
-        >
-          {glasses}
-        </h2>
+        {water} Glass
+      </h2>
 
-        <p
-          style={{
-            color: "#94a3b8",
-            fontSize: "20px",
-            marginTop: "10px",
-          }}
-        >
-          Glasses Drunk Today
-        </p>
-
-        <button
-          onClick={() =>
-            setGlasses(glasses + 1)
-          }
-          style={{
-            marginTop: "25px",
-            background: "#2563eb",
-            color: "white",
-            border: "none",
-            padding: "14px 24px",
-            borderRadius: "12px",
-            fontSize: "18px",
-            fontWeight: "bold",
-          }}
-        >
-          Drink Water 🚰
-        </button>
-      </div>
+      <button
+        onClick={() =>
+          setWater(water + 1)
+        }
+        style={{
+          marginTop: "20px",
+          padding: "14px",
+          borderRadius: "16px",
+          border: "none",
+          background: "#38bdf8",
+          color: "black",
+          fontWeight: "bold",
+          fontSize: "18px"
+        }}
+      >
+        + Add Water
+      </button>
     </div>
   );
 }
