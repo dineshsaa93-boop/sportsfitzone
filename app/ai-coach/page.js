@@ -6,38 +6,36 @@ export default function AICoach() {
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
 
-  const getAnswer = () => {
-    const q = question.toLowerCase();
-
-    if (q.includes("weight")) {
-      setAnswer("Do cardio daily and avoid junk food.");
-    } else if (q.includes("muscle")) {
-      setAnswer("Eat protein rich food and do strength workout.");
-    } else if (q.includes("cricket")) {
-      setAnswer("Practice batting timing and footwork daily.");
-    } else if (q.includes("football")) {
-      setAnswer("Improve stamina and sprint speed.");
+  function askAI() {
+    if (question.includes("weight")) {
+      setAnswer("Do cardio and avoid junk food 💪");
+    } else if (question.includes("muscle")) {
+      setAnswer("Eat protein and do gym workout 🏋️");
     } else {
-      setAnswer("Stay consistent and train hard every day 💪");
+      setAnswer("Train daily and stay consistent 🔥");
     }
-  };
+  }
 
   return (
     <div
       style={{
-        background: "#061122",
+        background: "#020617",
         minHeight: "100vh",
-        padding: "20px",
         color: "white",
+        padding: "20px",
       }}
     >
-      <h1 style={{ fontSize: "32px", marginBottom: "20px" }}>
+      <h1 style={{ fontSize: "40px", fontWeight: "bold" }}>
         AI Coach 🤖
       </h1>
 
+      <p style={{ marginBottom: "20px", color: "#94a3b8" }}>
+        Your personal sports AI coach.
+      </p>
+
       <input
         type="text"
-        placeholder="Ask anything..."
+        placeholder="Ask something..."
         value={question}
         onChange={(e) => setQuestion(e.target.value)}
         style={{
@@ -51,15 +49,15 @@ export default function AICoach() {
       />
 
       <button
-        onClick={getAnswer}
+        onClick={askAI}
         style={{
-          background: "#00ff66",
+          background: "#22c55e",
           color: "black",
           padding: "12px 20px",
           border: "none",
-          borderRadius: "10px",
-          fontWeight: "bold",
+          borderRadius: "12px",
           fontSize: "18px",
+          fontWeight: "bold",
         }}
       >
         Ask AI
@@ -68,8 +66,8 @@ export default function AICoach() {
       {answer && (
         <div
           style={{
-            marginTop: "25px",
-            background: "#0d1b2a",
+            marginTop: "20px",
+            background: "#0f172a",
             padding: "20px",
             borderRadius: "15px",
             fontSize: "18px",
