@@ -1,87 +1,75 @@
+"use client";
+
+import { useState } from "react";
+
 export default function DietPage() {
-
-  const diets = [
-    {
-      title: "Muscle Gain Diet 💪",
-      foods: [
-        "Milk",
-        "Banana",
-        "Peanut Butter",
-        "Eggs",
-        "Paneer",
-      ],
-    },
-
-    {
-      title: "Weight Loss Diet 🔥",
-      foods: [
-        "Oats",
-        "Salad",
-        "Green Tea",
-        "Apple",
-        "Boiled Vegetables",
-      ],
-    },
-
-    {
-      title: "Student Healthy Diet 📚",
-      foods: [
-        "Dry Fruits",
-        "Milk",
-        "Chapati",
-        "Rice",
-        "Seasonal Fruits",
-      ],
-    },
-  ];
+  const [goal, setGoal] = useState("");
 
   return (
     <div
       style={{
-        background: "#020817",
         minHeight: "100vh",
+        background: "#020617",
         color: "white",
-        padding: 20,
-        fontFamily: "sans-serif",
+        padding: "20px",
+        fontFamily: "sans-serif"
       }}
     >
-      <h1
-        style={{
-          fontSize: 40,
-          marginBottom: 30,
-        }}
-      >
-        Diet Planner 🍎
+      <h1 style={{ color: "#39ff14", fontSize: "38px" }}>
+        🍎 Diet Planner
       </h1>
 
-      {diets.map((diet, index) => (
-        <div
-          key={index}
-          style={{
-            background: "#081120",
-            padding: 20,
-            borderRadius: 25,
-            marginBottom: 25,
-            border: "1px solid #1d2b44",
-          }}
-        >
-          <h2 style={{ marginBottom: 15 }}>
-            {diet.title}
-          </h2>
+      <p style={{ color: "#94a3b8" }}>
+        Choose your fitness goal
+      </p>
 
-          {diet.foods.map((food, i) => (
-            <p
-              key={i}
-              style={{
-                color: "#aaa",
-                marginBottom: 8,
-              }}
-            >
-              ✅ {food}
-            </p>
-          ))}
+      <select
+        value={goal}
+        onChange={(e) => setGoal(e.target.value)}
+        style={{
+          marginTop: "20px",
+          padding: "12px",
+          borderRadius: "12px",
+          width: "100%",
+          background: "#0f172a",
+          color: "white",
+          border: "none"
+        }}
+      >
+        <option value="">Select Goal</option>
+        <option value="muscle">Build Muscle</option>
+        <option value="fat">Lose Fat</option>
+        <option value="energy">More Energy</option>
+      </select>
+
+      {goal === "muscle" && (
+        <div style={box}>
+          💪 High Protein Diet  
+          <p>Eggs, Paneer, Milk, Banana, Chicken</p>
         </div>
-      ))}
+      )}
+
+      {goal === "fat" && (
+        <div style={box}>
+          🥗 Fat Loss Diet  
+          <p>Salad, Fruits, Oats, Green Tea</p>
+        </div>
+      )}
+
+      {goal === "energy" && (
+        <div style={box}>
+          ⚡ Energy Boost Diet  
+          <p>Dry Fruits, Juice, Rice, Peanut Butter</p>
+        </div>
+      )}
     </div>
   );
 }
+
+const box = {
+  background: "#0f172a",
+  padding: "20px",
+  borderRadius: "20px",
+  marginTop: "30px",
+  lineHeight: "30px"
+};
