@@ -132,7 +132,16 @@ export default function HomePage() {
       <div style={styles.hero}>
         <div>
           <p style={styles.welcome}>WELCOME BACK!</p>
-
+<p
+  style={{
+    color: "#39ff14",
+    fontSize: "18px",
+    marginTop: "10px",
+    fontWeight: "bold"
+  }}
+>
+  🔥 Daily Streak: 7 Days
+</p>
           <h1 style={styles.title}>
             Sports Fit Zone ⚽
           </h1>
