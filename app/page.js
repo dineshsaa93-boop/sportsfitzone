@@ -199,6 +199,14 @@ export default function HomePage() {
           <Link href="/music" style={action}>
             🎵 Music
           </Link>
+
+          <Link href="/achievements" style={action}>
+            🌟 Achievements
+          </Link>
+
+          <Link href="/leaderboard" style={action}>
+            🏆 Leaderboard
+          </Link>
         </div>
       </div>
 
