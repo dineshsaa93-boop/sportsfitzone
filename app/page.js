@@ -80,7 +80,35 @@ export default function HomePage() {
   title: "Sleep",
   icon: "💤",
   link: "/sleep"
-},   
+},   {
+  title: "Water Tracker",
+  icon: "💧",
+  link: "/water-tracker"
+},
+
+{
+  title: "Workout Timer",
+  icon: "⏱️",
+  link: "/workout-timer"
+},
+
+{
+  title: "Quiz",
+  icon: "🧠",
+  link: "/quiz"
+},
+
+{
+  title: "Workout Schedule",
+  icon: "📅",
+  link: "/schedule"
+},
+
+{
+  title: "Notes",
+  icon: "📝",
+  link: "/notes"
+},
     
   ];
 
