@@ -64,13 +64,14 @@ export default function HomePage() {
       title: "Events",
       icon: <Calendar size={38} color="#4d88ff" />,
       link: "/events"
+},
       {
   title: "Diet Planner",
   icon: "🍎",
   link: "/diet"
 },
       
-    }
+    
   ];
 
   const sessions = [
