@@ -207,9 +207,9 @@ export default function HomePage() {
           ))}
         </div>
 
-        <button style={styles.showMore}>
-          🍎 Diet Planner
-        </button>
+        <Link href="/all-features" style={styles.showMore}>
+  Show more
+</Link>
       </div>
 
       {/* UPCOMING */}
