@@ -1,1 +1,16 @@
-
+{
+  "name": "Sports Fit Zone",
+  "short_name": "SportsFit",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#020817",
+  "theme_color": "#39ff14",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}
