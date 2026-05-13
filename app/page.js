@@ -170,9 +170,14 @@ export default function HomePage() {
 >
   🔥 Daily Streak: 7 Days
 </p>
-          <h1 style={styles.title}>
-            Sports Fit Zone ⚽
-          </h1>
+          <img
+  src="/logo.png"
+  alt="logo"
+  style={{
+    width: "220px",
+    marginTop: "10px"
+  }}
+/>
 
           <p style={styles.subtitle}>
             Train. Improve. Dominate.
