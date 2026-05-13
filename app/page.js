@@ -190,7 +190,21 @@ export default function HomePage() {
           </p>
 
           <p>UPGRADE PLAN</p>
-        </div>
+        <button
+  style={{
+    background: "#39ff14",
+    color: "black",
+    border: "none",
+    padding: "14px 25px",
+    borderRadius: "15px",
+    fontWeight: "bold",
+    marginTop: "20px",
+    fontSize: "16px",
+    width: "100%"
+  }}
+>
+  📲 Install App
+</button></div>
       </div>
 
       {/* FEATURES */}
