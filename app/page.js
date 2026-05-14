@@ -170,6 +170,36 @@ export default function HomePage() {
 >
   🔥 Daily Streak: 7 Days
 </p>
+    <div
+  style={{
+    background: "#081120",
+    padding: "15px",
+    borderRadius: "18px",
+    marginTop: "15px",
+    border: "1px solid #1d2b44"
+  }}
+>
+  <h3 style={{ color: "#39ff14" }}>
+    🎁 Daily Reward
+  </h3>
+
+  <p style={{ color: "#aaa" }}>
+    Claim 50 XP reward today 🚀
+  </p>
+
+  <button
+    style={{
+      marginTop: "12px",
+      background: "#39ff14",
+      border: "none",
+      padding: "10px 20px",
+      borderRadius: "12px",
+      fontWeight: "bold"
+    }}
+  >
+    Claim Reward
+  </button>
+</div>
           <img
   src="/logo.png"
   alt="logo"
