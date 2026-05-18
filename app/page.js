@@ -224,6 +224,9 @@ export default function HomePage() {
   style={{
     background: "#39ff14",
     color: "black",
+    boxShadow: "0 0 25px #39ff14",
+transition: "0.3s",
+cursor: "pointer",
     border: "none",
     padding: "14px 25px",
     borderRadius: "15px",
