@@ -169,6 +169,66 @@ export default function HomePage() {
   }}
 >
   🔥 Daily Streak: 7 Days
+    <div
+  style={{
+    display: "grid",
+    gridTemplateColumns: "repeat(2,1fr)",
+    gap: "12px",
+    marginTop: "18px"
+  }}
+>
+  <div
+    style={{
+      background: "#081120",
+      padding: "14px",
+      borderRadius: "16px",
+      border: "1px solid #1d2b44",
+      textAlign: "center"
+    }}
+  >
+    <h3 style={{ color: "#39ff14" }}>🔥 1240</h3>
+    <p style={{ color: "#aaa" }}>Calories</p>
+  </div>
+
+  <div
+    style={{
+      background: "#081120",
+      padding: "14px",
+      borderRadius: "16px",
+      border: "1px solid #1d2b44",
+      textAlign: "center"
+    }}
+  >
+    <h3 style={{ color: "#39ff14" }}>💪 18</h3>
+    <p style={{ color: "#aaa" }}>Workouts</p>
+  </div>
+
+  <div
+    style={{
+      background: "#081120",
+      padding: "14px",
+      borderRadius: "16px",
+      border: "1px solid #1d2b44",
+      textAlign: "center"
+    }}
+  >
+    <h3 style={{ color: "#39ff14" }}>⚡ 540</h3>
+    <p style={{ color: "#aaa" }}>XP Points</p>
+  </div>
+
+  <div
+    style={{
+      background: "#081120",
+      padding: "14px",
+      borderRadius: "16px",
+      border: "1px solid #1d2b44",
+      textAlign: "center"
+    }}
+  >
+    <h3 style={{ color: "#39ff14" }}>🏆 7</h3>
+    <p style={{ color: "#aaa" }}>Streak</p>
+  </div>
+</div>
 </p>
     <div
   style={{
