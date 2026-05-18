@@ -115,76 +115,29 @@ export default function HomePage() {
 
       {/* LIVE STATS */}
       <div style={styles.statsGrid}>
+        <div style={styles.statCardOrange}>
+  <Flame color="#ff7a00" size={32} />
+  <h2 style={styles.statNumber}>1240</h2>
+  <p style={styles.statLabel}>CALORIES</p>
+</div>
 
-      statCardOrange: {
-  background: "rgba(10,15,35,0.95)",
-  borderRadius: 24,
-  padding: 18,
-  width: "23%",
-  minHeight: 185,
-  border: "1px solid rgba(255,122,0,0.25)",
-  boxShadow: "0 0 30px rgba(255,122,0,0.12)",
-},
+<div style={styles.statCardGreen}>
+  <Dumbbell color="#39ff14" size={32} />
+  <h2 style={styles.statNumber}>18</h2>
+  <p style={styles.statLabel}>WORKOUTS</p>
+</div>
 
-statCardGreen: {
-  background: "rgba(10,15,35,0.95)",
-  borderRadius: 24,
-  padding: 18,
-  width: "23%",
-  minHeight: 185,
-  border: "1px solid rgba(57,255,20,0.25)",
-  boxShadow: "0 0 30px rgba(57,255,20,0.12)",
-},
+<div style={styles.statCardBlue}>
+  <Brain color="#00bfff" size={32} />
+  <h2 style={styles.statNumber}>540</h2>
+  <p style={styles.statLabel}>XP POINTS</p>
+</div>
 
-statCardBlue: {
-  background: "rgba(10,15,35,0.95)",
-  borderRadius: 24,
-  padding: 18,
-  width: "23%",
-  minHeight: 185,
-  border: "1px solid rgba(0,191,255,0.25)",
-  boxShadow: "0 0 30px rgba(0,191,255,0.12)",
-},
-
-statCardPurple: {
-  background: "rgba(10,15,35,0.95)",
-  borderRadius: 24,
-  padding: 18,
-  width: "23%",
-  minHeight: 185,
-  border: "1px solid rgba(204,102,255,0.25)",
-  boxShadow: "0 0 30px rgba(204,102,255,0.12)",
-},
-
-statNumber: {
-  fontSize: "42px",
-  fontWeight: "800",
-  color: "white",
-  marginTop: "18px",
-  lineHeight: 1
-},
-
-statLabel: {
-  fontSize: "13px",
-  color: "#9b9b9b",
-  marginTop: "10px",
-  letterSpacing: "1px"
-},
-
-      {/* DAILY REWARD */}
-      <div style={styles.rewardCard}>
-
-        <div>
-          <p style={styles.rewardTitle}>
-            🎁 Daily Reward
-          </p>
-
-          <p style={styles.rewardSub}>
-            Claim your bonus XP today.
-          </p>
-        </div>
-
-
+<div style={styles.statCardPurple}>
+  <Trophy color="#cc66ff" size={32} />
+  <h2 style={styles.statNumber}>7</h2>
+  <p style={styles.statLabel}>DAY STREAK</p>
+</div>
         <button style={styles.claimBtn}>
           Claim
         </button>
