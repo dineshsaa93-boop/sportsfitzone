@@ -418,6 +418,9 @@ const styles = {
     padding: 20
   },
 featureBox: {
+backdropFilter:"blur(14px)",
+  background: "rgba(15, 23, 42, 0.65)",
+boxShadow: "0 8px 32px rgba(0,0,0,0.35)",
  minHeight: 650, 
     marginTop: 30,
     background: "#081120",
