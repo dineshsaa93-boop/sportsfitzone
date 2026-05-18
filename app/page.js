@@ -21,37 +21,37 @@ import {
 const features = [
   {
     title: "AI Coach",
-    icon: <Bot color="#39ff14" size={28} />,
+    icon: <Bot color="#39ff14" size={22} />,
     link: "/ai-coach"
   },
 
   {
     title: "Diet",
-    icon: <Apple color="#ff8800" size={28} />,
+    icon: <Apple color="#ff8800" size={22} />,
     link: "/diet"
   },
 
   {
     title: "Progress",
-    icon: <Brain color="#00bfff" size={28} />,
+    icon: <Brain color="#00bfff" size={22} />,
     link: "/progress"
   },
 
   {
     title: "Water",
-    icon: <Droplets color="#00e1ff" size={28} />,
+    icon: <Droplets color="#00e1ff" size={22} />,
     link: "/water"
   },
 
   {
     title: "Timer",
-    icon: <Timer color="#39ff14" size={28} />,
+    icon: <Timer color="#39ff14" size={22} />,
     link: "/timer"
   },
 
   {
     title: "Notes",
-    icon: <NotebookPen color="#ffffff" size={28} />,
+    icon: <NotebookPen color="#ffffff" size={22} />,
     link: "/notes"
   }
 ];
