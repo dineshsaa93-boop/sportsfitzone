@@ -480,34 +480,95 @@ const styles = {
     alignItems: "center"
   },
 
-  hero: {
-    marginTop: 30,
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center"
-  },
+  dashboardContainer: {
+  marginTop: 25
+},
 
-  welcome: {
-    color: "#aaa",
-    fontSize: 18
-  },
+greetingRow: {
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+  gap: 15
+},
 
-  title: {
-    fontSize: 42,
-    marginTop: 10,
-    fontWeight: "bold"
-  },
+greetingTitle: {
+  fontSize: 52,
+  fontWeight: "bold",
+  marginTop: 5,
+  lineHeight: 1.1
+},
 
-  subtitle: {
-    color: "#aaa",
-    marginTop: 10,
-    fontSize: 20
-  },
+greetingSub: {
+  color: "#aaa",
+  marginTop: 10,
+  fontSize: 20
+},
 
-  premiumBox: {
-    border: "2px solid #39ff14",
-    borderRadius: 20,
-    padding: 20
+streakCard: {
+  background: "#081120",
+  border: "1px solid #1d2b44",
+  borderRadius: 24,
+  padding: 20,
+  width: 180
+},
+
+xpCard: {
+  marginTop: 25,
+  background:
+    "linear-gradient(135deg,#081120,#0d1b2e)",
+  border: "1px solid #1d2b44",
+  borderRadius: 30,
+  padding: 25
+},
+
+xpTop: {
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center"
+},
+
+progressBar: {
+  marginTop: 20,
+  height: 12,
+  width: "100%",
+  background: "#1d2b44",
+  borderRadius: 20,
+  overflow: "hidden"
+},
+
+progressFill: {
+  width: "68%",
+  height: "100%",
+  background: "#39ff14",
+  borderRadius: 20
+},
+
+statsGrid: {
+  marginTop: 25,
+  display: "grid",
+  gridTemplateColumns: "repeat(4,1fr)",
+  gap: 18
+},
+
+statCard: {
+  background: "#081120",
+  borderRadius: 24,
+  padding: 22,
+  border: "1px solid #1d2b44",
+  minHeight: 180
+},
+
+premiumBanner: {
+  marginTop: 25,
+  background:
+    "linear-gradient(90deg,#081120,#112a05)",
+  borderRadius: 28,
+  padding: 25,
+  border: "1px solid #1d2b44",
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center"
+},
   },
 featureBox: {
  minHeight: 650, 
