@@ -272,9 +272,8 @@ export default function HomePage() {
         </div>
 
         <button style={styles.showMore}>
-          🍎 Diet Planner
-        </button>
-      </div>
+  Show More
+</button>
 
       {/* UPCOMING */}
       <div style={styles.sectionHeader}>
@@ -504,8 +503,8 @@ featureBox: {
 
   featureGrid: {
     display: "grid",
-    gridTemplateColumns: "repeat(4,1fr)",
-    gap: 25
+    gridTemplateColumns: "repeat(3,1fr)",
+    gap: 20
   },
 
   featureItem: {
