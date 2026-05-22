@@ -493,7 +493,8 @@ premiumBanner: {
 },
 
 featureBox: {
- minHeight: 650, 
+overflow: "hidden",
+  minHeight: 650, 
     marginTop: 30,
     background: "#081120",
     borderRadius: 30,
