@@ -256,7 +256,7 @@ export default function HomePage() {
       <div style={styles.featureBox}>
 
         <div style={styles.featureGrid}>
-          {features.map((item, index) => (
+          {features.slice(0, 6).map((item, index) => (
             <Link
               href={item.link}
               key={index}
