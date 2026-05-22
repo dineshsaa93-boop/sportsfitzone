@@ -520,15 +520,15 @@ overflow: "hidden",
   },
 
   showMore: {
-    marginTop: 25,
-    width: "100%",
-    padding: 15,
-    borderRadius: 20,
-    border: "none",
-    background: "#111827",
-    color: "white",
-    fontSize: 18
-  },
+  marginTop: 20,
+  width: "100%",
+  padding: 14,
+  borderRadius: 14,
+  background: "#111827",
+  color: "white",
+  border: "1px solid #1f2937",
+  fontSize: 16,
+},
 
   sectionHeader: {
     marginTop: 35,
