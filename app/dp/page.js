@@ -145,7 +145,7 @@ comments: 24
         );
 }
 
-const styles = 
+const styles = {
   header: {
   display: "flex",
   justifyContent: "space-between",
