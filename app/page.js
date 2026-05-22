@@ -339,6 +339,7 @@ const [showAll, setShowAll] = useState(false);
           Resume
         </button>
       </div>
+</div>
 
       {/* BOTTOM NAVBAR */}
       <div style={styles.bottomNav}>
