@@ -19,7 +19,12 @@ import {
   User,
   PlayCircle,
   ChevronRight,
-  Home
+  Home,
+ImagePlus,
+Heart,
+MessageCircle,
+Send,
+PlusSquare,
 } from "lucide-react";
 
 export default function HomePage() {
@@ -108,7 +113,14 @@ const [showAll, setShowAll] = useState(false);
   title: "Notes",
   icon: "📝",
   link: "/notes"
-},
+
+ },
+
+{
+  title: "DP",
+  icon: <PlusSquare size={38} color="#ff4d88" />,
+  link: "/dp"
+}, 
     
   ];
 
