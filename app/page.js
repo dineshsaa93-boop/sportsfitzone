@@ -500,7 +500,7 @@ premiumBanner: {
 
 featureBox: {
 overflow: "hidden",
-  minHeight: 650, 
+  minHeight: "auto", 
     marginTop: 30,
     background: "#081120",
     borderRadius: 30,
@@ -510,7 +510,7 @@ overflow: "hidden",
 
   featureGrid: {
     display: "grid",
-    gridTemplateColumns: "repeat(3,1fr)",
+    gridTemplateColumns: "repeat(2,1fr)",
     gap: 20
   },
 
