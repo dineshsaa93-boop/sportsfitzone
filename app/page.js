@@ -328,7 +328,102 @@ export default function HomePage() {
   </div>
 
 </div>
+{/* NEW DASHBOARD UI */}
 
+<div style={styles.dashboardContainer}>
+
+  <div style={styles.greetingRow}>
+
+    <div>
+      <p style={styles.welcome}>Good to see you,</p>
+
+      <h1 style={styles.greetingTitle}>
+        Dinesh 👋
+      </h1>
+
+      <p style={styles.greetingSub}>
+        Focus today. <span style={{ color: "#39ff14" }}>Conquer</span> tomorrow.
+      </p>
+    </div>
+
+    <div style={styles.streakCard}>
+      <Flame color="#39ff14" size={40} />
+
+      <div>
+        <h2>7 DAY STREAK</h2>
+        <p style={{ color: "#aaa" }}>Keep it up!</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div style={styles.xpCard}>
+
+    <div style={styles.xpTop}>
+      <div>
+        <p style={{ color: "#aaa" }}>XP PROGRESS</p>
+
+        <h2 style={{ color: "#39ff14" }}>
+          540 <span style={{ color: "white" }}>/1000 XP</span>
+        </h2>
+      </div>
+
+      <div>
+        <p style={{ color: "#aaa" }}>LEVEL</p>
+        <h1 style={{ color: "#39ff14" }}>5</h1>
+      </div>
+    </div>
+
+    <div style={styles.progressBar}>
+      <div style={styles.progressFill}></div>
+    </div>
+
+  </div>
+
+  <div style={styles.statsGrid}>
+
+    <div style={styles.statCardOrange}>
+      <Flame color="#ff7b00" size={34} />
+      <h1>1240</h1>
+      <p>CALORIES</p>
+    </div>
+
+    <div style={styles.statCardGreen}>
+      <Dumbbell color="#39ff14" size={34} />
+      <h1>18</h1>
+      <p>WORKOUTS</p>
+    </div>
+
+    <div style={styles.statCardPurple}>
+      <Brain color="#d946ef" size={34} />
+      <h1>540</h1>
+      <p>XP POINTS</p>
+    </div>
+
+    <div style={styles.statCardBlue}>
+      <Trophy color="#3ea6ff" size={34} />
+      <h1>7</h1>
+      <p>DAY STREAK</p>
+    </div>
+
+  </div>
+
+  <div style={styles.premiumBanner}>
+
+    <div>
+      <h2>Go Premium</h2>
+      <p style={{ color: "#aaa" }}>
+        Unlock all features and achieve your best.
+      </p>
+    </div>
+
+    <button style={styles.upgradeBtn}>
+      Upgrade Now
+    </button>
+
+  </div>
+
+</div>
       {/* FEATURES */}
       <div style={styles.featureBox}>
 
@@ -568,9 +663,126 @@ premiumBanner: {
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center"
-},
+
   },
-featureBox: {
+dashboardContainer: {
+  marginTop: 25
+},
+
+greetingRow: {
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+  gap: 15
+},
+
+greetingTitle: {
+  fontSize: 52,
+  fontWeight: "bold",
+  marginTop: 5,
+  lineHeight: 1.1
+},
+
+greetingSub: {
+  color: "#aaa",
+  marginTop: 10,
+  fontSize: 20
+},
+
+streakCard: {
+  background: "#081120",
+  border: "1px solid #1d2b44",
+  borderRadius: 24,
+  padding: 20,
+  width: 180
+},
+
+xpCard: {
+  marginTop: 25,
+  background:
+    "linear-gradient(135deg,#081120,#0b1220)",
+  border: "1px solid #1d2b44",
+  borderRadius: 30,
+  padding: 25
+},
+
+xpTop: {
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center"
+},
+
+progressBar: {
+  marginTop: 20,
+  height: 12,
+  width: "100%",
+  background: "#1d2b44",
+  borderRadius: 20,
+  overflow: "hidden"
+},
+
+progressFill: {
+  width: "54%",
+  height: "100%",
+  background: "#39ff14",
+  borderRadius: 20
+},
+
+statsGrid: {
+  marginTop: 25,
+  display: "grid",
+  gridTemplateColumns: "repeat(2,1fr)",
+  gap: 18
+},
+
+statCardOrange: {
+  background: "#081120",
+  borderRadius: 28,
+  padding: 22,
+  border: "1px solid rgba(255,122,0,0.3)"
+},
+
+statCardGreen: {
+  background: "#081120",
+  borderRadius: 28,
+  padding: 22,
+  border: "1px solid rgba(57,255,20,0.3)"
+},
+
+statCardPurple: {
+  background: "#081120",
+  borderRadius: 28,
+  padding: 22,
+  border: "1px solid rgba(217,70,239,0.3)"
+},
+
+statCardBlue: {
+  background: "#081120",
+  borderRadius: 28,
+  padding: 22,
+  border: "1px solid rgba(62,166,255,0.3)"
+},
+
+premiumBanner: {
+  marginTop: 25,
+  background:
+    "linear-gradient(90deg,#081120,#102400)",
+  borderRadius: 30,
+  padding: 25,
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center"
+},
+
+upgradeBtn: {
+  background: "#39ff14",
+  border: "none",
+  padding: "16px 28px",
+  borderRadius: 20,
+  fontWeight: "bold",
+  fontSize: 18
+}
+  ,featureBox: {
  minHeight: 650, 
     marginTop: 30,
     background: "#081120",
