@@ -1,357 +1,268 @@
 "use client";
 
-import Link from "next/link";
+import { useState } from "react";
 import {
-  Menu,
+  Home,
+  Dumbbell,
+  ShoppingBag,
+  User,
   Trophy,
   Flame,
-  Bell,
-  MonitorPlay,
-  ClipboardList,
-  MessageCircleQuestion,
-  BookOpen,
-  Users,
-  Bot,
-  Calendar,
-  Dumbbell,
   Brain,
-  ShoppingCart,
-  User,
-  PlayCircle,
-  ChevronRight,
-  Home
+  Zap,
+  Bell,
+  Menu,
+  Play,
+  Bot,
+  Apple,
+  BarChart3,
+  Medal,
+  Users,
+  Plus
 } from "lucide-react";
 
 export default function HomePage() {
 
-  const features = [
-    {
-      title: "All Training",
-      icon: <MonitorPlay size={38} color="#39ff14" />,
-      link: "/training"
-    },
-    {
-      title: "All Tests",
-      icon: <ClipboardList size={38} color="#3ea6ff" />,
-      link: "/tests"
-    },
-    {
-      title: "My Doubts",
-      icon: <MessageCircleQuestion size={38} color="#b266ff" />,
-      link: "/doubts"
-    },
-    {
-      title: "Sports Books",
-      icon: <BookOpen size={38} color="#ff8c42" />,
-      link: "/books"
-    },
-    {
-      title: "Community",
-      icon: <Users size={38} color="#ffd633" />,
-      link: "/community"
-    },
-    {
-      title: "Challenges",
-      icon: <Trophy size={38} color="#ff4d88" />,
-      link: "/challenges"
-    },
-    {
-      title: "AI Coach",
-      icon: <Bot size={38} color="#00e5ff" />,
-      link: "/ai-coach"
-    },
-    {
-      title: "Events",
-      icon: <Calendar size={38} color="#4d88ff" />,
-      link: "/events"
-},
-      {
-  title: "Diet Planner",
-  icon: "🍎",
-  link: "/diet"
-},
-   {
-  title: "Progress",
-  icon: "📊",
-  link: "/progress"
-},
-
-{
-  title: "Sleep",
-  icon: "💤",
-  link: "/sleep"
-},   {
-  title: "Water Tracker",
-  icon: "💧",
-  link: "/water-tracker"
-},
-
-{
-  title: "Workout Timer",
-  icon: "⏱️",
-  link: "/workout-timer"
-},
-
-{
-  title: "Quiz",
-  icon: "🧠",
-  link: "/quiz"
-},
-
-{
-  title: "Workout Schedule",
-  icon: "📅",
-  link: "/schedule"
-},
-
-{
-  title: "Notes",
-  icon: "📝",
-  link: "/notes"
-},
-    
-  ];
+  const [showAll, setShowAll] = useState(false);
 
   const sessions = [
     {
       title: "Cricket Batting Masterclass",
       coach: "Rahul Dravid",
-      time: "03:00 PM",
       image:
-        "https://images.unsplash.com/photo-1547347298-4074fc3086f0?q=80&w=1200&auto=format&fit=crop"
+        "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?q=80&w=1200&auto=format&fit=crop"
     },
     {
       title: "Football Speed & Agility",
-      coach: "Sunil Chhetri",
-      time: "04:30 PM",
+      coach: "Indra Sharma",
+      image:
+        "https://images.unsplash.com/photo-1517466787929-bc90951d0974?q=80&w=1200&auto=format&fit=crop"
+    },
+    {
+      title: "Gym Strength Training",
+      coach: "Rohit Fitness",
       image:
         "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1200&auto=format&fit=crop"
     }
   ];
 
   return (
-    <div style={styles.page}>
+    <div style={styles.container}>
 
-      {/* TOP BAR */}
       <div style={styles.topBar}>
-        <Menu color="white" size={30} />
-
-        <div style={styles.topStats}>
-          <div style={styles.stat}>
-            <Trophy color="#ffd633" />
-            <span>12</span>
-          </div>
-
-          <div style={styles.stat}>
-            <Flame color="#39ff14" />
-            <span>3</span>
-          </div>
-
-          <div style={styles.stat}>
-            <Brain color="#66ff66" />
-            <span>468</span>
-          </div>
-
-          <Bell color="white" />
-        </div>
-      </div>
-
-      {/* HERO */}
-      <div style={styles.hero}>
-        <div>
-          <p style={styles.welcome}>WELCOME BACK!</p>
-<p
-  style={{
-    color: "#39ff14",
-    fontSize: "18px",
-    marginTop: "10px",
-    fontWeight: "bold"
-  }}
->
-  🔥 Daily Streak: 7 Days
-</p>
-    <div
-  style={{
-    background: "#081120",
-    padding: "15px",
-    borderRadius: "18px",
-    marginTop: "15px",
-    border: "1px solid #1d2b44"
-  }}
->
-  <h3 style={{ color: "#39ff14" }}>
-    🎁 Daily Reward
-  </h3>
-
-  <p style={{ color: "#aaa" }}>
-    Claim 50 XP reward today 🚀
-  </p>
-
-  <button
-    style={{
-      marginTop: "12px",
-      background: "#39ff14",
-      border: "none",
-      padding: "10px 20px",
-      borderRadius: "12px",
-      fontWeight: "bold"
-    }}
-  >
-    Claim Reward
-  </button>
-</div>
+        <Menu color="white" size={26} />
+        <div style={styles.topIcons}>
+          <Bell color="white" size={22} />
           <img
-  src="/logo.png"
-  alt="logo"
-  style={{
-    width: "220px",
-    marginTop: "10px"
-  }}
-/>
-
-          <p style={styles.subtitle}>
-            Train. Improve. Dominate.
-          </p>
+            src="https://i.pravatar.cc/100"
+            style={styles.avatar}
+          />
         </div>
-
-        <div style={styles.premiumBox}>
-          <p style={{ color: "#39ff14", fontWeight: "bold" }}>
-            PREMIUM
-          </p>
-
-          <p>UPGRADE PLAN</p>
-        <button
-  style={{
-    background: "#39ff14",
-    color: "black",
-    border: "none",
-    padding: "14px 25px",
-    borderRadius: "15px",
-    fontWeight: "bold",
-    marginTop: "20px",
-    fontSize: "16px",
-    width: "100%"
-  }}
->
-  📲 Install App
-</button></div>
       </div>
 
-      {/* FEATURES */}
-      <div style={styles.featureBox}>
+      <div style={styles.hero}>
+        <p style={styles.welcome}>Good to see you,</p>
 
-        <div style={styles.featureGrid}>
-          {features.map((item, index) => (
-            <Link
-              href={item.link}
-              key={index}
-              style={styles.featureItem}
-            >
-              {item.icon}
+        <h1 style={styles.name}>
+          Dinesh👋
+        </h1>
 
-              <p style={styles.featureText}>
-                {item.title}
-              </p>
-            </Link>
-          ))}
-        </div>
-
-        <Link href="/all-features" style={styles.showMore}>
-  Show more
-</Link>
-      </div>
-
-      {/* UPCOMING */}
-      <div style={styles.sectionHeader}>
-        <h2>Upcoming Sessions (8)</h2>
-
-        <p style={{ color: "#39ff14" }}>
-          View All
+        <p style={styles.quote}>
+          Focus today. <span style={{ color: "#39ff14" }}>Conquer</span> tomorrow.
         </p>
       </div>
 
-      {/* SESSION CARDS */}
-      {sessions.map((item, index) => (
-        <div key={index} style={styles.sessionCard}>
-
-          <img
-            src={item.image}
-            alt="session"
-            style={styles.sessionImage}
-          />
-
-          <div style={{ flex: 1 }}>
-            <div style={styles.timeRow}>
-              <span style={{ color: "#39ff14" }}>
-                ⏰ {item.time}
-              </span>
-
-              <span style={styles.liveBadge}>
-                LIVE
-              </span>
-            </div>
-
-            <h2 style={{ marginTop: 8 }}>
-              {item.title}
-            </h2>
-
-            <p style={{ color: "#aaa" }}>
-              By {item.coach}
-            </p>
-          </div>
-
-          <ChevronRight color="white" />
-        </div>
-      ))}
-
-      {/* BOTTOM PLAYER */}
-      <div style={styles.player}>
-        <div style={styles.playerLeft}>
-          <PlayCircle color="#39ff14" size={50} />
-
-          <div>
-            <h3>Full Body Strength Workout</h3>
-
-            <p style={{ color: "#aaa" }}>
-              Build Power & Endurance
-            </p>
-          </div>
+      <div style={styles.streakCard}>
+        <div style={styles.glowCircle}>
+          <Flame color="#39ff14" size={30} />
         </div>
 
-        <button style={styles.resumeBtn}>
-          Resume
-        </button>
+        <div>
+          <h2 style={styles.streakNumber}>7</h2>
+          <p style={styles.streakText}>DAY STREAK</p>
+        </div>
       </div>
 
-      {/* BOTTOM NAVBAR */}
-      <div style={styles.bottomNav}>
+      <div style={styles.progressCard}>
 
-        <Link href="/" style={styles.navItem}>
-          <Home color="#39ff14" />
-          <span style={{ color: "#39ff14" }}>
-            Home
-          </span>
-        </Link>
+        <div style={styles.xpBox}>
+          XP
+        </div>
 
-        <Link href="/training" style={styles.navItem}>
-          <Dumbbell color="white" />
-          <span>Training</span>
-        </Link>
+        <div style={{ flex: 1 }}>
 
-        <Link href="/ai-coach" style={styles.navItem}>
-          <Bot color="white" />
-          <span>AI Coach</span>
-        </Link>
+          <div style={styles.progressRow}>
+            <span>540 / 1000 XP</span>
+            <span>LEVEL 5</span>
+          </div>
 
-        <Link href="/store" style={styles.navItem}>
-          <ShoppingCart color="white" />
-          <span>Store</span>
-        </Link>
+          <div style={styles.progressBar}>
+            <div style={styles.progressFill}></div>
+          </div>
 
-        <Link href="/profile" style={styles.navItem}>
-          <User color="white" />
-          <span>Profile</span>
-        </Link>
+        </div>
+      </div>
+
+      <div style={styles.statsGrid}>
+
+        <div style={styles.cardOrange}>
+          <Flame color="#ff7a00" size={34} />
+          <h2 style={styles.statNumber}>1240</h2>
+          <p style={styles.statLabel}>CALORIES</p>
+        </div>
+
+        <div style={styles.cardGreen}>
+          <Dumbbell color="#39ff14" size={34} />
+          <h2 style={styles.statNumber}>18</h2>
+          <p style={styles.statLabel}>WORKOUTS</p>
+        </div>
+
+        <div style={styles.cardPurple}>
+          <Zap color="#cc66ff" size={34} />
+          <h2 style={styles.statNumber}>540</h2>
+          <p style={styles.statLabel}>XP POINTS</p>
+        </div>
+
+        <div style={styles.cardBlue}>
+          <Trophy color="#00bfff" size={34} />
+          <h2 style={styles.statNumber}>7</h2>
+          <p style={styles.statLabel}>DAY STREAK</p>
+        </div>
+
+      </div>
+
+      <div style={styles.premiumCard}>
+
+        <div>
+          <h2 style={styles.premiumTitle}>Go Premium</h2>
+          <p style={styles.premiumText}>
+            Unlock all features and achieve your best.
+          </p>
+        </div>
+
+        <button style={styles.upgradeBtn}>
+          Upgrade Now
+        </button>
+
+      </div>
+
+      <div style={styles.workoutCard}>
+
+        <img
+          src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1200&auto=format&fit=crop"
+          style={styles.workoutImage}
+        />
+
+        <div style={{ flex: 1 }}>
+
+          <p style={styles.smallGreen}>
+            CONTINUE WORKOUT
+          </p>
+
+          <h2 style={styles.workoutTitle}>
+            Full Body Strength Workout
+          </h2>
+
+          <p style={styles.workoutSub}>
+            Build Power & Endurance
+          </p>
+
+          <div style={styles.progressBar}>
+            <div style={styles.progressFill}></div>
+          </div>
+
+        </div>
+      </div>
+
+      <div style={styles.featureGrid}>
+
+        <div style={styles.featureBox}>
+          <Bot color="#39ff14" />
+          <p>AI Coach</p>
+        </div>
+
+        <div style={styles.featureBox}>
+          <Apple color="#ff7a00" />
+          <p>Diet Planner</p>
+        </div>
+
+        <div style={styles.featureBox}>
+          <BarChart3 color="#00bfff" />
+          <p>Progress</p>
+        </div>
+
+        <div style={styles.featureBox}>
+          <Medal color="#ffd700" />
+          <p>Challenges</p>
+        </div>
+
+        <div style={styles.featureBox}>
+          <Users color="#cc66ff" />
+          <p>Community</p>
+        </div>
+
+      </div>
+
+      <div style={styles.sessionHeader}>
+
+        <h2>Upcoming Sessions</h2>
+
+        <button
+          onClick={() => setShowAll(!showAll)}
+          style={styles.viewBtn}
+        >
+          {showAll ? "Less View" : "View All"}
+        </button>
+
+      </div>
+
+      <div style={styles.sessionWrap}>
+
+        {(showAll ? sessions : sessions.slice(0, 2)).map((item, index) => (
+
+          <div key={index} style={styles.sessionCard}>
+
+            <img
+              src={item.image}
+              style={styles.sessionImage}
+            />
+
+            <div style={styles.sessionInfo}>
+              <h3>{item.title}</h3>
+              <p>{item.coach}</p>
+            </div>
+
+          </div>
+
+        ))}
+
+      </div>
+
+      <div style={styles.bottomBar}>
+
+        <div style={styles.navItemActive}>
+          <Home />
+          <p>Home</p>
+        </div>
+
+        <div style={styles.navItem}>
+          <Dumbbell />
+          <p>Training</p>
+        </div>
+
+        <div style={styles.plusBtn}>
+          <Plus color="black" />
+        </div>
+
+        <div style={styles.navItem}>
+          <ShoppingBag />
+          <p>Store</p>
+        </div>
+
+        <div style={styles.navItem}>
+          <User />
+          <p>Profile</p>
+        </div>
 
       </div>
 
@@ -361,12 +272,12 @@ export default function HomePage() {
 
 const styles = {
 
-  page: {
+  container: {
     background: "#020817",
     minHeight: "100vh",
+    padding: 18,
+    paddingBottom: 120,
     color: "white",
-    padding: 20,
-    paddingBottom: 140,
     fontFamily: "sans-serif"
   },
 
@@ -376,23 +287,21 @@ const styles = {
     alignItems: "center"
   },
 
-  topStats: {
+  topIcons: {
     display: "flex",
     gap: 15,
     alignItems: "center"
   },
 
-  stat: {
-    display: "flex",
-    gap: 5,
-    alignItems: "center"
+  avatar: {
+    width: 48,
+    height: 48,
+    borderRadius: "50%",
+    border: "2px solid #39ff14"
   },
 
   hero: {
-    marginTop: 30,
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center"
+    marginTop: 30
   },
 
   welcome: {
@@ -400,149 +309,279 @@ const styles = {
     fontSize: 18
   },
 
-  title: {
-    fontSize: 42,
-    marginTop: 10,
+  name: {
+    fontSize: 56,
+    marginTop: -10,
+    fontWeight: "900"
+  },
+
+  quote: {
+    color: "#bbb",
+    marginTop: -20
+  },
+
+  streakCard: {
+    background: "#07111f",
+    borderRadius: 25,
+    padding: 20,
+    display: "flex",
+    alignItems: "center",
+    gap: 20,
+    marginTop: 20,
+    border: "1px solid rgba(57,255,20,0.2)"
+  },
+
+  glowCircle: {
+    width: 70,
+    height: 70,
+    borderRadius: "50%",
+    background: "rgba(57,255,20,0.1)",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    boxShadow: "0 0 30px rgba(57,255,20,0.6)"
+  },
+
+  streakNumber: {
+    fontSize: 38,
+    margin: 0
+  },
+
+  streakText: {
+    color: "#39ff14",
+    marginTop: -5
+  },
+
+  progressCard: {
+    background: "#07111f",
+    borderRadius: 25,
+    padding: 20,
+    marginTop: 20,
+    display: "flex",
+    gap: 20,
+    alignItems: "center"
+  },
+
+  xpBox: {
+    width: 70,
+    height: 70,
+    borderRadius: 20,
+    border: "2px solid #39ff14",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    fontWeight: "bold",
+    fontSize: 26
+  },
+
+  progressRow: {
+    display: "flex",
+    justifyContent: "space-between",
+    marginBottom: 10,
+    color: "#39ff14"
+  },
+
+  progressBar: {
+    width: "100%",
+    height: 10,
+    background: "#1d2a3d",
+    borderRadius: 20
+  },
+
+  progressFill: {
+    width: "68%",
+    height: "100%",
+    background: "#39ff14",
+    borderRadius: 20
+  },
+
+  statsGrid: {
+    display: "grid",
+    gridTemplateColumns: "1fr 1fr",
+    gap: 16,
+    marginTop: 20
+  },
+
+  cardOrange: {
+    background: "#07111f",
+    borderRadius: 25,
+    padding: 20,
+    border: "1px solid rgba(255,122,0,0.3)"
+  },
+
+  cardGreen: {
+    background: "#07111f",
+    borderRadius: 25,
+    padding: 20,
+    border: "1px solid rgba(57,255,20,0.3)"
+  },
+
+  cardPurple: {
+    background: "#07111f",
+    borderRadius: 25,
+    padding: 20,
+    border: "1px solid rgba(204,102,255,0.3)"
+  },
+
+  cardBlue: {
+    background: "#07111f",
+    borderRadius: 25,
+    padding: 20,
+    border: "1px solid rgba(0,191,255,0.3)"
+  },
+
+  statNumber: {
+    fontSize: 52,
+    marginBottom: 0
+  },
+
+  statLabel: {
+    color: "#aaa"
+  },
+
+  premiumCard: {
+    marginTop: 20,
+    background:
+      "linear-gradient(90deg,#07111f,#0d1f12)",
+    borderRadius: 25,
+    padding: 20,
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center"
+  },
+
+  premiumTitle: {
+    marginBottom: 5
+  },
+
+  premiumText: {
+    color: "#aaa",
+    maxWidth: 180
+  },
+
+  upgradeBtn: {
+    background: "#39ff14",
+    border: "none",
+    padding: "14px 22px",
+    borderRadius: 18,
     fontWeight: "bold"
   },
 
-  subtitle: {
-    color: "#aaa",
-    marginTop: 10,
-    fontSize: 20
+  workoutCard: {
+    marginTop: 20,
+    background: "#07111f",
+    borderRadius: 25,
+    padding: 16,
+    display: "flex",
+    gap: 16
   },
 
-  premiumBox: {
-    border: "2px solid #39ff14",
-    borderRadius: 20,
-    padding: 20
+  workoutImage: {
+    width: 120,
+    height: 140,
+    objectFit: "cover",
+    borderRadius: 18
   },
-featureBox: {
-backdropFilter:"blur(14px)",
-  background: "rgba(15, 23, 42, 0.65)",
-boxShadow: "0 8px 32px rgba(0,0,0,0.35)",
- minHeight: 650, 
-    marginTop: 30,
-    background: "#081120",
-    borderRadius: 30,
-    padding: 25,
-    border: "1px solid #1d2b44"
+
+  smallGreen: {
+    color: "#39ff14",
+    fontSize: 12
+  },
+
+  workoutTitle: {
+    marginTop: 0
+  },
+
+  workoutSub: {
+    color: "#aaa"
   },
 
   featureGrid: {
     display: "grid",
-    gridTemplateColumns: "repeat(4,1fr)",
-    gap: 25
-  },
-
-  featureItem: {
-    textAlign: "center",
-    textDecoration: "none",
-    color: "white"
-  },
-
-  featureText: {
-    marginTop: 10,
-    fontSize: 15
-  },
-
-  showMore: {
-    marginTop: 25,
-    width: "100%",
-    padding: 15,
-    borderRadius: 20,
-    border: "none",
-    background: "#111827",
-    color: "white",
-    fontSize: 18
-  },
-
-  sectionHeader: {
-    marginTop: 35,
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center"
-  },
-
-  sessionCard: {
-    marginTop: 20,
-    background: "#081120",
-    borderRadius: 25,
-    padding: 15,
-    display: "flex",
-    gap: 15,
-    alignItems: "center",
-    border: "1px solid #1d2b44"
-  },
-
-  sessionImage: {
-    width: 120,
-    height: 120,
-    objectFit: "cover",
-    borderRadius: 20
-  },
-
-  timeRow: {
-    display: "flex",
+    gridTemplateColumns: "repeat(5,1fr)",
     gap: 10,
-    alignItems: "center"
+    marginTop: 20
   },
 
-  liveBadge: {
-    background: "red",
-    padding: "5px 10px",
-    borderRadius: 10,
+  featureBox: {
+    background: "#07111f",
+    borderRadius: 18,
+    padding: 12,
+    textAlign: "center",
     fontSize: 12
   },
 
-  player: {
-    position: "fixed",
-    bottom: 90,
-    left: 10,
-    right: 10,
-    background: "#111827",
-    borderRadius: 20,
-    padding: 15,
+  sessionHeader: {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    border: "1px solid #1d2b44"
+    marginTop: 30
   },
 
-  playerLeft: {
-    display: "flex",
-    gap: 15,
-    alignItems: "center"
-  },
-
-  resumeBtn: {
-    background: "#39ff14",
+  viewBtn: {
+    background: "none",
     border: "none",
-    padding: "12px 20px",
-    borderRadius: 15,
+    color: "#39ff14",
     fontWeight: "bold"
   },
 
-  bottomNav: {
+  sessionWrap: {
+    display: "flex",
+    flexDirection: "column",
+    gap: 16
+  },
+
+  sessionCard: {
+    background: "#07111f",
+    borderRadius: 22,
+    overflow: "hidden"
+  },
+
+  sessionImage: {
+    width: "100%",
+    height: 180,
+    objectFit: "cover"
+  },
+
+  sessionInfo: {
+    padding: 15
+  },
+
+  bottomBar: {
     position: "fixed",
     bottom: 0,
     left: 0,
     right: 0,
-    background: "#020817",
+    background: "#050b16",
     display: "flex",
     justifyContent: "space-around",
-    padding: 15,
-    borderTop: "1px solid #1d2b44"
+    alignItems: "center",
+    padding: 16,
+    borderTop: "1px solid rgba(255,255,255,0.08)"
   },
 
   navItem: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    gap: 5,
-    color: "white",
-    textDecoration: "none",
+    textAlign: "center",
+    color: "#aaa",
     fontSize: 12
+  },
+
+  navItemActive: {
+    textAlign: "center",
+    color: "#39ff14",
+    fontSize: 12
+  },
+
+  plusBtn: {
+    width: 70,
+    height: 70,
+    borderRadius: "50%",
+    background: "#39ff14",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: -40,
+    boxShadow: "0 0 30px rgba(57,255,20,0.7)"
   }
 
 };
