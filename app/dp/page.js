@@ -65,7 +65,10 @@ comments: 24
     placeholder="Share your workout progress..."
     style={styles.input}
   />
-
+<button style={styles.uploadBtn}>
+  <ImagePlus size={20} />
+  Upload Photo
+</button>
 </div>
     <div style={styles.page}>
 
