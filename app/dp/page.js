@@ -14,7 +14,7 @@ export default function DPPage() {
       user: "Dinesh",
       image:
         "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1200&auto=format&fit=crop",
-      caption: "Completed intense chest workout 🔥"
+      caption: "Completed intense chest workout 🔥",
     likes: 100,
 comments: 24
 },
@@ -23,16 +23,16 @@ comments: 24
       user: "Rahul",
       image:
         "https://images.unsplash.com/photo-1547347298-4074fc3086f0?q=80&w=1200&auto=format&fit=crop",
-      caption: "Morning cricket practice 🏏"
+      caption: "Morning cricket practice 🏏",
    likes: 100
 comments: 24 
     },
 
     {
-      user: "Aryan",
+      user: "pragati",
       image:
         "https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=1200&auto=format&fit=crop",
-      caption: "5KM running completed 🏃"
+      caption: "5KM running completed 🏃",
    likes: 100
 comments: 24 
     }
