@@ -39,6 +39,7 @@ comments: 24
   ];
 
   return (
+    <div>
     <div style={styles.header}>
 
   <h1 style={styles.logo}>
@@ -140,7 +141,8 @@ comments: 24
       ))}
 
     </div>
-  );
+  </div>
+        );
 }
 
 const styles = 
