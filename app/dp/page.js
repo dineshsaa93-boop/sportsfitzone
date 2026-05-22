@@ -278,4 +278,4 @@ uploadBtn: {
     lineHeight: 1.5
   },
 
-};
+}
