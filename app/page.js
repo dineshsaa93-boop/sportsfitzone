@@ -371,8 +371,6 @@ const [showAll, setShowAll] = useState(false);
         </Link>
 
       </div>
-
-    </div>
   );
 }
 
