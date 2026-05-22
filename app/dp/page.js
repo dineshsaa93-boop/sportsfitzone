@@ -24,7 +24,7 @@ comments: 24
       image:
         "https://images.unsplash.com/photo-1547347298-4074fc3086f0?q=80&w=1200&auto=format&fit=crop",
       caption: "Morning cricket practice 🏏",
-   likes: 100
+   likes: 100,
 comments: 24 
     },
 
@@ -33,7 +33,7 @@ comments: 24
       image:
         "https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=1200&auto=format&fit=crop",
       caption: "5KM running completed 🏃",
-   likes: 100
+   likes: 100,
 comments: 24 
     }
   ];
