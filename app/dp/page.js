@@ -39,6 +39,13 @@ comments: 24
     }
   ];
 const [posts, setPosts] = useState(initialPosts);
+  const handleLike = (index) => {
+  const updatedPosts = [...posts];
+
+  updatedPosts[index].likes += 1;
+
+  setPosts(updatedPosts);
+};
   return (
     <div>
     <div style={styles.header}>
@@ -123,11 +130,12 @@ const [posts, setPosts] = useState(initialPosts);
   <p>{post.comments} comments</p>
 </div>
 
-            <Heart color="#ff4d88" size={28} />
-
-            <MessageCircle color="white" size={28} />
-
-            <Send color="white" size={28} />
+    
+ <Heart
+  color="#ff4d88"
+  size={28}
+  onClick={() => handleLike(index)}
+/>
 
           </div>
 
@@ -138,6 +146,7 @@ const [posts, setPosts] = useState(initialPosts);
             </span>
 
             {" "} {post.caption}
+
           </p>
 
         </div>
