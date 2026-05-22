@@ -369,8 +369,6 @@ const [showAll, setShowAll] = useState(false);
           <User color="white" />
           <span>Profile</span>
         </Link>
-
-      </div>
   );
 }
 
