@@ -190,7 +190,7 @@ input: {
   border: "none",
   outline: "none",
   color: "white",
-  fontSize: 16
+  fontSize: 16,
   uploadBtn: {
 uploadBtn: {
   display: "flex",
