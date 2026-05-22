@@ -39,6 +39,33 @@ comments: 24
   ];
 
   return (
+    <div style={styles.header}>
+
+  <h1 style={styles.logo}>
+    DP Community 🔥
+  </h1>
+
+  <div style={styles.headerIcons}>
+    <Camera color="white" />
+    <Video color="white" />
+  </div>
+
+</div>
+
+<div style={styles.createPost}>
+
+  <img
+    src="https://i.pravatar.cc/100"
+    alt="profile"
+    style={styles.profilePic}
+  />
+
+  <input
+    placeholder="Share your workout progress..."
+    style={styles.input}
+  />
+
+</div>
     <div style={styles.page}>
 
       {/* TOP BAR */}
@@ -116,7 +143,49 @@ comments: 24
   );
 }
 
-const styles = {
+const styles = 
+  header: {
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+  marginBottom: 20
+},
+
+logo: {
+  color: "white",
+  fontSize: 28,
+  fontWeight: "bold"
+},
+
+headerIcons: {
+  display: "flex",
+  gap: 15
+},
+
+createPost: {
+  display: "flex",
+  alignItems: "center",
+  gap: 12,
+  background: "#111827",
+  padding: 15,
+  borderRadius: 18,
+  marginBottom: 25
+},
+
+profilePic: {
+  width: 50,
+  height: 50,
+  borderRadius: "50%"
+},
+
+input: {
+  flex: 1,
+  background: "transparent",
+  border: "none",
+  outline: "none",
+  color: "white",
+  fontSize: 16
+},
 
   page: {
     background: "#020817",
