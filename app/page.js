@@ -404,7 +404,7 @@ const styles = {
   },
 
   dashboardContainer: {
-  marginTop: 25
+  marginTop: 25,
     width:"100%"
 },
 
