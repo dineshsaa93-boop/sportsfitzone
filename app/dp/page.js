@@ -1,5 +1,5 @@
 "use client";
-
+import { useState } from "react";
 import {
   Heart,
   MessageCircle,
@@ -10,7 +10,7 @@ import {
 
 export default function DPPage() {
 
-  const posts = [
+  const initialPosts = [
     {
       user: "Dinesh",
       image:
@@ -38,7 +38,7 @@ comments: 24
 comments: 24 
     }
   ];
-
+const [posts, setPosts] = useState(initialPosts);
   return (
     <div>
     <div style={styles.header}>
