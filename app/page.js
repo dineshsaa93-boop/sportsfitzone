@@ -553,7 +553,7 @@ const styles = {
     minHeight: "100vh",
     color: "white",
     padding: 20,
-    paddingBottom: 140,
+    paddingBottom: 220,
     fontFamily: "sans-serif"
   },
 
@@ -577,6 +577,7 @@ const styles = {
 
   dashboardContainer: {
   marginTop: 25
+    width:"100%"
 },
 
 greetingRow: {
@@ -652,19 +653,18 @@ statCard: {
   border: "1px solid #1d2b44",
   minHeight: 180
 },
-
 premiumBanner: {
   marginTop: 25,
   background:
-    "linear-gradient(90deg,#081120,#112a05)",
+    "linear-gradient(90deg,#081120,#102400)",
   borderRadius: 28,
-  padding: 25,
+  padding: 22,
   border: "1px solid #1d2b44",
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center"
+},
 
-  },
 dashboardContainer: {
   marginTop: 25
 flexWrap: "nowrap",
@@ -673,8 +673,9 @@ flexWrap: "nowrap",
 greetingRow: {
   display: "flex",
   justifyContent: "space-between",
-  alignItems: "center",
-  gap: 15
+  alignItems: "stretch",
+  gap: 12,
+  width: "100%"
 },
 
 greetingTitle: {
@@ -695,24 +696,25 @@ streakCard: {
   border: "1px solid #1d2b44",
   borderRadius: 24,
   padding: 20,
-  width: 160
+  width: "42%",
+  minHeight: 140,
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center"
 },
 
 xpCard: {
-  marginTop: 25,
-  background:
-    "linear-gradient(135deg,#081120,#0b1220)",
+  marginTop: 22,
+  background: "linear-gradient(135deg,#081120,#0b1220)",
   border: "1px solid #1d2b44",
   borderRadius: 30,
-  padding: 25
+  padding: 22
 },
-
 xpTop: {
   display: "flex",
   justifyContent: "space-between",
-  alignItems: "center"
-flexDirection: "row",
-  },
+  alignItems: "flex-start"
+},
 
 progressBar: {
   marginTop: 20,
@@ -734,28 +736,31 @@ statsGrid: {
   marginTop: 25,
   display: "grid",
   gridTemplateColumns: "repeat(4,1fr)",
-  gap: 18
+  gap: 12
 },
 
 statCardOrange: {
   background: "#081120",
-  borderRadius: 28,
-  padding: 22,
-  border: "1px solid rgba(255,122,0,0.3)"
+  borderRadius: 26,
+  padding: 18,
+  border: "1px solid rgba(255,122,0,0.35)",
+  minHeight: 170
 },
 
-statCardGreen: {
+statCardBlue: {
   background: "#081120",
-  borderRadius: 28,
-  padding: 22,
-  border: "1px solid rgba(57,255,20,0.3)"
+  borderRadius: 26,
+  padding: 18,
+  border: "1px solid rgba(62,166,255,0.35)",
+  minHeight: 170
 },
 
 statCardPurple: {
   background: "#081120",
-  borderRadius: 28,
-  padding: 22,
-  border: "1px solid rgba(217,70,239,0.3)"
+  borderRadius: 26,
+  padding: 18,
+  border: "1px solid rgba(217,70,239,0.35)",
+  minHeight: 170
 },
 
 statCardBlue: {
@@ -779,11 +784,11 @@ premiumBanner: {
 upgradeBtn: {
   background: "#39ff14",
   border: "none",
-  padding: "16px 28px",
-  borderRadius: 20,
+  padding: "18px 30px",
+  borderRadius: 22,
   fontWeight: "bold",
-  fontSize: 18
-}
+  fontSize: 20
+},
   ,featureBox: {
  minHeight: 650, 
     marginTop: 30,
