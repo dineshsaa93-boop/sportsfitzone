@@ -667,7 +667,8 @@ premiumBanner: {
   },
 dashboardContainer: {
   marginTop: 25
-},
+flexWrap: "nowrap",
+  },
 
 greetingRow: {
   display: "flex",
@@ -677,7 +678,7 @@ greetingRow: {
 },
 
 greetingTitle: {
-  fontSize: 52,
+  fontSize: 42,
   fontWeight: "bold",
   marginTop: 5,
   lineHeight: 1.1
@@ -694,7 +695,7 @@ streakCard: {
   border: "1px solid #1d2b44",
   borderRadius: 24,
   padding: 20,
-  width: 180
+  width: 160
 },
 
 xpCard: {
@@ -710,7 +711,8 @@ xpTop: {
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center"
-},
+flexDirection: "row",
+  },
 
 progressBar: {
   marginTop: 20,
@@ -731,7 +733,7 @@ progressFill: {
 statsGrid: {
   marginTop: 25,
   display: "grid",
-  gridTemplateColumns: "repeat(2,1fr)",
+  gridTemplateColumns: "repeat(4,1fr)",
   gap: 18
 },
 
