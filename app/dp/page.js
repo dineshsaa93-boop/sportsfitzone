@@ -4,28 +4,31 @@ import {
   Heart,
   MessageCircle,
   Send,
-  ImagePlus
+  PlusSquare,
 } from "lucide-react";
 
 export default function DPPage() {
 
   const posts = [
     {
-      username: "Dinesh",
-      caption: "DAY 8 COMPLETE 🔥",
+      user: "Dinesh",
       image:
         "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1200&auto=format&fit=crop",
-      likes: 245,
-      comments: 39
+      caption: "Completed intense chest workout 🔥"
     },
 
     {
-      username: "Aryan",
-      caption: "Football practice done ⚽",
+      user: "Rahul",
       image:
-        "https://images.unsplash.com/photo-1508098682722-e99c643e7485?q=80&w=1200&auto=format&fit=crop",
-      likes: 188,
-      comments: 21
+        "https://images.unsplash.com/photo-1547347298-4074fc3086f0?q=80&w=1200&auto=format&fit=crop",
+      caption: "Morning cricket practice 🏏"
+    },
+
+    {
+      user: "Aryan",
+      image:
+        "https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=1200&auto=format&fit=crop",
+      caption: "5KM running completed 🏃"
     }
   ];
 
@@ -33,70 +36,68 @@ export default function DPPage() {
     <div style={styles.page}>
 
       {/* TOP BAR */}
+
       <div style={styles.topBar}>
-        <h1>DP 🔥</h1>
+        <h1 style={styles.logo}>
+          DP Community
+        </h1>
 
-        <ImagePlus color="white" />
-      </div>
-
-      {/* CREATE POST */}
-      <div style={styles.createBox}>
-
-        <p style={{ color: "#aaa" }}>
-          Share your workout today...
-        </p>
-
-        <button style={styles.postBtn}>
-          Create Post
-        </button>
-
+        <PlusSquare color="white" size={30} />
       </div>
 
       {/* POSTS */}
+
       {posts.map((post, index) => (
 
-        <div key={index} style={styles.postCard}>
+        <div key={index} style={styles.card}>
+
+          {/* USER */}
 
           <div style={styles.userRow}>
-            <div style={styles.avatar}></div>
+
+            <div style={styles.avatar}>
+              {post.user.charAt(0)}
+            </div>
 
             <div>
-              <h3>{post.username}</h3>
+              <h3>{post.user}</h3>
 
-              <p style={{ color: "#aaa", fontSize: 12 }}>
-                2 hours ago
+              <p style={{ color: "#888", fontSize: 13 }}>
+                Athlete
               </p>
             </div>
+
           </div>
 
-          <p style={styles.caption}>
-            {post.caption}
-          </p>
+          {/* IMAGE */}
 
           <img
             src={post.image}
             alt="post"
-            style={styles.postImage}
+            style={styles.image}
           />
+
+          {/* ACTIONS */}
 
           <div style={styles.actionRow}>
 
-            <div style={styles.action}>
-              <Heart color="#ff4d88" />
-              <span>{post.likes}</span>
-            </div>
+            <Heart color="#ff4d88" size={28} />
 
-            <div style={styles.action}>
-              <MessageCircle color="#3ea6ff" />
-              <span>{post.comments}</span>
-            </div>
+            <MessageCircle color="white" size={28} />
 
-            <div style={styles.action}>
-              <Send color="#39ff14" />
-              <span>Share</span>
-            </div>
+            <Send color="white" size={28} />
 
           </div>
+
+          {/* CAPTION */}
+
+          <p style={styles.caption}>
+            <span style={{ fontWeight: "bold" }}>
+              {post.user}
+            </span>
+
+            {" "} {post.caption}
+          </p>
 
         </div>
 
@@ -111,8 +112,8 @@ const styles = {
   page: {
     background: "#020817",
     minHeight: "100vh",
-    color: "white",
     padding: 20,
+    color: "white",
     fontFamily: "sans-serif"
   },
 
@@ -123,67 +124,56 @@ const styles = {
     marginBottom: 25
   },
 
-  createBox: {
-    background: "#081120",
-    border: "1px solid #1d2b44",
-    borderRadius: 20,
-    padding: 20,
-    marginBottom: 25
-  },
-
-  postBtn: {
-    marginTop: 15,
-    background: "#39ff14",
-    border: "none",
-    padding: "12px 18px",
-    borderRadius: 12,
+  logo: {
+    fontSize: 32,
     fontWeight: "bold"
   },
 
-  postCard: {
+  card: {
     background: "#081120",
-    border: "1px solid #1d2b44",
     borderRadius: 25,
     padding: 15,
-    marginBottom: 25
+    marginBottom: 25,
+    border: "1px solid #1d2b44"
   },
 
   userRow: {
     display: "flex",
+    alignItems: "center",
     gap: 12,
-    alignItems: "center"
+    marginBottom: 15
   },
 
   avatar: {
     width: 50,
     height: 50,
     borderRadius: "50%",
-    background: "#39ff14"
+    background: "#39ff14",
+    color: "black",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    fontWeight: "bold",
+    fontSize: 22
   },
 
-  caption: {
-    marginTop: 15,
-    marginBottom: 15,
-    fontSize: 16
-  },
-
-  postImage: {
+  image: {
     width: "100%",
-    borderRadius: 20,
     height: 280,
-    objectFit: "cover"
+    objectFit: "cover",
+    borderRadius: 20
   },
 
   actionRow: {
     display: "flex",
-    justifyContent: "space-around",
+    gap: 18,
     marginTop: 15
   },
 
-  action: {
-    display: "flex",
-    gap: 8,
-    alignItems: "center"
+  caption: {
+    marginTop: 15,
+    color: "#ddd",
+    lineHeight: 1.5
   }
 
 };
