@@ -5,6 +5,7 @@ import {
   MessageCircle,
   Send,
   PlusSquare,
+  ImagePlus,
 } from "lucide-react";
 
 export default function DPPage() {
@@ -190,8 +191,19 @@ input: {
   outline: "none",
   color: "white",
   fontSize: 16
+  uploadBtn: {
+uploadBtn: {
+  display: "flex",
+  alignItems: "center",
+  gap: 8,
+  background: "#ff4d88",
+  color: "white",
+  border: "none",
+  padding: "10px 15px",
+  borderRadius: 12,
+  cursor: "pointer",
+  fontWeight: "bold"
 },
-
   page: {
     background: "#020817",
     minHeight: "100vh",
