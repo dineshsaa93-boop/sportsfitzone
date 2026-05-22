@@ -1,5 +1,5 @@
 "use client";
-
+import { useState } from "react";
 import Link from "next/link";
 import {
   Menu,
@@ -23,7 +23,7 @@ import {
 } from "lucide-react";
 
 export default function HomePage() {
-
+const [showAll, setShowAll] = useState(false);
   const features = [
     {
       title: "All Training",
@@ -256,7 +256,7 @@ export default function HomePage() {
       <div style={styles.featureBox}>
 
         <div style={styles.featureGrid}>
-          {features.slice(0, 6).map((item, index) => (
+          {(showAll ? features : features.slice(0, 6)).map((item, index) => (
             <Link
               href={item.link}
               key={index}
@@ -271,8 +271,11 @@ export default function HomePage() {
           ))}
         </div>
 
-        <button style={styles.showMore}>
-  Show More
+        <button
+  style={styles.showMore}
+  onClick={() => setShowAll(!showAll)}
+>
+  {showAll ? "Show Less" : "Show More"}
 </button>
 
       {/* UPCOMING */}
