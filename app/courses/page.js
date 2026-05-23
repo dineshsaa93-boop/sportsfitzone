@@ -23,41 +23,163 @@ export default function CoursesPage() {
 
     {
       title: "Cricket Masterclass",
+
       coach: "Virat Coach",
+
+      badge: "Verified Athlete",
+
+      xp: "12,500 XP",
+
+      review:
+        "Best sports training course ever 🔥",
+
+      student:
+        "Aryan",
+
+      live:
+        "Today 7:00 PM",
+
+      achievement:
+        "🏆 Elite Athlete Badge Unlocked",
+
+      downloads:
+        "12 Resources",
+
+      quiz:
+        "25 Questions Quiz",
+
+      rank:
+        "#1 Athlete",
+
+      points:
+        "+500 XP",
+
       price: "₹499",
+
       level: "Normal",
 
       duration: "12 Hours",
+
       lessons: "48 Lessons",
+
       rating: "4.9 ⭐",
+
+      progress: "65%",
+
+      completed:
+        "32/48 Lessons",
 
       image:
         "https://images.unsplash.com/photo-1546519638-68e109498ffc"
     },
 
     {
-      title: "Football Speed Training",
-      coach: "Ronaldo Coach",
+      title:
+        "Football Speed Training",
+
+      coach:
+        "Ronaldo Coach",
+
+      badge:
+        "Verified Athlete",
+
+      xp:
+        "18,400 XP",
+
+      review:
+        "Amazing speed drills and athlete mindset 💪",
+
+      student:
+        "Dinesh",
+
+      live:
+        "Tomorrow 6:30 PM",
+
+      achievement:
+        "🏆 Speed Beast Badge Unlocked",
+
+      downloads:
+        "18 Resources",
+
+      quiz:
+        "40 Questions Quiz",
+
+      rank:
+        "#2 Athlete",
+
+      points:
+        "+900 XP",
+
       price: "₹999",
+
       level: "Premium",
 
       duration: "20 Hours",
+
       lessons: "72 Lessons",
+
       rating: "4.8 ⭐",
+
+      progress: "82%",
+
+      completed:
+        "59/72 Lessons",
 
       image:
         "https://images.unsplash.com/photo-1517466787929-bc90951d0974"
     },
 
     {
-      title: "Gym Beast Program",
-      coach: "Fitness Pro",
+      title:
+        "Gym Beast Program",
+
+      coach:
+        "Fitness Pro",
+
+      badge:
+        "Verified Athlete",
+
+      xp:
+        "30,000 XP",
+
+      review:
+        "Best muscle building course on earth 🔥",
+
+      student:
+        "Pragati",
+
+      live:
+        "Today 9:00 PM",
+
+      achievement:
+        "🏆 Elite Athlete Badge Unlocked",
+
+      downloads:
+        "35 Resources",
+
+      quiz:
+        "75 Questions Quiz",
+
+      rank:
+        "#1 Elite Athlete",
+
+      points:
+        "+1500 XP",
+
       price: "₹1999",
+
       level: "Premium DP",
 
       duration: "35 Hours",
+
       lessons: "120 Lessons",
+
       rating: "5.0 ⭐",
+
+      progress: "91%",
+
+      completed:
+        "109/120 Lessons",
 
       image:
         "https://images.unsplash.com/photo-1517836357463-d25dfeac3438"
@@ -79,9 +201,13 @@ export default function CoursesPage() {
 
         <div style={styles.planCard}>
 
-          <h2>🟢 NORMAL</h2>
+          <h2>
+            🟢 NORMAL
+          </h2>
 
-          <h1>FREE</h1>
+          <h1>
+            FREE
+          </h1>
 
           <p>
             Basic workouts
@@ -104,9 +230,13 @@ export default function CoursesPage() {
             size={40}
           />
 
-          <h2>PREMIUM</h2>
+          <h2>
+            PREMIUM
+          </h2>
 
-          <h1>₹199/mo</h1>
+          <h1>
+            ₹199/mo
+          </h1>
 
           <p>
             AI Plans
@@ -133,9 +263,13 @@ export default function CoursesPage() {
             size={40}
           />
 
-          <h2>ELITE DP</h2>
+          <h2>
+            ELITE DP
+          </h2>
 
-          <h1>₹999/mo</h1>
+          <h1>
+            ₹999/mo
+          </h1>
 
           <p>
             Video Calls
@@ -177,6 +311,8 @@ export default function CoursesPage() {
 
           <div style={styles.courseContent}>
 
+            {/* LEVEL */}
+
             <div style={styles.levelRow}>
 
               <div style={styles.levelBox}>
@@ -185,28 +321,45 @@ export default function CoursesPage() {
                   {course.level}
                 </p>
 
-                {course.level === "Premium" && (
-                  <span style={styles.premiumBadge}>
+                {course.level ===
+                  "Premium" && (
+
+                  <span
+                    style={
+                      styles.premiumBadge
+                    }
+                  >
                     ⭐ PREMIUM
                   </span>
+
                 )}
 
-                {course.level === "Premium DP" && (
-                  <span style={styles.dpBadge}>
+                {course.level ===
+                  "Premium DP" && (
+
+                  <span
+                    style={styles.dpBadge}
+                  >
                     👑 PREMIUM DP
                   </span>
+
                 )}
 
               </div>
 
-              {course.level !== "Normal" && (
+              {course.level !==
+                "Normal" && (
+
                 <Lock
                   color="#ffd700"
                   size={20}
                 />
+
               )}
 
             </div>
+
+            {/* TITLE */}
 
             <h2>
               {course.title}
@@ -215,6 +368,28 @@ export default function CoursesPage() {
             <p style={{ color: "#aaa" }}>
               By {course.coach}
             </p>
+
+            {/* BADGES */}
+
+            <div style={styles.badgeRow}>
+
+              <span
+                style={
+                  styles.verifyBadge
+                }
+              >
+                ✔ {course.badge}
+              </span>
+
+              <span
+                style={styles.xpBadge}
+              >
+                🔥 {course.xp}
+              </span>
+
+            </div>
+
+            {/* COURSE INFO */}
 
             <div style={styles.infoRow}>
 
@@ -228,21 +403,86 @@ export default function CoursesPage() {
 
             </div>
 
+            {/* RATING */}
+
             <p style={styles.rating}>
               {course.rating}
             </p>
+
+            {/* PROGRESS */}
+
+            <div style={styles.progressBox}>
+
+              <div style={styles.progressTop}>
+
+                <p>
+                  {course.completed}
+                </p>
+
+                <p>
+                  {course.progress}
+                </p>
+
+              </div>
+
+              <div style={styles.progressBar}>
+
+                <div
+                  style={{
+                    ...styles.progressFill,
+                    width:
+                      course.progress
+                  }}
+                >
+                </div>
+
+              </div>
+
+            </div>
+
+            {/* PRICE */}
 
             <h3 style={styles.price}>
               {course.price}
             </h3>
 
+            {/* REVIEW */}
+
+            <div style={styles.reviewBox}>
+
+              <p
+                style={
+                  styles.reviewText
+                }
+              >
+                "{course.review}"
+              </p>
+
+              <p
+                style={
+                  styles.studentName
+                }
+              >
+                — {course.student}
+              </p>
+
+            </div>
+
+            {/* PREVIEW */}
+
             <a href="/course-preview">
 
-              <button style={styles.previewBtn}>
+              <button
+                style={
+                  styles.previewBtn
+                }
+              >
                 ▶ Preview Course
               </button>
 
             </a>
+
+            {/* BUY */}
 
             <button
               style={styles.watchBtn}
@@ -256,6 +496,176 @@ export default function CoursesPage() {
               Buy Course
 
             </button>
+
+            {/* CONTINUE */}
+
+            <button
+              style={
+                styles.continueBtn
+              }
+            >
+              Continue Learning
+            </button>
+
+            {/* CERTIFICATE */}
+
+            <button
+              style={
+                styles.certificateBtn
+              }
+            >
+              🏅 View Certificate
+            </button>
+
+            {/* LIVE CLASS */}
+
+            <div
+              style={
+                styles.liveClassBox
+              }
+            >
+
+              <div>
+
+                <p
+                  style={
+                    styles.liveText
+                  }
+                >
+                  🔴 LIVE CLASS
+                </p>
+
+                <p
+                  style={{
+                    color: "#aaa"
+                  }}
+                >
+                  {course.live}
+                </p>
+
+              </div>
+
+              <button
+                style={styles.joinBtn}
+              >
+                Join
+              </button>
+
+            </div>
+
+            {/* ACHIEVEMENT */}
+
+            <div
+              style={
+                styles.achievementBox
+              }
+            >
+
+              <h3
+                style={
+                  styles.achievementTitle
+                }
+              >
+                Achievement
+              </h3>
+
+              <p
+                style={
+                  styles.achievementText
+                }
+              >
+                {course.achievement}
+              </p>
+
+            </div>
+
+            {/* DOWNLOAD */}
+
+            <div
+              style={
+                styles.downloadBox
+              }
+            >
+
+              <div>
+
+                <h3>
+                  📥 Course Resources
+                </h3>
+
+                <p
+                  style={{
+                    color: "#aaa"
+                  }}
+                >
+                  {course.downloads}
+                </p>
+
+              </div>
+
+              <button
+                style={
+                  styles.downloadBtn
+                }
+              >
+                Download
+              </button>
+
+            </div>
+
+            {/* QUIZ */}
+
+            <div style={styles.quizBox}>
+
+              <div>
+
+                <h3>
+                  🧠 Athlete Quiz
+                </h3>
+
+                <p
+                  style={{
+                    color: "#aaa"
+                  }}
+                >
+                  {course.quiz}
+                </p>
+
+              </div>
+
+              <button
+                style={styles.quizBtn}
+              >
+                Start Quiz
+              </button>
+
+            </div>
+
+            {/* RANK */}
+
+            <div style={styles.rankBox}>
+
+              <div>
+
+                <h3>
+                  🏆 Athlete Rank
+                </h3>
+
+                <p
+                  style={{
+                    color: "#aaa"
+                  }}
+                >
+                  {course.rank}
+                </p>
+
+              </div>
+
+              <div style={styles.xpBox}>
+                {course.points}
+              </div>
+
+            </div>
 
           </div>
 
@@ -291,11 +701,15 @@ export default function CoursesPage() {
 
       {showPopup && (
 
-        <div style={styles.popupOverlay}>
+        <div
+          style={styles.popupOverlay}
+        >
 
           <div style={styles.popup}>
 
-            <div style={styles.popupTop}>
+            <div
+              style={styles.popupTop}
+            >
 
               <h2>
                 Unlock Premium 🚀
@@ -311,9 +725,10 @@ export default function CoursesPage() {
             </div>
 
             <p style={{ color: "#aaa" }}>
-              Access elite sports training,
-              live coaching and premium
-              athlete content.
+              Access elite sports
+              training, live coaching
+              and premium athlete
+              content.
             </p>
 
             <button
@@ -327,7 +742,9 @@ export default function CoursesPage() {
             </button>
 
             <button
-              style={styles.popupBtnElite}
+              style={
+                styles.popupBtnElite
+              }
               onClick={() => {
                 setShowPopup(false);
                 setSuccess(true);
@@ -346,11 +763,19 @@ export default function CoursesPage() {
 
       {success && (
 
-        <div style={styles.successOverlay}>
+        <div
+          style={
+            styles.successOverlay
+          }
+        >
 
           <div style={styles.successBox}>
 
-            <h1 style={styles.successEmoji}>
+            <h1
+              style={
+                styles.successEmoji
+              }
+            >
               🎉
             </h1>
 
@@ -408,7 +833,8 @@ const styles = {
     background: "#081120",
     borderRadius: 30,
     padding: 25,
-    border: "1px solid #1d2b44"
+    border:
+      "1px solid #1d2b44"
   },
 
   planCardPremium: {
@@ -416,7 +842,8 @@ const styles = {
       "linear-gradient(135deg,#2b1800,#3d2600)",
     borderRadius: 30,
     padding: 25,
-    border: "1px solid #ffd700"
+    border:
+      "1px solid #ffd700"
   },
 
   planCardElite: {
@@ -424,7 +851,8 @@ const styles = {
       "linear-gradient(135deg,#2b0018,#3d0025)",
     borderRadius: 30,
     padding: 25,
-    border: "1px solid #ff4d88"
+    border:
+      "1px solid #ff4d88"
   },
 
   freeBtn: {
@@ -468,7 +896,8 @@ const styles = {
     borderRadius: 30,
     overflow: "hidden",
     marginBottom: 25,
-    border: "1px solid #1d2b44"
+    border:
+      "1px solid #1d2b44"
   },
 
   courseImage: {
@@ -487,18 +916,18 @@ const styles = {
     alignItems: "center"
   },
 
-  level: {
-    background: "#111827",
-    padding: "6px 12px",
-    borderRadius: 10,
-    fontSize: 12
-  },
-
   levelBox: {
     display: "flex",
     gap: 10,
     alignItems: "center",
     marginTop: 10
+  },
+
+  level: {
+    background: "#111827",
+    padding: "6px 12px",
+    borderRadius: 10,
+    fontSize: 12
   },
 
   premiumBadge: {
@@ -519,6 +948,30 @@ const styles = {
     fontWeight: "bold"
   },
 
+  badgeRow: {
+    display: "flex",
+    gap: 10,
+    marginTop: 12,
+    flexWrap: "wrap"
+  },
+
+  verifyBadge: {
+    background: "#3ea6ff",
+    padding: "6px 12px",
+    borderRadius: 12,
+    fontSize: 12,
+    fontWeight: "bold"
+  },
+
+  xpBadge: {
+    background: "#102400",
+    color: "#39ff14",
+    padding: "6px 12px",
+    borderRadius: 12,
+    fontSize: 12,
+    fontWeight: "bold"
+  },
+
   infoRow: {
     display: "flex",
     justifyContent: "space-between",
@@ -533,9 +986,56 @@ const styles = {
     fontWeight: "bold"
   },
 
+  progressBox: {
+    marginTop: 20
+  },
+
+  progressTop: {
+    display: "flex",
+    justifyContent: "space-between",
+    color: "#aaa",
+    marginBottom: 10,
+    fontSize: 14
+  },
+
+  progressBar: {
+    width: "100%",
+    height: 10,
+    background: "#1d2b44",
+    borderRadius: 20,
+    overflow: "hidden"
+  },
+
+  progressFill: {
+    height: "100%",
+    background: "#39ff14",
+    borderRadius: 20
+  },
+
   price: {
-    marginTop: 15,
+    marginTop: 20,
     fontSize: 28
+  },
+
+  reviewBox: {
+    marginTop: 20,
+    background: "#111827",
+    padding: 15,
+    borderRadius: 18,
+    border:
+      "1px solid #1d2b44"
+  },
+
+  reviewText: {
+    color: "#ddd",
+    lineHeight: 1.6,
+    fontStyle: "italic"
+  },
+
+  studentName: {
+    marginTop: 10,
+    color: "#39ff14",
+    fontWeight: "bold"
   },
 
   previewBtn: {
@@ -543,7 +1043,8 @@ const styles = {
     width: "100%",
     padding: 14,
     borderRadius: 14,
-    border: "1px solid #39ff14",
+    border:
+      "1px solid #39ff14",
     background: "transparent",
     color: "#39ff14",
     fontWeight: "bold"
@@ -563,101 +1064,122 @@ const styles = {
     gap: 10
   },
 
-  benefitBox: {
-    marginTop: 40,
-    background: "#081120",
-    padding: 25,
-    borderRadius: 25,
-    display: "flex",
-    gap: 20,
-    alignItems: "center"
-  },
-
-  popupOverlay: {
-    position: "fixed",
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    background:
-      "rgba(0,0,0,0.7)",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    zIndex: 999
-  },
-
-  popup: {
-    background: "#081120",
-    width: "90%",
-    borderRadius: 30,
-    padding: 25,
-    border: "1px solid #1d2b44"
-  },
-
-  popupTop: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: 20
-  },
-
-  popupBtn: {
-    marginTop: 25,
-    width: "100%",
-    padding: 16,
-    borderRadius: 16,
-    border: "none",
-    background: "#ffd700",
-    fontWeight: "bold"
-  },
-
-  popupBtnElite: {
+  continueBtn: {
     marginTop: 15,
     width: "100%",
-    padding: 16,
-    borderRadius: 16,
+    padding: 15,
+    borderRadius: 15,
     border: "none",
-    background: "#ff4d88",
+    background: "#3ea6ff",
     color: "white",
     fontWeight: "bold"
   },
 
-  successOverlay: {
-    position: "fixed",
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    background:
-      "rgba(0,0,0,0.7)",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    zIndex: 999
-  },
-
-  successBox: {
-    width: "85%",
-    background: "#081120",
-    borderRadius: 30,
-    padding: 30,
-    textAlign: "center",
-    border: "1px solid #1d2b44"
-  },
-
-  successEmoji: {
-    fontSize: 60
-  },
-
-  doneBtn: {
-    marginTop: 25,
+  certificateBtn: {
+    marginTop: 15,
     width: "100%",
-    padding: 16,
-    borderRadius: 16,
-    border: "none",
-    background: "#39ff14",
+    padding: 15,
+    borderRadius: 15,
+    border:
+      "1px solid #ffd700",
+    background: "transparent",
+    color: "#ffd700",
     fontWeight: "bold"
-  }
+  },
 
-};
+  liveClassBox: {
+    marginTop: 20,
+    background: "#111827",
+    borderRadius: 18,
+    padding: 15,
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    border:
+      "1px solid #1d2b44"
+  },
+
+  liveText: {
+    color: "#ff4d88",
+    fontWeight: "bold"
+  },
+
+  joinBtn: {
+    background: "#ff4d88",
+    border: "none",
+    padding: "10px 18px",
+    borderRadius: 12,
+    color: "white",
+    fontWeight: "bold"
+  },
+
+  achievementBox: {
+    marginTop: 20,
+    background:
+      "linear-gradient(135deg,#2b1800,#3d2600)",
+    borderRadius: 20,
+    padding: 18,
+    border:
+      "1px solid #ffd700"
+  },
+
+  achievementTitle: {
+    color: "#ffd700",
+    marginBottom: 8
+  },
+
+  achievementText: {
+    color: "white",
+    fontWeight: "bold"
+  },
+
+  downloadBox: {
+    marginTop: 20,
+    background: "#111827",
+    borderRadius: 18,
+    padding: 18,
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    border:
+      "1px solid #1d2b44"
+  },
+
+  downloadBtn: {
+    background: "#3ea6ff",
+    border: "none",
+    padding: "10px 18px",
+    borderRadius: 12,
+    color: "white",
+    fontWeight: "bold"
+  },
+
+  quizBox: {
+    marginTop: 20,
+    background:
+      "linear-gradient(135deg,#081120,#102400)",
+    borderRadius: 18,
+    padding: 18,
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    border:
+      "1px solid #39ff14"
+  },
+
+  quizBtn: {
+    background: "#39ff14",
+    border: "none",
+    padding: "10px 18px",
+    borderRadius: 12,
+    color: "black",
+    fontWeight: "bold"
+  },
+
+  rankBox: {
+    marginTop: 20,
+    background:
+      "linear-gradient(135deg,#2b1800,#3d2600)",
+    borderRadius: 18,
+    padding: 18,
+              
