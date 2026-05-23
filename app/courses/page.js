@@ -1,14 +1,23 @@
 "use client";
 
+import { useState } from "react";
+
 import {
   Crown,
   Lock,
   PlayCircle,
   Flame,
-  Star
+  Star,
+  X
 } from "lucide-react";
 
 export default function CoursesPage() {
+
+  const [showPopup, setShowPopup] =
+    useState(false);
+
+  const [success, setSuccess] =
+    useState(false);
 
   const courses = [
 
@@ -235,7 +244,12 @@ export default function CoursesPage() {
 
             </a>
 
-            <button style={styles.watchBtn}>
+            <button
+              style={styles.watchBtn}
+              onClick={() =>
+                setShowPopup(true)
+              }
+            >
 
               <PlayCircle size={22} />
 
@@ -272,6 +286,97 @@ export default function CoursesPage() {
         </div>
 
       </div>
+
+      {/* PAYMENT POPUP */}
+
+      {showPopup && (
+
+        <div style={styles.popupOverlay}>
+
+          <div style={styles.popup}>
+
+            <div style={styles.popupTop}>
+
+              <h2>
+                Unlock Premium 🚀
+              </h2>
+
+              <X
+                size={28}
+                onClick={() =>
+                  setShowPopup(false)
+                }
+              />
+
+            </div>
+
+            <p style={{ color: "#aaa" }}>
+              Access elite sports training,
+              live coaching and premium
+              athlete content.
+            </p>
+
+            <button
+              style={styles.popupBtn}
+              onClick={() => {
+                setShowPopup(false);
+                setSuccess(true);
+              }}
+            >
+              Buy Premium — ₹199
+            </button>
+
+            <button
+              style={styles.popupBtnElite}
+              onClick={() => {
+                setShowPopup(false);
+                setSuccess(true);
+              }}
+            >
+              Buy Elite DP — ₹999
+            </button>
+
+          </div>
+
+        </div>
+
+      )}
+
+      {/* SUCCESS POPUP */}
+
+      {success && (
+
+        <div style={styles.successOverlay}>
+
+          <div style={styles.successBox}>
+
+            <h1 style={styles.successEmoji}>
+              🎉
+            </h1>
+
+            <h2>
+              Membership Activated!
+            </h2>
+
+            <p style={{ color: "#aaa" }}>
+              Premium features unlocked
+              successfully 🚀
+            </p>
+
+            <button
+              style={styles.doneBtn}
+              onClick={() =>
+                setSuccess(false)
+              }
+            >
+              Continue
+            </button>
+
+          </div>
+
+        </div>
+
+      )}
 
     </div>
 
@@ -466,6 +571,93 @@ const styles = {
     display: "flex",
     gap: 20,
     alignItems: "center"
+  },
+
+  popupOverlay: {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    background:
+      "rgba(0,0,0,0.7)",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    zIndex: 999
+  },
+
+  popup: {
+    background: "#081120",
+    width: "90%",
+    borderRadius: 30,
+    padding: 25,
+    border: "1px solid #1d2b44"
+  },
+
+  popupTop: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 20
+  },
+
+  popupBtn: {
+    marginTop: 25,
+    width: "100%",
+    padding: 16,
+    borderRadius: 16,
+    border: "none",
+    background: "#ffd700",
+    fontWeight: "bold"
+  },
+
+  popupBtnElite: {
+    marginTop: 15,
+    width: "100%",
+    padding: 16,
+    borderRadius: 16,
+    border: "none",
+    background: "#ff4d88",
+    color: "white",
+    fontWeight: "bold"
+  },
+
+  successOverlay: {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    background:
+      "rgba(0,0,0,0.7)",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    zIndex: 999
+  },
+
+  successBox: {
+    width: "85%",
+    background: "#081120",
+    borderRadius: 30,
+    padding: 30,
+    textAlign: "center",
+    border: "1px solid #1d2b44"
+  },
+
+  successEmoji: {
+    fontSize: 60
+  },
+
+  doneBtn: {
+    marginTop: 25,
+    width: "100%",
+    padding: 16,
+    borderRadius: 16,
+    border: "none",
+    background: "#39ff14",
+    fontWeight: "bold"
   }
 
 };
