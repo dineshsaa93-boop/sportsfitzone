@@ -1,6 +1,8 @@
 "use client";
+
 import { useState } from "react";
 import Link from "next/link";
+
 import {
   Menu,
   Trophy,
@@ -20,15 +22,23 @@ import {
   PlayCircle,
   ChevronRight,
   Home,
-ImagePlus,
-Heart,
-MessageCircle,
-Send,
-PlusSquare,
+  Search,
+  PlusSquare,
 } from "lucide-react";
 
 export default function HomePage() {
-const [showAll, setShowAll] = useState(false);
+
+  const [showAll, setShowAll] = useState(false);
+
+  const [notifications, setNotifications] = useState([
+    "🔥 Dinesh liked your workout post",
+    "💬 Pragati commented on your post",
+    "🏆 You completed 7 day streak"
+  ]);
+
+  const [showNotifications, setShowNotifications] =
+    useState(false);
+
   const features = [
     {
       title: "All Training",
@@ -69,59 +79,52 @@ const [showAll, setShowAll] = useState(false);
       title: "Events",
       icon: <Calendar size={38} color="#4d88ff" />,
       link: "/events"
-},
-      {
-  title: "Diet Planner",
-  icon: "🍎",
-  link: "/diet"
-},
-   {
-  title: "Progress",
-  icon: "📊",
-  link: "/progress"
-},
-
-{
-  title: "Sleep",
-  icon: "💤",
-  link: "/sleep"
-},   {
-  title: "Water Tracker",
-  icon: "💧",
-  link: "/water-tracker"
-},
-
-{
-  title: "Workout Timer",
-  icon: "⏱️",
-  link: "/workout-timer"
-},
-
-{
-  title: "Quiz",
-  icon: "🧠",
-  link: "/quiz"
-},
-
-{
-  title: "Workout Schedule",
-  icon: "📅",
-  link: "/schedule"
-},
-
-{
-  title: "Notes",
-  icon: "📝",
-  link: "/notes"
-
- },
-
-{
-  title: "DP",
-  icon: <PlusSquare size={38} color="#ff4d88" />,
-  link: "/dp"
-}, 
-    
+    },
+    {
+      title: "Diet Planner",
+      icon: "🍎",
+      link: "/diet"
+    },
+    {
+      title: "Progress",
+      icon: "📊",
+      link: "/progress"
+    },
+    {
+      title: "Sleep",
+      icon: "💤",
+      link: "/sleep"
+    },
+    {
+      title: "Water Tracker",
+      icon: "💧",
+      link: "/water-tracker"
+    },
+    {
+      title: "Workout Timer",
+      icon: "⏱️",
+      link: "/workout-timer"
+    },
+    {
+      title: "Quiz",
+      icon: "🧠",
+      link: "/quiz"
+    },
+    {
+      title: "Workout Schedule",
+      icon: "📅",
+      link: "/schedule"
+    },
+    {
+      title: "Notes",
+      icon: "📝",
+      link: "/notes"
+    },
+    {
+      title: "DP",
+      icon: <PlusSquare size={38} color="#ff4d88" />,
+      link: "/dp"
+    },
   ];
 
   const sessions = [
@@ -142,13 +145,17 @@ const [showAll, setShowAll] = useState(false);
   ];
 
   return (
+
     <div style={styles.page}>
 
       {/* TOP BAR */}
+
       <div style={styles.topBar}>
+
         <Menu color="white" size={30} />
 
         <div style={styles.topStats}>
+
           <div style={styles.stat}>
             <Trophy color="#ffd633" />
             <span>12</span>
@@ -164,144 +171,209 @@ const [showAll, setShowAll] = useState(false);
             <span>468</span>
           </div>
 
-          <Bell color="white" />
+          {/* BELL */}
+
+          <div
+            style={{ position: "relative" }}
+          >
+
+            <Bell
+              color="white"
+              size={28}
+              onClick={() =>
+                setShowNotifications(
+                  !showNotifications
+                )
+              }
+            />
+
+            {/* RED DOT */}
+
+            <div style={styles.redDot}></div>
+
+          </div>
+
         </div>
+
       </div>
 
-{/* NEW DASHBOARD UI */}
+      {/* NOTIFICATION POPUP */}
 
-<div style={styles.dashboardContainer}>
+      {showNotifications && (
 
-  <div style={styles.greetingRow}>
+        <div style={styles.notificationBox}>
 
-    <div>
-      <p style={styles.welcome}>Good to see you,</p>
+          <h3 style={{ marginBottom: 15 }}>
+            Notifications
+          </h3>
 
-      <h1 style={styles.greetingTitle}>
-        Dinesh 👋
-      </h1>
+          {notifications.map((item, index) => (
 
-      <p style={styles.greetingSub}>
-        Focus today. <span style={{ color: "#39ff14" }}>Conquer</span> tomorrow.
-      </p>
-    </div>
+            <div
+              key={index}
+              style={styles.notificationItem}
+            >
+              {item}
+            </div>
 
-    <div style={styles.streakCard}>
-      <Flame color="#39ff14" size={40} />
+          ))}
 
-      <div>
-        <h2>7 DAY STREAK</h2>
-        <p style={{ color: "#aaa" }}>Keep it up!</p>
+        </div>
+
+      )}
+
+      {/* DASHBOARD */}
+
+      <div style={styles.dashboardContainer}>
+
+        <div style={styles.greetingRow}>
+
+          <div>
+
+            <p style={styles.welcome}>
+              Good to see you,
+            </p>
+
+            <h1 style={styles.greetingTitle}>
+              Dinesh 👋
+            </h1>
+
+            <p style={styles.greetingSub}>
+              Focus today.
+              <span style={{ color: "#39ff14" }}>
+                {" "}Conquer
+              </span>
+              {" "}tomorrow.
+            </p>
+
+          </div>
+
+          <div style={styles.streakCard}>
+
+            <Flame
+              color="#39ff14"
+              size={40}
+            />
+
+            <div>
+              <h2>7 DAY STREAK</h2>
+
+              <p style={{ color: "#aaa" }}>
+                Keep it up!
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+
+        {/* XP CARD */}
+
+        <div style={styles.xpCard}>
+
+          <div style={styles.xpTop}>
+
+            <div>
+
+              <p style={{ color: "#aaa" }}>
+                XP PROGRESS
+              </p>
+
+              <h2 style={{ color: "#39ff14" }}>
+                540
+                <span style={{ color: "white" }}>
+                  {" "}/1000 XP
+                </span>
+              </h2>
+
+            </div>
+
+            <div>
+
+              <p style={{ color: "#aaa" }}>
+                LEVEL
+              </p>
+
+              <h1 style={{ color: "#39ff14" }}>
+                5
+              </h1>
+
+            </div>
+
+          </div>
+
+          <div style={styles.progressBar}>
+            <div style={styles.progressFill}></div>
+          </div>
+
+        </div>
+
       </div>
-    </div>
 
-  </div>
-
-  <div style={styles.xpCard}>
-
-    <div style={styles.xpTop}>
-      <div>
-        <p style={{ color: "#aaa" }}>XP PROGRESS</p>
-
-        <h2 style={{ color: "#39ff14" }}>
-          540 <span style={{ color: "white" }}>/1000 XP</span>
-        </h2>
-      </div>
-
-      <div>
-        <p style={{ color: "#aaa" }}>LEVEL</p>
-        <h1 style={{ color: "#39ff14" }}>5</h1>
-      </div>
-    </div>
-
-    <div style={styles.progressBar}>
-      <div style={styles.progressFill}></div>
-    </div>
-
-  </div>
-
-  <div style={styles.statsGrid}>
-
-    <div style={styles.statCardOrange}>
-      <Flame color="#ff7b00" size={34} />
-      <h1>1240</h1>
-      <p>CALORIES</p>
-    </div>
-
-    <div style={styles.statCardGreen}>
-      <Dumbbell color="#39ff14" size={34} />
-      <h1>18</h1>
-      <p>WORKOUTS</p>
-    </div>
-
-    <div style={styles.statCardPurple}>
-      <Brain color="#d946ef" size={34} />
-      <h1>540</h1>
-      <p>XP POINTS</p>
-    </div>
-
-    <div style={styles.statCardBlue}>
-      <Trophy color="#3ea6ff" size={34} />
-      <h1>7</h1>
-      <p>DAY STREAK</p>
-    </div>
-
-  </div>
-
-  <div style={styles.premiumBanner}>
-
-    <div>
-      <h2>Go Premium</h2>
-      <p style={{ color: "#aaa" }}>
-        Unlock all features and achieve your best.
-      </p>
-    </div>
-
-    <button style={styles.upgradeBtn}>
-      Upgrade Now
-    </button>
-
-  </div>
-
-</div>
       {/* FEATURES */}
+
       <div style={styles.featureBox}>
 
         <div style={styles.featureGrid}>
-          {(showAll ? features : features.slice(0, 6)).map((item, index) => (
+
+          {(showAll
+            ? features
+            : features.slice(0, 6)
+          ).map((item, index) => (
+
             <Link
               href={item.link}
               key={index}
               style={styles.featureItem}
             >
+
               {item.icon}
 
               <p style={styles.featureText}>
                 {item.title}
               </p>
+
             </Link>
+
           ))}
+
         </div>
 
         <button
-  style={styles.showMore}
-  onClick={() => setShowAll(!showAll)}
->
-  {showAll ? "Show Less" : "Show More"}
-</button>
+          style={styles.showMore}
+          onClick={() =>
+            setShowAll(!showAll)
+          }
+        >
+          {showAll
+            ? "Show Less"
+            : "Show More"}
+        </button>
+
+      </div>
 
       {/* UPCOMING */}
+
       <div style={styles.sectionHeader}>
-        <h2>Upcoming Sessions (8)</h2>
+
+        <h2>
+          Upcoming Sessions (8)
+        </h2>
 
         <p style={{ color: "#39ff14" }}>
           View All
         </p>
+
       </div>
 
       {/* SESSION CARDS */}
+
       {sessions.map((item, index) => (
-        <div key={index} style={styles.sessionCard}>
+
+        <div
+          key={index}
+          style={styles.sessionCard}
+        >
 
           <img
             src={item.image}
@@ -310,7 +382,9 @@ const [showAll, setShowAll] = useState(false);
           />
 
           <div style={{ flex: 1 }}>
+
             <div style={styles.timeRow}>
+
               <span style={{ color: "#39ff14" }}>
                 ⏰ {item.time}
               </span>
@@ -318,6 +392,7 @@ const [showAll, setShowAll] = useState(false);
               <span style={styles.liveBadge}>
                 LIVE
               </span>
+
             </div>
 
             <h2 style={{ marginTop: 8 }}>
@@ -327,33 +402,48 @@ const [showAll, setShowAll] = useState(false);
             <p style={{ color: "#aaa" }}>
               By {item.coach}
             </p>
+
           </div>
 
           <ChevronRight color="white" />
+
         </div>
+
       ))}
 
-      {/* BOTTOM PLAYER */}
+      {/* PLAYER */}
+
       <div style={styles.player}>
+
         <div style={styles.playerLeft}>
-          <PlayCircle color="#39ff14" size={50} />
+
+          <PlayCircle
+            color="#39ff14"
+            size={50}
+          />
 
           <div>
-            <h3>Full Body Strength Workout</h3>
+
+            <h3>
+              Full Body Strength Workout
+            </h3>
 
             <p style={{ color: "#aaa" }}>
               Build Power & Endurance
             </p>
+
           </div>
+
         </div>
 
         <button style={styles.resumeBtn}>
           Resume
         </button>
+
       </div>
-</div>
 
       {/* BOTTOM NAVBAR */}
+
       <div style={styles.bottomNav}>
 
         <Link href="/" style={styles.navItem}>
@@ -363,32 +453,42 @@ const [showAll, setShowAll] = useState(false);
           </span>
         </Link>
 
-        <Link href="/training" style={styles.navItem}>
+        <Link
+          href="/training"
+          style={styles.navItem}
+        >
           <Dumbbell color="white" />
           <span>Training</span>
         </Link>
 
-        <Link href="/ai-coach" style={styles.navItem}>
-          <Bot color="white" />
-          <span>AI Coach</span>
+        <Link
+          href="/dp"
+          style={styles.navItem}
+        >
+          <Flame color="white" />
+          <span>DP</span>
         </Link>
 
-        <Link href="/store" style={styles.navItem}>
-          <ShoppingCart color="white" />
-          <span>Store</span>
+        <Link
+          href="/search"
+          style={styles.navItem}
+        >
+          <Search color="white" />
+          <span>Search</span>
         </Link>
 
-        <Link href="/profile" style={styles.navItem}>
+        <Link
+          href="/profile"
+          style={styles.navItem}
+        >
           <User color="white" />
           <span>Profile</span>
         </Link>
 
-</div>
+      </div>
 
-</div>
-
-);
-
+    </div>
+  );
 }
 
 const styles = {
@@ -420,99 +520,106 @@ const styles = {
     alignItems: "center"
   },
 
+  redDot: {
+    width: 10,
+    height: 10,
+    background: "red",
+    borderRadius: "50%",
+    position: "absolute",
+    top: 0,
+    right: 0
+  },
+
+  notificationBox: {
+    position: "absolute",
+    top: 80,
+    right: 20,
+    width: 280,
+    background: "#081120",
+    border: "1px solid #1d2b44",
+    borderRadius: 20,
+    padding: 15,
+    zIndex: 999
+  },
+
+  notificationItem: {
+    background: "#111827",
+    padding: 12,
+    borderRadius: 12,
+    marginBottom: 10
+  },
+
   dashboardContainer: {
-  marginTop: 25,
-    width:"100%"
-},
+    marginTop: 25,
+    width: "100%"
+  },
 
-greetingRow: {
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "center",
-  gap: 15
-},
+  greetingRow: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    gap: 15
+  },
 
-greetingTitle: {
-  fontSize: 52,
-  fontWeight: "bold",
-  marginTop: 5,
-  lineHeight: 1.1
-},
+  welcome: {
+    color: "#aaa"
+  },
 
-greetingSub: {
-  color: "#aaa",
-  marginTop: 10,
-  fontSize: 20
-},
+  greetingTitle: {
+    fontSize: 52,
+    fontWeight: "bold",
+    marginTop: 5,
+    lineHeight: 1.1
+  },
 
-streakCard: {
-  background: "#081120",
-  border: "1px solid #1d2b44",
-  borderRadius: 24,
-  padding: 20,
-  width: 180
-},
+  greetingSub: {
+    color: "#aaa",
+    marginTop: 10,
+    fontSize: 20
+  },
 
-xpCard: {
-  marginTop: 25,
-  background:
-    "linear-gradient(135deg,#081120,#0d1b2e)",
-  border: "1px solid #1d2b44",
-  borderRadius: 30,
-  padding: 25
-},
+  streakCard: {
+    background: "#081120",
+    border: "1px solid #1d2b44",
+    borderRadius: 24,
+    padding: 20,
+    width: 180
+  },
 
-xpTop: {
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "center"
-},
+  xpCard: {
+    marginTop: 25,
+    background:
+      "linear-gradient(135deg,#081120,#0d1b2e)",
+    border: "1px solid #1d2b44",
+    borderRadius: 30,
+    padding: 25
+  },
 
-progressBar: {
-  marginTop: 20,
-  height: 12,
-  width: "100%",
-  background: "#1d2b44",
-  borderRadius: 20,
-  overflow: "hidden"
-},
+  xpTop: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center"
+  },
 
-progressFill: {
-  width: "68%",
-  height: "100%",
-  background: "#39ff14",
-  borderRadius: 20
-},
+  progressBar: {
+    marginTop: 20,
+    height: 12,
+    width: "100%",
+    background: "#1d2b44",
+    borderRadius: 20,
+    overflow: "hidden"
+  },
 
-statsGrid: {
-  marginTop: 25,
-  display: "grid",
-  gridTemplateColumns: "repeat(4,1fr)",
-  gap: 18
-},
+  progressFill: {
+    width: "68%",
+    height: "100%",
+    background: "#39ff14",
+    borderRadius: 20
+  },
 
-statCard: {
-  background: "#081120",
-  borderRadius: 24,
-  padding: 22,
-  border: "1px solid #1d2b44",
-  minHeight: 180
-},
-premiumBanner: {
-  marginTop: 25,
-  background:
-    "linear-gradient(90deg,#081120,#102400)",
-  borderRadius: 28,
-  padding: 22,
-  border: "1px solid #1d2b44",
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "center"
-},
-
-featureBox: {
-overflow: "hidden",
-  minHeight: "auto", 
+  featureBox: {
+    overflow: "hidden",
+    minHeight: "auto",
     marginTop: 30,
     background: "#081120",
     borderRadius: 30,
@@ -538,15 +645,15 @@ overflow: "hidden",
   },
 
   showMore: {
-  marginTop: 20,
-  width: "100%",
-  padding: 14,
-  borderRadius: 14,
-  background: "#111827",
-  color: "white",
-  border: "1px solid #1f2937",
-  fontSize: 16,
-},
+    marginTop: 20,
+    width: "100%",
+    padding: 14,
+    borderRadius: 14,
+    background: "#111827",
+    color: "white",
+    border: "1px solid #1f2937",
+    fontSize: 16
+  },
 
   sectionHeader: {
     marginTop: 35,
