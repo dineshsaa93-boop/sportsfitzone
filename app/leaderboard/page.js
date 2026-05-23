@@ -1,85 +1,200 @@
 "use client";
 
-const players = [
-  {
-    name: "Dinesh",
-    xp: 2500,
-    rank: "🥇",
-  },
+import {
+  Trophy,
+  Flame,
+  Medal
+} from "lucide-react";
 
-  {
-    name: "Rahul",
-    xp: 2100,
-    rank: "🥈",
-  },
+export default function LeaderboardPage() {
 
-  {
-    name: "Aryan",
-    xp: 1800,
-    rank: "🥉",
-  },
-];
+  const players = [
 
-export default function Leaderboard() {
+    {
+      name: "Dinesh",
+      xp: 540,
+      streak: 7,
+      badge: "🥇"
+    },
+
+    {
+      name: "Rahul",
+      xp: 500,
+      streak: 6,
+      badge: "🥈"
+    },
+
+    {
+      name: "Aryan",
+      xp: 460,
+      streak: 5,
+      badge: "🥉"
+    },
+
+    {
+      name: "Fitness Pro",
+      xp: 420,
+      streak: 4,
+      badge: "🔥"
+    }
+
+  ];
+
   return (
-    <div
-      style={{
-        background: "#020617",
-        minHeight: "100vh",
-        color: "white",
-        padding: "20px",
-      }}
-    >
-      <h1
-        style={{
-          fontSize: "42px",
-          marginBottom: "25px",
-        }}
-      >
+
+    <div style={styles.page}>
+
+      <h1 style={styles.heading}>
         Leaderboard 🏆
       </h1>
 
+      {/* TOP CARD */}
+
+      <div style={styles.topCard}>
+
+        <Trophy
+          color="#ffd633"
+          size={60}
+        />
+
+        <h2>Dinesh</h2>
+
+        <p>#1 Athlete This Week</p>
+
+      </div>
+
+      {/* PLAYERS */}
+
       {players.map((item, index) => (
+
         <div
           key={index}
-          style={{
-            background: "#0f172a",
-            padding: "20px",
-            borderRadius: "18px",
-            marginBottom: "18px",
-            display: "flex",
-            justifyContent:
-              "space-between",
-            alignItems: "center",
-          }}
+          style={styles.card}
         >
-          <div>
-            <h2
-              style={{
-                fontSize: "24px",
-              }}
-            >
-              {item.rank} {item.name}
-            </h2>
 
-            <p
-              style={{
-                color: "#94a3b8",
-              }}
-            >
-              XP: {item.xp}
-            </p>
+          <div style={styles.left}>
+
+            <div style={styles.badge}>
+              {item.badge}
+            </div>
+
+            <div>
+
+              <h2>{item.name}</h2>
+
+              <p style={{ color: "#aaa" }}>
+                {item.xp} XP
+              </p>
+
+            </div>
+
           </div>
 
-          <div
-            style={{
-              fontSize: "30px",
-            }}
-          >
-            🔥
+          <div style={styles.right}>
+
+            <Flame
+              color="#ff7b00"
+              size={25}
+            />
+
+            <span>
+              {item.streak}
+            </span>
+
           </div>
+
         </div>
+
       ))}
+
+      {/* ACHIEVEMENT */}
+
+      <div style={styles.achievement}>
+
+        <Medal
+          color="#39ff14"
+          size={40}
+        />
+
+        <div>
+
+          <h2>Achievement Unlocked</h2>
+
+          <p style={{ color: "#aaa" }}>
+            Completed 7 day streak 🔥
+          </p>
+
+        </div>
+
+      </div>
+
     </div>
+
   );
+
 }
+
+const styles = {
+
+  page: {
+    background: "#020817",
+    minHeight: "100vh",
+    padding: 20,
+    color: "white",
+    fontFamily: "sans-serif"
+  },
+
+  heading: {
+    fontSize: 35,
+    marginBottom: 30
+  },
+
+  topCard: {
+    background:
+      "linear-gradient(135deg,#ffd633,#ff7b00)",
+    padding: 30,
+    borderRadius: 30,
+    textAlign: "center",
+    color: "black",
+    marginBottom: 30
+  },
+
+  card: {
+    background: "#081120",
+    border:
+      "1px solid #1d2b44",
+    padding: 20,
+    borderRadius: 22,
+    marginBottom: 18,
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center"
+  },
+
+  left: {
+    display: "flex",
+    alignItems: "center",
+    gap: 15
+  },
+
+  badge: {
+    fontSize: 30
+  },
+
+  right: {
+    display: "flex",
+    alignItems: "center",
+    gap: 8
+  },
+
+  achievement: {
+    marginTop: 35,
+    background: "#081120",
+    padding: 25,
+    borderRadius: 25,
+    display: "flex",
+    gap: 20,
+    alignItems: "center"
+  }
+
+};
