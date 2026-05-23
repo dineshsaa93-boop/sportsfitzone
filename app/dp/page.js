@@ -92,7 +92,7 @@ const [posts, setPosts] = useState(initialPosts);
 
       {/* POSTS */}
 
-      {posts.map((post, index) => (
+      {posts.map((post,index) => (
 
         <div key={index} style={styles.card}>
 
@@ -131,11 +131,16 @@ const [posts, setPosts] = useState(initialPosts);
 </div>
 
     
- <Heart
-  color="#ff4d88"
-  size={28}
+ <button
   onClick={() => handleLike(index)}
-/>
+  style={{
+    background: "transparent",
+    border: "none",
+    cursor: "pointer"
+  }}
+>
+  <Heart color="#ff4d88" size={28} />
+</button>
 
           </div>
 
