@@ -1,93 +1,188 @@
 "use client";
 
-import { useState } from "react";
+import {
+  Grid3X3,
+  PlaySquare
+} from "lucide-react";
 
 export default function ProfilePage() {
-  const [xp, setXp] = useState(120);
-  const [level, setLevel] = useState(2);
 
-  const gainXP = () => {
-    const newXP = xp + 20;
+  const posts = [
 
-    setXp(newXP);
+    "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1200",
 
-    if (newXP >= 200) {
-      setLevel(level + 1);
-      setXp(0);
-    }
-  };
+    "https://images.unsplash.com/photo-1547347298-4074fc3086f0?q=80&w=1200",
+
+    "https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=1200",
+
+    "https://images.unsplash.com/photo-1508609349937-5ec4ae374ebf?q=80&w=1200",
+
+    "https://images.unsplash.com/photo-1517963879433-6ad2b056d712?q=80&w=1200",
+
+    "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=1200"
+
+  ];
 
   return (
-    <div
-      style={{
-        background: "#020617",
-        minHeight: "100vh",
-        color: "white",
-        padding: "25px",
-      }}
-    >
-      <h1 style={{ fontSize: "40px", marginBottom: "20px" }}>
-        Profile 👤
-      </h1>
 
-      <div
-        style={{
-          background: "#0f172a",
-          padding: "20px",
-          borderRadius: "20px",
-        }}
-      >
-        <h2 style={{ fontSize: "28px" }}>
-          Dinesh
-        </h2>
+    <div style={styles.page}>
 
-        <p style={{ color: "#94a3b8" }}>
-          Sports Athlete
-        </p>
+      {/* PROFILE HEADER */}
 
-        <h3 style={{ marginTop: "20px" }}>
-          Level {level}
-        </h3>
+      <div style={styles.header}>
 
-        <div
-          style={{
-            width: "100%",
-            height: "18px",
-            background: "#1e293b",
-            borderRadius: "20px",
-            marginTop: "10px",
-            overflow: "hidden",
-          }}
-        >
-          <div
-            style={{
-              width: `${xp / 2}%`,
-              height: "100%",
-              background: "#22c55e",
-            }}
-          />
+        <img
+          src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e"
+          alt="dp"
+          style={styles.dp}
+        />
+
+        <div style={styles.stats}>
+
+          <div>
+            <h2>24</h2>
+            <p>Posts</p>
+          </div>
+
+          <div>
+            <h2>12K</h2>
+            <p>Followers</p>
+          </div>
+
+          <div>
+            <h2>180</h2>
+            <p>Following</p>
+          </div>
+
         </div>
 
-        <p style={{ marginTop: "10px" }}>
-          XP: {xp}/200
+      </div>
+
+      {/* BIO */}
+
+      <div style={styles.bioBox}>
+
+        <h2>Dinesh 🚀</h2>
+
+        <p style={{ color: "#aaa" }}>
+          Athlete | Fitness | Future Engineer 💪
         </p>
 
-        <button
-          onClick={gainXP}
-          style={{
-            marginTop: "20px",
-            background: "#22c55e",
-            color: "black",
-            border: "none",
-            padding: "12px 22px",
-            borderRadius: "12px",
-            fontWeight: "bold",
-            fontSize: "18px",
-          }}
-        >
-          Complete Workout +20 XP
-        </button>
       </div>
+
+      {/* BUTTONS */}
+
+      <div style={styles.btnRow}>
+
+        <button style={styles.btn}>
+          Edit Profile
+        </button>
+
+        <button style={styles.btn}>
+          Share Profile
+        </button>
+
+      </div>
+
+      {/* TABS */}
+
+      <div style={styles.tabs}>
+
+        <Grid3X3 />
+
+        <PlaySquare />
+
+      </div>
+
+      {/* POSTS GRID */}
+
+      <div style={styles.grid}>
+
+        {posts.map((item, index) => (
+
+          <img
+            key={index}
+            src={item}
+            alt="post"
+            style={styles.gridImage}
+          />
+
+        ))}
+
+      </div>
+
     </div>
+
   );
 }
+
+const styles = {
+
+  page: {
+    background: "#020817",
+    minHeight: "100vh",
+    color: "white",
+    padding: 20,
+    fontFamily: "sans-serif"
+  },
+
+  header: {
+    display: "flex",
+    alignItems: "center",
+    gap: 25
+  },
+
+  dp: {
+    width: 100,
+    height: 100,
+    borderRadius: "50%",
+    objectFit: "cover"
+  },
+
+  stats: {
+    display: "flex",
+    gap: 30
+  },
+
+  bioBox: {
+    marginTop: 20
+  },
+
+  btnRow: {
+    display: "flex",
+    gap: 15,
+    marginTop: 20
+  },
+
+  btn: {
+    flex: 1,
+    background: "#111827",
+    border: "1px solid #1f2937",
+    color: "white",
+    padding: 12,
+    borderRadius: 12
+  },
+
+  tabs: {
+    marginTop: 30,
+    display: "flex",
+    justifyContent: "space-around",
+    borderTop: "1px solid #1f2937",
+    borderBottom: "1px solid #1f2937",
+    padding: 15
+  },
+
+  grid: {
+    marginTop: 20,
+    display: "grid",
+    gridTemplateColumns: "repeat(3,1fr)",
+    gap: 5
+  },
+
+  gridImage: {
+    width: "100%",
+    height: 130,
+    objectFit: "cover"
+  }
+
+};
