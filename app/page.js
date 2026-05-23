@@ -444,7 +444,7 @@ export default function HomePage() {
 
           {(showAll
             ? features
-            : features.slice(0, 6)
+            : features.slice(0, 20)
           ).map((item, index) => (
 
             <Link
