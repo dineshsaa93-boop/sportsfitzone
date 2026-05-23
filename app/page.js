@@ -189,9 +189,14 @@ export default function HomePage() {
         />,
       link: "/leaderboard"
     },
-
-    {
-      title: "DP",
+ 
+{
+      
+  title: "Courses",
+  icon: "🎓",
+  link: "/courses"
+},
+{  title: "DP",
       icon:
         <PlusSquare
           size={38}
