@@ -2,7 +2,8 @@
 
 import {
   Grid3X3,
-  PlaySquare
+  PlaySquare,
+  Plus
 } from "lucide-react";
 
 export default function ProfilePage() {
@@ -53,6 +54,55 @@ export default function ProfilePage() {
             <h2>180</h2>
             <p>Following</p>
           </div>
+
+        </div>
+
+      </div>
+
+      {/* STORIES */}
+
+      <div style={styles.storyRow}>
+
+        <div style={styles.storyBox}>
+
+          <div style={styles.storyCircle}>
+            <Plus color="white" />
+          </div>
+
+          <p>New</p>
+
+        </div>
+
+        <div style={styles.storyBox}>
+
+          <img
+            src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438"
+            style={styles.storyImage}
+          />
+
+          <p>Gym</p>
+
+        </div>
+
+        <div style={styles.storyBox}>
+
+          <img
+            src="https://images.unsplash.com/photo-1547347298-4074fc3086f0"
+            style={styles.storyImage}
+          />
+
+          <p>Cricket</p>
+
+        </div>
+
+        <div style={styles.storyBox}>
+
+          <img
+            src="https://images.unsplash.com/photo-1518611012118-696072aa579a"
+            style={styles.storyImage}
+          />
+
+          <p>Running</p>
 
         </div>
 
@@ -136,12 +186,43 @@ const styles = {
     width: 100,
     height: 100,
     borderRadius: "50%",
-    objectFit: "cover"
+    objectFit: "cover",
+    border: "4px solid #ff00cc"
   },
 
   stats: {
     display: "flex",
     gap: 30
+  },
+
+  storyRow: {
+    display: "flex",
+    gap: 20,
+    marginTop: 30,
+    overflowX: "auto"
+  },
+
+  storyBox: {
+    textAlign: "center"
+  },
+
+  storyCircle: {
+    width: 75,
+    height: 75,
+    borderRadius: "50%",
+    background:
+      "linear-gradient(45deg,#ff00cc,#3333ff)",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center"
+  },
+
+  storyImage: {
+    width: 75,
+    height: 75,
+    borderRadius: "50%",
+    objectFit: "cover",
+    border: "3px solid #ff00cc"
   },
 
   bioBox: {
@@ -160,7 +241,8 @@ const styles = {
     border: "1px solid #1f2937",
     color: "white",
     padding: 12,
-    borderRadius: 12
+    borderRadius: 12,
+    fontWeight: "bold"
   },
 
   tabs: {
@@ -182,7 +264,8 @@ const styles = {
   gridImage: {
     width: "100%",
     height: 130,
-    objectFit: "cover"
+    objectFit: "cover",
+    borderRadius: 10
   }
 
 };
