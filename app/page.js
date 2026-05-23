@@ -10,7 +10,7 @@ import {
   Bell,
   MonitorPlay,
   ClipboardList,
-  MessageCircleQuestion,
+ MessageCircleQuestion,
   BookOpen,
   Users,
   Bot,
@@ -28,120 +28,198 @@ import {
 
 export default function HomePage() {
 
-  const [showAll, setShowAll] = useState(false);
+  const [showAll, setShowAll] =
+    useState(false);
 
-  const [notifications, setNotifications] = useState([
-    "🔥 Dinesh liked your workout post",
-    "💬 Pragati commented on your post",
-    "🏆 You completed 7 day streak"
-  ]);
+  const [notifications, setNotifications] =
+    useState([
+      "🔥 Dinesh liked your workout post",
+      "💬 Pragati commented on your post",
+      "🏆 You completed 7 day streak"
+    ]);
 
-  const [showNotifications, setShowNotifications] =
+  const [showNotifications,
+    setShowNotifications] =
     useState(false);
 
   const features = [
+
     {
       title: "All Training",
-      icon: <MonitorPlay size={38} color="#39ff14" />,
+      icon:
+        <MonitorPlay
+          size={38}
+          color="#39ff14"
+        />,
       link: "/training"
     },
+
     {
       title: "All Tests",
-      icon: <ClipboardList size={38} color="#3ea6ff" />,
+      icon:
+        <ClipboardList
+          size={38}
+          color="#3ea6ff"
+        />,
       link: "/tests"
     },
+
     {
       title: "My Doubts",
-      icon: <MessageCircleQuestion size={38} color="#b266ff" />,
+      icon:
+        <MessageCircleQuestion
+          size={38}
+          color="#b266ff"
+        />,
       link: "/doubts"
     },
+
     {
       title: "Sports Books",
-      icon: <BookOpen size={38} color="#ff8c42" />,
+      icon:
+        <BookOpen
+          size={38}
+          color="#ff8c42"
+        />,
       link: "/books"
     },
+
     {
       title: "Community",
-      icon: <Users size={38} color="#ffd633" />,
+      icon:
+        <Users
+          size={38}
+          color="#ffd633"
+        />,
       link: "/community"
     },
+
     {
       title: "Challenges",
-      icon: <Trophy size={38} color="#ff4d88" />,
+      icon:
+        <Trophy
+          size={38}
+          color="#ff4d88"
+        />,
       link: "/challenges"
     },
+
     {
       title: "AI Coach",
-      icon: <Bot size={38} color="#00e5ff" />,
+      icon:
+        <Bot
+          size={38}
+          color="#00e5ff"
+        />,
       link: "/ai-coach"
     },
+
     {
       title: "Events",
-      icon: <Calendar size={38} color="#4d88ff" />,
+      icon:
+        <Calendar
+          size={38}
+          color="#4d88ff"
+        />,
       link: "/events"
     },
+
     {
       title: "Diet Planner",
       icon: "🍎",
       link: "/diet"
     },
+
     {
       title: "Progress",
       icon: "📊",
       link: "/progress"
     },
+
+    {
+      title: "Transformation",
+      icon: "🧬",
+      link: "/transformation"
+    },
+
     {
       title: "Sleep",
       icon: "💤",
       link: "/sleep"
     },
+
     {
       title: "Water Tracker",
       icon: "💧",
       link: "/water-tracker"
     },
+
     {
       title: "Workout Timer",
       icon: "⏱️",
       link: "/workout-timer"
     },
+
     {
       title: "Quiz",
       icon: "🧠",
       link: "/quiz"
     },
+
     {
       title: "Workout Schedule",
       icon: "📅",
       link: "/schedule"
     },
+
     {
       title: "Notes",
       icon: "📝",
       link: "/notes"
     },
+
     {
       title: "DP",
-      icon: <PlusSquare size={38} color="#ff4d88" />,
+      icon:
+        <PlusSquare
+          size={38}
+          color="#ff4d88"
+        />,
       link: "/dp"
     },
+
   ];
 
   const sessions = [
+
     {
-      title: "Cricket Batting Masterclass",
-      coach: "Rahul Dravid",
-      time: "03:00 PM",
+      title:
+        "Cricket Batting Masterclass",
+
+      coach:
+        "Rahul Dravid",
+
+      time:
+        "03:00 PM",
+
       image:
         "https://images.unsplash.com/photo-1547347298-4074fc3086f0?q=80&w=1200&auto=format&fit=crop"
     },
+
     {
-      title: "Football Speed & Agility",
-      coach: "Sunil Chhetri",
-      time: "04:30 PM",
+      title:
+        "Football Speed & Agility",
+
+      coach:
+        "Sunil Chhetri",
+
+      time:
+        "04:30 PM",
+
       image:
         "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1200&auto=format&fit=crop"
     }
+
   ];
 
   return (
@@ -152,7 +230,10 @@ export default function HomePage() {
 
       <div style={styles.topBar}>
 
-        <Menu color="white" size={30} />
+        <Menu
+          color="white"
+          size={30}
+        />
 
         <div style={styles.topStats}>
 
@@ -174,7 +255,9 @@ export default function HomePage() {
           {/* BELL */}
 
           <div
-            style={{ position: "relative" }}
+            style={{
+              position: "relative"
+            }}
           >
 
             <Bell
@@ -187,9 +270,8 @@ export default function HomePage() {
               }
             />
 
-            {/* RED DOT */}
-
-            <div style={styles.redDot}></div>
+            <div style={styles.redDot}>
+            </div>
 
           </div>
 
@@ -197,21 +279,28 @@ export default function HomePage() {
 
       </div>
 
-      {/* NOTIFICATION POPUP */}
+      {/* NOTIFICATION BOX */}
 
       {showNotifications && (
 
         <div style={styles.notificationBox}>
 
-          <h3 style={{ marginBottom: 15 }}>
+          <h3
+            style={{
+              marginBottom: 15
+            }}
+          >
             Notifications
           </h3>
 
-          {notifications.map((item, index) => (
+          {notifications.map(
+            (item, index) => (
 
             <div
               key={index}
-              style={styles.notificationItem}
+              style={
+                styles.notificationItem
+              }
             >
               {item}
             </div>
@@ -234,13 +323,19 @@ export default function HomePage() {
               Good to see you,
             </p>
 
-            <h1 style={styles.greetingTitle}>
+            <h1
+              style={styles.greetingTitle}
+            >
               Dinesh 👋
             </h1>
 
             <p style={styles.greetingSub}>
               Focus today.
-              <span style={{ color: "#39ff14" }}>
+              <span
+                style={{
+                  color: "#39ff14"
+                }}
+              >
                 {" "}Conquer
               </span>
               {" "}tomorrow.
@@ -256,18 +351,26 @@ export default function HomePage() {
             />
 
             <div>
-              <h2>7 DAY STREAK</h2>
 
-              <p style={{ color: "#aaa" }}>
+              <h2>
+                7 DAY STREAK
+              </h2>
+
+              <p
+                style={{
+                  color: "#aaa"
+                }}
+              >
                 Keep it up!
               </p>
+
             </div>
 
           </div>
 
         </div>
 
-        {/* XP CARD */}
+        {/* XP */}
 
         <div style={styles.xpCard}>
 
@@ -275,26 +378,48 @@ export default function HomePage() {
 
             <div>
 
-              <p style={{ color: "#aaa" }}>
+              <p
+                style={{
+                  color: "#aaa"
+                }}
+              >
                 XP PROGRESS
               </p>
 
-              <h2 style={{ color: "#39ff14" }}>
+              <h2
+                style={{
+                  color: "#39ff14"
+                }}
+              >
                 540
-                <span style={{ color: "white" }}>
+
+                <span
+                  style={{
+                    color: "white"
+                  }}
+                >
                   {" "}/1000 XP
                 </span>
+
               </h2>
 
             </div>
 
             <div>
 
-              <p style={{ color: "#aaa" }}>
+              <p
+                style={{
+                  color: "#aaa"
+                }}
+              >
                 LEVEL
               </p>
 
-              <h1 style={{ color: "#39ff14" }}>
+              <h1
+                style={{
+                  color: "#39ff14"
+                }}
+              >
                 5
               </h1>
 
@@ -303,7 +428,8 @@ export default function HomePage() {
           </div>
 
           <div style={styles.progressBar}>
-            <div style={styles.progressFill}></div>
+            <div style={styles.progressFill}>
+            </div>
           </div>
 
         </div>
@@ -366,7 +492,7 @@ export default function HomePage() {
 
       </div>
 
-      {/* SESSION CARDS */}
+      {/* SESSION */}
 
       {sessions.map((item, index) => (
 
@@ -385,7 +511,11 @@ export default function HomePage() {
 
             <div style={styles.timeRow}>
 
-              <span style={{ color: "#39ff14" }}>
+              <span
+                style={{
+                  color: "#39ff14"
+                }}
+              >
                 ⏰ {item.time}
               </span>
 
@@ -442,7 +572,7 @@ export default function HomePage() {
 
       </div>
 
-      {/* BOTTOM NAVBAR */}
+      {/* BOTTOM NAV */}
 
       <div style={styles.bottomNav}>
 
@@ -488,7 +618,9 @@ export default function HomePage() {
       </div>
 
     </div>
+
   );
+
 }
 
 const styles = {
@@ -536,7 +668,8 @@ const styles = {
     right: 20,
     width: 280,
     background: "#081120",
-    border: "1px solid #1d2b44",
+    border:
+      "1px solid #1d2b44",
     borderRadius: 20,
     padding: 15,
     zIndex: 999
@@ -580,7 +713,8 @@ const styles = {
 
   streakCard: {
     background: "#081120",
-    border: "1px solid #1d2b44",
+    border:
+      "1px solid #1d2b44",
     borderRadius: 24,
     padding: 20,
     width: 180
@@ -590,7 +724,8 @@ const styles = {
     marginTop: 25,
     background:
       "linear-gradient(135deg,#081120,#0d1b2e)",
-    border: "1px solid #1d2b44",
+    border:
+      "1px solid #1d2b44",
     borderRadius: 30,
     padding: 25
   },
@@ -624,12 +759,14 @@ const styles = {
     background: "#081120",
     borderRadius: 30,
     padding: 25,
-    border: "1px solid #1d2b44"
+    border:
+      "1px solid #1d2b44"
   },
 
   featureGrid: {
     display: "grid",
-    gridTemplateColumns: "repeat(2,1fr)",
+    gridTemplateColumns:
+      "repeat(2,1fr)",
     gap: 20
   },
 
@@ -651,7 +788,8 @@ const styles = {
     borderRadius: 14,
     background: "#111827",
     color: "white",
-    border: "1px solid #1f2937",
+    border:
+      "1px solid #1f2937",
     fontSize: 16
   },
 
@@ -670,7 +808,8 @@ const styles = {
     display: "flex",
     gap: 15,
     alignItems: "center",
-    border: "1px solid #1d2b44"
+    border:
+      "1px solid #1d2b44"
   },
 
   sessionImage: {
@@ -704,7 +843,8 @@ const styles = {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    border: "1px solid #1d2b44"
+    border:
+      "1px solid #1d2b44"
   },
 
   playerLeft: {
@@ -730,7 +870,8 @@ const styles = {
     display: "flex",
     justifyContent: "space-around",
     padding: 15,
-    borderTop: "1px solid #1d2b44"
+    borderTop:
+      "1px solid #1d2b44"
   },
 
   navItem: {
