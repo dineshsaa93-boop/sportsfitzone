@@ -290,6 +290,5 @@ uploadBtn: {
     marginTop: 15,
     color: "#ddd",
     lineHeight: 1.5
-  },
-
-}
+  }
+};
