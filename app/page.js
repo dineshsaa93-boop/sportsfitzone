@@ -10,7 +10,7 @@ import {
   Bell,
   MonitorPlay,
   ClipboardList,
- MessageCircleQuestion,
+  MessageCircleQuestion,
   BookOpen,
   Users,
   Bot,
@@ -24,6 +24,9 @@ import {
   Home,
   Search,
   PlusSquare,
+  Droplets,
+  Crown,
+  Target,
 } from "lucide-react";
 
 export default function HomePage() {
@@ -31,16 +34,15 @@ export default function HomePage() {
   const [showAll, setShowAll] =
     useState(false);
 
-  const [notifications, setNotifications] =
-    useState([
-      "🔥 Dinesh liked your workout post",
-      "💬 Pragati commented on your post",
-      "🏆 You completed 7 day streak"
-    ]);
-
   const [showNotifications,
     setShowNotifications] =
     useState(false);
+
+  const notifications = [
+    "🔥 Dinesh liked your workout post",
+    "💬 Pragati commented on your post",
+    "🏆 You completed 7 day streak",
+  ];
 
   const features = [
 
@@ -179,6 +181,16 @@ export default function HomePage() {
     },
 
     {
+      title: "Leaderboard",
+      icon:
+        <Crown
+          size={38}
+          color="#ffd700"
+        />,
+      link: "/leaderboard"
+    },
+
+    {
       title: "DP",
       icon:
         <PlusSquare
@@ -244,15 +256,13 @@ export default function HomePage() {
 
           <div style={styles.stat}>
             <Flame color="#39ff14" />
-            <span>3</span>
+            <span>7</span>
           </div>
 
           <div style={styles.stat}>
             <Brain color="#66ff66" />
             <span>468</span>
           </div>
-
-          {/* BELL */}
 
           <div
             style={{
@@ -279,7 +289,23 @@ export default function HomePage() {
 
       </div>
 
-      {/* NOTIFICATION BOX */}
+      {/* SEARCH */}
+
+      <div style={styles.searchBox}>
+
+        <Search
+          color="#888"
+          size={20}
+        />
+
+        <input
+          placeholder="Search workouts..."
+          style={styles.searchInput}
+        />
+
+      </div>
+
+      {/* NOTIFICATIONS */}
 
       {showNotifications && (
 
@@ -434,6 +460,83 @@ export default function HomePage() {
 
         </div>
 
+        {/* QUICK ACTIONS */}
+
+        <div style={styles.quickActions}>
+
+          <button style={styles.quickBtn}>
+            Start Workout
+          </button>
+
+          <button style={styles.quickBtn}>
+            Upload DP
+          </button>
+
+          <button style={styles.quickBtn}>
+            AI Coach
+          </button>
+
+        </div>
+
+        {/* DAILY CHALLENGE */}
+
+        <div style={styles.challengeCard}>
+
+          <div>
+
+            <h2>
+              Daily Challenge 💪
+            </h2>
+
+            <p style={{ color: "#aaa" }}>
+              Complete 100 Pushups Today
+            </p>
+
+          </div>
+
+          <Target
+            color="#39ff14"
+            size={45}
+          />
+
+        </div>
+
+        {/* WATER + CALORIES */}
+
+        <div style={styles.healthGrid}>
+
+          <div style={styles.healthCard}>
+
+            <Droplets
+              color="#3ea6ff"
+              size={35}
+            />
+
+            <h2>2.5L</h2>
+
+            <p style={{ color: "#aaa" }}>
+              Water Intake
+            </p>
+
+          </div>
+
+          <div style={styles.healthCard}>
+
+            <Flame
+              color="#ff7b00"
+              size={35}
+            />
+
+            <h2>1240</h2>
+
+            <p style={{ color: "#aaa" }}>
+              Calories Burned
+            </p>
+
+          </div>
+
+        </div>
+
       </div>
 
       {/* FEATURES */}
@@ -444,7 +547,7 @@ export default function HomePage() {
 
           {(showAll
             ? features
-            : features.slice(0, 20)
+            : features.slice(0, 8)
           ).map((item, index) => (
 
             <Link
@@ -478,12 +581,37 @@ export default function HomePage() {
 
       </div>
 
+      {/* LEADERBOARD */}
+
+      <div style={styles.leaderboard}>
+
+        <h2>
+          🏆 Leaderboard
+        </h2>
+
+        <div style={styles.leaderItem}>
+          <span>🥇 Dinesh</span>
+          <span>540 XP</span>
+        </div>
+
+        <div style={styles.leaderItem}>
+          <span>🥈 Rahul</span>
+          <span>500 XP</span>
+        </div>
+
+        <div style={styles.leaderItem}>
+          <span>🥉 Aryan</span>
+          <span>450 XP</span>
+        </div>
+
+      </div>
+
       {/* UPCOMING */}
 
       <div style={styles.sectionHeader}>
 
         <h2>
-          Upcoming Sessions (8)
+          Upcoming Sessions
         </h2>
 
         <p style={{ color: "#39ff14" }}>
@@ -652,6 +780,25 @@ const styles = {
     alignItems: "center"
   },
 
+  searchBox: {
+    marginTop: 20,
+    background: "#081120",
+    borderRadius: 20,
+    padding: 15,
+    display: "flex",
+    gap: 10,
+    alignItems: "center",
+  },
+
+  searchInput: {
+    background: "transparent",
+    border: "none",
+    outline: "none",
+    color: "white",
+    width: "100%",
+    fontSize: 16,
+  },
+
   redDot: {
     width: 10,
     height: 10,
@@ -664,7 +811,7 @@ const styles = {
 
   notificationBox: {
     position: "absolute",
-    top: 80,
+    top: 120,
     right: 20,
     width: 280,
     background: "#081120",
@@ -684,13 +831,11 @@ const styles = {
 
   dashboardContainer: {
     marginTop: 25,
-    width: "100%"
   },
 
   greetingRow: {
     display: "flex",
     justifyContent: "space-between",
-    alignItems: "center",
     gap: 15
   },
 
@@ -701,8 +846,6 @@ const styles = {
   greetingTitle: {
     fontSize: 52,
     fontWeight: "bold",
-    marginTop: 5,
-    lineHeight: 1.1
   },
 
   greetingSub: {
@@ -733,7 +876,6 @@ const styles = {
   xpTop: {
     display: "flex",
     justifyContent: "space-between",
-    alignItems: "center"
   },
 
   progressBar: {
@@ -749,18 +891,54 @@ const styles = {
     width: "68%",
     height: "100%",
     background: "#39ff14",
-    borderRadius: 20
+  },
+
+  quickActions: {
+    display: "flex",
+    gap: 10,
+    marginTop: 25,
+  },
+
+  quickBtn: {
+    flex: 1,
+    background: "#39ff14",
+    border: "none",
+    padding: 14,
+    borderRadius: 16,
+    fontWeight: "bold",
+  },
+
+  challengeCard: {
+    marginTop: 25,
+    background:
+      "linear-gradient(90deg,#081120,#102400)",
+    borderRadius: 24,
+    padding: 20,
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+
+  healthGrid: {
+    marginTop: 25,
+    display: "grid",
+    gridTemplateColumns:
+      "repeat(2,1fr)",
+    gap: 15,
+  },
+
+  healthCard: {
+    background: "#081120",
+    padding: 20,
+    borderRadius: 24,
+    textAlign: "center",
   },
 
   featureBox: {
-    overflow: "hidden",
-    minHeight: "auto",
     marginTop: 30,
     background: "#081120",
     borderRadius: 30,
     padding: 25,
-    border:
-      "1px solid #1d2b44"
   },
 
   featureGrid: {
@@ -793,6 +971,22 @@ const styles = {
     fontSize: 16
   },
 
+  leaderboard: {
+    marginTop: 30,
+    background: "#081120",
+    borderRadius: 25,
+    padding: 20,
+  },
+
+  leaderItem: {
+    display: "flex",
+    justifyContent: "space-between",
+    marginTop: 15,
+    background: "#111827",
+    padding: 14,
+    borderRadius: 14,
+  },
+
   sectionHeader: {
     marginTop: 35,
     display: "flex",
@@ -808,8 +1002,6 @@ const styles = {
     display: "flex",
     gap: 15,
     alignItems: "center",
-    border:
-      "1px solid #1d2b44"
   },
 
   sessionImage: {
@@ -843,8 +1035,6 @@ const styles = {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    border:
-      "1px solid #1d2b44"
   },
 
   playerLeft: {
