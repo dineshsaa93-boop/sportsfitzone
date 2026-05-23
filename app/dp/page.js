@@ -9,10 +9,15 @@ import {
   Camera,
   Video,
   PlusSquare,
-  Bell
+  Bell,
+  PlaySquare,
+  Grid3X3
 } from "lucide-react";
 
 export default function DPPage() {
+
+  const [activeTab, setActiveTab] =
+    useState("feed");
 
   const initialPosts = [
 
@@ -114,148 +119,212 @@ export default function DPPage() {
 
       </div>
 
-      {/* SHARE BOX */}
+      {/* TABS */}
 
-      <div style={styles.shareBox}>
+      <div style={styles.tabs}>
 
-        <img
-          src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e"
-          style={styles.shareDP}
-        />
+        <button
+          onClick={() =>
+            setActiveTab("feed")
+          }
+          style={
+            activeTab === "feed"
+              ? styles.activeTab
+              : styles.tabBtn
+          }
+        >
+          <Grid3X3 />
+        </button>
 
-        <p style={{ color: "#777" }}>
-          Share your workout progress...
-        </p>
+        <button
+          onClick={() =>
+            setActiveTab("reels")
+          }
+          style={
+            activeTab === "reels"
+              ? styles.activeTab
+              : styles.tabBtn
+          }
+        >
+          <PlaySquare />
+        </button>
 
       </div>
 
-      {/* POSTS */}
+      {/* REELS */}
 
-      {posts.map((post, index) => (
+      {activeTab === "reels" && (
 
-        <div
-          key={index}
-          style={styles.card}
-        >
+        <div style={styles.reelsGrid}>
 
-          {/* USER */}
+          <video
+            controls
+            style={styles.reelVideo}
+            src="https://www.w3schools.com/html/mov_bbb.mp4"
+          />
 
-          <div style={styles.userRow}>
+          <video
+            controls
+            style={styles.reelVideo}
+            src="https://www.w3schools.com/html/movie.mp4"
+          />
 
-            <div style={styles.userInfo}>
+        </div>
+
+      )}
+
+      {/* FEED */}
+
+      {activeTab === "feed" && (
+
+        <>
+
+          {/* SHARE BOX */}
+
+          <div style={styles.shareBox}>
+
+            <img
+              src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e"
+              style={styles.shareDP}
+            />
+
+            <p style={{ color: "#777" }}>
+              Share your workout progress...
+            </p>
+
+          </div>
+
+          {/* POSTS */}
+
+          {posts.map((post, index) => (
+
+            <div
+              key={index}
+              style={styles.card}
+            >
+
+              {/* USER */}
+
+              <div style={styles.userRow}>
+
+                <div style={styles.userInfo}>
+
+                  <img
+                    src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e"
+                    style={styles.avatar}
+                  />
+
+                  <div>
+
+                    <h2>{post.user}</h2>
+
+                    <p style={{ color: "#888" }}>
+                      Athlete
+                    </p>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+              {/* IMAGE */}
 
               <img
-                src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e"
-                style={styles.avatar}
+                src={post.image}
+                alt="post"
+                style={styles.image}
               />
 
-              <div>
+              {/* ACTIONS */}
 
-                <h2>{post.user}</h2>
+              <div style={styles.actionRow}>
 
-                <p style={{ color: "#888" }}>
-                  Athlete
+                <div style={styles.leftActions}>
+
+                  <button
+                    onClick={() =>
+                      handleLike(index)
+                    }
+                    style={styles.iconBtn}
+                  >
+
+                    <Heart
+                      color="#ff4d88"
+                      size={32}
+                    />
+
+                  </button>
+
+                  <MessageCircle
+                    color="white"
+                    size={32}
+                  />
+
+                  <Send
+                    color="white"
+                    size={32}
+                  />
+
+                </div>
+
+              </div>
+
+              {/* STATS */}
+
+              <div style={styles.statsRow}>
+
+                <p>
+                  {post.likes} likes
                 </p>
+
+                <p>
+                  {post.comments} comments
+                </p>
+
+              </div>
+
+              {/* CAPTION */}
+
+              <p style={styles.caption}>
+
+                <span
+                  style={{
+                    fontWeight: "bold"
+                  }}
+                >
+                  {post.user}
+                </span>
+
+                {" "} {post.caption}
+
+              </p>
+
+              {/* COMMENT */}
+
+              <div style={styles.commentRow}>
+
+                <input
+                  placeholder="Write comment..."
+                  style={styles.input}
+                />
+
+                <button
+                  style={styles.sendBtn}
+                  onClick={handleComment}
+                >
+                  Send
+                </button>
 
               </div>
 
             </div>
 
-          </div>
+          ))}
 
-          {/* IMAGE */}
+        </>
 
-          <img
-            src={post.image}
-            alt="post"
-            style={styles.image}
-          />
-
-          {/* ACTIONS */}
-
-          <div style={styles.actionRow}>
-
-            <div style={styles.leftActions}>
-
-              <button
-                onClick={() =>
-                  handleLike(index)
-                }
-                style={styles.iconBtn}
-              >
-
-                <Heart
-                  color="#ff4d88"
-                  size={32}
-                />
-
-              </button>
-
-              <MessageCircle
-                color="white"
-                size={32}
-              />
-
-              <Send
-                color="white"
-                size={32}
-              />
-
-            </div>
-
-          </div>
-
-          {/* STATS */}
-
-          <div style={styles.statsRow}>
-
-            <p>
-              {post.likes} likes
-            </p>
-
-            <p>
-              {post.comments} comments
-            </p>
-
-          </div>
-
-          {/* CAPTION */}
-
-          <p style={styles.caption}>
-
-            <span
-              style={{
-                fontWeight: "bold"
-              }}
-            >
-              {post.user}
-            </span>
-
-            {" "} {post.caption}
-
-          </p>
-
-          {/* COMMENT BOX */}
-
-          <div style={styles.commentRow}>
-
-            <input
-              placeholder="Write comment..."
-              style={styles.input}
-            />
-
-            <button
-              style={styles.sendBtn}
-              onClick={handleComment}
-            >
-              Send
-            </button>
-
-          </div>
-
-        </div>
-
-      ))}
+      )}
 
     </div>
 
@@ -300,6 +369,40 @@ const styles = {
     color: "#ddd",
     marginBottom: 8,
     fontSize: 14
+  },
+
+  tabs: {
+    display: "flex",
+    justifyContent: "center",
+    gap: 20,
+    marginBottom: 25
+  },
+
+  tabBtn: {
+    background: "#111827",
+    border: "none",
+    color: "white",
+    padding: 15,
+    borderRadius: 15
+  },
+
+  activeTab: {
+    background: "#39ff14",
+    border: "none",
+    color: "black",
+    padding: 15,
+    borderRadius: 15
+  },
+
+  reelsGrid: {
+    display: "grid",
+    gap: 20,
+    marginBottom: 30
+  },
+
+  reelVideo: {
+    width: "100%",
+    borderRadius: 20
   },
 
   shareBox: {
