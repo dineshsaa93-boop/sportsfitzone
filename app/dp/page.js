@@ -6,10 +6,10 @@ import {
   Heart,
   MessageCircle,
   Send,
-  PlusSquare,
-  ImagePlus,
   Camera,
-  Video
+  Video,
+  PlusSquare,
+  Bell
 } from "lucide-react";
 
 export default function DPPage() {
@@ -18,47 +18,34 @@ export default function DPPage() {
 
     {
       user: "Dinesh",
-
-      profile:
-        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e",
-
       image:
-        "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1200&auto=format&fit=crop",
-
-      caption: "Completed intense chest workout 🔥",
-
+        "https://images.unsplash.com/photo-1517836357463-d25dfeac3438",
+      caption:
+        "Completed intense chest workout 🔥",
       likes: 100,
-      comments: 24,
-
-      commentList: [],
-
-      isVideo: false
+      comments: 24
     },
 
     {
       user: "Rahul",
-
-      profile:
-        "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce",
-
       image:
-        "https://images.unsplash.com/photo-1547347298-4074fc3086f0?q=80&w=1200&auto=format&fit=crop",
-
-      caption: "Morning cricket practice 🏏",
-
-      likes: 85,
-      comments: 12,
-
-      commentList: [],
-
-      isVideo: false
+        "https://images.unsplash.com/photo-1547347298-4074fc3086f0",
+      caption:
+        "5KM running completed 🏃",
+      likes: 87,
+      comments: 14
     }
 
   ];
 
-  const [posts, setPosts] = useState(initialPosts);
+  const [posts, setPosts] =
+    useState(initialPosts);
 
-  const [commentText, setCommentText] = useState("");
+  const [notifications, setNotifications] =
+    useState([
+      "Rahul liked your post ❤️",
+      "Aryan commented 🔥"
+    ]);
 
   const handleLike = (index) => {
 
@@ -67,53 +54,21 @@ export default function DPPage() {
     updatedPosts[index].likes += 1;
 
     setPosts(updatedPosts);
+
+    setNotifications([
+      "Someone liked your post ❤️",
+      ...notifications
+    ]);
+
   };
 
-  const handleComment = (index) => {
+  const handleComment = () => {
 
-    if (!commentText) return;
+    setNotifications([
+      "New comment on your post 💬",
+      ...notifications
+    ]);
 
-    const updatedPosts = [...posts];
-
-    updatedPosts[index].commentList.push(commentText);
-
-    updatedPosts[index].comments += 1;
-
-    setPosts(updatedPosts);
-
-    setCommentText("");
-  };
-
-  const handleImageUpload = (e) => {
-
-    const file = e.target.files[0];
-
-    if (!file) return;
-
-    const fileUrl = URL.createObjectURL(file);
-
-    const isVideo = file.type.startsWith("video");
-
-    const newPost = {
-
-      user: "Dinesh",
-
-      profile:
-        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e",
-
-      image: fileUrl,
-
-      caption: "New upload 🔥",
-
-      likes: 0,
-      comments: 0,
-
-      commentList: [],
-
-      isVideo: isVideo
-    };
-
-    setPosts([newPost, ...posts]);
   };
 
   return (
@@ -125,46 +80,52 @@ export default function DPPage() {
       <div style={styles.header}>
 
         <h1 style={styles.logo}>
-          DP Community 🔥
+          🔥
         </h1>
 
         <div style={styles.headerIcons}>
 
-          <Camera color="white" />
+          <Bell color="white" />
 
           <Video color="white" />
 
-          <label>
-
-            <ImagePlus color="white" size={30} />
-
-            <input
-              type="file"
-              accept="image/*,video/*"
-              onChange={handleImageUpload}
-              style={{ display: "none" }}
-            />
-
-          </label>
+          <PlusSquare color="white" />
 
         </div>
 
       </div>
 
-      {/* CREATE POST */}
+      {/* NOTIFICATIONS */}
 
-      <div style={styles.createPost}>
+      <div style={styles.notificationBox}>
+
+        {notifications
+          .slice(0, 3)
+          .map((item, index) => (
+
+            <p
+              key={index}
+              style={styles.notificationText}
+            >
+              {item}
+            </p>
+
+          ))}
+
+      </div>
+
+      {/* SHARE BOX */}
+
+      <div style={styles.shareBox}>
 
         <img
-          src="https://i.pravatar.cc/100"
-          alt="profile"
-          style={styles.profilePic}
+          src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e"
+          style={styles.shareDP}
         />
 
-        <input
-          placeholder="Share your workout progress..."
-          style={styles.input}
-        />
+        <p style={{ color: "#777" }}>
+          Share your workout progress...
+        </p>
 
       </div>
 
@@ -172,68 +133,75 @@ export default function DPPage() {
 
       {posts.map((post, index) => (
 
-        <div key={index} style={styles.card}>
+        <div
+          key={index}
+          style={styles.card}
+        >
 
           {/* USER */}
 
           <div style={styles.userRow}>
 
-            <img
-              src={post.profile}
-              alt="dp"
-              style={styles.profilePic}
-            />
+            <div style={styles.userInfo}>
 
-            <div>
+              <img
+                src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e"
+                style={styles.avatar}
+              />
 
-              <h3>{post.user}</h3>
+              <div>
 
-              <p style={{ color: "#888", fontSize: 13 }}>
-                Athlete
-              </p>
+                <h2>{post.user}</h2>
+
+                <p style={{ color: "#888" }}>
+                  Athlete
+                </p>
+
+              </div>
 
             </div>
 
           </div>
 
-          {/* IMAGE / VIDEO */}
+          {/* IMAGE */}
 
-          {post.isVideo ? (
-
-            <video
-              controls
-              style={styles.image}
-              src={post.image}
-            />
-
-          ) : (
-
-            <img
-              src={post.image}
-              alt="post"
-              style={styles.image}
-            />
-
-          )}
+          <img
+            src={post.image}
+            alt="post"
+            style={styles.image}
+          />
 
           {/* ACTIONS */}
 
           <div style={styles.actionRow}>
 
-            <button
-              onClick={() => handleLike(index)}
-              style={{
-                background: "transparent",
-                border: "none",
-                cursor: "pointer"
-              }}
-            >
-              <Heart color="#ff4d88" size={28} />
-            </button>
+            <div style={styles.leftActions}>
 
-            <MessageCircle color="white" size={28} />
+              <button
+                onClick={() =>
+                  handleLike(index)
+                }
+                style={styles.iconBtn}
+              >
 
-            <Send color="white" size={28} />
+                <Heart
+                  color="#ff4d88"
+                  size={32}
+                />
+
+              </button>
+
+              <MessageCircle
+                color="white"
+                size={32}
+              />
+
+              <Send
+                color="white"
+                size={32}
+              />
+
+            </div>
 
           </div>
 
@@ -241,9 +209,13 @@ export default function DPPage() {
 
           <div style={styles.statsRow}>
 
-            <p>{post.likes} likes</p>
+            <p>
+              {post.likes} likes
+            </p>
 
-            <p>{post.comments} comments</p>
+            <p>
+              {post.comments} comments
+            </p>
 
           </div>
 
@@ -251,7 +223,11 @@ export default function DPPage() {
 
           <p style={styles.caption}>
 
-            <span style={{ fontWeight: "bold" }}>
+            <span
+              style={{
+                fontWeight: "bold"
+              }}
+            >
               {post.user}
             </span>
 
@@ -259,45 +235,21 @@ export default function DPPage() {
 
           </p>
 
-          {/* COMMENT INPUT */}
+          {/* COMMENT BOX */}
 
-          <div style={{ marginTop: 10 }}>
+          <div style={styles.commentRow}>
 
             <input
-              value={commentText}
-              onChange={(e) =>
-                setCommentText(e.target.value)
-              }
               placeholder="Write comment..."
-              style={{
-                padding: 8,
-                width: "70%",
-                borderRadius: 10
-              }}
+              style={styles.input}
             />
 
             <button
-              onClick={() => handleComment(index)}
-              style={{
-                marginLeft: 10,
-                padding: 8,
-                borderRadius: 10
-              }}
+              style={styles.sendBtn}
+              onClick={handleComment}
             >
               Send
             </button>
-
-          </div>
-
-          {/* COMMENTS */}
-
-          <div style={{ marginTop: 10 }}>
-
-            {post.commentList.map((c, i) => (
-
-              <p key={i}>{c}</p>
-
-            ))}
 
           </div>
 
@@ -308,6 +260,7 @@ export default function DPPage() {
     </div>
 
   );
+
 }
 
 const styles = {
@@ -328,84 +281,127 @@ const styles = {
   },
 
   logo: {
-    color: "white",
-    fontSize: 28,
-    fontWeight: "bold"
+    fontSize: 35
   },
 
   headerIcons: {
+    display: "flex",
+    gap: 20
+  },
+
+  notificationBox: {
+    background: "#081120",
+    padding: 12,
+    borderRadius: 15,
+    marginBottom: 20
+  },
+
+  notificationText: {
+    color: "#ddd",
+    marginBottom: 8,
+    fontSize: 14
+  },
+
+  shareBox: {
+    background: "#081120",
+    borderRadius: 25,
+    padding: 20,
+    display: "flex",
+    alignItems: "center",
+    gap: 15,
+    marginBottom: 25
+  },
+
+  shareDP: {
+    width: 60,
+    height: 60,
+    borderRadius: "50%",
+    objectFit: "cover"
+  },
+
+  card: {
+    background: "#081120",
+    padding: 20,
+    borderRadius: 30,
+    marginBottom: 30,
+    border: "1px solid #1b2940"
+  },
+
+  userRow: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center"
+  },
+
+  userInfo: {
     display: "flex",
     gap: 15,
     alignItems: "center"
   },
 
-  createPost: {
-    display: "flex",
-    alignItems: "center",
-    gap: 12,
-    background: "#111827",
-    padding: 15,
-    borderRadius: 18,
-    marginBottom: 25
-  },
-
-  input: {
-    flex: 1,
-    background: "transparent",
-    border: "none",
-    outline: "none",
-    color: "white",
-    fontSize: 16
-  },
-
-  card: {
-    background: "#081120",
-    borderRadius: 25,
-    padding: 15,
-    marginBottom: 25,
-    border: "1px solid #1d2b44"
-  },
-
-  userRow: {
-    display: "flex",
-    alignItems: "center",
-    gap: 12,
-    marginBottom: 15
-  },
-
-  profilePic: {
-    width: 50,
-    height: 50,
+  avatar: {
+    width: 70,
+    height: 70,
     borderRadius: "50%",
     objectFit: "cover"
   },
 
   image: {
     width: "100%",
-    height: 280,
+    height: 500,
     objectFit: "cover",
-    borderRadius: 20
+    borderRadius: 25,
+    marginTop: 20
   },
 
   actionRow: {
+    marginTop: 20
+  },
+
+  leftActions: {
     display: "flex",
-    gap: 18,
-    marginTop: 15,
-    alignItems: "center"
+    gap: 20
+  },
+
+  iconBtn: {
+    background: "transparent",
+    border: "none"
   },
 
   statsRow: {
     display: "flex",
     justifyContent: "space-between",
-    marginTop: 10,
-    color: "#888",
-    fontSize: 14
+    marginTop: 15,
+    color: "#999"
   },
 
   caption: {
-    marginTop: 15,
-    color: "#ddd",
-    lineHeight: 1.5
+    marginTop: 20,
+    lineHeight: 1.6,
+    fontSize: 20
+  },
+
+  commentRow: {
+    display: "flex",
+    gap: 15,
+    marginTop: 20
+  },
+
+  input: {
+    flex: 1,
+    padding: 15,
+    borderRadius: 15,
+    border: "none",
+    outline: "none",
+    fontSize: 16
+  },
+
+  sendBtn: {
+    background: "white",
+    border: "none",
+    padding: "15px 20px",
+    borderRadius: 15,
+    fontWeight: "bold"
   }
 
 };
