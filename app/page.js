@@ -17,7 +17,6 @@ import {
   Calendar,
   Dumbbell,
   Brain,
-  ShoppingCart,
   User,
   PlayCircle,
   ChevronRight,
@@ -42,6 +41,8 @@ export default function HomePage() {
     "🔥 Dinesh liked your workout post",
     "💬 Pragati commented on your post",
     "🏆 You completed 7 day streak",
+    "🎮 Tournament match starts in 20 mins",
+    "🎁 Daily reward available",
   ];
 
   const features = [
@@ -189,14 +190,55 @@ export default function HomePage() {
         />,
       link: "/leaderboard"
     },
- 
-{
-      
-  title: "Courses",
-  icon: "🎓",
-  link: "/courses"
-},
-{  title: "DP",
+
+    {
+      title: "Courses",
+      icon: "🎓",
+      link: "/courses"
+    },
+
+    {
+      title: "Tournaments",
+      icon:
+        <Trophy
+          size={38}
+          color="#ffd700"
+        />,
+      link: "/tournaments"
+    },
+
+    {
+      title: "Match Room",
+      icon: "🎮",
+      link: "/match-room"
+    },
+
+    {
+      title: "Live Match",
+      icon: "🔴",
+      link: "/live-match"
+    },
+
+    {
+      title: "Rewards",
+      icon: "🎁",
+      link: "/rewards"
+    },
+
+    {
+      title: "Athlete Profile",
+      icon: "👤",
+      link: "/athlete-profile"
+    },
+
+    {
+      title: "Team Chat",
+      icon: "💬",
+      link: "/team-chat"
+    },
+
+    {
+      title: "DP",
       icon:
         <PlusSquare
           size={38}
@@ -506,7 +548,7 @@ export default function HomePage() {
 
         </div>
 
-        {/* WATER + CALORIES */}
+        {/* HEALTH */}
 
         <div style={styles.healthGrid}>
 
@@ -552,7 +594,7 @@ export default function HomePage() {
 
           {(showAll
             ? features
-            : features.slice(0, 8)
+            : features.slice(0, 24)
           ).map((item, index) => (
 
             <Link
@@ -625,7 +667,7 @@ export default function HomePage() {
 
       </div>
 
-      {/* SESSION */}
+      {/* SESSIONS */}
 
       {sessions.map((item, index) => (
 
@@ -725,19 +767,19 @@ export default function HomePage() {
         </Link>
 
         <Link
+          href="/tournaments"
+          style={styles.navItem}
+        >
+          <Trophy color="white" />
+          <span>Tournaments</span>
+        </Link>
+
+        <Link
           href="/dp"
           style={styles.navItem}
         >
           <Flame color="white" />
           <span>DP</span>
-        </Link>
-
-        <Link
-          href="/search"
-          style={styles.navItem}
-        >
-          <Search color="white" />
-          <span>Search</span>
         </Link>
 
         <Link
