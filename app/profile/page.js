@@ -1,169 +1,165 @@
 "use client";
 
+import { useEffect, useState }
+from "react";
+
 import {
-  Grid3X3,
-  PlaySquare,
-  Plus
+  onAuthStateChanged,
+  signOut
+} from "firebase/auth";
+
+import { auth }
+from "@/lib/firebase";
+
+import {
+  Flame,
+  Mail,
+  Trophy,
+  LogOut
 } from "lucide-react";
 
 export default function ProfilePage() {
 
-  const posts = [
+  const [user, setUser] =
+    useState(null);
 
-    "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1200",
+  useEffect(() => {
 
-    "https://images.unsplash.com/photo-1547347298-4074fc3086f0?q=80&w=1200",
+    const unsubscribe =
+      onAuthStateChanged(
+        auth,
+        (currentUser) => {
 
-    "https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=1200",
+        if (currentUser) {
 
-    "https://images.unsplash.com/photo-1508609349937-5ec4ae374ebf?q=80&w=1200",
+          setUser(currentUser);
 
-    "https://images.unsplash.com/photo-1517963879433-6ad2b056d712?q=80&w=1200",
+        } else {
 
-    "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=1200"
+          setUser(null);
+        }
 
-  ];
+      });
+
+    return () => unsubscribe();
+
+  }, []);
+
+  const handleLogout =
+    async () => {
+
+    await signOut(auth);
+
+    alert("Logged Out");
+  };
+
+  if (!user) {
+
+    return (
+
+      <div style={styles.page}>
+
+        <h1>
+          No User Logged In
+        </h1>
+
+      </div>
+
+    );
+  }
 
   return (
 
     <div style={styles.page}>
 
-      {/* PROFILE HEADER */}
+      {/* PROFILE */}
 
-      <div style={styles.header}>
+      <div style={styles.profileCard}>
 
-        <img
-          src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e"
-          alt="dp"
-          style={styles.dp}
-        />
-
-        <div style={styles.stats}>
-
-          <div>
-            <h2>24</h2>
-            <p>Posts</p>
-          </div>
-
-          <div>
-            <h2>12K</h2>
-            <p>Followers</p>
-          </div>
-
-          <div>
-            <h2>180</h2>
-            <p>Following</p>
-          </div>
-
+        <div style={styles.avatar}>
+          🔥
         </div>
 
-      </div>
+        <h1 style={styles.name}>
+          Athlete
+        </h1>
 
-      {/* STORIES */}
-
-      <div style={styles.storyRow}>
-
-        <div style={styles.storyBox}>
-
-          <div style={styles.storyCircle}>
-            <Plus color="white" />
-          </div>
-
-          <p>New</p>
-
-        </div>
-
-        <div style={styles.storyBox}>
-
-          <img
-            src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438"
-            style={styles.storyImage}
-          />
-
-          <p>Gym</p>
-
-        </div>
-
-        <div style={styles.storyBox}>
-
-          <img
-            src="https://images.unsplash.com/photo-1547347298-4074fc3086f0"
-            style={styles.storyImage}
-          />
-
-          <p>Cricket</p>
-
-        </div>
-
-        <div style={styles.storyBox}>
-
-          <img
-            src="https://images.unsplash.com/photo-1518611012118-696072aa579a"
-            style={styles.storyImage}
-          />
-
-          <p>Running</p>
-
-        </div>
-
-      </div>
-
-      {/* BIO */}
-
-      <div style={styles.bioBox}>
-
-        <h2>Dinesh 🚀</h2>
-
-        <p style={{ color: "#aaa" }}>
-          Athlete | Fitness | Future Engineer 💪
+        <p style={styles.email}>
+          {user.email}
         </p>
 
-      </div>
+        <div style={styles.levelBox}>
 
-      {/* BUTTONS */}
-
-      <div style={styles.btnRow}>
-
-        <button style={styles.btn}>
-          Edit Profile
-        </button>
-
-        <button style={styles.btn}>
-          Share Profile
-        </button>
-
-      </div>
-
-      {/* TABS */}
-
-      <div style={styles.tabs}>
-
-        <Grid3X3 />
-
-        <PlaySquare />
-
-      </div>
-
-      {/* POSTS GRID */}
-
-      <div style={styles.grid}>
-
-        {posts.map((item, index) => (
-
-          <img
-            key={index}
-            src={item}
-            alt="post"
-            style={styles.gridImage}
+          <Flame
+            color="#39ff14"
+            size={22}
           />
 
-        ))}
+          <span>
+            Level 5 Athlete
+          </span>
+
+        </div>
 
       </div>
+
+      {/* STATS */}
+
+      <div style={styles.statsRow}>
+
+        <div style={styles.statCard}>
+
+          <Trophy
+            color="#ffd700"
+            size={28}
+          />
+
+          <h2>
+            12
+          </h2>
+
+          <p>
+            Wins
+          </p>
+
+        </div>
+
+        <div style={styles.statCard}>
+
+          <Mail
+            color="#3ea6ff"
+            size={28}
+          />
+
+          <h2>
+            Active
+          </h2>
+
+          <p>
+            Status
+          </p>
+
+        </div>
+
+      </div>
+
+      {/* LOGOUT */}
+
+      <button
+        style={styles.logoutBtn}
+        onClick={handleLogout}
+      >
+
+        <LogOut size={20} />
+
+        Logout
+
+      </button>
 
     </div>
 
   );
+
 }
 
 const styles = {
@@ -171,101 +167,81 @@ const styles = {
   page: {
     background: "#020817",
     minHeight: "100vh",
-    color: "white",
     padding: 20,
+    color: "white",
     fontFamily: "sans-serif"
   },
 
-  header: {
-    display: "flex",
-    alignItems: "center",
-    gap: 25
-  },
-
-  dp: {
-    width: 100,
-    height: 100,
-    borderRadius: "50%",
-    objectFit: "cover",
-    border: "4px solid #ff00cc"
-  },
-
-  stats: {
-    display: "flex",
-    gap: 30
-  },
-
-  storyRow: {
-    display: "flex",
-    gap: 20,
-    marginTop: 30,
-    overflowX: "auto"
-  },
-
-  storyBox: {
-    textAlign: "center"
-  },
-
-  storyCircle: {
-    width: 75,
-    height: 75,
-    borderRadius: "50%",
+  profileCard: {
+    marginTop: 40,
     background:
-      "linear-gradient(45deg,#ff00cc,#3333ff)",
+      "linear-gradient(135deg,#081120,#102400)",
+    borderRadius: 30,
+    padding: 30,
+    textAlign: "center",
+    border: "1px solid #39ff14"
+  },
+
+  avatar: {
+    width: 110,
+    height: 110,
+    borderRadius: "50%",
+    background: "#111827",
     display: "flex",
     justifyContent: "center",
+    alignItems: "center",
+    margin: "auto",
+    fontSize: 50
+  },
+
+  name: {
+    marginTop: 20,
+    fontSize: 34
+  },
+
+  email: {
+    color: "#aaa",
+    marginTop: 10
+  },
+
+  levelBox: {
+    marginTop: 20,
+    background: "#111827",
+    padding: 14,
+    borderRadius: 18,
+    display: "inline-flex",
+    gap: 10,
     alignItems: "center"
   },
 
-  storyImage: {
-    width: 75,
-    height: 75,
-    borderRadius: "50%",
-    objectFit: "cover",
-    border: "3px solid #ff00cc"
-  },
-
-  bioBox: {
-    marginTop: 20
-  },
-
-  btnRow: {
-    display: "flex",
-    gap: 15,
-    marginTop: 20
-  },
-
-  btn: {
-    flex: 1,
-    background: "#111827",
-    border: "1px solid #1f2937",
-    color: "white",
-    padding: 12,
-    borderRadius: 12,
-    fontWeight: "bold"
-  },
-
-  tabs: {
+  statsRow: {
     marginTop: 30,
-    display: "flex",
-    justifyContent: "space-around",
-    borderTop: "1px solid #1f2937",
-    borderBottom: "1px solid #1f2937",
-    padding: 15
-  },
-
-  grid: {
-    marginTop: 20,
     display: "grid",
-    gridTemplateColumns: "repeat(3,1fr)",
-    gap: 5
+    gridTemplateColumns:
+      "repeat(2,1fr)",
+    gap: 15
   },
 
-  gridImage: {
+  statCard: {
+    background: "#081120",
+    padding: 22,
+    borderRadius: 24,
+    textAlign: "center"
+  },
+
+  logoutBtn: {
+    marginTop: 35,
     width: "100%",
-    height: 130,
-    objectFit: "cover",
-    borderRadius: 10
+    padding: 16,
+    border: "none",
+    borderRadius: 18,
+    background: "#ff4d4d",
+    color: "white",
+    fontWeight: "bold",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    gap: 10
   }
 
 };
