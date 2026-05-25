@@ -23,52 +23,26 @@ export default function CoursesPage() {
 
     {
       title: "Cricket Masterclass",
-
       coach: "Virat Coach",
-
       badge: "Verified Athlete",
-
       xp: "12,500 XP",
-
       review:
         "Best sports training course ever 🔥",
-
-      student:
-        "Aryan",
-
-      live:
-        "Today 7:00 PM",
-
+      student: "Aryan",
+      live: "Today 7:00 PM",
       achievement:
         "🏆 Elite Athlete Badge Unlocked",
-
-      downloads:
-        "12 Resources",
-
-      quiz:
-        "25 Questions Quiz",
-
-      rank:
-        "#1 Athlete",
-
-      points:
-        "+500 XP",
-
+      downloads: "12 Resources",
+      quiz: "25 Questions Quiz",
+      rank: "#1 Athlete",
+      points: "+500 XP",
       price: "₹499",
-
       level: "Normal",
-
       duration: "12 Hours",
-
       lessons: "48 Lessons",
-
       rating: "4.9 ⭐",
-
       progress: "65%",
-
-      completed:
-        "32/48 Lessons",
-
+      completed: "32/48 Lessons",
       image:
         "https://images.unsplash.com/photo-1546519638-68e109498ffc"
     },
@@ -76,55 +50,42 @@ export default function CoursesPage() {
     {
       title:
         "Football Speed Training",
-
       coach:
         "Ronaldo Coach",
-
       badge:
         "Verified Athlete",
-
       xp:
         "18,400 XP",
-
       review:
         "Amazing speed drills and athlete mindset 💪",
-
       student:
         "Dinesh",
-
       live:
         "Tomorrow 6:30 PM",
-
       achievement:
         "🏆 Speed Beast Badge Unlocked",
-
       downloads:
         "18 Resources",
-
       quiz:
         "40 Questions Quiz",
-
       rank:
         "#2 Athlete",
-
       points:
         "+900 XP",
-
-      price: "₹999",
-
-      level: "Premium",
-
-      duration: "20 Hours",
-
-      lessons: "72 Lessons",
-
-      rating: "4.8 ⭐",
-
-      progress: "82%",
-
+      price:
+        "₹999",
+      level:
+        "Premium",
+      duration:
+        "20 Hours",
+      lessons:
+        "72 Lessons",
+      rating:
+        "4.8 ⭐",
+      progress:
+        "82%",
       completed:
         "59/72 Lessons",
-
       image:
         "https://images.unsplash.com/photo-1517466787929-bc90951d0974"
     },
@@ -132,55 +93,42 @@ export default function CoursesPage() {
     {
       title:
         "Gym Beast Program",
-
       coach:
         "Fitness Pro",
-
       badge:
         "Verified Athlete",
-
       xp:
         "30,000 XP",
-
       review:
         "Best muscle building course on earth 🔥",
-
       student:
         "Pragati",
-
       live:
         "Today 9:00 PM",
-
       achievement:
         "🏆 Elite Athlete Badge Unlocked",
-
       downloads:
         "35 Resources",
-
       quiz:
         "75 Questions Quiz",
-
       rank:
         "#1 Elite Athlete",
-
       points:
         "+1500 XP",
-
-      price: "₹1999",
-
-      level: "Premium DP",
-
-      duration: "35 Hours",
-
-      lessons: "120 Lessons",
-
-      rating: "5.0 ⭐",
-
-      progress: "91%",
-
+      price:
+        "₹1999",
+      level:
+        "Premium DP",
+      duration:
+        "35 Hours",
+      lessons:
+        "120 Lessons",
+      rating:
+        "5.0 ⭐",
+      progress:
+        "91%",
       completed:
         "109/120 Lessons",
-
       image:
         "https://images.unsplash.com/photo-1517836357463-d25dfeac3438"
     }
@@ -201,21 +149,13 @@ export default function CoursesPage() {
 
         <div style={styles.planCard}>
 
-          <h2>
-            🟢 NORMAL
-          </h2>
+          <h2>🟢 NORMAL</h2>
 
-          <h1>
-            FREE
-          </h1>
+          <h1>FREE</h1>
 
-          <p>
-            Basic workouts
-          </p>
+          <p>Basic workouts</p>
 
-          <p>
-            Community access
-          </p>
+          <p>Community access</p>
 
           <button style={styles.freeBtn}>
             Current Plan
@@ -230,25 +170,15 @@ export default function CoursesPage() {
             size={40}
           />
 
-          <h2>
-            PREMIUM
-          </h2>
+          <h2>PREMIUM</h2>
 
-          <h1>
-            ₹199/mo
-          </h1>
+          <h1>₹199/mo</h1>
 
-          <p>
-            AI Plans
-          </p>
+          <p>AI Plans</p>
 
-          <p>
-            1 to 1 Chat
-          </p>
+          <p>1 to 1 Chat</p>
 
-          <p>
-            Premium Courses
-          </p>
+          <p>Premium Courses</p>
 
           <button style={styles.premiumBtn}>
             Upgrade
@@ -263,25 +193,15 @@ export default function CoursesPage() {
             size={40}
           />
 
-          <h2>
-            ELITE DP
-          </h2>
+          <h2>ELITE DP</h2>
 
-          <h1>
-            ₹999/mo
-          </h1>
+          <h1>₹999/mo</h1>
 
-          <p>
-            Video Calls
-          </p>
+          <p>Video Calls</p>
 
-          <p>
-            Live Doubts
-          </p>
+          <p>Live Doubts</p>
 
-          <p>
-            Personal Trainer
-          </p>
+          <p>Personal Trainer</p>
 
           <button style={styles.eliteBtn}>
             Go Elite
@@ -306,12 +226,11 @@ export default function CoursesPage() {
 
           <img
             src={course.image}
+            alt="course"
             style={styles.courseImage}
           />
 
           <div style={styles.courseContent}>
-
-            {/* LEVEL */}
 
             <div style={styles.levelRow}>
 
@@ -359,8 +278,6 @@ export default function CoursesPage() {
 
             </div>
 
-            {/* TITLE */}
-
             <h2>
               {course.title}
             </h2>
@@ -368,8 +285,6 @@ export default function CoursesPage() {
             <p style={{ color: "#aaa" }}>
               By {course.coach}
             </p>
-
-            {/* BADGES */}
 
             <div style={styles.badgeRow}>
 
@@ -389,8 +304,6 @@ export default function CoursesPage() {
 
             </div>
 
-            {/* COURSE INFO */}
-
             <div style={styles.infoRow}>
 
               <p>
@@ -402,8 +315,6 @@ export default function CoursesPage() {
               </p>
 
             </div>
-
-            {/* RATING */}
 
             <p style={styles.rating}>
               {course.rating}
@@ -433,14 +344,11 @@ export default function CoursesPage() {
                     width:
                       course.progress
                   }}
-                >
-                </div>
+                />
 
               </div>
 
             </div>
-
-            {/* PRICE */}
 
             <h3 style={styles.price}>
               {course.price}
@@ -468,21 +376,13 @@ export default function CoursesPage() {
 
             </div>
 
-            {/* PREVIEW */}
+            {/* BUTTONS */}
 
-            <a href="/course-preview">
-
-              <button
-                style={
-                  styles.previewBtn
-                }
-              >
-                ▶ Preview Course
-              </button>
-
-            </a>
-
-            {/* BUY */}
+            <button
+              style={styles.previewBtn}
+            >
+              ▶ Preview Course
+            </button>
 
             <button
               style={styles.watchBtn}
@@ -497,8 +397,6 @@ export default function CoursesPage() {
 
             </button>
 
-            {/* CONTINUE */}
-
             <button
               style={
                 styles.continueBtn
@@ -506,8 +404,6 @@ export default function CoursesPage() {
             >
               Continue Learning
             </button>
-
-            {/* CERTIFICATE */}
 
             <button
               style={
@@ -697,7 +593,7 @@ export default function CoursesPage() {
 
       </div>
 
-      {/* PAYMENT POPUP */}
+      {/* POPUP */}
 
       {showPopup && (
 
@@ -726,9 +622,8 @@ export default function CoursesPage() {
 
             <p style={{ color: "#aaa" }}>
               Access elite sports
-              training, live coaching
-              and premium athlete
-              content.
+              training and premium
+              athlete content.
             </p>
 
             <button
@@ -759,7 +654,7 @@ export default function CoursesPage() {
 
       )}
 
-      {/* SUCCESS POPUP */}
+      {/* SUCCESS */}
 
       {success && (
 
@@ -784,8 +679,7 @@ export default function CoursesPage() {
             </h2>
 
             <p style={{ color: "#aaa" }}>
-              Premium features unlocked
-              successfully 🚀
+              Premium features unlocked 🚀
             </p>
 
             <button
@@ -1182,4 +1076,48 @@ const styles = {
       "linear-gradient(135deg,#2b1800,#3d2600)",
     borderRadius: 18,
     padding: 18,
-              
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    border:
+      "1px solid #ffd700"
+  },
+
+  xpBox: {
+    background: "#ffd700",
+    color: "black",
+    padding: "10px 18px",
+    borderRadius: 12,
+    fontWeight: "bold"
+  },
+
+  benefitBox: {
+    marginTop: 40,
+    background:
+      "linear-gradient(135deg,#081120,#102400)",
+    borderRadius: 24,
+    padding: 20,
+    display: "flex",
+    gap: 15,
+    alignItems: "center",
+    border:
+      "1px solid #39ff14"
+  },
+
+  popupOverlay: {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    background:
+      "rgba(0,0,0,0.7)",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    zIndex: 999
+  },
+
+  popup: {
+    width: "90%",
+    backgrou
