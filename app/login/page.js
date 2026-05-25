@@ -7,7 +7,15 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 
-import { auth } from "@/lib/firebase";
+import {
+  doc,
+  setDoc
+} from "firebase/firestore";
+
+import {
+  auth,
+  db
+} from "@/lib/firebase";
 
 import {
   Flame,
@@ -46,9 +54,9 @@ export default function LoginPage() {
 
       setLoading(true);
 
-      if (isLogin) {
+      // LOGIN
 
-        // LOGIN
+      if (isLogin) {
 
         await signInWithEmailAndPassword(
           auth,
@@ -58,14 +66,47 @@ export default function LoginPage() {
 
         alert("Login Success 🚀");
 
-      } else {
+      }
 
-        // SIGNUP
+      // SIGNUP
+
+      else {
 
         await createUserWithEmailAndPassword(
           auth,
           email,
           password
+        );
+
+        const user =
+          auth.currentUser;
+
+        // SAVE USER DATA
+
+        await setDoc(
+          doc(db, "users", user.uid),
+          {
+
+            name: name,
+
+            email: email,
+
+            xp: 0,
+
+            level: 1,
+
+            streak: 0,
+
+            wins: 0,
+
+            tournaments: 0,
+
+            rewards: 0,
+
+            createdAt:
+              new Date()
+
+          }
         );
 
         alert("Account Created 🔥");
@@ -135,6 +176,8 @@ export default function LoginPage() {
 
         )}
 
+        {/* EMAIL */}
+
         <div style={styles.inputBox}>
 
           <Mail
@@ -152,6 +195,8 @@ export default function LoginPage() {
           />
 
         </div>
+
+        {/* PASSWORD */}
 
         <div style={styles.inputBox}>
 
@@ -209,6 +254,32 @@ export default function LoginPage() {
           </span>
 
         </p>
+
+      </div>
+
+      {/* FEATURES */}
+
+      <div style={styles.bottomCard}>
+
+        <h2>
+          Why Join AthleteX? 🔥
+        </h2>
+
+        <div style={styles.featureItem}>
+          🏆 Join tournaments
+        </div>
+
+        <div style={styles.featureItem}>
+          💬 Team chats & community
+        </div>
+
+        <div style={styles.featureItem}>
+          🎁 Earn rewards & XP
+        </div>
+
+        <div style={styles.featureItem}>
+          📊 Athlete progress tracking
+        </div>
 
       </div>
 
@@ -303,7 +374,24 @@ const styles = {
 
   switchBtn: {
     color: "#39ff14",
-    fontWeight: "bold"
+    fontWeight: "bold",
+    cursor: "pointer"
+  },
+
+  bottomCard: {
+    marginTop: 35,
+    background:
+      "linear-gradient(135deg,#102400,#081120)",
+    borderRadius: 28,
+    padding: 22,
+    border: "1px solid #39ff14"
+  },
+
+  featureItem: {
+    background: "#111827",
+    padding: 14,
+    borderRadius: 16,
+    marginTop: 15
   }
 
 };
