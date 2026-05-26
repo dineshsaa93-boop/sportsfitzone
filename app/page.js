@@ -30,9 +30,6 @@ import {
 
 export default function HomePage() {
 
-  const [showAll, setShowAll] =
-    useState(false);
-
   const [showNotifications,
     setShowNotifications] =
     useState(false);
@@ -592,10 +589,7 @@ export default function HomePage() {
 
         <div style={styles.featureGrid}>
 
-          {(showAll
-            ? features
-            : features.slice(0, 24)
-          ).map((item, index) => (
+          {features.map((item, index) => (
 
             <Link
               href={item.link}
@@ -614,17 +608,6 @@ export default function HomePage() {
           ))}
 
         </div>
-
-        <button
-          style={styles.showMore}
-          onClick={() =>
-            setShowAll(!showAll)
-          }
-        >
-          {showAll
-            ? "Show Less"
-            : "Show More"}
-        </button>
 
       </div>
 
@@ -1004,18 +987,6 @@ const styles = {
   featureText: {
     marginTop: 10,
     fontSize: 15
-  },
-
-  showMore: {
-    marginTop: 20,
-    width: "100%",
-    padding: 14,
-    borderRadius: 14,
-    background: "#111827",
-    color: "white",
-    border:
-      "1px solid #1f2937",
-    fontSize: 16
   },
 
   leaderboard: {
