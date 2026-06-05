@@ -440,7 +440,35 @@ export default function HomePage() {
 
         </div>
 
-        {/* XP */}
+        <div style={styles.heroCard}>
+
+  <h2>🏆 Athlete Rank</h2>
+
+  <h1>Gold Athlete</h1>
+
+  <p>Top 15% Athletes</p>
+
+  <div style={styles.heroStats}>
+
+    <div>
+      <h3>540</h3>
+      <p>XP</p>
+    </div>
+
+    <div>
+      <h3>7</h3>
+      <p>Streak</p>
+    </div>
+
+    <div>
+      <h3>12</h3>
+      <p>Trophies</p>
+    </div>
+
+  </div>
+
+</div>
+   {/* XP */}
 
         <div style={styles.xpCard}>
 
