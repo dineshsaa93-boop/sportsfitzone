@@ -1118,6 +1118,20 @@ const styles = {
     color: "white",
     textDecoration: "none",
     fontSize: 12
-  }
+  },
+heroCard: {
+  marginTop: 25,
+  background: "linear-gradient(135deg,#1a1f3a,#2d1b69)",
+  borderRadius: 30,
+  padding: 25,
+  border: "1px solid #3d4a7a",
+  textAlign: "center"
+},
+
+heroStats: {
+  display: "flex",
+  justifyContent: "space-around",
+  marginTop: 20
+},
 
 };
