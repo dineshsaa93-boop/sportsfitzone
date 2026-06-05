@@ -1119,5 +1119,11 @@ const styles = {
   },
 
   popup: {
-    width: "90%",
-    backgrou
+  width: "90%",
+    background: "#081120",
+    borderRadius: 24,
+    padding: 20,
+    maxHeight: "80vh",
+    overflowY: "auto"
+  }
+  };
