@@ -30,9 +30,10 @@ import {
 
 export default function HomePage() {
 
-  const [showNotifications,
-    setShowNotifications] =
-    useState(false);
+  const [showNotifications, setShowNotifications] = useState(false);
+  
+  // NEW: Show More / Show Less को कंट्रोल करने के लिए नया state
+  const [showAllFeatures, setShowAllFeatures] = useState(false);
 
   const notifications = [
     "🔥 Dinesh liked your workout post",
@@ -278,6 +279,9 @@ export default function HomePage() {
 
   ];
 
+  // NEW: तय करना कि कितने फीचर्स दिखाने हैं (शुरुआत में 8, बटन दबाने पर सारे)
+  const displayedFeatures = showAllFeatures ? features : features.slice(0, 8);
+
   return (
 
     <div style={styles.page}>
@@ -442,33 +446,34 @@ export default function HomePage() {
 
         <div style={styles.heroCard}>
 
-  <h2>🏆 Athlete Rank</h2>
+          <h2>🏆 Athlete Rank</h2>
 
-  <h1>Gold Athlete</h1>
+          <h1>Gold Athlete</h1>
 
-  <p>Top 15% Athletes</p>
+          <p>Top 15% Athletes</p>
 
-  <div style={styles.heroStats}>
+          <div style={styles.heroStats}>
 
-    <div>
-      <h3>540</h3>
-      <p>XP</p>
-    </div>
+            <div>
+              <h3>540</h3>
+              <p>XP</p>
+            </div>
 
-    <div>
-      <h3>7</h3>
-      <p>Streak</p>
-    </div>
+            <div>
+              <h3>7</h3>
+              <p>Streak</p>
+            </div>
 
-    <div>
-      <h3>12</h3>
-      <p>Trophies</p>
-    </div>
+            <div>
+              <h3>12</h3>
+              <p>Trophies</p>
+            </div>
 
-  </div>
+          </div>
 
-</div>
-   {/* XP */}
+        </div>
+
+        {/* XP */}
 
         <div style={styles.xpCard}>
 
@@ -617,7 +622,8 @@ export default function HomePage() {
 
         <div style={styles.featureGrid}>
 
-          {features.map((item, index) => (
+          {/* UPDATED: features.map की जगह displayedFeatures.map का इस्तेमाल */}
+          {displayedFeatures.map((item, index) => (
 
             <Link
               href={item.link}
@@ -636,6 +642,25 @@ export default function HomePage() {
           ))}
 
         </div>
+
+        {/* NEW: SHOW MORE / SHOW LESS BUTTON */}
+        <button 
+          onClick={() => setShowAllFeatures(!showAllFeatures)}
+          style={{
+            marginTop: 20,
+            width: "100%",
+            padding: 15,
+            background: "#1d2b44",
+            color: "white",
+            border: "none",
+            borderRadius: 15,
+            fontWeight: "bold",
+            fontSize: 16,
+            cursor: "pointer"
+          }}
+        >
+          {showAllFeatures ? "Show Less 🔼" : "Show More 🔽"}
+        </button>
 
       </div>
 
@@ -1119,19 +1144,21 @@ const styles = {
     textDecoration: "none",
     fontSize: 12
   },
-heroCard: {
-  marginTop: 25,
-  background: "linear-gradient(135deg,#1a1f3a,#2d1b69)",
-  borderRadius: 30,
-  padding: 25,
-  border: "1px solid #3d4a7a",
-  textAlign: "center"
-},
+  
+  heroCard: {
+    marginTop: 25,
+    background: "linear-gradient(135deg,#1a1f3a,#2d1b69)",
+    borderRadius: 30,
+    padding: 25,
+    border: "1px solid #3d4a7a",
+    textAlign: "center"
+  },
 
-heroStats: {
-  display: "flex",
-  justifyContent: "space-around",
-  marginTop: 20
-},
+  heroStats: {
+    display: "flex",
+    justifyContent: "space-around",
+    marginTop: 20
+  },
 
 };
+      
