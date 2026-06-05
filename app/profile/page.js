@@ -9,7 +9,7 @@ import {
 } from "firebase/auth";
 
 import { auth }
-from "@/lib/firebase";
+from "../firebase";
 
 import {
   Flame,
