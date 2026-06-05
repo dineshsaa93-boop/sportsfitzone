@@ -15,7 +15,7 @@ import {
 import {
   auth,
   db
-} from "@/lib/firebase";
+} from "../firebase";
 
 import {
   Flame,
