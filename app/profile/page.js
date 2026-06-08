@@ -7,10 +7,12 @@ import {
   onAuthStateChanged,
   signOut
 } from "firebase/auth";
-
-import { auth }
+import { auth, db }
 from "../firebase";
-
+import {
+  doc,
+  getDoc
+} from "firebase/firestore";
 import {
   Flame,
   Mail,
@@ -22,17 +24,35 @@ export default function ProfilePage() {
 
   const [user, setUser] =
     useState(null);
-
+const [profileData, setProfileData] =
+  useState(null);
   useEffect(() => {
 
     const unsubscribe =
       onAuthStateChanged(
         auth,
-        (currentUser) => {
+        async (currentUser) => {
 
         if (currentUser) {
 
           setUser(currentUser);
+          const docRef =
+  doc(
+    db,
+    "users",
+    currentUser.uid
+  );
+
+const docSnap =
+  await getDoc(docRef);
+
+if (docSnap.exists()) {
+
+  setProfileData(
+    docSnap.data()
+  );
+
+}
 
         } else {
 
@@ -81,8 +101,8 @@ export default function ProfilePage() {
         </div>
 
         <h1 style={styles.name}>
-          Athlete
-        </h1>
+  {profileData?.name || "Athlete"}
+</h1>
 
         <p style={styles.email}>
           {user.email}
@@ -96,8 +116,8 @@ export default function ProfilePage() {
           />
 
           <span>
-            Level 5 Athlete
-          </span>
+  Level {profileData?.level || 1} Athlete
+</span>
 
         </div>
 
@@ -114,9 +134,9 @@ export default function ProfilePage() {
             size={28}
           />
 
-          <h2>
-            12
-          </h2>
+      <h2>
+  {profileData?.wins || 0}
+</h2>
 
           <p>
             Wins
