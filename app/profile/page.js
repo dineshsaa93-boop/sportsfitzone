@@ -107,9 +107,6 @@ if (docSnap.exists()) {
         <p style={styles.email}>
           {user.email}
         </p>
-  <h2>
-  {user?.uid}
-</h2>
 
         <div style={styles.levelBox}>
 
