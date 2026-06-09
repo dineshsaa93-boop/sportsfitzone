@@ -43,7 +43,41 @@ export default function HomePage() {
   
   // NEW: Show More / Show Less को कंट्रोल करने के लिए नया state
   const [showAllFeatures, setShowAllFeatures] = useState(false);
+useEffect(() => {
 
+  const unsubscribe =
+    onAuthStateChanged(
+      auth,
+      async (currentUser) => {
+
+        if (currentUser) {
+
+          const docRef =
+            doc(
+              db,
+              "users",
+              currentUser.uid
+            );
+
+          const docSnap =
+            await getDoc(docRef);
+
+          if (docSnap.exists()) {
+
+            setProfileData(
+              docSnap.data()
+            );
+
+          }
+
+        }
+
+      }
+    );
+
+  return () => unsubscribe();
+
+}, []);
   const notifications = [
     "🔥 Dinesh liked your workout post",
     "💬 Pragati commented on your post",
