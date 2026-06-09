@@ -516,7 +516,6 @@ useEffect(() => {
             <div>
               <h3>
   <h3>
-  <h3>
   {profileData?.wins || 0}
 </h3>
               <p>Trophies</p>
