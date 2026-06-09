@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-
+import { useRouter } from "next/navigation";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -40,7 +40,7 @@ export default function LoginPage() {
 
   const [loading, setLoading] =
     useState(false);
-
+const router = useRouter();
   const handleAuth = async () => {
 
     if (!email || !password) {
@@ -65,7 +65,8 @@ export default function LoginPage() {
         );
 
         alert("Login Success 🚀");
-
+        
+      router.push("/profile");
       }
 
       // SIGNUP
