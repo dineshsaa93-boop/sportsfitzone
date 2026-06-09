@@ -1,6 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
+import { onAuthStateChanged } from "firebase/auth";
+
+import { doc, getDoc } from "firebase/firestore";
+
+import { auth, db } from "../firebase";
 import Link from "next/link";
 
 import {
@@ -29,6 +35,9 @@ import {
 } from "lucide-react";
 
 export default function HomePage() {
+
+  const [profileData, setProfileData] =
+  useState(null);
 
   const [showNotifications, setShowNotifications] = useState(false);
   
