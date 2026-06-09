@@ -491,24 +491,34 @@ useEffect(() => {
 
           <h2>🏆 Athlete Rank</h2>
 
-          <h1>Gold Athlete</h1>
+          <h1>
+  Level {profileData?.level || 1} Athlete
+</h1>
 
           <p>Top 15% Athletes</p>
 
           <div style={styles.heroStats}>
 
             <div>
-              <h3>540</h3>
+              <h3>
+  {profileData?.xp || 0}
+</h3>
               <p>XP</p>
             </div>
 
             <div>
-              <h3>7</h3>
+              <h3>
+  {profileData?.streak || 0}
+</h3>
               <p>Streak</p>
             </div>
 
             <div>
-              <h3>12</h3>
+              <h3>
+  <h3>
+  <h3>
+  {profileData?.wins || 0}
+</h3>
               <p>Trophies</p>
             </div>
 
