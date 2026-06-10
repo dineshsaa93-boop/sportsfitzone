@@ -10,9 +10,6 @@ import {
 } from "firebase/firestore";
 
 export default function WaterTracker() {
-
-  const [water, setWater] =
-    useState(0);
 const [water, setWater] = useState(0);
 
 useEffect(() => {
