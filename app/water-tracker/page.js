@@ -14,13 +14,23 @@ export default function WaterTracker() {
 const [water, setWater] = useState(0);
 
 useEffect(() => {
-
-  const [water, setWater] = useState(0);
-
-useEffect(() => {
+  useEffect(() => {
 
   async function loadWater() {
-    ...
+
+    const user = auth.currentUser;
+
+    if (!user) return;
+
+    const snap = await getDoc(
+      doc(db, "users", user.uid)
+    );
+
+    if (snap.exists()) {
+      setWater(
+        snap.data().water || 0
+      );
+    }
   }
 
   loadWater();
