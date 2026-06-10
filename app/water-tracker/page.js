@@ -1,12 +1,47 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+import { auth, db } from "../../firebase";
+
+import {
+  doc,
+  getDoc
+} from "firebase/firestore";
 
 export default function WaterTracker() {
 
   const [water, setWater] =
     useState(0);
+const [water, setWater] = useState(0);
 
+useEffect(() => {
+
+  async function loadWater() {
+
+    const user = auth.currentUser;
+
+    if (!user) return;
+
+    const docRef =
+      doc(db, "users", user.uid);
+
+    const snap =
+      await getDoc(docRef);
+
+    if (snap.exists()) {
+
+      setWater(
+        snap.data().water || 0
+      );
+
+    }
+
+  }
+
+  loadWater();
+
+}, []);
   return (
     <div
       style={{
