@@ -577,7 +577,7 @@ useEffect(() => {
               >
                 XP PROGRESS
               </p>
-                
+  <h2              
   style={{
     color: "#39ff14"
   }}
