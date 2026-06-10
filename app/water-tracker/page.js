@@ -6,7 +6,8 @@ import { auth, db } from "../firebase";
 
 import {
   doc,
-  getDoc
+  getDoc,
+  updateDoc
 } from "firebase/firestore";
 
 export default function WaterTracker() {
@@ -14,26 +15,24 @@ const [water, setWater] = useState(0);
 
 useEffect(() => {
 
-  async function loadWater() {
+  async function addWater() {
 
-    const user = auth.currentUser;
+  const user =
+    auth.currentUser;
 
-    if (!user) return;
+  if (!user) return;
 
-    const docRef =
-      doc(db, "users", user.uid);
+  const newWater =
+    water + 1;
 
-    const snap =
-      await getDoc(docRef);
+  setWater(newWater);
 
-    if (snap.exists()) {
-
-      setWater(
-        snap.data().water || 0
-      );
-
+  await updateDoc(
+    doc(db, "users", user.uid),
+    {
+      water: newWater
     }
-
+  );
   }
 
   loadWater();
@@ -67,9 +66,7 @@ useEffect(() => {
       </h2>
 
       <button
-        onClick={() =>
-          setWater(water + 1)
-        }
+        onClick={addWater}
         style={{
           marginTop: "20px",
           padding: "14px",
