@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 
 import { onAuthStateChanged } from "firebase/auth";
 
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 
 import { auth, db } from "./firebase";
 import Link from "next/link";
@@ -78,6 +78,32 @@ useEffect(() => {
   return () => unsubscribe();
 
 }, []);
+  const handleWorkout = async () => {
+  if (!auth.currentUser || !profileData) return;
+
+  const newXP = (profileData.xp || 0) + 10;
+  const newLevel = Math.floor(newXP / 100) + 1;
+  const newStreak = (profileData.streak || 0) + 1;
+
+  const userRef = doc(
+    db,
+    "users",
+    auth.currentUser.uid
+  );
+
+  await updateDoc(userRef, {
+    xp: newXP,
+    level: newLevel,
+    streak: newStreak
+  });
+
+  setProfileData({
+    ...profileData,
+    xp: newXP,
+    level: newLevel,
+    streak: newStreak
+  });
+};
   const notifications = [
     "🔥 Dinesh liked your workout post",
     "💬 Pragati commented on your post",
@@ -593,7 +619,10 @@ useEffect(() => {
 
         <div style={styles.quickActions}>
 
-          <button style={styles.quickBtn}>
+          <button
+  style={styles.quickBtn}
+  onClick={handleWorkout}
+>
             Start Workout
           </button>
 
