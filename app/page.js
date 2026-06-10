@@ -79,6 +79,7 @@ useEffect(() => {
 
 }, []);
   const handleWorkout = async () => {
+    alert("Clicked");
   if (!auth.currentUser || !profileData) return;
 
   const newXP = (profileData.xp || 0) + 10;
