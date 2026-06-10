@@ -90,13 +90,13 @@ useEffect(() => {
     "users",
     auth.currentUser.uid
   );
-
+alert("Before Firebase Update");
   await updateDoc(userRef, {
     xp: newXP,
     level: newLevel,
     streak: newStreak
   });
-
+alert("Firebase Updated");
   setProfileData({
     ...profileData,
     xp: newXP,
