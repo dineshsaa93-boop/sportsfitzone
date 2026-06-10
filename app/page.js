@@ -583,14 +583,21 @@ useEffect(() => {
                   color: "#39ff14"
                 }}
               >
-                540
+                <h2
+  style={{
+    color: "#39ff14"
+  }}
+>
+  {profileData?.xp || 0}
 
-                <span
-                  style={{
-                    color: "white"
-                  }}
-                >
-                  {" "}/1000 XP
+  <span
+    style={{
+      color: "white"
+    }}
+  >
+    {" "}/1000 XP
+  </span>
+</h2>
                 </span>
 
               </h2>
