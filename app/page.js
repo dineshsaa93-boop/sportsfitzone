@@ -598,9 +598,6 @@ useEffect(() => {
     {" "}/1000 XP
   </span>
 </h2>
-                </span>
-
-              </h2>
 
             </div>
 
