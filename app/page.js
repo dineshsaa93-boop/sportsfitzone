@@ -619,7 +619,7 @@ useEffect(() => {
                   color: "#39ff14"
                 }}
               >
-                5
+                {profileData?.level || 1}
               </h1>
 
             </div>
