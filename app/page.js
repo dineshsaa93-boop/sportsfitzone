@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 
 import { onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
-
 import { auth, db } from "./firebase";
 import Link from "next/link";
 
@@ -101,6 +100,9 @@ alert("Before Firebase Update");
   });
 alert("Firebase Updated");
   setProfileData({
+    } catch (error) {
+  alert(error.message);
+  }
     ...profileData,
     xp: newXP,
     level: newLevel,
