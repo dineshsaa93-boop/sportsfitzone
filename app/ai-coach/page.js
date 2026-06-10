@@ -8,21 +8,26 @@ export default function AICoach() {
   const [answer, setAnswer] = useState("");
 
   function askAI() {
-    if (question.includes("weight")) {
-  ...
-}
-else if (question.includes("muscle")) {
-  ...
-}
-else if (question.includes("chest")) {
-  ...
-}
-else if (question.includes("abs")) {
-  ...
-}
-else if (question.includes("cricket")) {
-  ...
-}
+    function askAI() {
+  if (question.includes("weight")) {
+    setAnswer("Do cardio and avoid junk food 💪");
+  } 
+  else if (question.includes("muscle")) {
+    setAnswer("Eat protein and do gym workout 🏋️");
+  } 
+  else if (question.includes("chest")) {
+    setAnswer("Push-ups and bench press karo 🔥");
+  } 
+  else if (question.includes("abs")) {
+    setAnswer("Planks aur leg raises karo 💪");
+  } 
+  else if (question.includes("cricket")) {
+    setAnswer("Daily practice aur fitness maintain karo 🏏");
+  } 
+  else {
+    setAnswer("Train daily and stay consistent 🔥");
+  }
+    }
   }
 
   return (
