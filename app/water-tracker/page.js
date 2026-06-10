@@ -44,12 +44,7 @@ async function addWater() {
     }
   );
 }
-
-return (
-  loadWater();
-
-}, []);
-  return (
+ return (
     <div
       style={{
         background: "#020617",
