@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
 export default function AICoach() {
   const [question, setQuestion] = useState("");
