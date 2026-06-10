@@ -77,38 +77,44 @@ useEffect(() => {
 
 }, []);
   const handleWorkout = async () => {
+  try {
+
     alert("Clicked");
-  if (!auth.currentUser || !profileData) {
-  alert("User or Profile Missing");
-  return;
-  }
 
-  const newXP = (profileData.xp || 0) + 10;
-  const newLevel = Math.floor(newXP / 100) + 1;
-  const newStreak = (profileData.streak || 0) + 1;
+    if (!auth.currentUser || !profileData) return;
 
-  const userRef = doc(
-    db,
-    "users",
-    auth.currentUser.uid
-  );
-alert("Before Firebase Update");
-  await updateDoc(userRef, {
-    xp: newXP,
-    level: newLevel,
-    streak: newStreak
-  });
-alert("Firebase Updated");
-  setProfileData({
-    } catch (error) {
-  alert(error.message);
+    const newXP = (profileData.xp || 0) + 10;
+    const newLevel = Math.floor(newXP / 100) + 1;
+    const newStreak = (profileData.streak || 0) + 1;
+
+    const userRef = doc(
+      db,
+      "users",
+      auth.currentUser.uid
+    );
+
+    alert("Before Firebase Update");
+
+    await updateDoc(userRef, {
+      xp: newXP,
+      level: newLevel,
+      streak: newStreak
+    });
+
+    alert("Firebase Updated");
+
+    setProfileData({
+      ...profileData,
+      xp: newXP,
+      level: newLevel,
+      streak: newStreak
+    });
+
+  } catch (error) {
+    alert(error.message);
   }
-    ...profileData,
-    xp: newXP,
-    level: newLevel,
-    streak: newStreak
-  });
 };
+
   const notifications = [
     "🔥 Dinesh liked your workout post",
     "💬 Pragati commented on your post",
