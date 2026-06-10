@@ -15,15 +15,25 @@ const [water, setWater] = useState(0);
 
 useEffect(() => {
 
-  async function addWater() {
+  const [water, setWater] = useState(0);
 
-  const user =
-    auth.currentUser;
+useEffect(() => {
+
+  async function loadWater() {
+    ...
+  }
+
+  loadWater();
+
+}, []);
+
+async function addWater() {
+
+  const user = auth.currentUser;
 
   if (!user) return;
 
-  const newWater =
-    water + 1;
+  const newWater = water + 1;
 
   setWater(newWater);
 
@@ -33,8 +43,9 @@ useEffect(() => {
       water: newWater
     }
   );
-  }
+}
 
+return (
   loadWater();
 
 }, []);
