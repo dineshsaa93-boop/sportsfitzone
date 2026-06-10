@@ -79,7 +79,10 @@ useEffect(() => {
 }, []);
   const handleWorkout = async () => {
     alert("Clicked");
-  if (!auth.currentUser || !profileData) return;
+  if (!auth.currentUser || !profileData) {
+  alert("User or Profile Missing");
+  return;
+  }
 
   const newXP = (profileData.xp || 0) + 10;
   const newLevel = Math.floor(newXP / 100) + 1;
