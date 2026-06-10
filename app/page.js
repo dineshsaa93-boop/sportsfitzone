@@ -624,7 +624,7 @@ useEffect(() => {
   style={styles.quickBtn}
   onClick={handleWorkout}
 >
-            TEST BUTTON
+            Start working 
           </button>
 
           <button style={styles.quickBtn}>
