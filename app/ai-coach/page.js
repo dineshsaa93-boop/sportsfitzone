@@ -9,12 +9,20 @@ export default function AICoach() {
 
   function askAI() {
     if (question.includes("weight")) {
-      setAnswer("Do cardio and avoid junk food 💪");
-    } else if (question.includes("muscle")) {
-      setAnswer("Eat protein and do gym workout 🏋️");
-    } else {
-      setAnswer("Train daily and stay consistent 🔥");
-    }
+  ...
+}
+else if (question.includes("muscle")) {
+  ...
+}
+else if (question.includes("chest")) {
+  ...
+}
+else if (question.includes("abs")) {
+  ...
+}
+else if (question.includes("cricket")) {
+  ...
+}
   }
 
   return (
