@@ -4,15 +4,7 @@ import { useEffect, useState } from "react";
 import { auth, db } from "../firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { doc, onSnapshot, setDoc } from "firebase/firestore";
-import {
-  Crown,
-  Lock,
-  PlayCircle,
-  Flame,
-  Star,
-  X,
-  CheckCircle
-} from "lucide-react";
+import { Crown, Lock, PlayCircle, Flame, Star, X, CheckCircle } from "lucide-react";
 
 export default function CoursesPage() {
   const [selectedSport, setSelectedSport] = useState("all");
@@ -100,12 +92,8 @@ export default function CoursesPage() {
 
   useEffect(() => {
     const unsubscribeAuth = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setUserId(user.uid);
-      } else {
-        setUserId(null);
-        setLoading(false);
-      }
+      if (user) { setUserId(user.uid); } 
+      else { setUserId(null); setLoading(false); }
     });
     return () => unsubscribeAuth();
   }, []);
@@ -114,19 +102,14 @@ export default function CoursesPage() {
     if (!userId) return;
     const userDocRef = doc(db, "users", userId);
     const unsubscribeDoc = onSnapshot(userDocRef, (docSnap) => {
-      if (docSnap.exists()) {
-        setPurchasedCourses(docSnap.data().purchasedCourses || []);
-      }
+      if (docSnap.exists()) { setPurchasedCourses(docSnap.data().purchasedCourses || []); }
       setLoading(false);
     });
     return () => unsubscribeDoc();
   }, [userId]);
 
   function handleBuyClick(course) {
-    if (!userId) {
-      alert("Please login first to purchase courses!");
-      return;
-    }
+    if (!userId) { alert("Please login first to purchase courses!"); return; }
     setSelectedCourse(course);
     setShowPopup(true);
   }
@@ -143,32 +126,18 @@ export default function CoursesPage() {
     setShowPopup(false);
     setSuccess(true);
     try {
-      await setDoc(
-        doc(db, "users", userId),
-        { purchasedCourses: updatedPurchases },
-        { merge: true }
-      );
+      await setDoc(doc(db, "users", userId), { purchasedCourses: updatedPurchases }, { merge: true });
     } catch (error) {
       console.error("Firebase update failed:", error);
       setPurchasedCourses(purchasedCourses);
     }
   }
 
-  const filteredCourses = selectedSport === "all" 
-    ? courses 
-    : courses.filter((c) => c.sport === selectedSport);
+  const filteredCourses = selectedSport === "all" ? courses : courses.filter((c) => c.sport === selectedSport);
 
   if (loading) {
     return (
-      <div style={{
-        background: "#020817",
-        minHeight: "100vh",
-        color: "white",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        fontFamily: "sans-serif"
-      }}>
+      <div style={{ background: "#020817", minHeight: "100vh", color: "white", display: "flex", justifyContent: "center", alignItems: "center", fontFamily: "sans-serif" }}>
         <h2>Loading Modules...</h2>
       </div>
     );
@@ -178,7 +147,7 @@ export default function CoursesPage() {
     <div style={styles.page}>
       <h1 style={styles.heading}>🎓 Sports Courses</h1>
 
-      {/* MEMBERSHIP PLAN SECTION */}
+      {/* MEMBERSHIP PLANS */}
       <div style={styles.membershipBox}>
         <div style={styles.planCard}>
           <h2>🟢 NORMAL</h2>
@@ -209,7 +178,7 @@ export default function CoursesPage() {
         </div>
       </div>
 
-      {/* SPORT CATEGORIES FILTERS */}
+      {/* CATEGORIES SPORT TABS */}
       <h2 style={styles.sectionTitle}>Select Your Sport ⚽</h2>
       <div style={styles.filterContainer}>
         {["all", "cricket", "football", "gym"].map((sport) => (
@@ -227,16 +196,14 @@ export default function CoursesPage() {
         ))}
       </div>
 
-      {/* ALL DYNAMIC COURSES LIST */}
+      {/* RENDER DYNAMIC COURSES */}
       <h2 style={styles.sectionTitle}>Top Courses 🔥</h2>
 
       {filteredCourses.map((course) => {
         const isOwned = purchasedCourses.includes(course.id);
-
         return (
           <div key={course.id} style={styles.courseCard}>
             <img src={course.image} alt="course" style={styles.courseImage} />
-
             <div style={styles.courseContent}>
               <div style={styles.levelRow}>
                 <div style={styles.levelBox}>
@@ -263,7 +230,6 @@ export default function CoursesPage() {
 
               <p style={styles.rating}>{course.rating}</p>
 
-              {/* USER COURSE PROGRESS BAR */}
               {isOwned && (
                 <div style={styles.progressBox}>
                   <div style={styles.progressTop}>
@@ -278,7 +244,6 @@ export default function CoursesPage() {
 
               {!isOwned && <h3 style={styles.price}>₹{course.price}</h3>}
 
-              {/* STUDENT REVIEW TRUCK */}
               <div style={styles.reviewBox}>
                 <p style={styles.reviewText}>"{course.review}"</p>
                 <p style={styles.studentName}>— {course.student}</p>
@@ -286,7 +251,6 @@ export default function CoursesPage() {
 
               <button style={styles.previewBtn}>▶ Preview Course</button>
 
-              {/* CONTROLLING LOCKED/UNLOCKED STUFFS */}
               {!isOwned ? (
                 <button style={styles.watchBtn} onClick={() => handleBuyClick(course)}>
                   <PlayCircle size={22} /> Buy Course
@@ -339,7 +303,7 @@ export default function CoursesPage() {
         );
       })}
 
-      {/* WHY UPGRADE BOTTOM FOOTER */}
+      {/* FOOTER ADVANTAGE */}
       <div style={styles.benefitBox}>
         <Star color="#39ff14" size={35} />
         <div>
@@ -348,7 +312,7 @@ export default function CoursesPage() {
         </div>
       </div>
 
-      {/* SECURE CHECKOUT DYNAMIC MODAL */}
+      {/* CONFIRMATION POPUP OVERLAY */}
       {showPopup && selectedCourse && (
         <div style={styles.popupOverlay}>
           <div style={styles.popup}>
@@ -356,20 +320,14 @@ export default function CoursesPage() {
               <h2>Unlock Premium 🚀</h2>
               <X size={28} style={{ cursor: "pointer", color: "white" }} onClick={() => setShowPopup(false)} />
             </div>
-            <p style={{ color: "white", marginBottom: "15px" }}>
-              Course: <strong>{selectedCourse.title}</strong>
-            </p>
-            <p style={{ color: "#aaa" }}>
-              Access elite sports training and premium athlete content securely.
-            </p>
-            <button style={styles.popupBtn} onClick={confirmPurchase}>
-              Buy Now — ₹{selectedCourse.price}
-            </button>
+            <p style={{ color: "white", marginBottom: "15px" }}>Course: <strong>{selectedCourse.title}</strong></p>
+            <p style={{ color: "#aaa" }}>Access elite sports training and premium athlete content securely.</p>
+            <button style={styles.popupBtn} onClick={confirmPurchase}>Buy Now — ₹{selectedCourse.price}</button>
           </div>
         </div>
       )}
 
-      {/* CONGRATS SUCCESS SCREEN */}
+      {/* CONGRATULATIONS SUCCESS WINDOW */}
       {success && (
         <div style={styles.successOverlay}>
           <div style={styles.successBox}>
@@ -384,356 +342,71 @@ export default function CoursesPage() {
   );
 }
 
-// FULLY BLOWN EXPANDED OBJECT STYLE SHEETS (No Single-line Compression)
+// ULTRA-OPTIMIZED REUSABLE CSS CONSTANTS (Guarantees zero truncation)
+const bBtn = { width: "100%", padding: "14px", borderRadius: "14px", border: "none", fontWeight: "bold", cursor: "pointer", marginTop: "15px" };
+const flexSB = { display: "flex", justifyContent: "space-between", alignItems: "center" };
+const pCard = { borderRadius: "30px", padding: "25px", border: "1px solid #1d2b44", background: "#081120" };
+const boxBase = { marginTop: "20px", background: "#111827", borderRadius: "18px", padding: "15px", border: "1px solid #1d2b44" };
+const smBadge = { padding: "5px 10px", borderRadius: "10px", fontSize: "12px", fontWeight: "bold" };
+
 const styles = {
-  page: {
-    background: "#020817",
-    minHeight: "100vh",
-    color: "white",
-    padding: "20px",
-    fontFamily: "sans-serif"
-  },
-  heading: {
-    fontSize: "40px",
-    marginBottom: "30px"
-  },
-  membershipBox: {
-    display: "grid",
-    gap: "20px",
-    gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))"
-  },
-  planCard: {
-    background: "#081120",
-    borderRadius: "30px",
-    padding: "25px",
-    border: "1px solid #1d2b44"
-  },
-  planCardPremium: {
-    background: "linear-gradient(135deg,#2b1800,#3d2600)",
-    borderRadius: "30px",
-    padding: "25px",
-    border: "1px solid #ffd700"
-  },
-  planCardElite: {
-    background: "linear-gradient(135deg,#2b0018,#3d0025)",
-    borderRadius: "30px",
-    padding: "25px",
-    border: "1px solid #ff4d88"
-  },
-  freeBtn: {
-    marginTop: "20px",
-    width: "100%",
-    padding: "15px",
-    borderRadius: "15px",
-    border: "none",
-    background: "#39ff14",
-    fontWeight: "bold",
-    color: "black",
-    cursor: "pointer"
-  },
-  premiumBtn: {
-    marginTop: "20px",
-    width: "100%",
-    padding: "15px",
-    borderRadius: "15px",
-    border: "none",
-    background: "#ffd700",
-    fontWeight: "bold",
-    color: "black",
-    cursor: "pointer"
-  },
-  eliteBtn: {
-    marginTop: "20px",
-    width: "100%",
-    padding: "15px",
-    borderRadius: "15px",
-    border: "none",
-    background: "#ff4d88",
-    color: "white",
-    fontWeight: "bold",
-    cursor: "pointer"
-  },
-  sectionTitle: {
-    marginTop: "40px",
-    marginBottom: "20px"
-  },
-  filterContainer: {
-    display: "flex",
-    gap: "10px",
-    marginBottom: "25px",
-    flexWrap: "wrap"
-  },
-  filterBtn: {
-    padding: "10px 20px",
-    borderRadius: "12px",
-    border: "1px solid #1d2b44",
-    fontWeight: "bold",
-    cursor: "pointer",
-    transition: "all 0.3s"
-  },
-  courseCard: {
-    background: "#081120",
-    borderRadius: "30px",
-    overflow: "hidden",
-    marginBottom: "25px",
-    border: "1px solid #1d2b44"
-  },
-  courseImage: {
-    width: "100%",
-    height: "220px",
-    objectFit: "cover"
-  },
-  courseContent: {
-    padding: "20px"
-  },
-  levelRow: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center"
-  },
-  levelBox: {
-    display: "flex",
-    gap: "10px",
-    alignItems: "center",
-    marginTop: "10px"
-  },
-  level: {
-    background: "#111827",
-    padding: "6px 12px",
-    borderRadius: "10px",
-    fontSize: "12px"
-  },
-  premiumBadge: {
-    background: "#ffd700",
-    color: "black",
-    padding: "5px 10px",
-    borderRadius: "10px",
-    fontSize: "12px",
-    fontWeight: "bold"
-  },
-  dpBadge: {
-    background: "#ff4d88",
-    color: "white",
-    padding: "5px 10px",
-    borderRadius: "10px",
-    fontSize: "12px",
-    fontWeight: "bold"
-  },
-  badgeRow: {
-    display: "flex",
-    gap: "10px",
-    marginTop: "12px",
-    flexWrap: "wrap"
-  },
-  verifyBadge: {
-    background: "#3ea6ff",
-    padding: "6px 12px",
-    borderRadius: "12px",
-    fontSize: "12px",
-    fontWeight: "bold",
-    color: "black"
-  },
-  xpBadge: {
-    background: "#102400",
-    color: "#39ff14",
-    padding: "6px 12px",
-    borderRadius: "12px",
-    fontSize: "12px",
-    fontWeight: "bold"
-  },
-  infoRow: {
-    display: "flex",
-    justifyContent: "space-between",
-    marginTop: "15px",
-    color: "#aaa",
-    fontSize: "14px"
-  },
-  rating: {
-    marginTop: "10px",
-    color: "#ffd700",
-    fontWeight: "bold"
-  },
-  progressBox: {
-    marginTop: "20px"
-  },
-  progressTop: {
-    display: "flex",
-    justifyContent: "space-between",
-    color: "#aaa",
-    marginBottom: "10px",
-    fontSize: "14px"
-  },
-  progressBar: {
-    width: "100%",
-    height: "10px",
-    background: "#1d2b44",
-    borderRadius: "20px",
-    overflow: "hidden"
-  },
-  progressFill: {
-    height: "100%",
-    background: "#39ff14",
-    borderRadius: "20px"
-  },
-  price: {
-    marginTop: "20px",
-    fontSize: "28px",
-    color: "#39ff14"
-  },
-  reviewBox: {
-    marginTop: "20px",
-    background: "#111827",
-    padding: "15px",
-    borderRadius: "18px",
-    border: "1px solid #1d2b44"
-  },
-  reviewText: {
-    color: "#ddd",
-    lineHeight: "1.6",
-    fontStyle: "italic"
-  },
-  studentName: {
-    marginTop: "10px",
-    color: "#39ff14",
-    fontWeight: "bold"
-  },
-  previewBtn: {
-    marginTop: "20px",
-    width: "100%",
-    padding: "14px",
-    borderRadius: "14px",
-    border: "1px solid #39ff14",
-    background: "transparent",
-    color: "#39ff14",
-    fontWeight: "bold",
-    cursor: "pointer"
-  },
-  watchBtn: {
-    marginTop: "20px",
-    width: "100%",
-    background: "#39ff14",
-    border: "none",
-    padding: "15px",
-    borderRadius: "15px",
-    fontWeight: "bold",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    gap: "10px",
-    cursor: "pointer",
-    color: "black"
-  },
-  continueBtn: {
-    marginTop: "15px",
-    width: "100%",
-    padding: "15px",
-    borderRadius: "15px",
-    border: "none",
-    background: "#3ea6ff",
-    color: "white",
-    fontWeight: "bold",
-    cursor: "pointer"
-  },
-  certificateBtn: {
-    marginTop: "15px",
-    width: "100%",
-    padding: "15px",
-    borderRadius: "15px",
-    border: "1px solid #ffd700",
-    background: "transparent",
-    color: "#ffd700",
-    fontWeight: "bold",
-    cursor: "pointer"
-  },
-  liveClassBox: {
-    marginTop: "20px",
-    background: "#111827",
-    borderRadius: "18px",
-    padding: "15px",
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    border: "1px solid #1d2b44"
-  },
-  liveText: {
-    color: "#ff4d88",
-    fontWeight: "bold"
-  },
-  joinBtn: {
-    background: "#ff4d88",
-    border: "none",
-    padding: "10px 18px",
-    borderRadius: "12px",
-    color: "white",
-    fontWeight: "bold",
-    cursor: "pointer"
-  },
-  achievementBox: {
-    marginTop: "20px",
-    background: "linear-gradient(135deg,#2b1800,#3d2600)",
-    borderRadius: "20px",
-    padding: "18px",
-    border: "1px solid #ffd700"
-  },
-  achievementTitle: {
-    color: "#ffd700",
-    marginBottom: "8px"
-  },
-  achievementText: {
-    color: "white",
-    fontWeight: "bold"
-  },
-  downloadBox: {
-    marginTop: "20px",
-    background: "#111827",
-    borderRadius: "18px",
-    padding: "18px",
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    border: "1px solid #1d2b44"
-  },
-  downloadBtn: {
-    background: "#3ea6ff",
-    border: "none",
-    padding: "10px 18px",
-    borderRadius: "12px",
-    color: "black",
-    fontWeight: "bold",
-    cursor: "pointer"
-  },
-  quizBox: {
-    marginTop: "20px",
-    background: "linear-gradient(135deg,#081120,#102400)",
-    borderRadius: "18px",
-    padding: "18px",
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    border: "1px solid #39ff14"
-  },
-  quizBtn: {
-    background: "#39ff14",
-    border: "none",
-    padding: "10px 18px",
-    borderRadius: "12px",
-    color: "black",
-    fontWeight: "bold",
-    cursor: "pointer"
-  },
-  rankBox: {
-    marginTop: "20px",
-    background: "linear-gradient(135deg,#2b1800,#3d2600)",
-    borderRadius: "18px",
-    padding: "18px",
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    border: "1px solid #ffd700"
-  },
-  xpBox: {
-    background: "#ffd700",
-    color: "black",
-    padding: "10px 18px",
-    borderRadiu
-      };
+  page: { background: "#020817", minHeight: "100vh", color: "white", padding: "20px", fontFamily: "sans-serif" },
+  heading: { fontSize: "40px", marginBottom: "30px" },
+  membershipBox: { display: "grid", gap: "20px", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))" },
+  planCard: pCard,
+  planCardPremium: { ...pCard, background: "linear-gradient(135deg,#2b1800,#3d2600)", borderColor: "#ffd700" },
+  planCardElite: { ...pCard, background: "linear-gradient(135deg,#2b0018,#3d0025)", borderColor: "#ff4d88" },
+  freeBtn: { ...bBtn, background: "#39ff14", color: "black", marginTop: "20px" },
+  premiumBtn: { ...bBtn, background: "#ffd700", color: "black", marginTop: "20px" },
+  eliteBtn: { ...bBtn, background: "#ff4d88", color: "white", marginTop: "20px" },
+  sectionTitle: { marginTop: "40px", marginBottom: "20px" },
+  filterContainer: { display: "flex", gap: "10px", marginBottom: "25px", flexWrap: "wrap" },
+  filterBtn: { padding: "10px 20px", borderRadius: "12px", border: "1px solid #1d2b44", fontWeight: "bold", cursor: "pointer" },
+  courseCard: { background: "#081120", borderRadius: "30px", overflow: "hidden", marginBottom: "25px", border: "1px solid #1d2b44" },
+  courseImage: { width: "100%", height: "220px", objectFit: "cover" },
+  courseContent: { padding: "20px" },
+  levelRow: flexSB,
+  levelBox: { display: "flex", gap: "10px", alignItems: "center", marginTop: "10px" },
+  level: { background: "#111827", padding: "6px 12px", borderRadius: "10px", fontSize: "12px" },
+  premiumBadge: { ...smBadge, background: "#ffd700", color: "black" },
+  dpBadge: { ...smBadge, background: "#ff4d88", color: "white" },
+  badgeRow: { display: "flex", gap: "10px", marginTop: "12px", flexWrap: "wrap" },
+  verifyBadge: { background: "#3ea6ff", padding: "6px 12px", borderRadius: "12px", fontSize: "12px", fontWeight: "bold", color: "black" },
+  xpBadge: { background: "#102400", color: "#39ff14", padding: "6px 12px", borderRadius: "12px", fontSize: "12px", fontWeight: "bold" },
+  infoRow: { ...flexSB, marginTop: "15px", color: "#aaa", fontSize: "14px" },
+  rating: { marginTop: "10px", color: "#ffd700", fontWeight: "bold" },
+  progressBox: { marginTop: "20px" },
+  progressTop: { ...flexSB, color: "#aaa", marginBottom: "10px", fontSize: "14px" },
+  progressBar: { width: "100%", height: "10px", background: "#1d2b44", borderRadius: "20px", overflow: "hidden" },
+  progressFill: { height: "100%", background: "#39ff14", borderRadius: "20px" },
+  price: { marginTop: "20px", fontSize: "28px", color: "#39ff14" },
+  reviewBox: boxBase,
+  reviewText: { color: "#ddd", lineHeight: "1.6", fontStyle: "italic" },
+  studentName: { marginTop: "10px", color: "#39ff14", fontWeight: "bold" },
+  previewBtn: { ...bBtn, background: "transparent", border: "1px solid #39ff14", color: "#39ff14", marginTop: "20px" },
+  watchBtn: { ...bBtn, background: "#39ff14", color: "black", display: "flex", justifyContent: "center", alignItems: "center", gap: "10px", marginTop: "20px", padding: "15px" },
+  continueBtn: { ...bBtn, background: "#3ea6ff", color: "white", padding: "15px" },
+  certificateBtn: { ...bBtn, background: "transparent", border: "1px solid #ffd700", color: "#ffd700", padding: "15px" },
+  liveClassBox: { ...boxBase, ...flexSB },
+  liveText: { color: "#ff4d88", fontWeight: "bold" },
+  joinBtn: { background: "#ff4d88", border: "none", padding: "10px 18px", borderRadius: "12px", color: "white", fontWeight: "bold", cursor: "pointer" },
+  achievementBox: { ...boxBase, background: "linear-gradient(135deg,#2b1800,#3d2600)", borderColor: "#ffd700" },
+  achievementTitle: { color: "#ffd700", marginBottom: "8px" },
+  achievementText: { color: "white", fontWeight: "bold" },
+  downloadBox: { ...boxBase, ...flexSB },
+  downloadBtn: { background: "#3ea6ff", border: "none", padding: "10px 18px", borderRadius: "12px", color: "black", fontWeight: "bold", cursor: "pointer" },
+  quizBox: { ...boxBase, ...flexSB, background: "linear-gradient(135deg,#081120,#102400)", borderColor: "#39ff14" },
+  quizBtn: { background: "#39ff14", border: "none", padding: "10px 18px", borderRadius: "12px", color: "black", fontWeight: "bold", cursor: "pointer" },
+  rankBox: { ...boxBase, ...flexSB, background: "linear-gradient(135deg,#2b1800,#3d2600)", borderColor: "#ffd700" },
+  xpBox: { background: "#ffd700", color: "black", padding: "10px 18px", borderRadius: "12px", fontWeight: "bold" },
+  benefitBox: { marginTop: "40px", background: "linear-gradient(135deg,#081120,#102400)", borderRadius: "24px", padding: "20px", display: "flex", gap: "15px", alignItems: "center", border: "1px solid #39ff14" },
+  popupOverlay: { position: "fixed", top: 0, left: 0, right: 0, bottom: 0, background: "rgba(0,0,0,0.8)", display: "flex", justifyContent: "center", alignItems: "center", zIndex: 999 },
+  popup: { width: "90%", maxWidth: "450px", background: "#0f172a", padding: "25px", borderRadius: "25px", border: "1px solid #1e293b" },
+  popupTop: flexSB,
+  popupBtn: { ...bBtn, background: "#39ff14", color: "black", fontSize: "16px", padding: "15px", marginTop: "20px" },
+  successOverlay: { position: "fixed", top: 0, left: 0, right: 0, bottom: 0, background: "rgba(0,0,0,0.85)", display: "flex", justifyContent: "center", alignItems: "center", zIndex: 999 },
+  successBox: { width: "90%", maxWidth: "400px", background: "#0f172a", padding: "30px", borderRadius: "35px", textAlign: "center", border: "1px solid #39ff14" },
+  successEmoji: { fontSize: "60px", marginBottom: "10px" },
+  doneBtn: { background: "#39ff14", border: "none", padding: "12px 30px", borderRadius: "12px", fontWeight: "bold", cursor: "pointer", color: "black", marginTop: "25px" }
+};
+        
