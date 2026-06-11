@@ -23,7 +23,6 @@ export default function CoursesPage() {
   const [userId, setUserId] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // CORE DATA ARRAY
   const courses = [
     {
       id: "cricket_01",
@@ -99,7 +98,6 @@ export default function CoursesPage() {
     }
   ];
 
-  // 1. FIREBASE AUTH CHECK
   useEffect(() => {
     const unsubscribeAuth = onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -112,10 +110,8 @@ export default function CoursesPage() {
     return () => unsubscribeAuth();
   }, []);
 
-  // 2. REAL-TIME DATA FETCH (PURCHASED COURSES)
   useEffect(() => {
     if (!userId) return;
-
     const userDocRef = doc(db, "users", userId);
     const unsubscribeDoc = onSnapshot(userDocRef, (docSnap) => {
       if (docSnap.exists()) {
@@ -123,11 +119,9 @@ export default function CoursesPage() {
       }
       setLoading(false);
     });
-
     return () => unsubscribeDoc();
   }, [userId]);
 
-  // 3. PURCHASE LOGIC HANDLERS
   function handleBuyClick(course) {
     if (!userId) {
       alert("Please login first to purchase courses!");
@@ -139,20 +133,15 @@ export default function CoursesPage() {
 
   async function confirmPurchase() {
     if (!userId || !selectedCourse) return;
-
     if (purchasedCourses.includes(selectedCourse.id)) {
       setShowPopup(false);
       alert("Aapne ye course pehle se kharida hua hai!");
       return;
     }
-
     const updatedPurchases = [...purchasedCourses, selectedCourse.id];
-    
-    // UI Update immediately
     setPurchasedCourses(updatedPurchases);
     setShowPopup(false);
     setSuccess(true);
-
     try {
       await setDoc(
         doc(db, "users", userId),
@@ -161,20 +150,25 @@ export default function CoursesPage() {
       );
     } catch (error) {
       console.error("Firebase update failed:", error);
-      // Rollback on failure
       setPurchasedCourses(purchasedCourses);
     }
   }
 
-  // 4. SPORT FILTER LOGIC
   const filteredCourses = selectedSport === "all" 
     ? courses 
     : courses.filter((c) => c.sport === selectedSport);
 
-  // 5. LOADING SCREEN
   if (loading) {
     return (
-      <div style={{ background: "#020817", minHeight: "100vh", color: "white", display: "flex", justifyContent: "center", alignItems: "center", fontFamily: "sans-serif" }}>
+      <div style={{
+        background: "#020817",
+        minHeight: "100vh",
+        color: "white",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        fontFamily: "sans-serif"
+      }}>
         <h2>Loading Modules...</h2>
       </div>
     );
@@ -184,7 +178,7 @@ export default function CoursesPage() {
     <div style={styles.page}>
       <h1 style={styles.heading}>🎓 Sports Courses</h1>
 
-      {/* MEMBERSHIP SECTION */}
+      {/* MEMBERSHIP PLAN SECTION */}
       <div style={styles.membershipBox}>
         <div style={styles.planCard}>
           <h2>🟢 NORMAL</h2>
@@ -215,7 +209,7 @@ export default function CoursesPage() {
         </div>
       </div>
 
-      {/* DYNAMIC SPORT FILTERS */}
+      {/* SPORT CATEGORIES FILTERS */}
       <h2 style={styles.sectionTitle}>Select Your Sport ⚽</h2>
       <div style={styles.filterContainer}>
         {["all", "cricket", "football", "gym"].map((sport) => (
@@ -233,11 +227,10 @@ export default function CoursesPage() {
         ))}
       </div>
 
+      {/* ALL DYNAMIC COURSES LIST */}
       <h2 style={styles.sectionTitle}>Top Courses 🔥</h2>
 
-      {/* COURSE MAPPING */}
       {filteredCourses.map((course) => {
-        // Core Security Logic: Checking if user owns this specific course
         const isOwned = purchasedCourses.includes(course.id);
 
         return (
@@ -270,7 +263,7 @@ export default function CoursesPage() {
 
               <p style={styles.rating}>{course.rating}</p>
 
-              {/* DYNAMIC PROGRESS: Only show if course is owned */}
+              {/* USER COURSE PROGRESS BAR */}
               {isOwned && (
                 <div style={styles.progressBox}>
                   <div style={styles.progressTop}>
@@ -283,9 +276,9 @@ export default function CoursesPage() {
                 </div>
               )}
 
-              {/* DYNAMIC PRICE: Only show if NOT owned */}
               {!isOwned && <h3 style={styles.price}>₹{course.price}</h3>}
 
+              {/* STUDENT REVIEW TRUCK */}
               <div style={styles.reviewBox}>
                 <p style={styles.reviewText}>"{course.review}"</p>
                 <p style={styles.studentName}>— {course.student}</p>
@@ -293,11 +286,10 @@ export default function CoursesPage() {
 
               <button style={styles.previewBtn}>▶ Preview Course</button>
 
-              {/* CONDITIONAL RENDERING: Buttons change based on Ownership */}
+              {/* CONTROLLING LOCKED/UNLOCKED STUFFS */}
               {!isOwned ? (
                 <button style={styles.watchBtn} onClick={() => handleBuyClick(course)}>
-                  <PlayCircle size={22} />
-                  Buy Course
+                  <PlayCircle size={22} /> Buy Course
                 </button>
               ) : (
                 <>
@@ -347,18 +339,16 @@ export default function CoursesPage() {
         );
       })}
 
-      {/* WHY UPGRADE SECTION */}
+      {/* WHY UPGRADE BOTTOM FOOTER */}
       <div style={styles.benefitBox}>
         <Star color="#39ff14" size={35} />
         <div>
           <h2>Why Upgrade?</h2>
-          <p style={{ color: "#aaa" }}>
-            Unlock 90% premium sports training and elite coaching.
-          </p>
+          <p style={{ color: "#aaa" }}>Unlock 90% premium sports training and elite coaching.</p>
         </div>
       </div>
 
-      {/* POPUP MODAL (BUY CONFIRMATION) */}
+      {/* SECURE CHECKOUT DYNAMIC MODAL */}
       {showPopup && selectedCourse && (
         <div style={styles.popupOverlay}>
           <div style={styles.popup}>
@@ -379,16 +369,14 @@ export default function CoursesPage() {
         </div>
       )}
 
-      {/* SUCCESS MODAL */}
+      {/* CONGRATS SUCCESS SCREEN */}
       {success && (
         <div style={styles.successOverlay}>
           <div style={styles.successBox}>
             <h1 style={styles.successEmoji}>🎉</h1>
             <h2 style={{ color: "white", marginBottom: "10px" }}>Membership Activated!</h2>
             <p style={{ color: "#aaa" }}>Premium features unlocked 🚀</p>
-            <button style={styles.doneBtn} onClick={() => setSuccess(false)}>
-              Continue
-            </button>
+            <button style={styles.doneBtn} onClick={() => setSuccess(false)}>Continue</button>
           </div>
         </div>
       )}
@@ -396,7 +384,7 @@ export default function CoursesPage() {
   );
 }
 
-// FULL STYLES OBJECT (No truncation)
+// FULLY BLOWN EXPANDED OBJECT STYLE SHEETS (No Single-line Compression)
 const styles = {
   page: {
     background: "#020817",
@@ -735,4 +723,16 @@ const styles = {
   },
   rankBox: {
     marginTop: "20px",
-  
+    background: "linear-gradient(135deg,#2b1800,#3d2600)",
+    borderRadius: "18px",
+    padding: "18px",
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    border: "1px solid #ffd700"
+  },
+  xpBox: {
+    background: "#ffd700",
+    color: "black",
+    padding: "10px 18px",
+    borderRadiu
