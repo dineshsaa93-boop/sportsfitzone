@@ -1,412 +1,251 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { auth, db } from "../firebase";
 import { onAuthStateChanged } from "firebase/auth";
-import { doc, onSnapshot, setDoc } from "firebase/firestore";
-import { Crown, Lock, PlayCircle, Flame, Star, X, CheckCircle } from "lucide-react";
+import { doc, getDoc, updateDoc, arrayUnion } from "firebase/firestore";
+import { 
+  PlayCircle, Star, Users, Clock, Award, Shield, 
+  Crown, Video, Calendar, CheckCircle, ChevronRight, Play, Dumbbell
+} from "lucide-react";
 
-export default function CoursesPage() {
-  const [selectedSport, setSelectedSport] = useState("all");
-  const [purchasedCourses, setPurchasedCourses] = useState([]);
-  const [selectedCourse, setSelectedCourse] = useState(null);
-  const [showPopup, setShowPopup] = useState(false);
-  const [success, setSuccess] = useState(false);
+export default function SportsFitZoneCourses() {
   const [userId, setUserId] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [activeTab, setActiveTab] = useState("explore"); // explore, learning, memberships, live
+  const [activeSport, setActiveSport] = useState("All");
 
-  const courses = [
-    {
-      id: "cricket_01",
-      sport: "cricket",
-      title: "Cricket Masterclass",
-      coach: "Virat Coach",
-      badge: "Verified Athlete",
-      xp: "12,500 XP",
-      review: "Best sports training course ever 🔥",
-      student: "Aryan",
-      live: "Today 7:00 PM",
-      achievement: "🏆 Elite Athlete Badge Unlocked",
-      downloads: "12 Resources",
-      quiz: "25 Questions Quiz",
-      rank: "#1 Athlete",
-      points: "+500 XP",
-      price: "499",
-      level: "Normal",
-      duration: "12 Hours",
-      lessons: "48 Lessons",
-      rating: "4.9 ⭐",
-      progress: "65%",
-      completed: "32/48 Lessons",
-      image: "https://images.unsplash.com/photo-1546519638-68e109498ffc"
-    },
-    {
-      id: "football_01",
-      sport: "football",
-      title: "Football Speed Training",
-      coach: "Ronaldo Coach",
-      badge: "Verified Athlete",
-      xp: "18,400 XP",
-      review: "Amazing speed drills and athlete mindset 💪",
-      student: "Dinesh",
-      live: "Tomorrow 6:30 PM",
-      achievement: "🏆 Speed Beast Badge Unlocked",
-      downloads: "18 Resources",
-      quiz: "40 Questions Quiz",
-      rank: "#2 Athlete",
-      points: "+900 XP",
-      price: "999",
-      level: "Premium",
-      duration: "20 Hours",
-      lessons: "72 Lessons",
-      rating: "4.8 ⭐",
-      progress: "82%",
-      completed: "59/72 Lessons",
-      image: "https://images.unsplash.com/photo-1517466787929-bc90951d0974"
-    },
-    {
-      id: "gym_01",
-      sport: "gym",
-      title: "Gym Beast Program",
-      coach: "Fitness Pro",
-      badge: "Verified Athlete",
-      xp: "30,000 XP",
-      review: "Best muscle building course on earth 🔥",
-      student: "Pragati",
-      live: "Today 9:00 PM",
-      achievement: "🏆 Elite Athlete Badge Unlocked",
-      downloads: "35 Resources",
-      quiz: "75 Questions Quiz",
-      rank: "#1 Elite Athlete",
-      points: "+1500 XP",
-      price: "1999",
-      level: "Premium DP",
-      duration: "35 Hours",
-      lessons: "120 Lessons",
-      rating: "5.0 ⭐",
-      progress: "91%",
-      completed: "109/120 Lessons",
-      image: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438"
-    }
-  ];
+  const sportsCategories = ["All", "Cricket", "Football", "Basketball", "Athletics", "Boxing"];
 
   useEffect(() => {
-    const unsubscribeAuth = onAuthStateChanged(auth, (user) => {
-      if (user) { setUserId(user.uid); } 
-      else { setUserId(null); setLoading(false); }
+    const unsub = onAuthStateChanged(auth, user => {
+      if (user) setUserId(user.uid);
     });
-    return () => unsubscribeAuth();
+    return () => unsub();
   }, []);
 
-  useEffect(() => {
-    if (!userId) return;
-    const userDocRef = doc(db, "users", userId);
-    const unsubscribeDoc = onSnapshot(userDocRef, (docSnap) => {
-      if (docSnap.exists()) { setPurchasedCourses(docSnap.data().purchasedCourses || []); }
-      setLoading(false);
-    });
-    return () => unsubscribeDoc();
-  }, [userId]);
-
-  function handleBuyClick(course) {
-    if (!userId) { alert("Please login first to purchase courses!"); return; }
-    setSelectedCourse(course);
-    setShowPopup(true);
-  }
-
-  async function confirmPurchase() {
-    if (!userId || !selectedCourse) return;
-    if (purchasedCourses.includes(selectedCourse.id)) {
-      setShowPopup(false);
-      alert("Aapne ye course pehle se kharida hua hai!");
-      return;
-    }
-    const updatedPurchases = [...purchasedCourses, selectedCourse.id];
-    setPurchasedCourses(updatedPurchases);
-    setShowPopup(false);
-    setSuccess(true);
-    try {
-      await setDoc(doc(db, "users", userId), { purchasedCourses: updatedPurchases }, { merge: true });
-    } catch (error) {
-      console.error("Firebase update failed:", error);
-      setPurchasedCourses(purchasedCourses);
-    }
-  }
-
-  const filteredCourses = selectedSport === "all" ? courses : courses.filter((c) => c.sport === selectedSport);
-
-  if (loading) {
-    return (
-      <div style={{ background: "#020817", minHeight: "100vh", color: "white", display: "flex", justifyContent: "center", alignItems: "center", fontFamily: "sans-serif" }}>
-        <h2>Loading Modules...</h2>
-      </div>
-    );
-  }
-
   return (
-    <div style={styles.page}>
-      <h1 style={styles.heading}>🎓 Sports Courses</h1>
-
-      {/* MEMBERSHIP PLANS */}
-      <div style={styles.membershipBox}>
-        <div style={styles.planCard}>
-          <h2>🟢 NORMAL</h2>
-          <h1>FREE</h1>
-          <p>Basic workouts</p>
-          <p>Community access</p>
-          <button style={styles.freeBtn}>Current Plan</button>
-        </div>
-
-        <div style={styles.planCardPremium}>
-          <Crown color="#ffd700" size={40} />
-          <h2>PREMIUM</h2>
-          <h1>₹199/mo</h1>
-          <p>AI Plans</p>
-          <p>1 to 1 Chat</p>
-          <p>Premium Courses</p>
-          <button style={styles.premiumBtn}>Upgrade</button>
-        </div>
-
-        <div style={styles.planCardElite}>
-          <Flame color="#ff4d88" size={40} />
-          <h2>ELITE DP</h2>
-          <h1>₹999/mo</h1>
-          <p>Video Calls</p>
-          <p>Live Doubts</p>
-          <p>Personal Trainer</p>
-          <button style={styles.eliteBtn}>Go Elite</button>
-        </div>
-      </div>
-
-      {/* CATEGORIES SPORT TABS */}
-      <h2 style={styles.sectionTitle}>Select Your Sport ⚽</h2>
-      <div style={styles.filterContainer}>
-        {["all", "cricket", "football", "gym"].map((sport) => (
-          <button
-            key={sport}
-            onClick={() => setSelectedSport(sport)}
-            style={{
-              ...styles.filterBtn,
-              background: selectedSport === sport ? "#39ff14" : "#081120",
-              color: selectedSport === sport ? "black" : "white"
-            }}
-          >
-            {sport.toUpperCase()}
-          </button>
-        ))}
-      </div>
-
-      {/* RENDER DYNAMIC COURSES */}
-      <h2 style={styles.sectionTitle}>Top Courses 🔥</h2>
-
-      {filteredCourses.map((course) => {
-        const isOwned = purchasedCourses.includes(course.id);
-        return (
-          <div key={course.id} style={styles.courseCard}>
-            <img src={course.image} alt="course" style={styles.courseImage} />
-            <div style={styles.courseContent}>
-              <div style={styles.levelRow}>
-                <div style={styles.levelBox}>
-                  <p style={styles.level}>{course.level}</p>
-                  {course.level === "Premium" && <span style={styles.premiumBadge}>⭐ PREMIUM</span>}
-                  {course.level === "Premium DP" && <span style={styles.dpBadge}>👑 PREMIUM DP</span>}
-                </div>
-                {!isOwned && course.level !== "Normal" && <Lock color="#ffd700" size={20} />}
-                {isOwned && <CheckCircle color="#39ff14" size={20} />}
-              </div>
-
-              <h2>{course.title}</h2>
-              <p style={{ color: "#aaa" }}>By {course.coach}</p>
-
-              <div style={styles.badgeRow}>
-                <span style={styles.verifyBadge}>✔ {course.badge}</span>
-                <span style={styles.xpBadge}>🔥 {course.xp}</span>
-              </div>
-
-              <div style={styles.infoRow}>
-                <p>⏱ {course.duration}</p>
-                <p>🎥 {course.lessons}</p>
-              </div>
-
-              <p style={styles.rating}>{course.rating}</p>
-
-              {isOwned && (
-                <div style={styles.progressBox}>
-                  <div style={styles.progressTop}>
-                    <p>{course.completed}</p>
-                    <p>{course.progress}</p>
-                  </div>
-                  <div style={styles.progressBar}>
-                    <div style={{ ...styles.progressFill, width: course.progress }} />
-                  </div>
-                </div>
-              )}
-
-              {!isOwned && <h3 style={styles.price}>₹{course.price}</h3>}
-
-              <div style={styles.reviewBox}>
-                <p style={styles.reviewText}>"{course.review}"</p>
-                <p style={styles.studentName}>— {course.student}</p>
-              </div>
-
-              <button style={styles.previewBtn}>▶ Preview Course</button>
-
-              {!isOwned ? (
-                <button style={styles.watchBtn} onClick={() => handleBuyClick(course)}>
-                  <PlayCircle size={22} /> Buy Course
-                </button>
-              ) : (
-                <>
-                  <button style={styles.continueBtn}>Continue Learning</button>
-                  <button style={styles.certificateBtn}>🏅 View Certificate</button>
-
-                  <div style={styles.liveClassBox}>
-                    <div>
-                      <p style={styles.liveText}>🔴 LIVE CLASS</p>
-                      <p style={{ color: "#aaa" }}>{course.live}</p>
-                    </div>
-                    <button style={styles.joinBtn}>Join</button>
-                  </div>
-
-                  <div style={styles.achievementBox}>
-                    <h3 style={styles.achievementTitle}>Achievement</h3>
-                    <p style={styles.achievementText}>{course.achievement}</p>
-                  </div>
-
-                  <div style={styles.downloadBox}>
-                    <div>
-                      <h3>📥 Course Resources</h3>
-                      <p style={{ color: "#aaa" }}>{course.downloads}</p>
-                    </div>
-                    <button style={styles.downloadBtn}>Download</button>
-                  </div>
-
-                  <div style={styles.quizBox}>
-                    <div>
-                      <h3>🧠 Athlete Quiz</h3>
-                      <p style={{ color: "#aaa" }}>{course.quiz}</p>
-                    </div>
-                    <button style={styles.quizBtn}>Start Quiz</button>
-                  </div>
-
-                  <div style={styles.rankBox}>
-                    <div>
-                      <h3>🏆 Athlete Rank</h3>
-                      <p style={{ color: "#aaa" }}>{course.rank}</p>
-                    </div>
-                    <div style={styles.xpBox}>{course.points}</div>
-                  </div>
-                </>
-              )}
-            </div>
-          </div>
-        );
-      })}
-
-      {/* FOOTER ADVANTAGE */}
-      <div style={styles.benefitBox}>
-        <Star color="#39ff14" size={35} />
+    <div style={s.page}>
+      
+      {/* HEADER */}
+      <div style={s.header}>
         <div>
-          <h2>Why Upgrade?</h2>
-          <p style={{ color: "#aaa" }}>Unlock 90% premium sports training and elite coaching.</p>
+          <h1 style={s.title}>SportsFitZone <span style={{color:"#9d4edd"}}>Academy</span></h1>
+          <p style={s.sub}>Learn from World-Class Elite Coaches</p>
+        </div>
+        <div style={s.navTabs}>
+          {["explore", "learning", "memberships", "live"].map(tab => (
+            <button key={tab} onClick={() => setActiveTab(tab)} style={{...s.tabBtn, background: activeTab === tab ? "rgba(62,166,255,0.2)" : "transparent", color: activeTab === tab ? "#3ea6ff" : "#94a3b8", borderBottom: activeTab === tab ? "2px solid #3ea6ff" : "2px solid transparent"}}>
+              {tab.charAt(0).toUpperCase() + tab.slice(1)}
+            </button>
+          ))}
         </div>
       </div>
 
-      {/* CONFIRMATION POPUP OVERLAY */}
-      {showPopup && selectedCourse && (
-        <div style={styles.popupOverlay}>
-          <div style={styles.popup}>
-            <div style={styles.popupTop}>
-              <h2>Unlock Premium 🚀</h2>
-              <X size={28} style={{ cursor: "pointer", color: "white" }} onClick={() => setShowPopup(false)} />
-            </div>
-            <p style={{ color: "white", marginBottom: "15px" }}>Course: <strong>{selectedCourse.title}</strong></p>
-            <p style={{ color: "#aaa" }}>Access elite sports training and premium athlete content securely.</p>
-            <button style={styles.popupBtn} onClick={confirmPurchase}>Buy Now — ₹{selectedCourse.price}</button>
-          </div>
-        </div>
-      )}
+      {/* RENDER CONTENT BASED ON TAB */}
+      {activeTab === "explore" && <ExploreSection activeSport={activeSport} setActiveSport={setActiveSport} sportsCategories={sportsCategories} />}
+      {activeTab === "learning" && <MyLearningSection userId={userId} />}
+      {activeTab === "memberships" && <MembershipSection />}
+      {activeTab === "live" && <LiveSessionsSection />}
 
-      {/* CONGRATULATIONS SUCCESS WINDOW */}
-      {success && (
-        <div style={styles.successOverlay}>
-          <div style={styles.successBox}>
-            <h1 style={styles.successEmoji}>🎉</h1>
-            <h2 style={{ color: "white", marginBottom: "10px" }}>Membership Activated!</h2>
-            <p style={{ color: "#aaa" }}>Premium features unlocked 🚀</p>
-            <button style={styles.doneBtn} onClick={() => setSuccess(false)}>Continue</button>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
 
-// ULTRA-OPTIMIZED REUSABLE CSS CONSTANTS (Guarantees zero truncation)
-const bBtn = { width: "100%", padding: "14px", borderRadius: "14px", border: "none", fontWeight: "bold", cursor: "pointer", marginTop: "15px" };
-const flexSB = { display: "flex", justifyContent: "space-between", alignItems: "center" };
-const pCard = { borderRadius: "30px", padding: "25px", border: "1px solid #1d2b44", background: "#081120" };
-const boxBase = { marginTop: "20px", background: "#111827", borderRadius: "18px", padding: "15px", border: "1px solid #1d2b44" };
-const smBadge = { padding: "5px 10px", borderRadius: "10px", fontSize: "12px", fontWeight: "bold" };
+// ==========================================
+// 1. EXPLORE COURSES SECTION
+// ==========================================
+function ExploreSection({ activeSport, setActiveSport, sportsCategories }) {
+  const MOCK_COURSES = [
+    { id: "c1", title: "Cricket Fundamentals", sport: "Cricket", coach: "Rahul Dravid", rating: 4.9, students: "12k", level: "Beginner", modules: 12 },
+    { id: "c2", title: "Finishing & Shooting", sport: "Football", coach: "Sunil Chhetri", rating: 4.8, students: "8.5k", level: "Advanced", modules: 8 },
+    { id: "c3", title: "Explosive Plyometrics", sport: "Athletics", coach: "Usain B.", rating: 5.0, students: "22k", level: "Elite", modules: 15 }
+  ];
 
-const styles = {
-  page: { background: "#020817", minHeight: "100vh", color: "white", padding: "20px", fontFamily: "sans-serif" },
-  heading: { fontSize: "40px", marginBottom: "30px" },
-  membershipBox: { display: "grid", gap: "20px", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))" },
-  planCard: pCard,
-  planCardPremium: { ...pCard, background: "linear-gradient(135deg,#2b1800,#3d2600)", borderColor: "#ffd700" },
-  planCardElite: { ...pCard, background: "linear-gradient(135deg,#2b0018,#3d0025)", borderColor: "#ff4d88" },
-  freeBtn: { ...bBtn, background: "#39ff14", color: "black", marginTop: "20px" },
-  premiumBtn: { ...bBtn, background: "#ffd700", color: "black", marginTop: "20px" },
-  eliteBtn: { ...bBtn, background: "#ff4d88", color: "white", marginTop: "20px" },
-  sectionTitle: { marginTop: "40px", marginBottom: "20px" },
-  filterContainer: { display: "flex", gap: "10px", marginBottom: "25px", flexWrap: "wrap" },
-  filterBtn: { padding: "10px 20px", borderRadius: "12px", border: "1px solid #1d2b44", fontWeight: "bold", cursor: "pointer" },
-  courseCard: { background: "#081120", borderRadius: "30px", overflow: "hidden", marginBottom: "25px", border: "1px solid #1d2b44" },
-  courseImage: { width: "100%", height: "220px", objectFit: "cover" },
-  courseContent: { padding: "20px" },
-  levelRow: flexSB,
-  levelBox: { display: "flex", gap: "10px", alignItems: "center", marginTop: "10px" },
-  level: { background: "#111827", padding: "6px 12px", borderRadius: "10px", fontSize: "12px" },
-  premiumBadge: { ...smBadge, background: "#ffd700", color: "black" },
-  dpBadge: { ...smBadge, background: "#ff4d88", color: "white" },
-  badgeRow: { display: "flex", gap: "10px", marginTop: "12px", flexWrap: "wrap" },
-  verifyBadge: { background: "#3ea6ff", padding: "6px 12px", borderRadius: "12px", fontSize: "12px", fontWeight: "bold", color: "black" },
-  xpBadge: { background: "#102400", color: "#39ff14", padding: "6px 12px", borderRadius: "12px", fontSize: "12px", fontWeight: "bold" },
-  infoRow: { ...flexSB, marginTop: "15px", color: "#aaa", fontSize: "14px" },
-  rating: { marginTop: "10px", color: "#ffd700", fontWeight: "bold" },
-  progressBox: { marginTop: "20px" },
-  progressTop: { ...flexSB, color: "#aaa", marginBottom: "10px", fontSize: "14px" },
-  progressBar: { width: "100%", height: "10px", background: "#1d2b44", borderRadius: "20px", overflow: "hidden" },
-  progressFill: { height: "100%", background: "#39ff14", borderRadius: "20px" },
-  price: { marginTop: "20px", fontSize: "28px", color: "#39ff14" },
-  reviewBox: boxBase,
-  reviewText: { color: "#ddd", lineHeight: "1.6", fontStyle: "italic" },
-  studentName: { marginTop: "10px", color: "#39ff14", fontWeight: "bold" },
-  previewBtn: { ...bBtn, background: "transparent", border: "1px solid #39ff14", color: "#39ff14", marginTop: "20px" },
-  watchBtn: { ...bBtn, background: "#39ff14", color: "black", display: "flex", justifyContent: "center", alignItems: "center", gap: "10px", marginTop: "20px", padding: "15px" },
-  continueBtn: { ...bBtn, background: "#3ea6ff", color: "white", padding: "15px" },
-  certificateBtn: { ...bBtn, background: "transparent", border: "1px solid #ffd700", color: "#ffd700", padding: "15px" },
-  liveClassBox: { ...boxBase, ...flexSB },
-  liveText: { color: "#ff4d88", fontWeight: "bold" },
-  joinBtn: { background: "#ff4d88", border: "none", padding: "10px 18px", borderRadius: "12px", color: "white", fontWeight: "bold", cursor: "pointer" },
-  achievementBox: { ...boxBase, background: "linear-gradient(135deg,#2b1800,#3d2600)", borderColor: "#ffd700" },
-  achievementTitle: { color: "#ffd700", marginBottom: "8px" },
-  achievementText: { color: "white", fontWeight: "bold" },
-  downloadBox: { ...boxBase, ...flexSB },
-  downloadBtn: { background: "#3ea6ff", border: "none", padding: "10px 18px", borderRadius: "12px", color: "black", fontWeight: "bold", cursor: "pointer" },
-  quizBox: { ...boxBase, ...flexSB, background: "linear-gradient(135deg,#081120,#102400)", borderColor: "#39ff14" },
-  quizBtn: { background: "#39ff14", border: "none", padding: "10px 18px", borderRadius: "12px", color: "black", fontWeight: "bold", cursor: "pointer" },
-  rankBox: { ...boxBase, ...flexSB, background: "linear-gradient(135deg,#2b1800,#3d2600)", borderColor: "#ffd700" },
-  xpBox: { background: "#ffd700", color: "black", padding: "10px 18px", borderRadius: "12px", fontWeight: "bold" },
-  benefitBox: { marginTop: "40px", background: "linear-gradient(135deg,#081120,#102400)", borderRadius: "24px", padding: "20px", display: "flex", gap: "15px", alignItems: "center", border: "1px solid #39ff14" },
-  popupOverlay: { position: "fixed", top: 0, left: 0, right: 0, bottom: 0, background: "rgba(0,0,0,0.8)", display: "flex", justifyContent: "center", alignItems: "center", zIndex: 999 },
-  popup: { width: "90%", maxWidth: "450px", background: "#0f172a", padding: "25px", borderRadius: "25px", border: "1px solid #1e293b" },
-  popupTop: flexSB,
-  popupBtn: { ...bBtn, background: "#39ff14", color: "black", fontSize: "16px", padding: "15px", marginTop: "20px" },
-  successOverlay: { position: "fixed", top: 0, left: 0, right: 0, bottom: 0, background: "rgba(0,0,0,0.85)", display: "flex", justifyContent: "center", alignItems: "center", zIndex: 999 },
-  successBox: { width: "90%", maxWidth: "400px", background: "#0f172a", padding: "30px", borderRadius: "35px", textAlign: "center", border: "1px solid #39ff14" },
-  successEmoji: { fontSize: "60px", marginBottom: "10px" },
-  doneBtn: { background: "#39ff14", border: "none", padding: "12px 30px", borderRadius: "12px", fontWeight: "bold", cursor: "pointer", color: "black", marginTop: "25px" }
-};
+  return (
+    <div>
+      {/* Category Pills */}
+      <div style={s.categoryScroll}>
+        {sportsCategories.map(sport => (
+          <button key={sport} onClick={() => setActiveSport(sport)} style={{...s.pill, background: activeSport === sport ? "#3ea6ff" : "rgba(255,255,255,0.05)", color: activeSport === sport ? "#020617" : "white"}}>
+            {sport}
+          </button>
+        ))}
+      </div>
+
+      <h2 style={s.sectionTitle}><Star color="#ffd700"/> Featured Masterclasses</h2>
+      <div style={s.grid}>
+        {MOCK_COURSES.map(course => (
+          <div key={course.id} style={s.courseCard}>
+            <div style={s.thumbnail}>
+              <PlayCircle size={40} color="rgba(255,255,255,0.7)" />
+              <span style={s.sportBadge}>{course.sport}</span>
+            </div>
+            <div style={{padding: "15px"}}>
+              <h3 style={{margin:"0 0 5px", fontSize:"18px"}}>{course.title}</h3>
+              <p style={{color:"#aaa", fontSize:"13px", margin:"0 0 10px"}}>Coach: <span style={{color:"#3ea6ff"}}>{course.coach}</span></p>
+              
+              <div style={s.flexSB}>
+                <span style={s.infoTag}><Clock size={12}/> {course.modules} Modules</span>
+                <span style={s.infoTag}><Users size={12}/> {course.students}</span>
+              </div>
+              
+              <button style={s.enrollBtn}>View Details</button>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ==========================================
+// 2. MY LEARNING & PROGRESSION
+// ==========================================
+function MyLearningSection({ userId }) {
+  const handleSyncToWorkout = async () => {
+    alert("Practice Task '50x Front Foot Defense' sent to Workout Hub!");
+    // Firebase Logic will go here: updateDoc arrayUnion to user's courseTasks
+  };
+
+  return (
+    <div>
+      <h2 style={s.sectionTitle}><Play color="#39ff14"/> Continue Learning</h2>
+      
+      {/* Active Course Card */}
+      <div style={{...s.glass, display: "flex", gap: "20px", flexWrap: "wrap"}}>
+        <div style={{...s.thumbnail, width: "200px", height: "120px"}}><PlayCircle size={30} color="white"/></div>
+        <div style={{flex: 1}}>
+          <div style={s.flexSB}>
+            <h3 style={{margin:0}}>Cricket Fundamentals</h3>
+            <span style={{color:"#39ff14", fontWeight:"bold"}}>45% Completed</span>
+          </div>
+          <p style={{color:"#aaa", fontSize:"14px", margin:"5px 0 15px"}}>Current Module: <b>Front Foot Defense</b></p>
+          
+          <div style={{background: "rgba(255,255,255,0.1)", height: "6px", borderRadius: "3px", marginBottom: "15px"}}>
+            <div style={{background: "#39ff14", width: "45%", height: "100%", borderRadius: "3px"}}></div>
+          </div>
+
+          <div style={s.flexSB}>
+            <button style={{...s.actionBtn, background: "#3ea6ff", color: "#020617"}}><Play size={16}/> Resume Video</button>
+            
+            {/* WORKOUT SYSTEM SYNC BUTTON */}
+            <button onClick={handleSyncToWorkout} style={{...s.actionBtn, background: "rgba(157, 78, 221, 0.2)", border: "1px solid #9d4edd", color: "#e2e8f0"}}>
+              <Dumbbell size={16} color="#9d4edd"/> Send Practice to Workout
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ==========================================
+// 3. MEMBERSHIPS & LEVELS
+// ==========================================
+function MembershipSection() {
+  return (
+    <div>
+      <div style={{textAlign: "center", marginBottom: "30px"}}>
+        <h2 style={{fontSize:"28px", margin:0}}>Unlock Your Full Potential</h2>
+        <p style={{color:"#aaa"}}>Choose the training tier that fits your goals.</p>
+      </div>
+
+      <div style={{display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: "20px"}}>
         
+        {/* BASIC PLAN */}
+        <div style={s.tierCard}>
+          <h3 style={{color: "#3ea6ff"}}>BASIC</h3>
+          <h2 style={{fontSize:"32px", margin:"10px 0"}}>Free</h2>
+          <ul style={s.featureList}>
+            <li><CheckCircle size={14} color="#39ff14"/> Recorded Classes</li>
+            <li><CheckCircle size={14} color="#39ff14"/> Community Access</li>
+            <li><CheckCircle size={14} color="#39ff14"/> Progress Tracking</li>
+          </ul>
+          <button style={{...s.tierBtn, border: "1px solid #3ea6ff", color: "#3ea6ff"}}>Current Plan</button>
+        </div>
+
+        {/* PREMIUM PLAN */}
+        <div style={{...s.tierCard, border: "1px solid #9d4edd", transform: "scale(1.05)", background: "rgba(15,23,42,0.9)"}}>
+          <div style={s.popularBadge}>Most Popular</div>
+          <h3 style={{color: "#9d4edd"}}><Shield size={18}/> PREMIUM</h3>
+          <h2 style={{fontSize:"32px", margin:"10px 0"}}>$15<span style={{fontSize:"14px", color:"#aaa"}}>/mo</span></h2>
+          <ul style={s.featureList}>
+            <li><CheckCircle size={14} color="#9d4edd"/> Everything in Basic</li>
+            <li><CheckCircle size={14} color="#9d4edd"/> Exclusive Classes</li>
+            <li><CheckCircle size={14} color="#9d4edd"/> Advanced Training Plans</li>
+            <li><CheckCircle size={14} color="#9d4edd"/> Coach Q&A Sessions</li>
+          </ul>
+          <button style={{...s.tierBtn, background: "#9d4edd", color: "white"}}>Upgrade Premium</button>
+        </div>
+
+        {/* ELITE PLAN */}
+        <div style={s.tierCard}>
+          <h3 style={{color: "#ffd700"}}><Crown size={18}/> ELITE</h3>
+          <h2 style={{fontSize:"32px", margin:"10px 0"}}>$99<span style={{fontSize:"14px", color:"#aaa"}}>/mo</span></h2>
+          <ul style={s.featureList}>
+            <li><CheckCircle size={14} color="#ffd700"/> 1-to-1 Coach Calls</li>
+            <li><CheckCircle size={14} color="#ffd700"/> Personalized Roadmap</li>
+            <li><CheckCircle size={14} color="#ffd700"/> Performance Reviews</li>
+            <li><CheckCircle size={14} color="#ffd700"/> Private Mentorship</li>
+          </ul>
+          <button style={{...s.tierBtn, background: "linear-gradient(90deg, #ffd700, #ffaa00)", color: "#000"}}>Apply for Elite</button>
+        </div>
+
+      </div>
+    </div>
+  );
+}
+
+// ==========================================
+// 4. LIVE SESSIONS
+// ==========================================
+function LiveSessionsSection() {
+  return (
+    <div>
+      <h2 style={s.sectionTitle}><Video color="#ff4d88"/> Upcoming Live Clinics</h2>
+      <div style={{...s.glass, borderLeft: "4px solid #ff4d88"}}>
+        <div style={s.flexSB}>
+          <div>
+            <span style={{background: "#ff4d88", padding: "3px 8px", borderRadius: "4px", fontSize: "11px", fontWeight: "bold"}}>LIVE TODAY</span>
+            <h3 style={{margin:"10px 0 5px"}}>Advanced Fast Bowling Tactics</h3>
+            <p style={{color:"#aaa", fontSize:"13px", margin:0}}><Calendar size={12}/> 7:30 PM • Coach M. Johnson</p>
+          </div>
+          <button style={{...s.actionBtn, background: "#ff4d88", color: "white"}}>Join Session</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ==========================================
+// STYLES (Glassmorphism & Branding)
+// ==========================================
+const flex = { display: "flex", alignItems: "center" };
+const flexSB = { ...flex, justifyContent: "space-between" };
+const gl = { background: "rgba(15, 23, 42, 0.6)", backdropFilter: "blur(12px)", padding: "20px", borderRadius: "16px", border: "1px solid rgba(255,255,255,0.08)" };
+
+const s = {
+  page: { minHeight: "100vh", background: "#020617", color: "white", padding: "20px", fontFamily: "sans-serif", maxWidth: "1200px", margin: "0 auto", paddingBottom: "50px" },
+  header: { marginBottom: "30px" },
+  title: { fontSize: "32px", fontWeight: "900", margin: 0, letterSpacing: "-0.5px" },
+  sub: { color: "#94a3b8", fontSize: "15px", margin: "5px 0 20px" },
+  navTabs: { display: "flex", gap: "10px", borderBottom: "1px solid rgba(255,255,255,0.1)", paddingBottom: "0px", overflowX: "auto" },
+  tabBtn: { border: "none", padding: "10px 20px", fontSize: "15px", fontWeight: "bold", cursor: "pointer", transition: "all 0.3s", borderRadius: "8px 8px 0 0", whiteSpace: "nowrap" },
+  categoryScroll: { display: "flex", gap: "10px", overflowX: "auto", paddingBottom: "15px", marginBottom: "20px" },
+  pill: { padding: "8px 16px", borderRadius: "20px", border: "1px solid rgba(255,255,255,0.1)", fontWeight: "bold", cursor: "pointer", whiteSpace: "nowrap" },
+  sectionTitle: { ...flex, gap: "10px", fontSize: "20px", margin: "0 0 20px" },
+  grid: { display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))", gap: "20px" },
+  courseCard: { background: "rgba(15,23,42,0.8)", borderRadius: "16px", overflow: "hidden", border: "1px solid rgba(255,255,255,0.05)", transition: "transform 0.2s" },
+  thumbnail: { height: "160px", background: "linear-gradient(45deg, #1e293b, #0f172a)", ...flex, justifyContent: "center", position: "relative", borderRadius: "12px" },
+  sportBadge: { position: "absolute", top: "10px", right: "10px", background: "rgba(0,0,0,0.6)", padding: "4px 10px", borderRadius: "8px", fontSize: "11px", fontWeight: "bold", backdropFilter: "blur(4px)" },
+  infoTag: { ...flex, gap: "5px", color: "#94a3b8", fontSize: "12px" },
+  enrollBtn: { width: "100%", padding: "10px", marginTop: "15px", background: "rgba(62,166,255,0.1)", color: "#3ea6ff", border: "1px solid rgba(62,166,255,0.3)", borderRadius: "8px", fontWeight: "bold", cursor: "pointer" },
+  glass: gl,
+  flexSB: flexSB,
+  actionBtn: { ...flex, gap: "8px", border: "none", padding: "10px 16px", borderRadius: "8px", fontWeight: "bold", cursor: "pointer" },
+  tierCard: { ...gl, position: "relative", display: "flex", flexDirection: "column" },
+  popularBadge: { position: "absolute", top: "-12px", left: "50%", transform: "translateX(-50%)", background: "#9d4edd", padding: "4px 12px", borderRadius: "20px", fontSize: "11px", fontWeight: "bold" },
+  featureList: { listStyle: "none", padding: 0, margin: "20px 0", flex: 1, display: "flex", flexDirection: "column", gap: "12px", fontSize: "14px", color: "#e2e8f0" },
+  tierBtn: { width: "100%", padding: "12px", border: "none", borderRadius: "8px", fontWeight: "bold", cursor: "pointer", marginTop: "auto" }
+};
+  
