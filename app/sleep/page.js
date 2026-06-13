@@ -7,6 +7,14 @@ export default function SleepPage() {
   const [hours, setHours] =
     useState(7);
 
+  const goal = 8;
+
+  const progress =
+    Math.min(
+      (hours / goal) * 100,
+      100
+    );
+
   return (
     <div
       style={{
@@ -34,6 +42,7 @@ export default function SleepPage() {
           textAlign: "center"
         }}
       >
+
         <h2
           style={{
             color: "#94a3b8"
@@ -52,6 +61,46 @@ export default function SleepPage() {
           {hours}h
         </h1>
 
+        {/* Progress Bar */}
+
+        <div
+          style={{
+            marginTop: "20px"
+          }}
+        >
+
+          <div
+            style={{
+              height: "14px",
+              background: "#1e293b",
+              borderRadius: "20px",
+              overflow: "hidden"
+            }}
+          >
+
+            <div
+              style={{
+                width: `${progress}%`,
+                height: "100%",
+                background: "#38bdf8"
+              }}
+            />
+
+          </div>
+
+          <p
+            style={{
+              marginTop: "10px",
+              color: "#94a3b8"
+            }}
+          >
+            Goal: {goal} Hours
+          </p>
+
+        </div>
+
+        {/* Buttons */}
+
         <div
           style={{
             display: "flex",
@@ -60,10 +109,16 @@ export default function SleepPage() {
             marginTop: "25px"
           }}
         >
+
           <button
             style={btn}
             onClick={() =>
-              setHours(hours - 1)
+              setHours(
+                Math.max(
+                  0,
+                  hours - 1
+                )
+              )
             }
           >
             -1 Hour
@@ -72,12 +127,48 @@ export default function SleepPage() {
           <button
             style={btn}
             onClick={() =>
-              setHours(hours + 1)
+              setHours(
+                hours + 1
+              )
             }
           >
             +1 Hour
           </button>
+
         </div>
+
+        {/* Status */}
+
+        <h3
+          style={{
+            marginTop: "25px",
+            color:
+              hours >= 8
+                ? "#22c55e"
+                : "#facc15"
+          }}
+        >
+          {hours >= 8
+            ? "🏆 Excellent Sleep"
+            : "⚠️ Need More Sleep"}
+        </h3>
+
+        {/* XP Reward */}
+
+        {hours >= 8 && (
+
+          <p
+            style={{
+              marginTop: "10px",
+              color: "#22c55e",
+              fontWeight: "bold",
+              fontSize: "18px"
+            }}
+          >
+            +10 XP Earned 🔥
+          </p>
+
+        )}
 
         <p
           style={{
@@ -85,8 +176,12 @@ export default function SleepPage() {
             color: "#94a3b8"
           }}
         >
-          Good sleep improves recovery & performance 😎
+          Good sleep improves
+          recovery,
+          focus &
+          performance 😎
         </p>
+
       </div>
     </div>
   );
@@ -98,5 +193,7 @@ const btn = {
   border: "none",
   padding: "12px 18px",
   borderRadius: "12px",
-  fontWeight: "bold"
+  fontWeight: "bold",
+  fontSize: "16px",
+  cursor: "pointer"
 };
