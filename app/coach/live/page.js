@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { auth, db } from "../../../firebase";
+import { auth, db } from "../../firebase";
 import { collection, addDoc } from "firebase/firestore";
 import { Video, Calendar } from "lucide-react";
 
