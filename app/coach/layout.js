@@ -20,7 +20,7 @@ export default function CoachPanelLayout({ children }) {
   return (
     <div style={{ display: "flex", minHeight: "100vh", background: "#020617", color: "white", fontFamily: "sans-serif" }}>
       {/* SIDEBAR */}
-      <div style={{ width: "260px", background: "rgba(15, 23, 42, 0.8)", borderRight: "1px solid rgba(255,255,255,0.05)", padding: "20px", display: "flex", flexDirection: "column" }}>
+      <div style={{ width: "80px", background: "rgba(15, 23, 42, 0.8)", borderRight: "1px solid rgba(255,255,255,0.05)", padding: "20px", display: "flex", flexDirection: "column" }}>
         <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "40px" }}>
           <ShieldCheck size={28} color="#ffaa00" />
           <h2 style={{ margin: 0, fontSize: "20px" }}>Coach<span style={{ color: "#ffaa00" }}>Panel</span></h2>
