@@ -1,1 +1,203 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { auth, db } from "../../firebase";
+import { onAuthStateChanged } from "firebase/auth";
+import { doc, getDoc, updateDoc, arrayUnion, collection, getDocs } from "firebase/firestore";
+import { useRouter } from "next/navigation";
+import { 
+  ArrowLeft, Star, Users, Clock, Shield, PlayCircle, BookOpen, UserCheck 
+} from "lucide-react";
+
+export default function CourseDetailsPage({ params }) {
+  const router = useRouter();
+  const courseId = params.id;
+  
+  const [userId, setUserId] = useState(null);
+  const [userData, setUserData] = useState(null);
+  const [course, setCourse] = useState(null);
+  const [coach, setCoach] = useState(null);
+  const [reviews, setReviews] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  // Check Enrollment
+  const isEnrolled = userData?.enrolledCourses?.includes(courseId);
+
+  useEffect(() => {
+    const unsub = onAuthStateChanged(auth, user => {
+      if (user) setUserId(user.uid);
+    });
+    return () => unsub();
+  }, []);
+
+  useEffect(() => {
+    const fetchCourseData = async () => {
+      if (!courseId) return;
+      try {
+        // Fetch Course
+        const courseSnap = await getDoc(doc(db, "courses", courseId));
+        if (courseSnap.exists()) {
+          const cData = courseSnap.data();
+          setCourse({ id: courseSnap.id, ...cData });
+          
+          // Fetch Coach
+          if (cData.coachId) {
+            const coachSnap = await getDoc(doc(db, "coachProfiles", cData.coachId));
+            if (coachSnap.exists()) setCoach(coachSnap.data());
+          }
+        }
+        
+        // Fetch Reviews
+        const reviewSnap = await getDocs(collection(db, "courseReviews"));
+        let fetchedReviews = [];
+        reviewSnap.forEach(r => {
+          if (r.data().courseId === courseId) fetchedReviews.push(r.data());
+        });
+        setReviews(fetchedReviews);
+        
+        setLoading(false);
+      } catch (e) {
+        console.error("Error fetching data", e);
+        setLoading(false);
+      }
+    };
+    fetchCourseData();
+  }, [courseId]);
+
+  useEffect(() => {
+    if (!userId) return;
+    const fetchUser = async () => {
+      const uSnap = await getDoc(doc(db, "users", userId));
+      if (uSnap.exists()) setUserData(uSnap.data());
+    };
+    fetchUser();
+  }, [userId]);
+
+  const handleEnroll = async () => {
+    if (!userId) return alert("Please login to enroll.");
+    try {
+      await updateDoc(doc(db, "users", userId), {
+        enrolledCourses: arrayUnion(courseId)
+      });
+      // Update local state instantly
+      setUserData(prev => ({ ...prev, enrolledCourses: [...(prev?.enrolledCourses || []), courseId] }));
+      alert("Successfully Enrolled!");
+    } catch (e) {
+      console.error("Enrollment failed", e);
+    }
+  };
+
+  if (loading) return <div style={s.center}><h2>Loading Course Protocols...</h2></div>;
+  if (!course) return <div style={s.center}><h2>Course Not Found</h2></div>;
+
+  return (
+    <div style={s.page}>
+      
+      {/* Navigation */}
+      <button onClick={() => router.back()} style={s.backBtn}>
+        <ArrowLeft size={20} /> Back to Academy
+      </button>
+
+      {/* Hero Section */}
+      <div style={s.glassHero}>
+        <div style={{...s.heroImage, backgroundImage: `url(${course.thumbnail || ''})`}}>
+          {!course.thumbnail && <PlayCircle size={60} color="rgba(255,255,255,0.5)" />}
+        </div>
+        <div style={s.heroContent}>
+          <span style={s.badge}>{course.sport} • {course.level || "All Levels"}</span>
+          <h1 style={{fontSize:"32px", margin:"10px 0"}}>{course.title}</h1>
+          <p style={{color:"#94a3b8", fontSize:"16px", lineHeight:"1.5"}}>{course.description || "Master the elite fundamentals with our professional grade training."}</p>
+          
+          <div style={{display:"flex", gap:"15px", margin:"15px 0", flexWrap:"wrap"}}>
+            <span style={s.infoTag}><Clock size={16} color="#3ea6ff"/> {course.duration || "4 Weeks"}</span>
+            <span style={s.infoTag}><BookOpen size={16} color="#ffd700"/> {course.modulesCount || 0} Modules</span>
+            <span style={s.infoTag}><Users size={16} color="#39ff14"/> {course.students || 0} Students</span>
+          </div>
+
+          <div style={s.flexSB}>
+            <h2 style={{margin:0, color:"#3ea6ff"}}>${course.price || "Free"}</h2>
+            <button 
+              onClick={isEnrolled ? () => router.push('/courses') : handleEnroll} 
+              style={{...s.enrollBtn, background: isEnrolled ? "rgba(57,255,20,0.2)" : "#3ea6ff", color: isEnrolled ? "#39ff14" : "#020617", border: isEnrolled ? "1px solid #39ff14" : "none"}}
+            >
+              {isEnrolled ? "Already Enrolled - Go to Learning" : "Enroll Now"}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div style={s.grid2}>
+        {/* Left Col: Details & Requirements */}
+        <div>
+          <div style={s.glass}>
+            <h2 style={s.sectionTitle}><Shield size={20} color="#9d4edd"/> What You Will Learn</h2>
+            <ul style={s.list}>
+              <li>Elite biomechanics and form correction</li>
+              <li>Advanced game-time decision making</li>
+              <li>Custom practice tasks linked to Workout Hub</li>
+            </ul>
+
+            <h2 style={{...s.sectionTitle, marginTop:"20px"}}><UserCheck size={20} color="#ffaa00"/> Requirements</h2>
+            <ul style={s.list}>
+              <li>Basic understanding of the sport</li>
+              <li>Dedication to practice daily tasks</li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Right Col: Coach & Reviews */}
+        <div>
+          <div style={s.glass}>
+            <h2 style={s.sectionTitle}>Meet Your Coach</h2>
+            <div style={{display:"flex", gap:"15px", alignItems:"center"}}>
+              <div style={s.coachAvatar}>{coach?.photo ? <img src={coach.photo} width="100%" style={{borderRadius:"50%"}} /> : <Users size={30} />}</div>
+              <div>
+                <h3 style={{margin:"0 0 5px", color:"white"}}>{coach?.name || course.coachId}</h3>
+                <p style={{color:"#3ea6ff", fontSize:"13px", margin:0}}>{coach?.specialization || "Elite Trainer"}</p>
+              </div>
+            </div>
+            <p style={{color:"#94a3b8", fontSize:"14px", marginTop:"15px"}}>{coach?.bio || "Professional coach with years of international experience."}</p>
+          </div>
+
+          <div style={{...s.glass, marginTop:"20px"}}>
+            <h2 style={s.sectionTitle}>Reviews ({reviews.length})</h2>
+            {reviews.length === 0 ? <p style={{color:"#aaa", fontSize:"14px"}}>No reviews yet. Enroll and be the first!</p> : reviews.map((r, i) => (
+              <div key={i} style={{borderBottom:"1px solid rgba(255,255,255,0.1)", paddingBottom:"10px", marginBottom:"10px"}}>
+                <div style={{display:"flex", gap:"5px"}}><Star size={12} color="#ffd700"/><Star size={12} color="#ffd700"/><Star size={12} color="#ffd700"/><Star size={12} color="#ffd700"/><Star size={12} color="#ffd700"/></div>
+                <p style={{color:"white", fontSize:"14px", margin:"5px 0"}}>{r.comment}</p>
+                <p style={{color:"#aaa", fontSize:"12px", margin:0}}>- {r.userName}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+    </div>
+  );
+}
+
+// ==========================================
+// STYLES (Identical Glassmorphism Theme)
+// ==========================================
+const flex = { display: "flex", alignItems: "center" };
+const flexSB = { ...flex, justifyContent: "space-between" };
+const gl = { background: "rgba(15, 23, 42, 0.6)", backdropFilter: "blur(12px)", padding: "20px", borderRadius: "16px", border: "1px solid rgba(255,255,255,0.08)" };
+
+const s = {
+  page: { minHeight: "100vh", background: "#020617", color: "white", padding: "20px", fontFamily: "sans-serif", maxWidth: "1000px", margin: "0 auto", paddingBottom: "50px" },
+  center: { ...flex, justifyContent: "center", minHeight: "100vh", background: "#020617", color: "white" },
+  backBtn: { ...flex, gap: "8px", background: "transparent", color: "#3ea6ff", border: "none", cursor: "pointer", fontSize: "16px", fontWeight: "bold", marginBottom: "20px" },
+  glassHero: { ...gl, display: "flex", gap: "30px", flexWrap: "wrap", padding: "0", overflow: "hidden", marginBottom: "20px" },
+  heroImage: { flex: "1 1 300px", minHeight: "250px", background: "linear-gradient(45deg, #1e293b, #0f172a)", ...flex, justifyContent: "center", backgroundSize: "cover", backgroundPosition:"center" },
+  heroContent: { flex: "2 1 400px", padding: "30px" },
+  badge: { background: "rgba(255,255,255,0.1)", padding: "5px 12px", borderRadius: "8px", fontSize: "12px", fontWeight: "bold", color: "#e2e8f0" },
+  infoTag: { ...flex, gap: "5px", color: "#e2e8f0", fontSize: "14px", background: "rgba(0,0,0,0.3)", padding: "8px 12px", borderRadius: "8px" },
+  enrollBtn: { padding: "12px 24px", borderRadius: "8px", fontWeight: "bold", cursor: "pointer", fontSize: "16px", transition: "all 0.3s" },
+  grid2: { display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "20px" },
+  glass: gl,
+  sectionTitle: { ...flex, gap: "10px", fontSize: "18px", margin: "0 0 15px", color: "white" },
+  list: { paddingLeft: "20px", color: "#e2e8f0", lineHeight: "1.8", fontSize: "15px", margin: 0 },
+  coachAvatar: { width: "60px", height: "60px", borderRadius: "50%", background: "rgba(0,0,0,0.5)", ...flex, justifyContent: "center" },
+  flexSB: flexSB
+};
 
