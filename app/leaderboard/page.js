@@ -1,200 +1,85 @@
 "use client";
 
-import {
-  Trophy,
-  Flame,
-  Medal
-} from "lucide-react";
+import { useState, useEffect } from "react";
+import { db } from "../../firebase";
+import { collection, query, orderBy, limit, getDocs } from "firebase/firestore";
+import { Trophy, Flame, Medal } from "lucide-react";
 
-export default function LeaderboardPage() {
+export default function GlobalLeaderboard() {
+  const [athletes, setAthletes] = useState([]);
+  const [activeTab, setActiveTab] = useState("Global");
+  const [loading, setLoading] = useState(true);
 
-  const players = [
+  useEffect(() => {
+    const fetchLeaderboard = async () => {
+      // Query users sorted by XP descending. For 'Academy' or 'Friends', you would add a 'where' clause.
+      const q = query(collection(db, "users"), orderBy("xp", "desc"), limit(50));
+      const snap = await getDocs(q);
+      setAthletes(snap.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+      setLoading(false);
+    };
+    fetchLeaderboard();
+  }, [activeTab]);
 
-    {
-      name: "Dinesh",
-      xp: 540,
-      streak: 7,
-      badge: "🥇"
-    },
-
-    {
-      name: "Rahul",
-      xp: 500,
-      streak: 6,
-      badge: "🥈"
-    },
-
-    {
-      name: "Aryan",
-      xp: 460,
-      streak: 5,
-      badge: "🥉"
-    },
-
-    {
-      name: "Fitness Pro",
-      xp: 420,
-      streak: 4,
-      badge: "🔥"
-    }
-
-  ];
+  if (loading) return <div style={s.center}>Loading Global Rankings...</div>;
 
   return (
-
-    <div style={styles.page}>
-
-      <h1 style={styles.heading}>
-        Leaderboard 🏆
-      </h1>
-
-      {/* TOP CARD */}
-
-      <div style={styles.topCard}>
-
-        <Trophy
-          color="#ffd633"
-          size={60}
-        />
-
-        <h2>Dinesh</h2>
-
-        <p>#1 Athlete This Week</p>
-
+    <div style={s.page}>
+      <div style={{ textAlign: "center", marginBottom: "30px" }}>
+        <Trophy size={48} color="#ffd700" style={{ marginBottom: "10px" }} />
+        <h1 style={{ fontSize: "32px", margin: "0 0 10px 0" }}>Hall of Fame</h1>
+        
+        <div style={s.tabs}>
+          {["Global", "Academy", "Friends"].map(tab => (
+            <button 
+              key={tab} 
+              onClick={() => setActiveTab(tab)}
+              style={{...s.tabBtn, background: activeTab === tab ? "rgba(62,166,255,0.2)" : "transparent", color: activeTab === tab ? "#3ea6ff" : "#94a3b8", borderBottom: activeTab === tab ? "2px solid #3ea6ff" : "2px solid transparent"}}
+            >
+              {tab}
+            </button>
+          ))}
+        </div>
       </div>
 
-      {/* PLAYERS */}
-
-      {players.map((item, index) => (
-
-        <div
-          key={index}
-          style={styles.card}
-        >
-
-          <div style={styles.left}>
-
-            <div style={styles.badge}>
-              {item.badge}
+      <div style={s.listContainer}>
+        {athletes.map((athlete, index) => {
+          const isTop3 = index < 3;
+          const rankColors = ["#ffd700", "#c0c0c0", "#cd7f32"]; // Gold, Silver, Bronze
+          
+          return (
+            <div key={athlete.id} style={{...s.athleteRow, border: isTop3 ? `1px solid ${rankColors[index]}50` : "1px solid rgba(255,255,255,0.05)"}}>
+              <div style={{ display: "flex", alignItems: "center", gap: "15px" }}>
+                <div style={{...s.rankBadge, background: isTop3 ? `${rankColors[index]}20` : "rgba(255,255,255,0.05)", color: isTop3 ? rankColors[index] : "#94a3b8"}}>
+                  {isTop3 ? <Medal size={16} /> : `#${index + 1}`}
+                </div>
+                <div>
+                  <h3 style={{ margin: "0 0 4px", fontSize: "16px" }}>{athlete.displayName || "Unknown Athlete"}</h3>
+                  <span style={{ fontSize: "12px", color: "#94a3b8" }}>Level {athlete.level || 1} • {athlete.sport || "Athlete"}</span>
+                </div>
+              </div>
+              
+              <div style={{ textAlign: "right" }}>
+                <h3 style={{ margin: "0 0 4px", color: "#3ea6ff" }}>{athlete.xp || 0} XP</h3>
+                <span style={{ fontSize: "12px", color: "#ff4d88", display: "flex", alignItems: "center", gap: "4px", justifyContent: "flex-end" }}>
+                  <Flame size={12}/> {athlete.streak || 0}
+                </span>
+              </div>
             </div>
-
-            <div>
-
-              <h2>{item.name}</h2>
-
-              <p style={{ color: "#aaa" }}>
-                {item.xp} XP
-              </p>
-
-            </div>
-
-          </div>
-
-          <div style={styles.right}>
-
-            <Flame
-              color="#ff7b00"
-              size={25}
-            />
-
-            <span>
-              {item.streak}
-            </span>
-
-          </div>
-
-        </div>
-
-      ))}
-
-      {/* ACHIEVEMENT */}
-
-      <div style={styles.achievement}>
-
-        <Medal
-          color="#39ff14"
-          size={40}
-        />
-
-        <div>
-
-          <h2>Achievement Unlocked</h2>
-
-          <p style={{ color: "#aaa" }}>
-            Completed 7 day streak 🔥
-          </p>
-
-        </div>
-
+          );
+        })}
       </div>
-
     </div>
-
   );
-
 }
 
-const styles = {
-
-  page: {
-    background: "#020817",
-    minHeight: "100vh",
-    padding: 20,
-    color: "white",
-    fontFamily: "sans-serif"
-  },
-
-  heading: {
-    fontSize: 35,
-    marginBottom: 30
-  },
-
-  topCard: {
-    background:
-      "linear-gradient(135deg,#ffd633,#ff7b00)",
-    padding: 30,
-    borderRadius: 30,
-    textAlign: "center",
-    color: "black",
-    marginBottom: 30
-  },
-
-  card: {
-    background: "#081120",
-    border:
-      "1px solid #1d2b44",
-    padding: 20,
-    borderRadius: 22,
-    marginBottom: 18,
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center"
-  },
-
-  left: {
-    display: "flex",
-    alignItems: "center",
-    gap: 15
-  },
-
-  badge: {
-    fontSize: 30
-  },
-
-  right: {
-    display: "flex",
-    alignItems: "center",
-    gap: 8
-  },
-
-  achievement: {
-    marginTop: 35,
-    background: "#081120",
-    padding: 25,
-    borderRadius: 25,
-    display: "flex",
-    gap: 20,
-    alignItems: "center"
-  }
-
+const s = {
+  page: { minHeight: "100vh", background: "#020617", color: "white", padding: "20px", maxWidth: "800px", margin: "0 auto", fontFamily: "sans-serif" },
+  center: { display: "flex", justifyContent: "center", alignItems: "center", height: "100vh", background: "#020617", color: "white" },
+  tabs: { display: "flex", justifyContent: "center", gap: "10px", marginTop: "20px" },
+  tabBtn: { padding: "10px 20px", fontSize: "15px", fontWeight: "bold", border: "none", cursor: "pointer", transition: "0.3s", borderRadius: "8px 8px 0 0" },
+  listContainer: { display: "flex", flexDirection: "column", gap: "10px" },
+  athleteRow: { background: "rgba(15, 23, 42, 0.6)", backdropFilter: "blur(12px)", padding: "16px 20px", borderRadius: "12px", display: "flex", justifyContent: "space-between", alignItems: "center", transition: "transform 0.2s" },
+  rankBadge: { width: "35px", height: "35px", borderRadius: "50%", display: "flex", justifyContent: "center", alignItems: "center", fontWeight: "bold", fontSize: "14px" }
 };
+                               
