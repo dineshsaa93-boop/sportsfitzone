@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import {
   Menu, Trophy, Flame, Bell, Search, Settings2, Shield, Star, Target,
   Activity, Moon, Droplet, Timer, Brain, Calendar, ClipboardList, Crown,
@@ -17,9 +17,9 @@ const CircularProgress = ({ percentage, color, title, subtitle, label }) => {
   const strokeDashoffset = circumference - (percentage / 100) * circumference;
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-      <div style={{ position: "relative", width: 120, height: 120, display: "flex", justifyContent: "center", alignItems: "center" }}>
-        <svg width="120" height="120" viewBox="0 0 120 120" style={{ transform: "rotate(-90deg)", position: "absolute" }}>
+    <div className="circular-progress-container">
+      <div className="circular-progress-svg-wrapper">
+        <svg width="120" height="120" viewBox="0 0 120 120" className="progress-svg">
           <defs>
             <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
               <stop offset="0%" stopColor="#3ea6ff" />
@@ -30,14 +30,14 @@ const CircularProgress = ({ percentage, color, title, subtitle, label }) => {
           <circle cx="60" cy="60" r={radius} stroke="url(#grad)" strokeWidth="8" fill="none"
             strokeDasharray={circumference} strokeDashoffset={strokeDashoffset} strokeLinecap="round" />
         </svg>
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", zIndex: 10 }}>
+        <div className="progress-text-content">
           <Activity size={20} color="#39ff14" style={{ marginBottom: 2 }} />
-          <span style={{ color: "white", fontSize: 28, fontWeight: "900", lineHeight: "1" }}>{percentage}%</span>
-          <span style={{ color: "#39ff14", fontSize: 10, fontWeight: "bold", letterSpacing: 1.5, marginTop: 4 }}>READINESS</span>
+          <span className="progress-percent">{percentage}%</span>
+          <span className="progress-label-top">READINESS</span>
         </div>
       </div>
-      <p style={{ color: "#39ff14", fontSize: 13, fontWeight: "bold", margin: "12px 0 2px", letterSpacing: 0.5 }}>{label}</p>
-      <p style={{ color: "#94a3b8", fontSize: 11, margin: 0 }}>{subtitle}</p>
+      <p className="progress-label-bottom">{label}</p>
+      <p className="progress-subtitle">{subtitle}</p>
     </div>
   );
 };
@@ -49,15 +49,15 @@ const Sparkline = ({ color, points }) => (
 );
 
 const StatCard = ({ icon, title, value, subText, color, points, isPositive }) => (
-  <div style={styles.statCard}>
-    <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 15 }}>
-      <div style={{ border: `1px solid ${color}40`, padding: 8, borderRadius: 10, display: "flex", justifyContent: "center", alignItems: "center" }}>
+  <div className="stat-card">
+    <div className="stat-card-header">
+      <div className="stat-icon-wrapper" style={{ borderColor: `${color}40` }}>
         {icon}
       </div>
-      <span style={{ color: "#94a3b8", fontSize: 12, fontWeight: "bold", letterSpacing: 1, textTransform: "uppercase" }}>{title}</span>
+      <span className="stat-title">{title}</span>
     </div>
-    <h2 style={{ color: "white", fontSize: 28, margin: "0 0 6px", fontWeight: "900" }}>{value}</h2>
-    <p style={{ color: isPositive ? "#39ff14" : "#94a3b8", fontSize: 13, margin: 0, fontWeight: "600" }}>{subText}</p>
+    <h2 className="stat-value">{value}</h2>
+    <p className="stat-subtext" style={{ color: isPositive ? "#39ff14" : "#94a3b8" }}>{subText}</p>
     <Sparkline color={color} points={points} />
   </div>
 );
@@ -93,357 +93,395 @@ const ALL_FEATURES_DATA = [
 
 export default function SportsFitZone() {
   return (
-    <div style={styles.page}>
+    <div className="sfz-app">
       
-      {/* 1. HEADER */}
-      <header style={styles.header}>
-        <div style={{ display: "flex", alignItems: "center", gap: 15 }}>
-          <Menu color="white" size={32} strokeWidth={2.5} style={{ cursor: "pointer" }} />
-          <div style={{ display: "flex", flexDirection: "column", lineHeight: 1 }}>
-            <span style={{ color: "white", fontSize: 18, fontWeight: 900, fontStyle: "italic", letterSpacing: 1.5 }}>SPORTS</span>
-            <span style={{ color: "#39ff14", fontSize: 18, fontWeight: 900, fontStyle: "italic", letterSpacing: 1.5 }}>FIT ZONE</span>
-          </div>
-        </div>
-
-        <div style={styles.headerStats}>
-          <div style={styles.statPill}><Trophy color="#ffd700" size={16} fill="#ffd700" /><span style={{ color: "#ffd700" }}>12</span></div>
-          <div style={styles.statPill}><Flame color="#ff7b00" size={16} fill="#ff7b00" /><span style={{ color: "#ff7b00" }}>7</span></div>
-          <div style={styles.statPill}><span style={styles.xpIcon}>XP</span><span style={{ color: "white" }}>468</span></div>
-          <div style={{ position: "relative", marginLeft: 8 }}>
-            <Bell color="#e2e8f0" size={26} strokeWidth={2} />
-            <div style={styles.notificationDot}></div>
-          </div>
-        </div>
-      </header>
-
-      {/* 2. SEARCH BAR */}
-      <div style={styles.searchContainer}>
-        <Search color="#94a3b8" size={22} />
-        <input placeholder="Search workouts, plans, tournaments..." style={styles.searchInput} />
-        <SlidersHorizontal color="#9d4edd" size={22} />
-      </div>
-
-      {/* 3. HERO SECTION */}
-      <div style={styles.heroGrid}>
+      {/* 🔴 MAGIC RESPONSIVE CSS INJECTED HERE 🔴 */}
+      <style>{`
+        * { box-sizing: border-box; }
+        body { margin: 0; background: #090e17; }
         
-        {/* Main Profile Card */}
-        <div style={styles.mainAthleteCard}>
-          <div style={styles.athleteTextContent}>
-            <p style={{ color: "#e2e8f0", fontSize: 15, margin: "0 0 5px", fontWeight: "500" }}>Good Evening,</p>
-            <h1 style={{ color: "white", fontSize: 44, fontWeight: 900, margin: "0 0 8px", letterSpacing: 1.5, textTransform: "uppercase" }}>DINESH</h1>
-            <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 20 }}>
-              <span style={{ color: "white", fontSize: 14, fontWeight: "bold" }}>Elite Athlete</span>
-              <CheckCircle2 size={16} color="#39ff14" fill="#39ff14" stroke="#090e17" />
+        .sfz-app {
+          background: #090e17;
+          min-height: 100vh;
+          color: white;
+          font-family: system-ui, -apple-system, sans-serif;
+          padding-bottom: 90px; /* space for bottom nav */
+        }
+        
+        .container {
+          max-width: 1400px;
+          margin: 0 auto;
+          padding: 20px;
+          overflow-x: hidden; /* prevents horizontal scrolling */
+        }
+
+        /* Header */
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; flex-wrap: wrap; gap: 15px; }
+        .logo-area { display: flex; align-items: center; gap: 12px; }
+        .logo-text { display: flex; flex-direction: column; line-height: 1; }
+        .logo-sports { color: white; font-size: 18px; font-weight: 900; font-style: italic; letter-spacing: 1.5px; }
+        .logo-fit { color: #39ff14; font-size: 18px; font-weight: 900; font-style: italic; letter-spacing: 1.5px; }
+        
+        .stats-area { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+        .stat-pill { display: flex; align-items: center; gap: 6px; background: #111827; padding: 6px 12px; border-radius: 25px; font-size: 14px; font-weight: bold; border: 1px solid rgba(255,255,255,0.08); }
+        .xp-badge { background: #39ff14; color: #020617; font-size: 10px; padding: 2px 6px; border-radius: 4px; font-weight: 900; }
+        .bell-wrapper { position: relative; margin-left: 5px; }
+        .bell-dot { width: 10px; height: 10px; background: #39ff14; border-radius: 50%; position: absolute; top: -2px; right: 0; border: 2px solid #090e17; }
+
+        /* Search */
+        .search-bar { display: flex; align-items: center; background: #111827; border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 14px 20px; margin-bottom: 25px; gap: 12px; }
+        .search-input { flex: 1; background: transparent; border: none; outline: none; color: white; font-size: 15px; width: 100%; }
+
+        /* Grids */
+        .grid-2 { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; margin-bottom: 20px; }
+        .grid-mid { display: grid; grid-template-columns: 1fr 2fr; gap: 20px; margin-bottom: 20px; }
+        
+        /* Hero Card */
+        .hero-card { 
+          background: linear-gradient(to right, #0d1321 55%, rgba(13,19,33,0.2)), url('https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?q=80&w=1000&auto=format&fit=crop');
+          background-size: cover; background-position: top right;
+          border-radius: 24px; border: 1px solid rgba(255,255,255,0.08); padding: 30px; 
+          display: flex; justify-content: space-between; align-items: center; position: relative; overflow: hidden;
+        }
+        .hero-title { color: white; font-size: 44px; font-weight: 900; margin: 0 0 8px; letter-spacing: 1.5px; }
+        .hero-stats-row { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 30px; }
+        .hero-stat-item { display: flex; align-items: center; gap: 10px; }
+
+        /* Rank Card */
+        .rank-card { background: linear-gradient(180deg, #16112a 0%, #111827 100%); border-radius: 24px; border: 1px solid rgba(157,78,221,0.3); padding: 25px; display: flex; flex-direction: column; justify-content: space-between; }
+        .rank-bottom-bar { display: flex; justify-content: space-between; background: rgba(0,0,0,0.2); padding: 12px; border-radius: 12px; margin-top: 20px; }
+
+        /* Circular Progress (CSS driven) */
+        .circular-progress-container { display: flex; flex-direction: column; align-items: center; z-index: 2; }
+        .circular-progress-svg-wrapper { position: relative; width: 120px; height: 120px; display: flex; justify-content: center; align-items: center; }
+        .progress-svg { transform: rotate(-90deg); position: absolute; }
+        .progress-text-content { display: flex; flex-direction: column; align-items: center; z-index: 10; }
+        .progress-percent { color: white; font-size: 28px; font-weight: 900; line-height: 1; }
+        .progress-label-top { color: #39ff14; font-size: 10px; font-weight: bold; letter-spacing: 1.5px; margin-top: 4px; }
+        .progress-label-bottom { color: #39ff14; font-size: 13px; font-weight: bold; margin: 12px 0 2px; letter-spacing: 0.5px; }
+        .progress-subtitle { color: #94a3b8; font-size: 11px; margin: 0; text-align: center; }
+
+        /* Cards general */
+        .card-dark { background: #111827; border-radius: 24px; padding: 25px; border: 1px solid rgba(255,255,255,0.05); display: flex; flex-direction: column; }
+        
+        /* Challenge & Workout */
+        .challenge-card { background: linear-gradient(135deg, #0d1b14 0%, #111827 100%); border-radius: 24px; border: 1px solid rgba(57,255,20,0.2); padding: 25px; }
+        .workout-card { background: linear-gradient(to right, #0d1321 50%, rgba(13,19,33,0.3)), url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1000&auto=format&fit=crop'); background-size: cover; background-position: center right; border-radius: 24px; border: 1px solid rgba(255,255,255,0.08); padding: 25px; position: relative; }
+        
+        /* Stats Grid 6-items */
+        .stats-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 15px; margin-bottom: 20px; }
+        .stat-card { background: #111827; border-radius: 20px; padding: 18px; border: 1px solid rgba(255,255,255,0.05); display: flex; flex-direction: column; height: 160px; }
+        .stat-card-header { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+        .stat-icon-wrapper { border: 1px solid; padding: 6px; border-radius: 10px; display: flex; justify-content: center; align-items: center; }
+        .stat-title { color: #94a3b8; font-size: 11px; font-weight: bold; letter-spacing: 1px; text-transform: uppercase; }
+        .stat-value { color: white; font-size: 26px; margin: 0 0 4px; font-weight: 900; }
+        .stat-subtext { font-size: 12px; margin: 0; font-weight: 600; }
+
+        /* Widgets Grid */
+        .widgets-grid { display: grid; grid-template-columns: 1fr 1.5fr 1fr; gap: 20px; margin-bottom: 40px; }
+        .podium-item { display: flex; flex-direction: column; align-items: center; position: relative; }
+        .lb-avatar { border-radius: 50%; border: 2px solid; object-fit: cover; margin-bottom: 8px; }
+
+        /* Features */
+        .features-grid { display: grid; grid-template-columns: repeat(8, 1fr); gap: 20px 10px; }
+        .feature-box { display: flex; flex-direction: column; align-items: center; gap: 8px; cursor: pointer; }
+        .feature-icon-cont { width: 65px; height: 65px; border-radius: 18px; background: #111827; border: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: center; align-items: center; }
+        .feature-text { color: #94a3b8; font-size: 11px; text-align: center; font-weight: 600; line-height: 1.2; }
+
+        /* Buttons */
+        .btn-solid { background: #39ff14; color: #020617; border: none; padding: 12px 24px; border-radius: 12px; font-size: 14px; font-weight: 900; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; }
+        .btn-outline { background: transparent; border: 1px solid #39ff14; color: #39ff14; padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: bold; cursor: pointer; }
+
+        /* Bottom Nav */
+        .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: #090e17; border-top: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-around; padding: 12px 10px 20px; z-index: 100; }
+        .nav-item { display: flex; flex-direction: column; align-items: center; opacity: 0.6; cursor: pointer; }
+        .nav-item.active { opacity: 1; }
+        .nav-text { color: #94a3b8; font-size: 11px; margin-top: 6px; font-weight: 600; }
+        .nav-text.active { color: #39ff14; font-weight: bold; }
+
+        /* 📱 RESPONSIVE MEDIA QUERIES FOR MOBILE 📱 */
+        @media (max-width: 1024px) {
+          .stats-grid { grid-template-columns: repeat(3, 1fr); }
+          .features-grid { grid-template-columns: repeat(6, 1fr); }
+   }
+    @media (max-width: 768px) {
+          .container { padding: 15px; }
+          .header { flex-direction: column; align-items: flex-start; }
+          .stats-area { width: 100%; justify-content: flex-start; overflow-x: auto; padding-bottom: 5px; flex-wrap: nowrap; }
+          .stats-area::-webkit-scrollbar { display: none; }
+          
+          .grid-2 { grid-template-columns: 1fr; }
+          .grid-mid { grid-template-columns: 1fr; }
+          
+          .hero-card { flex-direction: column; align-items: flex-start; gap: 25px; padding: 20px; }
+          .hero-title { font-size: 36px; }
+          .circular-progress-container { align-self: center; } /* Center the circle on mobile */
+          
+          .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+          .widgets-grid { grid-template-columns: 1fr; gap: 15px; }
+          .features-grid { grid-template-columns: repeat(4, 1fr); }
+          
+          .rank-bottom-bar { flex-direction: column; gap: 10px; align-items: center; text-align: center; }
+          .workout-card { padding: 20px; }
+        }
+
+        @media (max-width: 480px) {
+          .hero-title { font-size: 30px; }
+          .feature-icon-cont { width: 55px; height: 55px; }
+        }
+      `}</style>
+      
+      <div className="container">
+        {/* 1. HEADER */}
+        <header className="header">
+          <div className="logo-area">
+            <Menu color="white" size={30} strokeWidth={2.5} style={{ cursor: "pointer" }} />
+            <div className="logo-text">
+              <span className="logo-sports">SPORTS</span>
+              <span className="logo-fit">FIT ZONE</span>
+            </div>
+          </div>
+
+          <div className="stats-area">
+            <div className="stat-pill"><Trophy color="#ffd700" size={15} fill="#ffd700" /><span style={{ color: "#ffd700" }}>12</span></div>
+            <div className="stat-pill"><Flame color="#ff7b00" size={15} fill="#ff7b00" /><span style={{ color: "#ff7b00" }}>7</span></div>
+            <div className="stat-pill"><span className="xp-badge">XP</span><span style={{ color: "white" }}>468</span></div>
+            <div className="bell-wrapper">
+              <Bell color="#e2e8f0" size={24} strokeWidth={2} />
+              <div className="bell-dot"></div>
+            </div>
+          </div>
+        </header>
+
+        {/* 2. SEARCH BAR */}
+        <div className="search-bar">
+          <Search color="#94a3b8" size={20} />
+          <input placeholder="Search workouts, plans, tournaments..." className="search-input" />
+          <SlidersHorizontal color="#9d4edd" size={20} />
+        </div>
+
+        {/* 3. HERO SECTION */}
+        <div className="grid-2">
+          {/* Main Profile Card */}
+          <div className="hero-card">
+            <div style={{ zIndex: 2 }}>
+              <p style={{ color: "#e2e8f0", fontSize: 14, margin: "0 0 5px", fontWeight: "500" }}>Good Evening,</p>
+              <h1 className="hero-title">DINESH</h1>
+              <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 15 }}>
+                <span style={{ color: "white", fontSize: 13, fontWeight: "bold" }}>Elite Athlete</span>
+                <CheckCircle2 size={15} color="#39ff14" fill="#39ff14" stroke="#090e17" />
+              </div>
+              
+              <p style={{ color: "white", fontSize: 14, lineHeight: 1.5, margin: "0 0 20px" }}>
+                Discipline today,<br/>
+                <span style={{ color: "#39ff14", fontWeight: "bold" }}>Domination</span> tomorrow.
+              </p>
+
+              <div className="hero-stats-row">
+                <div className="hero-stat-item">
+                  <Flame color="#ff7b00" size={20} fill="#ff7b00"/>
+                  <div><span style={{ color: "white", fontWeight: "900", fontSize: 15 }}>7</span><br/><span style={{ color: "#94a3b8", fontSize: 11, fontWeight: "500" }}>Day Streak</span></div>
+                </div>
+                <div className="hero-stat-item">
+                  <Activity color="#39ff14" size={20}/>
+                  <div><span style={{ color: "white", fontWeight: "900", fontSize: 15 }}>92%</span><br/><span style={{ color: "#94a3b8", fontSize: 11, fontWeight: "500" }}>Readiness</span></div>
+                </div>
+                <div className="hero-stat-item">
+                  <Droplet color="#3ea6ff" size={20}/>
+                  <div><span style={{ color: "white", fontWeight: "900", fontSize: 15 }}>85%</span><br/><span style={{ color: "#94a3b8", fontSize: 11, fontWeight: "500" }}>Recovery</span></div>
+                </div>
+              </div>
             </div>
             
-            <p style={{ color: "white", fontSize: 15, lineHeight: 1.5, margin: "0 0 30px" }}>
-              Discipline today,<br/>
-              <span style={{ color: "#39ff14", fontWeight: "bold" }}>Domination</span> tomorrow.
-            </p>
+            <CircularProgress percentage={92} label="OPTIMAL" subtitle="You are in the zone!" />
+          </div>
 
-            <div style={styles.heroBottomStats}>
-              <div style={styles.heroStatItem}>
-                <Flame color="#ff7b00" size={22} fill="#ff7b00"/>
-                <div><span style={{ color: "white", fontWeight: "900", fontSize: 16 }}>7</span><br/><span style={{ color: "#94a3b8", fontSize: 11, fontWeight: "500" }}>Day Streak</span></div>
+          {/* Rank Card */}
+          <div className="rank-card">
+            <div style={{ display: "flex", alignItems: "center", gap: 15 }}>
+              <div style={{ position: "relative" }}>
+                <Shield size={50} color="#9d4edd" fill="rgba(157,78,221,0.2)" strokeWidth={1.5} />
+                <Star size={20} color="white" fill="white" style={{ position: "absolute", top: 15, left: 15 }} />
               </div>
-              <div style={styles.heroStatItem}>
-                <Activity color="#39ff14" size={22}/>
-                <div><span style={{ color: "white", fontWeight: "900", fontSize: 16 }}>92%</span><br/><span style={{ color: "#94a3b8", fontSize: 11, fontWeight: "500" }}>Readiness</span></div>
-              </div>
-              <div style={styles.heroStatItem}>
-                <Droplet color="#3ea6ff" size={22}/>
-                <div><span style={{ color: "white", fontWeight: "900", fontSize: 16 }}>85%</span><br/><span style={{ color: "#94a3b8", fontSize: 11, fontWeight: "500" }}>Recovery</span></div>
+              <div>
+                <p style={{ color: "#9d4edd", fontSize: 11, fontWeight: "bold", margin: "0 0 4px", letterSpacing: 1.5 }}>YOUR RANK</p>
+                <h2 style={{ color: "white", fontSize: 17, fontWeight: "900", margin: "0 0 4px", letterSpacing: 0.5 }}>LEVEL 1 ATHLETE</h2>
+                <p style={{ color: "#94a3b8", fontSize: 12, margin: 0 }}>Top 15% Among All Athletes</p>
               </div>
             </div>
-          </div>
-          <div style={{ zIndex: 2, display: "flex", alignItems: "center" }}>
-             <CircularProgress percentage={92} label="OPTIMAL" subtitle="You are in the zone!" />
+            
+            <div className="rank-bottom-bar">
+              <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 4 }}>
+                <span style={{ fontSize: 9, color: "#94a3b8", fontWeight: "bold" }}>🌐 GLOBAL RANK</span>
+                <span style={{ fontSize: 16, color: "white", fontWeight: "900" }}>#24</span>
+                <span style={{ fontSize: 10, color: "#39ff14", fontWeight: "bold" }}>Top 15%</span>
+              </div>
+              <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 4 }}>
+                <span style={{ fontSize: 9, color: "#94a3b8", fontWeight: "bold" }}>🇮🇳 INDIA RANK</span>
+                <span style={{ fontSize: 16, color: "white", fontWeight: "900" }}>#5</span>
+                <span style={{ fontSize: 10, color: "#39ff14", fontWeight: "bold" }}>Top 5%</span>
+              </div>
+              <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 4 }}>
+                <span style={{ fontSize: 9, color: "#94a3b8", fontWeight: "bold" }}>🛡️ ACADEMY RANK</span>
+                <span style={{ fontSize: 16, color: "white", fontWeight: "900" }}>#1</span>
+                <span style={{ fontSize: 10, color: "#ffd700", fontWeight: "bold" }}>Top 1%</span>
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Rank Card */}
-        <div style={styles.rankCard}>
-          <div style={{ display: "flex", alignItems: "center", gap: 15, marginBottom: 25 }}>
-            <div style={{ position: "relative" }}>
-              <Shield size={55} color="#9d4edd" fill="rgba(157,78,221,0.2)" strokeWidth={1.5} />
-              <Star size={24} color="white" fill="white" style={{ position: "absolute", top: 15, left: 15 }} />
+        {/* 4. MID SECTION (CHALLENGES & TODAY'S PLAN) */}
+        <div className="grid-mid">
+          {/* Daily Challenge */}
+          <div className="challenge-card">
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+              <div>
+                <p style={{ color: "#39ff14", fontSize: 11, fontWeight: "bold", margin: "0 0 6px", letterSpacing: 1 }}>DAILY CHALLENGE</p>
+                <h2 style={{ color: "white", fontSize: 22, fontWeight: "900", margin: 0 }}>100 Pushups 💪</h2>
+              </div>
+              <Target color="#39ff14" size={40} strokeWidth={1.5} />
             </div>
-            <div>
-              <p style={{ color: "#9d4edd", fontSize: 11, fontWeight: "bold", margin: "0 0 4px", letterSpacing: 1.5 }}>YOUR RANK</p>
-              <h2 style={{ color: "white", fontSize: 18, fontWeight: "900", margin: "0 0 4px", letterSpacing: 0.5 }}>LEVEL 1 ATHLETE</h2>
-              <p style={{ color: "#94a3b8", fontSize: 12, margin: 0 }}>Top 15% Among All Athletes</p>
+            
+            <div style={{ display: "flex", alignItems: "center", gap: 12, margin: "20px 0" }}>
+              <div style={{ flex: 1, background: "rgba(255,255,255,0.1)", height: 8, borderRadius: 4 }}>
+                <div style={{ width: "80%", height: "100%", background: "linear-gradient(90deg, rgba(57,255,20,0.8) 0%, #39ff14 100%)", borderRadius: 4, boxShadow: "0 0 10px rgba(57,255,20,0.5)" }}></div>
+              </div>
+              <span style={{ color: "white", fontSize: 13, fontWeight: "bold" }}>80%</span>
+            </div>
+
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+              <span style={{ color: "#39ff14", fontSize: 13, fontWeight: "bold" }}>+50 XP <span style={{ color: "#94a3b8", fontWeight: "500" }}>Reward</span></span>
+              <button className="btn-outline">Join Challenge</button>
             </div>
           </div>
-          
-          <div style={{ display: "flex", justifyContent: "space-between", marginTop: "auto", background: "rgba(0,0,0,0.2)", padding: 12, borderRadius: 12 }}>
-            <div style={styles.rankItem}>
-              <span style={styles.rankLabel}>🌐 GLOBAL RANK</span>
-              <span style={styles.rankValue}>#24</span>
-              <span style={styles.rankSub}>Top 15%</span>
-            </div>
-            <div style={styles.rankItem}>
-              <span style={styles.rankLabel}>🇮🇳 INDIA RANK</span>
-              <span style={styles.rankValue}>#5</span>
-              <span style={styles.rankSub}>Top 5%</span>
-            </div>
-            <div style={styles.rankItem}>
-              <span style={styles.rankLabel}>🛡️ ACADEMY RANK</span>
-              <span style={styles.rankValue}>#1</span>
-              <span style={{...styles.rankSub, color: "#ffd700"}}>Top 1%</span>
+
+          {/* Today's Plan */}
+          <div className="workout-card">
+            <div style={{ zIndex: 2, position: "relative" }}>
+              <p style={{ color: "#39ff14", fontSize: 11, fontWeight: "bold", margin: "0 0 6px", letterSpacing: 1 }}>TODAY'S PLAN</p>
+              <h2 style={{ color: "white", fontSize: 26, fontWeight: "900", margin: 0 }}>Full Body Strength</h2>
+              <div style={{ display: "flex", gap: 15, flexWrap: "wrap", margin: "12px 0 20px" }}>
+                <span style={{ display: "flex", alignItems: "center", gap: 6, color: "#e2e8f0", fontSize: 13, fontWeight: "600" }}><Timer size={15}/> 45 min</span>
+                <span style={{ display: "flex", alignItems: "center", gap: 6, color: "#e2e8f0", fontSize: 13, fontWeight: "600" }}><Flame size={15}/> 420 kcal</span>
+                <span style={{ display: "flex", alignItems: "center", gap: 6, color: "#e2e8f0", fontSize: 13, fontWeight: "600" }}><Activity size={15}/> Advanced</span>
+              </div>
+              <button className="btn-solid">
+                Resume Workout <Play fill="#020617" size={16} />
+              </button>
             </div>
           </div>
         </div>
-      </div>
 
-      {/* 4. MID SECTION (CHALLENGES & TODAY'S PLAN) */}
-      <div style={styles.midGrid}>
-        
-        {/* Daily Challenge */}
-        <div style={styles.challengeCard}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
-            <div>
-              <p style={{ color: "#39ff14", fontSize: 12, fontWeight: "bold", margin: "0 0 8px", letterSpacing: 1 }}>DAILY CHALLENGE</p>
-              <h2 style={{ color: "white", fontSize: 24, fontWeight: "900", margin: 0 }}>100 Pushups 💪</h2>
-            </div>
-            <Target color="#39ff14" size={45} strokeWidth={1.5} />
-          </div>
-          
-          <div style={{ display: "flex", alignItems: "center", gap: 12, marginTop: 25, marginBottom: 20 }}>
-            <div style={{ flex: 1, background: "rgba(255,255,255,0.1)", height: 8, borderRadius: 4 }}>
-              <div style={{ width: "80%", height: "100%", background: "linear-gradient(90deg, rgba(57,255,20,0.8) 0%, #39ff14 100%)", borderRadius: 4, boxShadow: "0 0 10px rgba(57,255,20,0.5)" }}></div>
-            </div>
-            <span style={{ color: "white", fontSize: 14, fontWeight: "bold" }}>80%</span>
-          </div>
-
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-            <span style={{ color: "#39ff14", fontSize: 14, fontWeight: "bold" }}>+50 XP <span style={{ color: "#94a3b8", fontWeight: "500" }}>Reward</span></span>
-            <button style={styles.outlineBtn}>Join Challenge</button>
-          </div>
+        {/* 5. METRICS GRID */}
+        <div className="stats-grid">
+          <StatCard icon={<span className="xp-badge">XP</span>} title="XP TODAY" value="120" subText="+12%" color="#39ff14" isPositive={true} points="0,20 20,18 40,10 60,15 80,5 100,2" />
+          <StatCard icon={<Flame color="#ff7b00" size={18} fill="#ff7b00"/>} title="CALORIES" value="2,450" subText="Goal: 2,800" color="#ff7b00" points="0,20 20,15 40,18 60,8 80,12 100,5" />
+          <StatCard icon={<Activity color="#39ff14" size={18}/>} title="RECOVERY" value="85%" subText="Good" color="#39ff14" isPositive={true} points="0,15 20,20 40,10 60,18 80,5 100,8" />
+          <StatCard icon={<Moon color="#9d4edd" size={18} fill="#9d4edd"/>} title="SLEEP SCORE" value="78" subText="Good" color="#9d4edd" points="0,10 20,15 40,5 60,12 80,8 100,18" />
+          <StatCard icon={<Droplet color="#3ea6ff" size={18} fill="#3ea6ff"/>} title="WATER INTAKE" value="2.6 L" subText="Goal: 3.0 L" color="#3ea6ff" points="0,18 20,10 40,15 60,5 80,10 100,5" />
+          <StatCard icon={<Trophy color="#ffaa00" size={18}/>} title="STREAK" value="7" subText="Days" color="#ffaa00" points="0,20 25,18 50,15 75,10 100,5" />
         </div>
 
-        {/* Today's Plan */}
-        <div style={styles.workoutCard}>
-          <div style={{ zIndex: 2, position: "relative" }}>
-            <p style={{ color: "#39ff14", fontSize: 12, fontWeight: "bold", margin: "0 0 8px", letterSpacing: 1 }}>TODAY'S PLAN</p>
-            <h2 style={{ color: "white", fontSize: 28, fontWeight: "900", margin: 0 }}>Full Body Strength</h2>
-            <div style={{ display: "flex", gap: 20, marginTop: 12, marginBottom: 25 }}>
-              <span style={styles.workoutMeta}><Timer size={16}/> 45 min</span>
-              <span style={styles.workoutMeta}><Flame size={16}/> 420 kcal</span>
-              <span style={styles.workoutMeta}><Activity size={16}/> Advanced</span>
+        {/* 6. BOTTOM WIDGETS */}
+        <div className="widgets-grid">
+          {/* AI Coach */}
+          <div className="card-dark" style={{ border: "1px solid rgba(62,166,255,0.3)" }}>
+            <h3 style={{ color: "#3ea6ff", fontSize: 12, fontWeight: "bold", margin: "0 0 15px", letterSpacing: 1, textTransform: "uppercase" }}>AI Coach Insight</h3>
+            <div style={{ display: "flex", gap: 15, alignItems: "center", marginBottom: 20 }}>
+              <Brain size={50} color="#3ea6ff" strokeWidth={1.5} />
+              <p style={{ color: "#e2e8f0", fontSize: 13, lineHeight: 1.5, margin: 0, fontWeight: "500" }}>
+                Your recovery is excellent and energy is high.<br/><br/>Perfect day to push your limits! 🚀
+              </p>
             </div>
-            <button style={styles.solidBtn}>
-              Resume Workout <Play fill="#020617" size={16} />
+            <button style={{ width: "100%", background: "transparent", border: "1px solid rgba(62,166,255,0.3)", color: "#3ea6ff", padding: "10px", borderRadius: 12, fontSize: 13, fontWeight: "bold", cursor: "pointer", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+              View Full Report <ChevronRight size={16}/>
             </button>
           </div>
-        </div>
-      </div>
 
-      {/* 5. METRICS 6-GRID */}
-      <div style={styles.statsGrid}>
-        <StatCard icon={<span style={styles.xpIconMini}>XP</span>} title="XP TODAY" value="120" subText="+12%" color="#39ff14" isPositive={true} points="0,20 20,18 40,10 60,15 80,5 100,2" />
-        <StatCard icon={<Flame color="#ff7b00" size={20} fill="#ff7b00"/>} title="CALORIES" value="2,450" subText="Goal: 2,800" color="#ff7b00" points="0,20 20,15 40,18 60,8 80,12 100,5" />
-        <StatCard icon={<Activity color="#39ff14" size={20}/>} title="RECOVERY" value="85%" subText="Good" color="#39ff14" isPositive={true} points="0,15 20,20 40,10 60,18 80,5 100,8" />
-        <StatCard icon={<Moon color="#9d4edd" size={20} fill="#9d4edd"/>} title="SLEEP SCORE" value="78" subText="Good" color="#9d4edd" points="0,10 20,15 40,5 60,12 80,8 100,18" />
-        <StatCard icon={<Droplet color="#3ea6ff" size={20} fill="#3ea6ff"/>} title="WATER INTAKE" value="2.6 L" subText="Goal: 3.0 L" color="#3ea6ff" points="0,18 20,10 40,15 60,5 80,10 100,5" />
-        <StatCard icon={<Trophy color="#ffaa00" size={20}/>} title="STREAK" value="7" subText="Days" color="#ffaa00" points="0,20 25,18 50,15 75,10 100,5" />
-      </div>
-
-      {/* 6. BOTTOM WIDGETS */}
-      <div style={styles.widgetsGrid}>
-        
-        {/* AI Coach Insight */}
-        <div style={{...styles.widgetCard, border: "1px solid rgba(62,166,255,0.3)"}}>
-          <h3 style={{ color: "#3ea6ff", fontSize: 13, fontWeight: "bold", margin: "0 0 20px", letterSpacing: 1, textTransform: "uppercase" }}>AI Coach Insight</h3>
-          <div style={{ display: "flex", gap: 20, alignItems: "center", marginBottom: 25 }}>
-            <Brain size={60} color="#3ea6ff" strokeWidth={1.5} />
-            <p style={{ color: "#e2e8f0", fontSize: 14, lineHeight: 1.6, margin: 0, fontWeight: "500" }}>
-              Your recovery is excellent and energy is high.<br/><br/>
-              Perfect day to push your limits! 🚀
-            </p>
+          {/* Leaderboard */}
+          <div className="card-dark">
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 }}>
+              <h3 style={{ color: "#ffd700", fontSize: 12, fontWeight: "bold", margin: 0, letterSpacing: 1, textTransform: "uppercase" }}>Leaderboard Top 3</h3>
+              <span style={{ color: "#94a3b8", fontSize: 12, cursor: "pointer", display: "flex", alignItems: "center", fontWeight: "600" }}>View All <ChevronRight size={14}/></span>
+            </div>
+            <div style={{ display: "flex", justifyContent: "space-around", alignItems: "flex-end", height: 110 }}>
+              <div className="podium-item">
+                <div style={{ position: "absolute", top:-6, left:-6, width:20, height:20, background:"#c0c0c0", borderRadius:"50%", color:"#020617", fontSize:11, fontWeight:"bold", display:"flex", justifyContent:"center", alignItems:"center", zIndex:2 }}>2</div>
+                <img src="https://i.pravatar.cc/150?img=11" className="lb-avatar" style={{ width: 50, height: 50, borderColor: "#c0c0c0" }} alt="2"/>
+                <span style={{ color:"white", fontSize:13, fontWeight:"bold" }}>Dinesh</span>
+                <span style={{ color:"#39ff14", fontSize:11, fontWeight:"bold" }}>1,100 XP</span>
+              </div>
+              <div className="podium-item" style={{ zIndex: 2 }}>
+                <div style={{ position: "absolute", top:-8, left:-8, width:24, height:24, background:"#ffd700", borderRadius:"50%", color:"#020617", fontSize:12, fontWeight:"bold", display:"flex", justifyContent:"center", alignItems:"center", zIndex:2 }}>1</div>
+                <img src="https://i.pravatar.cc/150?img=5" className="lb-avatar" style={{ width: 65, height: 65, borderColor: "#ffd700", borderWidth: 3 }} alt="1"/>
+                <span style={{ color:"white", fontSize:15, fontWeight:"bold" }}>Pragati</span>
+                <span style={{ color:"#ffd700", fontSize:11, fontWeight:"bold" }}>1,250 XP</span>
+              </div>
+              <div className="podium-item">
+                <div style={{ position: "absolute", top:-6, left:-6, width:20, height:20, background:"#cd7f32", borderRadius:"50%", color:"#020617", fontSize:11, fontWeight:"bold", display:"flex", justifyContent:"center", alignItems:"center", zIndex:2 }}>3</div>
+                <img src="https://i.pravatar.cc/150?img=12" className="lb-avatar" style={{ width: 50, height: 50, borderColor: "#cd7f32" }} alt="3"/>
+                <span style={{ color:"white", fontSize:13, fontWeight:"bold" }}>Athlete X</span>
+                <span style={{ color:"#39ff14", fontSize:11, fontWeight:"bold" }}>980 XP</span>
+              </div>
+            </div>
           </div>
-          <button style={styles.outlineBtnBlue}>
-            View Full Report <ChevronRight size={16}/>
-          </button>
+
+          {/* Upcoming Event */}
+          <div className="card-dark">
+            <h3 style={{ color: "#9d4edd", fontSize: 12, fontWeight: "bold", margin: "0 0 15px", letterSpacing: 1, textTransform: "uppercase" }}>Upcoming Event</h3>
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginBottom: 15 }}>
+              <Trophy size={50} color="#9d4edd" strokeWidth={1.5} style={{ marginBottom: 10 }} />
+              <h4 style={{ color: "white", fontSize: 15, margin: "0 0 4px", fontWeight: "bold", textAlign: "center", lineHeight: 1.3 }}>State Powerlifting<br/>Championship 2025</h4>
+              <p style={{ color: "#94a3b8", fontSize: 12, margin: 0, fontWeight: "600" }}>12 May 2025</p>
+            </div>
+            <button style={{ width: "100%", background: "rgba(157,78,221,0.1)", border: "1px solid rgba(157,78,221,0.5)", color: "white", padding: "10px", borderRadius: 12, fontSize: 13, fontWeight: "bold", cursor: "pointer" }}>Register Now</button>
+          </div>
         </div>
 
-        {/* Leaderboard Top 3 */}
-        <div style={{...styles.widgetCard, flex: 1.5}}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 30 }}>
-            <h3 style={{ color: "#ffd700", fontSize: 13, fontWeight: "bold", margin: 0, letterSpacing: 1, textTransform: "uppercase" }}>Leaderboard Top 3</h3>
+        {/* 7. ALL FEATURES */}
+        <div style={{ marginBottom: 30 }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 }}>
+            <h2 style={{ color: "white", fontSize: 15, margin: 0, fontWeight: "900", letterSpacing: 1.5 }}>ALL FEATURES</h2>
             <span style={{ color: "#94a3b8", fontSize: 13, cursor: "pointer", display: "flex", alignItems: "center", fontWeight: "600" }}>View All <ChevronRight size={14}/></span>
           </div>
           
-          <div style={{ display: "flex", justifyContent: "space-around", alignItems: "flex-end", height: 120 }}>
-            <div style={styles.podiumItem}>
-              <div style={{...styles.lbBadge, background: "#c0c0c0"}}>2</div>
-              <img src="https://i.pravatar.cc/150?img=11" style={{...styles.lbAvatar, width: 55, height: 55, borderColor: "#c0c0c0"}} alt="Rank 2"/>
-              <span style={styles.lbName}>Dinesh</span>
-              <span style={styles.lbXp}>1,100 XP</span>
-            </div>
-            <div style={{...styles.podiumItem, zIndex: 2}}>
-              <div style={{...styles.lbBadge, background: "#ffd700", width: 24, height: 24, fontSize: 13, top: -8, left: -8}}>1</div>
-              <img src="https://i.pravatar.cc/150?img=5" style={{...styles.lbAvatar, width: 75, height: 75, borderColor: "#ffd700", borderWidth: 3}} alt="Rank 1"/>
-              <span style={{...styles.lbName, fontSize: 16}}>Pragati</span>
-              <span style={{...styles.lbXp, color: "#ffd700", fontSize: 12}}>1,250 XP</span>
-            </div>
-            <div style={styles.podiumItem}>
-              <div style={{...styles.lbBadge, background: "#cd7f32"}}>3</div>
-              <img src="https://i.pravatar.cc/150?img=12" style={{...styles.lbAvatar, width: 55, height: 55, borderColor: "#cd7f32"}} alt="Rank 3"/>
-              <span style={styles.lbName}>Athlete X</span>
-              <span style={styles.lbXp}>980 XP</span>
-            </div>
-          </div>
-        </div>
-  {/* Upcoming Event */}
-        <div style={styles.widgetCard}>
-          <h3 style={{ color: "#9d4edd", fontSize: 13, fontWeight: "bold", margin: "0 0 20px", letterSpacing: 1, textTransform: "uppercase" }}>Upcoming Event</h3>
-          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginBottom: 20 }}>
-            <Trophy size={60} color="#9d4edd" strokeWidth={1.5} style={{ marginBottom: 15 }} />
-            <h4 style={{ color: "white", fontSize: 16, margin: "0 0 6px", fontWeight: "bold", textAlign: "center", lineHeight: 1.3 }}>State Powerlifting<br/>Championship 2025</h4>
-            <p style={{ color: "#94a3b8", fontSize: 12, margin: 0, fontWeight: "600" }}>12 May 2025</p>
-          </div>
-          <button style={styles.outlineBtnPurple}>Register Now</button>
-        </div>
-      </div>
-
-      {/* 7. ALL FEATURES SECTION */}
-      <div style={{ marginTop: 40, marginBottom: 100 }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 25 }}>
-          <h2 style={{ color: "white", fontSize: 16, margin: 0, fontWeight: "900", letterSpacing: 1.5 }}>ALL FEATURES</h2>
-          <span style={{ color: "#94a3b8", fontSize: 14, cursor: "pointer", display: "flex", alignItems: "center", fontWeight: "600" }}>
-            View All <ChevronRight size={16}/>
-          </span>
-        </div>
-        
-        {/* EXACT 8-COLUMN GRID for Desktop, wraps on smaller screens */}
-        <div style={styles.featuresGrid}>
-          {ALL_FEATURES_DATA.map((item) => (
-            <div key={item.id} style={styles.featureBox}>
-              <div style={styles.featureIconContainer}>
-                {React.cloneElement(item.icon, { color: item.color, strokeWidth: 1.5 })}
+          <div className="features-grid">
+            {ALL_FEATURES_DATA.map((item) => (
+              <div key={item.id} className="feature-box">
+                <div className="feature-icon-cont">
+                  {React.cloneElement(item.icon, { color: item.color, strokeWidth: 1.5 })}
+                </div>
+                <span className="feature-text">{item.title}</span>
               </div>
-              <span style={styles.featureText}>{item.title}</span>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
 
       {/* 8. BOTTOM NAVIGATION */}
-      <div style={styles.bottomNav}>
-        <div style={styles.navItemActive}>
-          <Home color="#39ff14" size={28} />
-          <span style={styles.navTextActive}>Home</span>
+      <div className="bottom-nav">
+        <div className="nav-item active">
+          <Home color="#39ff14" size={24} />
+          <span className="nav-text active">Home</span>
         </div>
-        <div style={styles.navItem}>
-          <Dumbbell color="#94a3b8" size={28} />
-          <span style={styles.navText}>Training</span>
+        <div className="nav-item">
+          <Dumbbell color="#94a3b8" size={24} />
+          <span className="nav-text">Training</span>
         </div>
-        <div style={styles.navItem}>
-          <Trophy color="#94a3b8" size={28} />
-          <span style={styles.navText}>Tournaments</span>
+        <div className="nav-item">
+          <Trophy color="#94a3b8" size={24} />
+          <span className="nav-text">Tournaments</span>
         </div>
-        <div style={styles.navItem}>
-          <Flame color="#94a3b8" size={28} />
-          <span style={styles.navText}>DP</span>
+        <div className="nav-item">
+          <Flame color="#94a3b8" size={24} />
+          <span className="nav-text">DP</span>
         </div>
-        <div style={styles.navItem}>
-          <User color="#94a3b8" size={28} />
-          <span style={styles.navText}>Profile</span>
+        <div className="nav-item">
+          <User color="#94a3b8" size={24} />
+          <span className="nav-text">Profile</span>
         </div>
       </div>
 
     </div>
   );
-}
-
-// --- CSS-IN-JS STYLES (100% Matching Colors & Layout) ---
-
-const styles = {
-  page: {
-    background: "#090e17", 
-    minHeight: "100vh",
-    color: "white",
-    padding: "25px 25px 0 25px",
-    fontFamily: "system-ui, -apple-system, sans-serif",
-    maxWidth: 1400,
-    margin: "0 auto",
-    position: "relative"
-  },
-  
-  // Header
-  header: { display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 25 },
-  headerStats: { display: "flex", gap: 12, alignItems: "center" },
-  statPill: { display: "flex", alignItems: "center", gap: 8, background: "#111827", padding: "8px 16px", borderRadius: 25, fontSize: 15, fontWeight: "bold", border: "1px solid rgba(255,255,255,0.08)" },
-  xpIcon: { background: "#39ff14", color: "#020617", fontSize: 10, padding: "2px 6px", borderRadius: 4, fontWeight: 900 },
-  xpIconMini: { background: "#39ff14", color: "#020617", fontSize: 10, padding: "2px 6px", borderRadius: 4, fontWeight: 900, display: "inline-block" },
-  notificationDot: { width: 10, height: 10, background: "#39ff14", borderRadius: "50%", position: "absolute", top: -2, right: 0, border: "2px solid #090e17" },
-  
-  // Search
-  searchContainer: { display: "flex", alignItems: "center", background: "#111827", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 16, padding: "16px 20px", marginBottom: 30, gap: 12 },
-  searchInput: { flex: 1, background: "transparent", border: "none", outline: "none", color: "white", fontSize: 15 },
-  
-  // Hero
-  heroGrid: { display: "flex", gap: 20, flexWrap: "wrap", marginBottom: 20 },
-  mainAthleteCard: { 
-    flex: 2, minWidth: 350, display: "flex", justifyContent: "space-between", position: "relative", 
-    background: "linear-gradient(to right, #0d1321 55%, rgba(13,19,33,0.2)), url('https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?q=80&w=1000&auto=format&fit=crop')",
-    backgroundSize: "cover", backgroundPosition: "top right", borderRadius: 24, border: "1px solid rgba(255,255,255,0.08)", padding: 30, overflow: "hidden" 
-  },
-  athleteTextContent: { zIndex: 2, position: "relative" },
-  heroBottomStats: { display: "flex", gap: 25 },
-  heroStatItem: { display: "flex", alignItems: "center", gap: 10 },
-  
-  rankCard: { 
-    flex: 1, minWidth: 300, background: "linear-gradient(180deg, #16112a 0%, #111827 100%)", 
-    borderRadius: 24, border: "1px solid rgba(157,78,221,0.3)", padding: 25, display: "flex", flexDirection: "column" 
-  },
-  rankItem: { display: "flex", flexDirection: "column", gap: 4, alignItems: "center" },
-  rankLabel: { fontSize: 9, color: "#94a3b8", fontWeight: "bold" },
-  rankValue: { fontSize: 18, color: "white", fontWeight: "900" },
-  rankSub: { fontSize: 10, color: "#39ff14", fontWeight: "bold" },
-
-  // Mid Grid
-  midGrid: { display: "flex", gap: 20, flexWrap: "wrap", marginBottom: 20 },
-  challengeCard: { 
-    flex: 1, minWidth: 300, background: "linear-gradient(135deg, #0d1b14 0%, #111827 100%)", 
-    borderRadius: 24, border: "1px solid rgba(57,255,20,0.2)", padding: 25 
-  },
-  outlineBtn: { background: "transparent", border: "1px solid #39ff14", color: "#39ff14", padding: "8px 16px", borderRadius: 20, fontSize: 13, fontWeight: "bold", cursor: "pointer" },
-  
-  workoutCard: { 
-    flex: 2, minWidth: 350, position: "relative", borderRadius: 24, border: "1px solid rgba(255,255,255,0.08)", padding: 25,
-    background: "linear-gradient(to right, #0d1321 50%, rgba(13,19,33,0.3)), url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1000&auto=format&fit=crop')",
-    backgroundSize: "cover", backgroundPosition: "center right"
-  },
-  workoutMeta: { display: "flex", alignItems: "center", gap: 8, color: "#e2e8f0", fontSize: 14, fontWeight: "600" },
-  solidBtn: { background: "#39ff14", color: "#020617", border: "none", padding: "12px 24px", borderRadius: 12, fontSize: 14, fontWeight: "900", cursor: "pointer", display: "flex", alignItems: "center", gap: 10 },
-
-  // Stats Grid
-  statsGrid: { display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 20, marginBottom: 20 },
-  statCard: { background: "#111827", borderRadius: 20, padding: 20, border: "1px solid rgba(255,255,255,0.05)", display: "flex", flexDirection: "column", height: 160 },
-
-  // Widgets
-  widgetsGrid: { display: "flex", gap: 20, flexWrap: "wrap" },
-  widgetCard: { flex: 1, minWidth: 300, background: "#111827", borderRadius: 24, padding: 25, border: "1px solid rgba(255,255,255,0.05)", display: "flex", flexDirection: "column" },
-  outlineBtnBlue: { background: "transparent", border: "1px solid rgba(62,166,255,0.3)", color: "#3ea6ff", padding: "12px", borderRadius: 12, fontSize: 14, fontWeight: "bold", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%" },
-  outlineBtnPurple: { background: "rgba(157,78,221,0.1)", border: "1px solid rgba(157,78,221,0.5)", color: "white", padding: "12px", borderRadius: 12, fontSize: 14, fontWeight: "bold", cursor: "pointer", width: "100%" },
-  
-  podiumItem: { display: "flex", flexDirection: "column", alignItems: "center", position: "relative" },
-  lbBadge: { position: "absolute", top: -6, left: -6, width: 22, height: 22, borderRadius: "50%", display: "flex", justifyContent: "center", alignItems: "center", color: "#020617", fontSize: 12, fontWeight: "bold", zIndex: 2 },
-  lbAvatar: { borderRadius: "50%", borderStyle: "solid", borderWidth: 2, objectFit: "cover", marginBottom: 8 },
-  lbName: { color: "white", fontSize: 14, fontWeight: "bold", marginBottom: 4 },
-  lbXp: { color: "#39ff14", fontSize: 11, fontWeight: "bold" },
-
-  // Features (Exactly 8 columns wide layout)
-  featuresGrid: { display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(90px, 1fr))", gap: "25px 15px" },
-  featureBox: { display: "flex", flexDirection: "column", alignItems: "center", gap: 10, cursor: "pointer" },
-  featureIconContainer: { width: 70, height: 70, borderRadius: 18, background: "#111827", border: "1px solid rgba(255,255,255,0.05)", display: "flex", justifyContent: "center", alignItems: "center", transition: "transform 0.2s" },
-  featureText: { color: "#94a3b8", fontSize: 11, textAlign: "center", fontWeight: "600", lineHeight: 1.3 },
-  
-  // Bottom Nav
-  bottomNav: { position: "fixed", bottom: 0, left: 0, right: 0, background: "#090e17", borderTop: "1px solid rgba(255,255,255,0.05)", display: "flex", justifyContent: "space-around", padding: "15px 10px 25px", zIndex: 100 },
-  navItem: { display: "flex", flexDirection: "column", alignItems: "center", opacity: 0.7, cursor: "pointer" },
-  navItemActive: { display: "flex", flexDirection: "column", alignItems: "center", opacity: 1, cursor: "pointer" },
-  navText: { color: "#94a3b8", fontSize: 12, marginTop: 6, fontWeight: "600" },
-  navTextActive: { color: "#39ff14", fontSize: 12, marginTop: 6, fontWeight: "bold" }
-  };
+  }
