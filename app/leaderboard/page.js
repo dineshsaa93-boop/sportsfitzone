@@ -54,10 +54,15 @@ export default function GlobalLeaderboard() {
                   {isTop3 ? <Medal size={16} /> : `#${index + 1}`}
                 </div>
                 <div>
-                  <h3 style={{ margin: "0 0 4px", fontSize: "16px" }}>{athlete.name || athlete.displayName || "Unknown Athlete"}
-                  <span style={{ fontSize: "12px", color: "#94a3b8" }}>Level {athlete.level || 1} • {athlete.sport || "Athlete"}</span>
-                </div>
-              </div>
+                  
+  <h3 style={{ margin: "0 0 4px", fontSize: "16px" }}>
+    {athlete.name || athlete.displayName || "Unknown Athlete"}
+  </h3>
+
+  <span style={{ fontSize: "12px", color: "#94a3b8" }}>
+    Level {athlete.level || 1} • {athlete.sport || "Athlete"}
+  </span>
+</div>
               
               <div style={{ textAlign: "right" }}>
                 <h3 style={{ margin: "0 0 4px", color: "#3ea6ff" }}>{athlete.xp || 0} XP</h3>
