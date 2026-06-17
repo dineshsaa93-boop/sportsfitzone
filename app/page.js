@@ -42,8 +42,6 @@ height:45
 </div>
 
 </div>
-
-</div>
 <div style={styles.searchBar}>
 
 <Search size={22} color="#666"/>
@@ -344,7 +342,7 @@ Resume Workout ▶
 </div>
 
 </div>
-  rankWorkoutGrid:{
+rankWorkoutGrid:{
 display:"grid",
 gap:20,
 marginTop:25
@@ -507,6 +505,7 @@ padding:20,
 borderRadius:25,
 border:"1px solid rgba(255,255,255,.08)"
 },
+
 <div style={styles.aiCard}>
 
 <div>
