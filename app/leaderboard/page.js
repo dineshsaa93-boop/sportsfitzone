@@ -73,7 +73,7 @@ export default function GlobalLeaderboard() {
             </div>
           );
         })}
-      </div>
+      
     </div>
   );
 }
