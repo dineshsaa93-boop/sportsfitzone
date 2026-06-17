@@ -174,8 +174,7 @@ export default function HomePage() {
         <input placeholder="Search workouts, plans, tournaments..." style={styles.searchInput} />
         <Settings2 color="#9d4edd" size={20} />
       </div>
-
-      {/* HERO SECTION */}
+{/* HERO SECTION */}
       <div style={styles.heroGrid}>
         
         {/* Main Athlete Card */}
@@ -347,4 +346,168 @@ export default function HomePage() {
               <div style={{...styles.lbBadge, background: "#cd7f32"}}>3</div>
               <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80" style={{...styles.lbAvatar, width: 55, height: 55, borderColor: "#cd7f32"}} alt="Rank 3"/>
               <span style={styles.lbName}>Athlete X</span>
-              <span style={{
+              <span style={{...styles.lbXp, color: "#39ff14"}}>980 XP</span>
+            </div>
+          </div>
+        </div>
+{/* Upcoming Event */}
+        <div style={styles.widgetCard}>
+          <h3 style={{ color: "#9d4edd", fontSize: 12, fontWeight: "bold", margin: "0 0 15px", textTransform: "uppercase" }}>UPCOMING EVENT</h3>
+          <div style={{ textAlign: "center", marginBottom: 15 }}>
+            <Trophy size={60} color="#9d4edd" strokeWidth={1.5} style={{ filter: "drop-shadow(0 0 15px rgba(157,78,221,0.5))", marginBottom: 15 }} />
+            <h4 style={{ color: "white", fontSize: 15, margin: "0 0 5px", fontWeight: "bold" }}>State Powerlifting<br/>Championship 2025</h4>
+            <p style={{ color: "#e2e8f0", fontSize: 12, margin: 0 }}>12 May 2025</p>
+          </div>
+          <button style={{...styles.outlineBtnPurple, width: "100%"}}>Register Now</button>
+        </div>
+
+      </div>
+
+      {/* ALL FEATURES SECTION */}
+      <div style={{ marginTop: 40 }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 }}>
+          <h2 style={{ color: "white", fontSize: 14, margin: 0, fontWeight: "bold", letterSpacing: 1 }}>ALL FEATURES</h2>
+          <span onClick={() => setShowAllFeatures(!showAllFeatures)} style={{ color: "#94a3b8", fontSize: 12, cursor: "pointer", display: "flex", alignItems: "center" }}>
+            View {showAllFeatures ? "Less" : "All"} <ChevronRight size={14}/>
+          </span>
+        </div>
+        
+        <div style={styles.featuresGrid}>
+          {displayedFeatures.map((item) => (
+            <Link href={item.link} key={item.id} style={styles.featureBox}>
+              <div style={{...styles.featureIconContainer, borderColor: `${item.color}40`}}>
+                {React.cloneElement(item.icon, { color: item.color, strokeWidth: 1.5 })}
+              </div>
+              <span style={styles.featureText}>{item.title}</span>
+            </Link>
+          ))}
+        </div>
+
+        {/* Event Banner spanning bottom */}
+        <Link href="/events" style={styles.eventBanner}>
+          <div style={{ background: "rgba(157,78,221,0.2)", padding: 6, borderRadius: 8 }}><Calendar color="#9d4edd" size={20}/></div>
+          <span style={{ color: "white", fontSize: 13, fontWeight: "bold" }}>Events</span>
+        </Link>
+      </div>
+
+      {/* BOTTOM NAVIGATION */}
+      <div style={styles.bottomNav}>
+        <Link href="/" style={styles.navItemActive}>
+          <Home color="#39ff14" size={24} />
+          <span style={styles.navTextActive}>Home</span>
+        </Link>
+        <Link href="/training" style={styles.navItem}>
+          <Dumbbell color="#94a3b8" size={24} />
+          <span style={styles.navText}>Training</span>
+        </Link>
+        <Link href="/tournaments" style={styles.navItem}>
+          <Trophy color="#94a3b8" size={24} />
+          <span style={styles.navText}>Tournaments</span>
+        </Link>
+        <Link href="/dp" style={styles.navItem}>
+          <Flame color="#94a3b8" size={24} />
+          <span style={styles.navText}>DP</span>
+        </Link>
+        <Link href="/profile" style={styles.navItem}>
+          <User color="#94a3b8" size={24} />
+          <span style={styles.navText}>Profile</span>
+        </Link>
+      </div>
+
+    </div>
+  );
+}
+
+// --- CSS-IN-JS STYLES ---
+
+const styles = {
+  page: {
+    background: "#090e17", // Deep dark background
+    minHeight: "100vh",
+    color: "white",
+    padding: "20px 20px 100px 20px",
+    fontFamily: "system-ui, -apple-system, sans-serif",
+    maxWidth: 1200,
+    margin: "0 auto"
+  },
+  
+  // Header & Search
+  header: { display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 },
+  headerStats: { display: "flex", gap: 10, alignItems: "center" },
+  statPill: { display: "flex", alignItems: "center", gap: 6, background: "rgba(255,255,255,0.05)", padding: "6px 12px", borderRadius: 20, fontSize: 14, fontWeight: "bold", border: "1px solid rgba(255,255,255,0.1)" },
+  xpIcon: { background: "#39ff14", color: "#020617", fontSize: 10, padding: "2px 5px", borderRadius: 4, fontWeight: 900 },
+  xpIconMini: { background: "#39ff14", color: "#020617", fontSize: 10, padding: "2px 5px", borderRadius: 4, fontWeight: 900, display: "inline-block" },
+  notificationDot: { width: 10, height: 10, background: "#39ff14", borderRadius: "50%", position: "absolute", top: 0, right: 0, border: "2px solid #090e17" },
+  
+  searchContainer: { display: "flex", alignItems: "center", background: "#111827", border: "1px solid rgba(255,255,255,0.05)", borderRadius: 12, padding: "12px 15px", marginBottom: 25, gap: 10 },
+  searchInput: { flex: 1, background: "transparent", border: "none", outline: "none", color: "white", fontSize: 14 },
+  
+  // Hero Section
+  heroGrid: { display: "flex", gap: 20, flexWrap: "wrap", marginBottom: 20 },
+  mainAthleteCard: { 
+    flex: 2, minWidth: 300, display: "flex", justifyContent: "space-between", position: "relative", 
+    background: "linear-gradient(to right, #0d1321 50%, transparent), url('https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?q=80&w=1000&auto=format&fit=crop')",
+    backgroundSize: "cover", backgroundPosition: "right", borderRadius: 20, border: "1px solid rgba(255,255,255,0.08)", padding: 25, overflow: "hidden" 
+  },
+  athleteTextContent: { zIndex: 2, position: "relative" },
+  heroBottomStats: { display: "flex", gap: 20, marginTop: 25 },
+  heroStatItem: { display: "flex", alignItems: "center", gap: 8 },
+  readinessContainer: { zIndex: 2, display: "flex", alignItems: "center", justifyContent: "center", paddingRight: 20 },
+  
+  rankCard: { 
+    flex: 1, minWidth: 250, background: "linear-gradient(180deg, #16112a 0%, #111827 100%)", 
+    borderRadius: 20, border: "1px solid rgba(157,78,221,0.3)", padding: 25, display: "flex", flexDirection: "column" 
+  },
+  shieldIconWrapper: { position: "relative", display: "flex", justifyContent: "center", alignItems: "center" },
+  rankItem: { display: "flex", flexDirection: "column", gap: 4, alignItems: "flex-start" },
+  rankLabel: { fontSize: 9, color: "#94a3b8", fontWeight: "bold" },
+  rankValue: { fontSize: 16, color: "white", fontWeight: "bold" },
+  rankSub: { fontSize: 10, color: "#39ff14", fontWeight: "bold" },
+
+  // Mid Section
+  midGrid: { display: "flex", gap: 20, flexWrap: "wrap", marginBottom: 20 },
+  challengeCard: { 
+    flex: 1, minWidth: 300, background: "linear-gradient(135deg, #0d1b14 0%, #111827 100%)", 
+    borderRadius: 20, border: "1px solid rgba(57,255,20,0.2)", padding: 25 
+  },
+  outlineBtn: { background: "transparent", border: "1px solid #39ff14", color: "#39ff14", padding: "8px 16px", borderRadius: 20, fontSize: 12, fontWeight: "bold", cursor: "pointer" },
+  
+  workoutCard: { 
+    flex: 2, minWidth: 300, position: "relative", borderRadius: 20, border: "1px solid rgba(255,255,255,0.08)", padding: 25,
+    background: "linear-gradient(to right, #0d1321 60%, transparent), url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1000&auto=format&fit=crop')",
+    backgroundSize: "cover", backgroundPosition: "center right"
+  },
+  workoutMeta: { display: "flex", alignItems: "center", gap: 6, color: "#e2e8f0", fontSize: 13, fontWeight: "500" },
+  solidBtn: { background: "#39ff14", color: "#020617", border: "none", padding: "10px 20px", borderRadius: 12, fontSize: 14, fontWeight: "bold", cursor: "pointer", display: "flex", alignItems: "center", gap: 8 },
+
+  // Stats Grid
+  statsGrid: { display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))", gap: 15, marginBottom: 20 },
+  statCard: { background: "#111827", borderRadius: 16, padding: 15, border: "1px solid rgba(255,255,255,0.05)", display: "flex", flexDirection: "column", height: 140 },
+
+  // Bottom Widgets
+  widgetsGrid: { display: "flex", gap: 20, flexWrap: "wrap" },
+  widgetCard: { flex: 1, minWidth: 280, background: "#111827", borderRadius: 20, padding: 25, border: "1px solid rgba(255,255,255,0.05)", display: "flex", flexDirection: "column" },
+  outlineBtnBlue: { background: "transparent", border: "1px solid rgba(62,166,255,0.4)", color: "#3ea6ff", padding: "12px", borderRadius: 12, fontSize: 13, fontWeight: "bold", cursor: "pointer", display: "flex", alignItems: "center" },
+  outlineBtnPurple: { background: "rgba(157,78,221,0.1)", border: "1px solid #9d4edd", color: "white", padding: "12px", borderRadius: 12, fontSize: 14, fontWeight: "bold", cursor: "pointer" },
+  
+  // Leaderboard Custom
+  podiumItem: { display: "flex", flexDirection: "column", alignItems: "center", position: "relative" },
+  lbBadge: { position: "absolute", top: -8, left: -8, width: 22, height: 22, borderRadius: "50%", display: "flex", justifyContent: "center", alignItems: "center", color: "#020617", fontSize: 12, fontWeight: "bold", zIndex: 2 },
+  lbAvatar: { borderRadius: "50%", borderStyle: "solid", borderWidth: 3, objectFit: "cover", marginBottom: 8 },
+  lbName: { color: "white", fontSize: 13, fontWeight: "bold", marginBottom: 2 },
+  lbXp: { color: "#39ff14", fontSize: 11, fontWeight: "bold" },
+
+  // Features Grid
+  featuresGrid: { display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(80px, 1fr))", gap: 20 },
+  featureBox: { display: "flex", flexDirection: "column", alignItems: "center", gap: 10, textDecoration: "none", cursor: "pointer" },
+  featureIconContainer: { width: 64, height: 64, borderRadius: 18, background: "#111827", borderStyle: "solid", borderWidth: 1, display: "flex", justifyContent: "center", alignItems: "center", transition: "transform 0.2s" },
+  featureText: { color: "#94a3b8", fontSize: 11, textAlign: "center", fontWeight: "500" },
+  eventBanner: { display: "flex", alignItems: "center", gap: 10, background: "#111827", border: "1px solid rgba(255,255,255,0.05)", borderRadius: 12, padding: "10px 15px", marginTop: 20, textDecoration: "none", width: "max-content" },
+
+  // Bottom Nav
+  bottomNav: { position: "fixed", bottom: 0, left: 0, right: 0, background: "rgba(9, 14, 23, 0.95)", backdropFilter: "blur(20px)", borderTop: "1px solid rgba(255,255,255,0.05)", display: "flex", justifyContent: "space-around", padding: "12px 10px 25px", zIndex: 1000 },
+  navItem: { display: "flex", flexDirection: "column", alignItems: "center", textDecoration: "none", opacity: 0.6 },
+  navItemActive: { display: "flex", flexDirection: "column", alignItems: "center", textDecoration: "none", opacity: 1 },
+  navText: { color: "#94a3b8", fontSize: 10, marginTop: 4, fontWeight: "500" },
+  navTextActive: { color: "#39ff14", fontSize: 10, marginTop: 4, fontWeight: "bold" }
+};
