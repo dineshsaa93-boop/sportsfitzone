@@ -1184,7 +1184,7 @@ liveBadge: {
 background: "red",
 padding: "5px 10px",
 borderRadius: 10,
-fontSize: 12
+fontSize: 12,
       player: {
   position: "Forward"
 }
