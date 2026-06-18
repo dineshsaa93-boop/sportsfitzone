@@ -1,981 +1,1191 @@
 "use client";
 
-import React from 'react';
-
-export default function SportsFitZone() {
-  return (
-    <div className="app-container">
-      {/* 100% PIXEL PERFECT CSS */}
-      <style dangerouslySetInnerHTML={{ __html: `
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
-
-        :root {
-          --bg-color: #050505;
-          --neon-green: #7CFF00;
-          --purple: #8A2BE2;
-          --blue: #00BFFF;
-          --orange: #FF9800;
-          --white: #FFFFFF;
-          --grey: #B0B0B0;
-          --card-bg: rgba(15, 18, 25, 0.85);
-          --card-border: rgba(255, 255, 255, 0.08);
-          --glass-blur: blur(12px);
-        }
-
-        * {
-          margin: 0;
-          padding: 0;
-          box-sizing: border-box;
-          font-family: 'Poppins', sans-serif;
-        }
-
-        body {
-          background-color: var(--bg-color);
-          color: var(--white);
-          -webkit-font-smoothing: antialiased;
-        }
-
-        .app-container {
-          max-width: 1080px;
-          margin: 0 auto;
-          background-color: var(--bg-color);
-          min-height: 100vh;
-          position: relative;
-          padding-bottom: 120px;
-          overflow-x: hidden;
-        }
-
-        /* TOP BAR */
-        .top-bar {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          padding: 20px 24px;
-        }
-
-        .top-left {
-          display: flex;
-          align-items: center;
-          gap: 16px;
-        }
-
-        .logo-text {
-          display: flex;
-          flex-direction: column;
-        }
-
-        .logo-sports {
-          font-size: 24px;
-          font-weight: 900;
-          font-style: italic;
-          line-height: 1;
-          letter-spacing: -1px;
-        }
-
-        .logo-zone {
-          font-size: 12px;
-          font-weight: 800;
-          color: var(--neon-green);
-          letter-spacing: 2px;
-        }
-
-        .top-right {
-          display: flex;
-          align-items: center;
-          gap: 12px;
-        }
-
-        .stat-pill {
-          display: flex;
-          align-items: center;
-          gap: 6px;
-          background: rgba(255, 255, 255, 0.05);
-          border: 1px solid var(--card-border);
-          padding: 8px 16px;
-          border-radius: 30px;
-          font-weight: 700;
-          font-size: 14px;
-          box-shadow: 0 0 10px rgba(255, 255, 255, 0.02);
-        }
-
-        .bell-icon {
-          position: relative;
-          background: rgba(255, 255, 255, 0.05);
-          border: 1px solid var(--card-border);
-          width: 42px;
-          height: 42px;
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-
-        .green-dot-nav {
-          position: absolute;
-          top: 10px;
-          right: 12px;
-          width: 8px;
-          height: 8px;
-          background-color: var(--neon-green);
-          border-radius: 50%;
-          box-shadow: 0 0 8px var(--neon-green);
-        }
-
-        /* SEARCH BAR */
-        .search-container {
-          padding: 0 24px 20px 24px;
-        }
-
-        .search-bar {
-          display: flex;
-          align-items: center;
-          background: rgba(20, 24, 34, 0.6);
-          border: 1px solid var(--card-border);
-          border-radius: 30px;
-          padding: 12px 20px;
-          box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-        }
-
-        .search-input {
-          flex: 1;
-          background: transparent;
-          border: none;
-          color: var(--white);
-          font-size: 15px;
-          margin-left: 12px;
-          outline: none;
-        }
-
-        .search-input::placeholder {
-          color: var(--grey);
-        }
-
-        /* GRID LAYOUTS (EXACT ALIGNMENT) */
-        .grid-2-col {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 20px;
-          padding: 0 24px;
-          margin-bottom: 20px;
-        }
-
-        .grid-3-col {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 20px;
-          padding: 0 24px;
-          margin-bottom: 20px;
-        }
-
-        /* CARDS GENERAL */
-        .glass-card {
-          background: var(--card-bg);
-          border: 1px solid var(--card-border);
-          border-radius: 28px;
-          padding: 28px;
-          backdrop-filter: var(--glass-blur);
-          position: relative;
-          overflow: hidden;
-        }
-
-        /* HERO SECTION */
-        .hero-section {
-          display: flex;
-          gap: 20px;
-          padding: 0 24px;
-          margin-bottom: 20px;
-        }
-
-        .hero-left {
-          flex: 1.2;
-          background: linear-gradient(135deg, rgba(20,25,35,0.9), rgba(10,12,18,0.9));
-          border: 1px solid var(--card-border);
-          border-radius: 28px;
-          padding: 32px;
-          position: relative;
-          box-shadow: inset 0 0 40px rgba(0,0,0,0.5);
-        }
-
-        .hero-right {
-          flex: 0.8;
-          background: var(--card-bg);
-          border: 1px solid rgba(138, 43, 226, 0.3);
-          border-radius: 28px;
-          padding: 32px;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          box-shadow: 0 0 25px rgba(138, 43, 226, 0.1);
-          position: relative;
-        }
-
-        .hero-name {
-          font-size: 48px;
-          font-weight: 900;
-          letter-spacing: -1.5px;
-          line-height: 1.1;
-        }
-
-        .elite-badge {
-          display: inline-flex;
-          align-items: center;
-          gap: 6px;
-          color: var(--white);
-          font-size: 16px;
-          font-weight: 600;
-          margin-top: 8px;
-        }
-
-        .hero-quote {
-          margin-top: 24px;
-          font-size: 18px;
-          color: var(--white);
-          line-height: 1.5;
-        }
-
-        .neon-green-text {
-          color: var(--neon-green);
-          font-weight: 800;
-          text-shadow: 0 0 15px rgba(124, 255, 0, 0.4);
-        }
-
-        .ready-card {
-          margin-top: 32px;
-          background: rgba(0,0,0,0.4);
-          border: 1px solid rgba(255,255,255,0.1);
-          padding: 16px 20px;
-          border-radius: 20px;
-          display: inline-flex;
-          align-items: center;
-          gap: 16px;
-        }
-
-        .status-dot {
-          width: 14px;
-          height: 14px;
-          background-color: var(--neon-green);
-          border-radius: 50%;
-          box-shadow: 0 0 12px var(--neon-green);
-        }
-
-        .status-title {
-          color: var(--neon-green);
-          font-weight: 700;
-          font-size: 15px;
-        }
-
-        .status-sub {
-          color: var(--grey);
-          font-size: 13px;
-          margin-top: 4px;
-        }
-
-        /* READINESS CIRCLE */
-        .level-badge-top {
-          position: absolute;
-          top: 20px;
-          right: 20px;
-          display: flex;
-          align-items: center;
-          gap: 8px;
-        }
-        
-        .level-badge-top svg {
-          width: 32px;
-          height: 32px;
-          filter: drop-shadow(0 0 8px var(--purple));
-        }
-
-        .circle-container {
-          position: relative;
-          width: 180px;
-          height: 180px;
-          margin-top: 20px;
-        }
-
-        .circle-text {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          text-align: center;
-        }
-
-        .circle-percent {
-          font-size: 48px;
-          font-weight: 900;
-          line-height: 1;
-        }
-
-        .circle-label {
-          font-size: 11px;
-          color: var(--neon-green);
-          font-weight: 800;
-          letter-spacing: 2px;
-          margin-top: 4px;
-        }
-
-        .optimal-text {
-          margin-top: 24px;
-          color: var(--neon-green);
-          font-weight: 800;
-          font-size: 16px;
-        }
-          /* RANK CARD */
-        .rank-card {
-          background: linear-gradient(160deg, rgba(30,20,50,0.8), var(--card-bg));
-          border-color: rgba(138, 43, 226, 0.3);
-          box-shadow: 0 0 30px rgba(138, 43, 226, 0.1);
-        }
-
-        .rank-header {
-          display: flex;
-          gap: 20px;
-          align-items: center;
-        }
-
-        .rank-shield {
-          width: 80px;
-          height: 80px;
-          background: rgba(138, 43, 226, 0.1);
-          border-radius: 20px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 40px;
-          border: 1px solid rgba(138, 43, 226, 0.4);
-          box-shadow: 0 0 20px rgba(138, 43, 226, 0.2);
-        }
-
-        .rank-subtitle {
-          color: var(--purple);
-          font-size: 12px;
-          font-weight: 800;
-          letter-spacing: 1.5px;
-        }
-
-        .rank-title {
-          font-size: 26px;
-          font-weight: 900;
-          margin: 4px 0;
-        }
-
-        .rank-bar-bg {
-          width: 100%;
-          height: 6px;
-          background: rgba(255,255,255,0.1);
-          border-radius: 6px;
-          margin: 24px 0;
-        }
-
-        .rank-bar-fill {
-          width: 85%;
-          height: 100%;
-          background: var(--purple);
-          border-radius: 6px;
-          box-shadow: 0 0 10px var(--purple);
-        }
-
-        .rank-stats-row {
-          display: flex;
-          justify-content: space-between;
-        }
-
-        .r-stat-label {
-          font-size: 11px;
-          color: var(--grey);
-          font-weight: 700;
-          display: flex;
-          align-items: center;
-          gap: 6px;
-        }
-
-        .r-stat-val {
-          font-size: 24px;
-          font-weight: 900;
-          margin: 4px 0;
-        }
-
-        /* PLAN CARD */
-        .plan-title-sm {
-          color: var(--neon-green);
-          font-size: 12px;
-          font-weight: 800;
-          letter-spacing: 1.5px;
-        }
-
-        .plan-title-lg {
-          font-size: 32px;
-          font-weight: 900;
-          line-height: 1.2;
-          margin: 8px 0 20px 0;
-        }
-
-        .plan-tags {
-          display: flex;
-          gap: 16px;
-          margin-bottom: 30px;
-        }
-
-        .plan-tag {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          font-size: 14px;
-          color: var(--grey);
-          font-weight: 500;
-        }
-
-        .resume-btn {
-          width: 100%;
-          background: var(--neon-green);
-          color: #000;
-          border: none;
-          padding: 18px;
-          border-radius: 20px;
-          font-size: 16px;
-          font-weight: 800;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          cursor: pointer;
-          box-shadow: 0 0 20px rgba(124, 255, 0, 0.3);
-          transition: 0.3s;
-        }
-
-        .resume-btn:hover {
-          box-shadow: 0 0 30px rgba(124, 255, 0, 0.5);
-          transform: scale(1.02);
-        }
-
-        /* COACH CARD */
-        .coach-card {
-          border-color: rgba(0, 191, 255, 0.3);
-          box-shadow: 0 0 20px rgba(0, 191, 255, 0.05);
-        }
-
-        .coach-header {
-          color: var(--blue);
-          font-size: 12px;
-          font-weight: 800;
-          letter-spacing: 1px;
-          margin-bottom: 16px;
-        }
-
-        .coach-body {
-          display: flex;
-          gap: 20px;
-          align-items: center;
-          margin-bottom: 24px;
-        }
-
-        .brain-icon {
-          font-size: 40px;
-          filter: drop-shadow(0 0 10px var(--blue));
-        }
-
-        .coach-text {
-          font-size: 16px;
-          line-height: 1.5;
-          font-weight: 500;
-        }
-
-        .report-btn {
-          width: 100%;
-          background: transparent;
-          border: 1px solid rgba(0, 191, 255, 0.3);
-          color: var(--blue);
-          padding: 16px;
-          border-radius: 16px;
-          font-size: 14px;
-          font-weight: 700;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-        }
-
-        /* LEADERBOARD */
-        .lead-header {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          margin-bottom: 24px;
-        }
-
-        .lead-title {
-          color: #FACC15;
-          font-size: 12px;
-          font-weight: 800;
-          letter-spacing: 1px;
-        }
-
-        .lead-view {
-          color: var(--grey);
-          font-size: 13px;
-          font-weight: 600;
-        }
-
-        .podium {
-          display: flex;
-          justify-content: space-around;
-          align-items: flex-end;
-        }
-
-        .podium-profile {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-        }
-
-        .avatar-wrap {
-          position: relative;
-          border-radius: 50%;
-          background: #111;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-
-        .rank-badge-num {
-          position: absolute;
-          top: -5px;
-          left: -5px;
-          width: 24px;
-          height: 24px;
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: #000;
-          font-weight: 900;
-          font-size: 12px;
-          box-shadow: 0 0 10px rgba(0,0,0,0.5);
-        }
-
-        .lead-name {
-          font-size: 15px;
-          font-weight: 700;
-          margin-top: 12px;
-        }
-
-        .lead-xp {
-          font-size: 13px;
-          color: var(--neon-green);
-          font-weight: 700;
-          margin-top: 4px;
-        }
-
-        /* BOTTOM STATS */
-        .b-stat-card {
-          background: var(--card-bg);
-          border: 1px solid var(--card-border);
-          border-radius: 24px;
-          padding: 24px;
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          height: 160px;
-        }
-
-        .b-stat-icon {
-          font-size: 24px;
-          margin-bottom: 12px;
-        }
-
-        .b-stat-title {
-          font-size: 12px;
-          color: var(--grey);
-          font-weight: 800;
-          letter-spacing: 1px;
-        }
-
-        .b-stat-val {
-          font-size: 32px;
-          font-weight: 900;
-          margin: 4px 0;
-          line-height: 1;
-        }
-
-        .b-stat-bar-bg {
-          width: 100%;
-          height: 4px;
-          background: rgba(255,255,255,0.1);
-          border-radius: 4px;
-          margin-top: 12px;
-        }
-
-        /* BOTTOM NAV */
-        .bottom-nav {
-          position: fixed;
-          bottom: 0;
-          left: 50%;
-          transform: translateX(-50%);
-          width: 100%;
-          max-width: 1080px;
-          background: rgba(5, 5, 5, 0.95);
-          backdrop-filter: blur(20px);
-          border-top: 1px solid rgba(255,255,255,0.05);
-          display: flex;
-          justify-content: space-around;
-          padding: 16px 0 30px 0;
-          z-index: 100;
-        }
-
-        .nav-item {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          gap: 6px;
-          color: var(--grey);
-          cursor: pointer;
-        }
-
-        .nav-item.active {
-          color: var(--neon-green);
-        }
-
-        .nav-icon {
-          font-size: 24px;
-        }
-
-        .nav-item.active .nav-icon {
-          filter: drop-shadow(0 0 10px var(--neon-green));
-        }
-
-        .nav-text {
-          font-size: 12px;
-          font-weight: 700;
-        }
-      `}} />
-
-      {/* 1. TOP BAR */}
-      <header className="top-bar">
-        <div className="top-left">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
-            <line x1="3" y1="12" x2="21" y2="12"></line>
-            <line x1="3" y1="6" x2="21" y2="6"></line>
-            <line x1="3" y1="18" x2="15" y2="18"></line>
-          </svg>
-          <div className="logo-text">
-            <span className="logo-sports">SPORTS</span>
-            <span className="logo-zone">FIT ZONE</span>
-          </div>
-        </div>
-        <div className="top-right">
-          <div className="stat-pill"><span style={{color: '#FACC15'}}>🏆</span> <span style={{color: '#FACC15'}}>12</span></div>
-          <div className="stat-pill"><span style={{color: '#FF9800'}}>🔥</span> <span style={{color: '#FF9800'}}>7</span></div>
-          <div className="stat-pill">
-            <span style={{color: '#7CFF00', border: '1px solid #7CFF00', padding: '2px 6px', borderRadius: '6px', fontSize: '10px', background: 'rgba(124,255,0,0.1)'}}>XP</span> 
-            468
-          </div>
-          <div className="bell-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
-              <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
-            </svg>
-            <span className="green-dot-nav"></span>
-          </div>
-        </div>
-      </header>
-
-      {/* 2. SEARCH BAR */}
-      <div className="search-container">
-        <div className="search-bar">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--grey)" strokeWidth="2">
-            <circle cx="11" cy="11" r="8"></circle>
-            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-          </svg>
-          <input type="text" className="search-input" placeholder="Search workouts, plans, tournaments..." />
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--purple)" strokeWidth="2">
-            <line x1="4" y1="21" x2="4" y2="14"></line>
-            <line x1="4" y1="10" x2="4" y2="3"></line>
-            <line x1="12" y1="21" x2="12" y2="12"></line>
-            <line x1="12" y1="8" x2="12" y2="3"></line>
-            <line x1="20" y1="21" x2="20" y2="16"></line>
-            <line x1="20" y1="12" x2="20" y2="3"></line>
-            <line x1="1" y1="14" x2="7" y2="14"></line>
-            <line x1="9" y1="8" x2="15" y2="8"></line>
-            <line x1="17" y1="16" x2="23" y2="16"></line>
-          </svg>
-        </div>
-      </div>
-
-      {/* 3. HERO SECTION (Side by side) */}
-      <section className="hero-section">
-        <div className="hero-left">
-          <h1 className="hero-name">DINESH</h1>
-          <div className="elite-badge">Elite Athlete <span style={{color: 'var(--neon-green)'}}>✓</span></div>
-          
-          <div className="hero-quote">
-            Discipline today,<br/>
-            <span className="neon-green-text">Domination</span> tomorrow.
-          </div>
-
-          <div className="ready-card">
-            <div className="status-dot"></div>
-            <div>
-              <div className="status-title">Ready To Train</div>
-              <div className="status-sub">Your body. Your mind. Your moment.</div>
-            </div>
-          </div>
-        </div>
-
-        <div className="hero-right">
-          <div className="level-badge-top">
-            <svg viewBox="0 0 24 24" fill="none" stroke="var(--purple)" strokeWidth="2">
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-              <path d="M12 8v4l3 3"/>
-            </svg>
-            <div>
-              <div style={{color: 'var(--purple)', fontSize: '10px', fontWeight: '800'}}>LEVEL 1</div>
-              <div style={{fontSize: '10px', fontWeight: '700'}}>ATHLETE</div>
-            </div>
-          </div>
-
-          <div className="circle-container">
-            <svg width="180" height="180" viewBox="0 0 180 180" style={{ transform: 'rotate(-90deg)' }}>
-              <circle cx="90" cy="90" r="80" fill="none" stroke="#111" strokeWidth="12" />
-              <circle cx="90" cy="90" r="80" fill="none" stroke="url(#neonGradient)" strokeWidth="12" strokeDasharray="502" strokeDashoffset="40" strokeLinecap="round" />
-              <defs>
-                <linearGradient id="neonGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="#7CFF00" />
-                  <stop offset="100%" stopColor="#059669" />
-                </linearGradient>
-              </defs>
-            </svg>
-            <div className="circle-text">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--neon-green)" strokeWidth="2" style={{margin: '0 auto'}}>
-                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
-              </svg>
-              <div className="circle-percent">92%</div>
-              <div className="circle-label">READINESS</div>
-            </div>
-          </div>
-          <div className="optimal-text">OPTIMAL</div>
-          <div style={{color: 'var(--grey)', fontSize: '13px'}}>You are in the zone!</div>
-        </div>
-      </section>
-{/* 4. MIDDLE GRID (Rank & Plan) */}
-      <div className="grid-2-col">
-        {/* Rank Card */}
-        <div className="glass-card rank-card">
-          <div className="rank-header">
-            <div className="rank-shield">★</div>
-            <div>
-              <div className="rank-subtitle">YOUR RANK</div>
-              <div className="rank-title">LEVEL 1 ATHLETE</div>
-              <div style={{color: 'var(--grey)', fontSize: '14px'}}>Top 15% Among All Athletes</div>
-            </div>
-          </div>
-          <div className="rank-bar-bg">
-            <div className="rank-bar-fill"></div>
-          </div>
-          <div className="rank-stats-row">
-            <div>
-              <div className="r-stat-label">🏆 GLOBAL RANK</div>
-              <div className="r-stat-val">#24</div>
-              <div style={{color: 'var(--neon-green)', fontSize: '13px', fontWeight: '700'}}>Top 15%</div>
-            </div>
-            <div>
-              <div className="r-stat-label">🇮🇳 INDIA RANK</div>
-              <div className="r-stat-val">#5</div>
-              <div style={{color: 'var(--neon-green)', fontSize: '13px', fontWeight: '700'}}>Top 5%</div>
-            </div>
-            <div>
-              <div className="r-stat-label">👑 ACADEMY RANK</div>
-              <div className="r-stat-val">#1</div>
-              <div style={{color: 'var(--neon-green)', fontSize: '13px', fontWeight: '700'}}>Top 1%</div>
-            </div>
-          </div>
-        </div>
-
-        {/* Plan Card */}
-        <div className="glass-card" style={{position: 'relative'}}>
-          {/* Athlete fading background could go here */}
-          <div className="plan-title-sm">TODAY'S PLAN</div>
-          <div className="plan-title-lg">Full Body<br/>Strength</div>
-          <div className="plan-tags">
-            <div className="plan-tag">⏱ 45 min</div>
-            <div className="plan-tag">🔥 420 kcal</div>
-            <div className="plan-tag">📊 Advanced</div>
-          </div>
-          <button className="resume-btn">
-            Resume Workout
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-              <polygon points="5 3 19 12 5 21 5 3"></polygon>
-            </svg>
-          </button>
-        </div>
-      </div>
-
-      {/* 5. MIDDLE GRID (AI Coach & Leaderboard) */}
-      <div className="grid-2-col">
-        {/* AI Coach */}
-        <div className="glass-card coach-card">
-          <div className="coach-header">AI COACH INSIGHT</div>
-          <div className="coach-body">
-            <div className="brain-icon">🧠</div>
-            <div className="coach-text">
-              Readiness is excellent today. It's a great day to push your limits! ⚡
-            </div>
-          </div>
-          <button className="report-btn">
-            View Full Report
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <polyline points="9 18 15 12 9 6"></polyline>
-            </svg>
-          </button>
-        </div>
-
-        {/* Leaderboard */}
-        <div className="glass-card">
-          <div className="lead-header">
-            <div className="lead-title">LEADERBOARD TOP 3</div>
-            <div className="lead-view">View All {'>'}</div>
-          </div>
-          <div className="podium">
-            <div className="podium-profile" style={{marginBottom: '10px'}}>
-              <div className="avatar-wrap" style={{width: '64px', height: '64px', border: '3px solid #C0C0C0', boxShadow: '0 0 15px rgba(192,192,192,0.3)'}}>
-                <div className="rank-badge-num" style={{backgroundColor: '#C0C0C0'}}>2</div>
-                <div style={{fontSize: '32px'}}>👤</div>
-              </div>
-              <div className="lead-name">Dinesh</div>
-              <div className="lead-xp">1,100 XP</div>
-            </div>
-
-            <div className="podium-profile">
-              <div className="avatar-wrap" style={{width: '80px', height: '80px', border: '3px solid #FACC15', boxShadow: '0 0 20px rgba(250,204,21,0.4)'}}>
-                <div className="rank-badge-num" style={{backgroundColor: '#FACC15'}}>1</div>
-                <div style={{fontSize: '40px'}}>👩</div>
-              </div>
-              <div className="lead-name">Pragati</div>
-              <div className="lead-xp">1,250 XP</div>
-            </div>
-
-            <div className="podium-profile" style={{marginBottom: '20px'}}>
-              <div className="avatar-wrap" style={{width: '56px', height: '56px', border: '3px solid #CD7F32', boxShadow: '0 0 15px rgba(205,127,50,0.3)'}}>
-                <div className="rank-badge-num" style={{backgroundColor: '#CD7F32'}}>3</div>
-                <div style={{fontSize: '28px'}}>👤</div>
-              </div>
-              <div className="lead-name">Athlete X</div>
-              <div className="lead-xp">980 XP</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* 6. BOTTOM STATS (6 Cards Grid) */}
-      <div className="grid-3-col">
-        {/* Card 1 */}
-        <div className="b-stat-card">
-          <div>
-            <div className="b-stat-icon" style={{color: 'var(--neon-green)'}}>
-              <span style={{border: '2px solid var(--neon-green)', padding: '4px', borderRadius: '8px', fontSize: '14px', fontWeight: '900'}}>XP</span>
-            </div>
-            <div className="b-stat-title">XP TODAY</div>
-            <div className="b-stat-val">120</div>
-            <div style={{color: 'var(--neon-green)', fontSize: '13px', fontWeight: '700'}}>+12%</div>
-          </div>
-          <div className="rank-bar-bg"><div className="rank-bar-fill" style={{width: '60%', background: 'var(--neon-green)', boxShadow: '0 0 8px var(--neon-green)'}}></div></div>
-        </div>
-
-        {/* Card 2 */}
-        <div className="b-stat-card">
-          <div>
-            <div className="b-stat-icon">🔥</div>
-            <div className="b-stat-title">CALORIES</div>
-            <div className="b-stat-val">2,450</div>
-            <div style={{color: 'var(--grey)', fontSize: '13px', fontWeight: '600'}}>Goal: 2,800</div>
-          </div>
-          <div className="rank-bar-bg"><div className="rank-bar-fill" style={{width: '85%', background: 'var(--orange)', boxShadow: '0 0 8px var(--orange)'}}></div></div>
-        </div>
-
-        {/* Card 3 */}
-        <div className="b-stat-card">
-          <div>
-            <div className="b-stat-icon" style={{color: 'var(--neon-green)'}}>💚</div>
-            <div className="b-stat-title">RECOVERY</div>
-            <div className="b-stat-val">85%</div>
-            <div style={{color: 'var(--neon-green)', fontSize: '13px', fontWeight: '700'}}>Good</div>
-          </div>
-          <div className="rank-bar-bg"><div className="rank-bar-fill" style={{width: '85%', background: 'var(--neon-green)', boxShadow: '0 0 8px var(--neon-green)'}}></div></div>
-        </div>
-
-        {/* Card 4 */}
-        <div className="b-stat-card">
-          <div>
-            <div className="b-stat-icon" style={{color: 'var(--purple)'}}>🌙</div>
-            <div className="b-stat-title">SLEEP SCORE</div>
-            <div className="b-stat-val">78</div>
-            <div style={{color: 'var(--grey)', fontSize: '13px', fontWeight: '600'}}>Good</div>
-          </div>
-          <div className="rank-bar-bg"><div className="rank-bar-fill" style={{width: '78%', background: 'var(--purple)', boxShadow: '0 0 8px var(--purple)'}}></div></div>
-        </div>
-
-        {/* Card 5 */}
-        <div className="b-stat-card">
-          <div>
-            <div className="b-stat-icon" style={{color: 'var(--blue)'}}>💧</div>
-            <div className="b-stat-title">WATER GOAL</div>
-            <div className="b-stat-val">2.6 L</div>
-            <div style={{color: 'var(--grey)', fontSize: '13px', fontWeight: '600'}}>Goal: 3.0 L</div>
-          </div>
-          <div className="rank-bar-bg"><div className="rank-bar-fill" style={{width: '86%', background: 'var(--blue)', boxShadow: '0 0 8px var(--blue)'}}></div></div>
-        </div>
-
-        {/* Card 6 */}
-        <div className="b-stat-card">
-          <div>
-            <div className="b-stat-icon" style={{color: '#FACC15'}}>⚡</div>
-            <div className="b-stat-title">STREAK</div>
-            <div className="b-stat-val">7</div>
-            <div style={{color: 'var(--grey)', fontSize: '13px', fontWeight: '600'}}>Days</div>
-          </div>
-          <div className="rank-bar-bg"><div className="rank-bar-fill" style={{width: '100%', background: '#FACC15', boxShadow: '0 0 8px #FACC15'}}></div></div>
-        </div>
-      </div>
-
-      {/* 7. BOTTOM NAVIGATION */}
-      <nav className="bottom-nav">
-        <div className="nav-item active">
-          <div className="nav-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-              <polyline points="9 22 9 12 15 12 15 22"></polyline>
-            </svg>
-          </div>
-          <div className="nav-text">Home</div>
-        </div>
-        
-        <div className="nav-item">
-          <div className="nav-icon">🏋️</div>
-          <div className="nav-text">Training</div>
-        </div>
-
-        <div className="nav-item">
-          <div className="nav-icon">🏆</div>
-          <div className="nav-text">Tournaments</div>
-        </div>
-
-        <div className="nav-item">
-          <div className="nav-icon">
-            <span style={{border: '2px solid var(--grey)', borderRadius: '50%', padding: '2px 4px', fontSize: '12px', fontWeight: '900'}}>XP</span>
-          </div>
-          <div className="nav-text">DP</div>
-        </div>
-
-        <div className="nav-item">
-          <div className="nav-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-              <circle cx="12" cy="7" r="4"></circle>
-            </svg>
-          </div>
-          <div className="nav-text">Profile</div>
-        </div>
-      </nav>
-
-    </div>
-  );
-        }
+import { useState, useEffect } from "react";
+
+import { onAuthStateChanged } from "firebase/auth";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { auth, db } from "./firebase";
+import Link from "next/link";
+
+import {
+Menu,
+Trophy,
+Flame,
+Bell,
+MonitorPlay,
+ClipboardList,
+MessageCircleQuestion,
+BookOpen,
+Users,
+Bot,
+Calendar,
+Dumbbell,
+Brain,
+User,
+PlayCircle,
+ChevronRight,
+Home,
+Search,
+PlusSquare,
+Droplets,
+Crown,
+Target,
+} from "lucide-react";
+
+export default function HomePage() {
+
+const [profileData, setProfileData] =
+useState(null);
+
+const [showNotifications, setShowNotifications] = useState(false);
+
+// NEW: Show More / Show Less को कंट्रोल करने के लिए नया state
+const [showAllFeatures, setShowAllFeatures] = useState(false);
+useEffect(() => {
+
+const unsubscribe =
+onAuthStateChanged(
+auth,
+async (currentUser) => {
+
+if (currentUser) {  
+
+      const docRef =  
+        doc(  
+          db,  
+          "users",  
+          currentUser.uid  
+        );  
+
+      const docSnap =  
+        await getDoc(docRef);  
+
+      if (docSnap.exists()) {  
+
+        setProfileData(  
+          docSnap.data()  
+        );  
+
+      }  
+
+    }  
+
+  }  
+);
+
+return () => unsubscribe();
+
+}, []);
+const handleWorkout = async () => {
+try {
+
+alert("Clicked");  
+
+if (!auth.currentUser || !profileData) return;  
+
+const newXP = (profileData.xp || 0) + 10;  
+const newLevel = Math.floor(newXP / 100) + 1;  
+const newStreak = (profileData.streak || 0) + 1;  
+
+const userRef = doc(  
+  db,  
+  "users",  
+  auth.currentUser.uid  
+);  
+
+alert("Before Firebase Update");  
+
+await updateDoc(userRef, {  
+  xp: newXP,  
+  level: newLevel,  
+  streak: newStreak  
+});  
+
+alert("Firebase Updated");  
+
+setProfileData({  
+  ...profileData,  
+  xp: newXP,  
+  level: newLevel,  
+  streak: newStreak  
+});
+
+} catch (error) {
+alert(error.message);
+}
+};
+
+const notifications = [
+"🔥 Dinesh liked your workout post",
+"💬 Pragati commented on your post",
+"🏆 You completed 7 day streak",
+"🎮 Tournament match starts in 20 mins",
+"🎁 Daily reward available",
+];
+
+const features = [
+
+{  
+  title: "All Training",  
+  icon:  
+    <MonitorPlay  
+      size={38}  
+      color="#39ff14"  
+    />,  
+  link: "/training"  
+},  
+
+{  
+  title: "All Tests",  
+  icon:  
+    <ClipboardList  
+      size={38}  
+      color="#3ea6ff"  
+    />,  
+  link: "/tests"  
+},  
+
+{  
+  title: "My Doubts",  
+  icon:  
+    <MessageCircleQuestion  
+      size={38}  
+      color="#b266ff"  
+    />,  
+  link: "/doubts"  
+},  
+
+{  
+  title: "Sports Books",  
+  icon:  
+    <BookOpen  
+      size={38}  
+      color="#ff8c42"  
+    />,  
+  link: "/books"  
+},  
+
+{  
+  title: "Community",  
+  icon:  
+    <Users  
+      size={38}  
+      color="#ffd633"  
+    />,  
+  link: "/community"  
+},  
+
+{  
+  title: "Challenges",  
+  icon:  
+    <Trophy  
+      size={38}  
+      color="#ff4d88"  
+    />,  
+  link: "/challenges"  
+},  
+
+{  
+  title: "AI Coach",  
+  icon:  
+    <Bot  
+      size={38}  
+      color="#00e5ff"  
+    />,  
+  link: "/ai-coach"  
+},  
+
+{  
+  title: "Events",  
+  icon:  
+    <Calendar  
+      size={38}  
+      color="#4d88ff"  
+    />,  
+  link: "/events"  
+},  
+
+{  
+  title: "Diet Planner",  
+  icon: "🍎",  
+  link: "/diet"  
+},  
+
+{  
+  title: "Progress",  
+  icon: "📊",  
+  link: "/progress"  
+},  
+
+{  
+  title: "Transformation",  
+  icon: "🧬",  
+  link: "/transformation"  
+},  
+
+{  
+  title: "Sleep",  
+  icon: "💤",  
+  link: "/sleep"  
+},  
+
+{  
+  title: "Water Tracker",  
+  icon: "💧",  
+  link: "/water-tracker"  
+},  
+
+{  
+  title: "Workout Timer",  
+  icon: "⏱️",  
+  link: "/workout-timer"  
+},  
+
+{  
+  title: "Quiz",  
+  icon: "🧠",  
+  link: "/quiz"  
+},  
+
+{  
+  title: "Workout Schedule",  
+  icon: "📅",  
+  link: "/schedule"  
+},  
+
+{  
+  title: "Notes",  
+  icon: "📝",  
+  link: "/notes"  
+},  
+
+{  
+  title: "Leaderboard",  
+  icon:  
+    <Crown  
+      size={38}  
+      color="#ffd700"  
+    />,  
+  link: "/leaderboard"  
+},  
+
+{  
+  title: "Courses",  
+  icon: "🎓",  
+  link: "/courses"  
+},  
+
+{  
+  title: "Tournaments",  
+  icon:  
+    <Trophy  
+      size={38}  
+      color="#ffd700"  
+    />,  
+  link: "/tournaments"  
+},  
+
+{  
+  title: "Match Room",  
+  icon: "🎮",  
+  link: "/match-room"  
+},  
+
+{  
+  title: "Live Match",  
+  icon: "🔴",  
+  link: "/live-match"  
+},  
+
+{  
+  title: "Rewards",  
+  icon: "🎁",  
+  link: "/rewards"  
+},  
+
+{  
+  title: "Athlete Profile",  
+  icon: "👤",  
+  link: "/athlete-profile"  
+},  
+
+{  
+  title: "Team Chat",  
+  icon: "💬",  
+  link: "/team-chat"  
+},  
+
+{  
+  title: "DP",  
+  icon:  
+    <PlusSquare  
+      size={38}  
+      color="#ff4d88"  
+    />,  
+  link: "/dp"  
+},
+
+];
+
+const sessions = [
+
+{  
+  title:  
+    "Cricket Batting Masterclass",  
+
+  coach:  
+    "Rahul Dravid",  
+
+  time:  
+    "03:00 PM",  
+
+  image:  
+    "https://images.unsplash.com/photo-1547347298-4074fc3086f0?q=80&w=1200&auto=format&fit=crop"  
+},  
+
+{  
+  title:  
+    "Football Speed & Agility",  
+
+  coach:  
+    "Sunil Chhetri",  
+
+  time:  
+    "04:30 PM",  
+
+  image:  
+    "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1200&auto=format&fit=crop"  
+}
+
+];
+
+// NEW: तय करना कि कितने फीचर्स दिखाने हैं (शुरुआत में 8, बटन दबाने पर सारे)
+const displayedFeatures = showAllFeatures ? features : features.slice(0, 8);
+
+return (
+
+<div style={styles.page}>  
+
+  {/* TOP BAR */}  
+
+  <div style={styles.topBar}>  
+
+    <Menu  
+      color="white"  
+      size={30}  
+    />  
+
+    <div style={styles.topStats}>  
+
+      <div style={styles.stat}>  
+        <Trophy color="#ffd633" />  
+        <span>12</span>  
+      </div>  
+
+      <div style={styles.stat}>  
+        <Flame color="#39ff14" />  
+        <span>7</span>  
+      </div>  
+
+      <div style={styles.stat}>  
+        <Brain color="#66ff66" />  
+        <span>468</span>  
+      </div>  
+
+      <div  
+        style={{  
+          position: "relative"  
+        }}  
+      >  
+
+        <Bell  
+          color="white"  
+          size={28}  
+          onClick={() =>  
+            setShowNotifications(  
+              !showNotifications  
+            )  
+          }  
+        />  
+
+        <div style={styles.redDot}>  
+        </div>  
+
+      </div>  
+
+    </div>  
+
+  </div>  
+
+  {/* SEARCH */}  
+
+  <div style={styles.searchBox}>  
+
+    <Search  
+      color="#888"  
+      size={20}  
+    />  
+
+    <input  
+      placeholder="Search workouts..."  
+      style={styles.searchInput}  
+    />  
+
+  </div>  
+
+  {/* NOTIFICATIONS */}  
+
+  {showNotifications && (  
+
+    <div style={styles.notificationBox}>  
+
+      <h3  
+        style={{  
+          marginBottom: 15  
+        }}  
+      >  
+        Notifications  
+      </h3>  
+
+      {notifications.map(  
+        (item, index) => (  
+
+        <div  
+          key={index}  
+          style={  
+            styles.notificationItem  
+          }  
+        >  
+          {item}  
+        </div>  
+
+      ))}  
+
+    </div>  
+
+  )}  
+
+  {/* DASHBOARD */}  
+
+  <div style={styles.dashboardContainer}>  
+
+    <div style={styles.greetingRow}>  
+
+      <div>  
+
+        <p style={styles.welcome}>  
+          Good to see you,  
+        </p>  
+
+        <h1  
+          style={styles.greetingTitle}  
+        >  
+          Dinesh 👋  
+        </h1>  
+
+        <p style={styles.greetingSub}>  
+          Focus today.  
+          <span  
+            style={{  
+              color: "#39ff14"  
+            }}  
+          >  
+            {" "}Conquer  
+          </span>  
+          {" "}tomorrow.  
+        </p>  
+
+      </div>  
+
+      <div style={styles.streakCard}>  
+
+        <Flame  
+          color="#39ff14"  
+          size={40}  
+        />  
+
+        <div>  
+
+          <h2>  
+            7 DAY STREAK  
+          </h2>  
+
+          <p  
+            style={{  
+              color: "#aaa"  
+            }}  
+          >  
+            Keep it up!  
+          </p>  
+
+        </div>  
+
+      </div>  
+
+    </div>  
+
+    <div style={styles.heroCard}>  
+
+      <h2>🏆 Athlete Rank</h2>  
+
+      <h1>
+
+Level {profileData?.level || 1} Athlete
+
+</h1>  <p>Top 15% Athletes</p>  
+
+      <div style={styles.heroStats}>  
+
+        <div>  
+          <h3>
+
+{profileData?.xp || 0}
+
+</h3>  
+              <p>XP</p>  
+            </div>  <div>  
+          <h3>
+
+{profileData?.streak || 0}
+
+</h3>  
+              <p>Streak</p>  
+            </div>  <div>  
+          <h3>
+
+{profileData?.wins || 0}
+
+</h3>  
+              <p>Trophies</p>  
+            </div>  </div>  
+
+    </div>  
+
+    {/* XP */}  
+
+    <div style={styles.xpCard}>  
+
+      <div style={styles.xpTop}>  
+
+        <div>  
+
+          <p  
+            style={{  
+              color: "#aaa"  
+            }}  
+          >  
+            XP PROGRESS  
+          </p>
+
+  <h2                
+  style={{  
+    color: "#39ff14"  
+  }}  
+>  
+  {profileData?.xp || 0}  <span
+style={{
+color: "white"
+}}
+
+> 
+
+{" "}/1000 XP
+
+  </span>  
+</h2>  </div>  
+
+        <div>  
+
+          <p  
+            style={{  
+              color: "#aaa"  
+            }}  
+          >  
+            LEVEL  
+          </p>  
+
+          <h1  
+            style={{  
+              color: "#39ff14"  
+            }}  
+          >  
+            {profileData?.level || 1}  
+          </h1>  
+
+        </div>  
+
+      </div>  
+
+      <div style={styles.progressBar}>  
+        <div style={styles.progressFill}>  
+        </div>  
+      </div>  
+
+    </div>  
+
+    {/* QUICK ACTIONS */}  
+
+    <div style={styles.quickActions}>  
+
+      <button
+
+style={styles.quickBtn}
+onClick={handleWorkout}
+
+> 
+
+Start working   
+      </button>  
+
+      <button style={styles.quickBtn}>  
+        Upload DP  
+      </button>  
+
+      <button style={styles.quickBtn}>  
+        AI Coach  
+      </button>  
+
+    </div>  
+
+    {/* DAILY CHALLENGE */}  
+
+    <div style={styles.challengeCard}>  
+
+      <div>  
+
+        <h2>  
+          Daily Challenge 💪  
+        </h2>  
+
+        <p style={{ color: "#aaa" }}>  
+          Complete 100 Pushups Today  
+        </p>  
+
+      </div>  
+
+      <Target  
+        color="#39ff14"  
+        size={45}  
+      />  
+
+    </div>  
+
+    {/* HEALTH */}  
+
+    <div style={styles.healthGrid}>  
+
+      <div style={styles.healthCard}>  
+
+        <Droplets  
+          color="#3ea6ff"  
+          size={35}  
+        />  
+
+        <h2>2.5L</h2>  
+
+        <p style={{ color: "#aaa" }}>  
+          Water Intake  
+        </p>  
+
+      </div>  
+
+      <div style={styles.healthCard}>  
+
+        <Flame  
+          color="#ff7b00"  
+          size={35}  
+        />  
+
+        <h2>1240</h2>  
+
+        <p style={{ color: "#aaa" }}>  
+          Calories Burned  
+        </p>  
+
+      </div>  
+
+    </div>  
+
+  </div>  
+
+  {/* FEATURES */}  
+
+  <div style={styles.featureBox}>  
+
+    <div style={styles.featureGrid}>  
+
+      {/* UPDATED: features.map की जगह displayedFeatures.map का इस्तेमाल */}  
+      {displayedFeatures.map((item, index) => (  
+
+        <Link  
+          href={item.link}  
+          key={index}  
+          style={styles.featureItem}  
+        >  
+
+          {item.icon}  
+
+          <p style={styles.featureText}>  
+            {item.title}  
+          </p>  
+
+        </Link>  
+
+      ))}  
+
+    </div>  
+
+    {/* NEW: SHOW MORE / SHOW LESS BUTTON */}  
+    <button   
+      onClick={() => setShowAllFeatures(!showAllFeatures)}  
+      style={{  
+        marginTop: 20,  
+        width: "100%",  
+        padding: 15,  
+        background: "#1d2b44",  
+        color: "white",  
+        border: "none",  
+        borderRadius: 15,  
+        fontWeight: "bold",  
+        fontSize: 16,  
+        cursor: "pointer"  
+      }}  
+    >  
+      {showAllFeatures ? "Show Less 🔼" : "Show More 🔽"}  
+    </button>  
+
+  </div>  
+
+  {/* LEADERBOARD */}  
+
+  <div style={styles.leaderboard}>  
+
+    <h2>  
+      🏆 Leaderboard  
+    </h2>  
+
+    <div style={styles.leaderItem}>  
+      <span>🥇 Dinesh</span>  
+      <span>540 XP</span>  
+    </div>  
+
+    <div style={styles.leaderItem}>  
+      <span>🥈 Rahul</span>  
+      <span>500 XP</span>  
+    </div>  
+
+    <div style={styles.leaderItem}>  
+      <span>🥉 Aryan</span>  
+      <span>450 XP</span>  
+    </div>  
+
+  </div>  
+
+  {/* UPCOMING */}  
+
+  <div style={styles.sectionHeader}>  
+
+    <h2>  
+      Upcoming Sessions  
+    </h2>  
+
+    <p style={{ color: "#39ff14" }}>  
+      View All  
+    </p>  
+
+  </div>  
+
+  {/* SESSIONS */}  
+
+  {sessions.map((item, index) => (  
+
+    <div  
+      key={index}  
+      style={styles.sessionCard}  
+    >  
+
+      <img  
+        src={item.image}  
+        alt="session"  
+        style={styles.sessionImage}  
+      />  
+
+      <div style={{ flex: 1 }}>  
+
+        <div style={styles.timeRow}>  
+
+          <span  
+            style={{  
+              color: "#39ff14"  
+            }}  
+          >  
+            ⏰ {item.time}  
+          </span>  
+
+          <span style={styles.liveBadge}>  
+            LIVE  
+          </span>  
+
+        </div>  
+
+        <h2 style={{ marginTop: 8 }}>  
+          {item.title}  
+        </h2>  
+
+        <p style={{ color: "#aaa" }}>  
+          By {item.coach}  
+        </p>  
+
+      </div>  
+
+      <ChevronRight color="white" />  
+
+    </div>  
+
+  ))}  
+
+  {/* PLAYER */}  
+
+  <div style={styles.player}>  
+
+    <div style={styles.playerLeft}>  
+
+      <PlayCircle  
+        color="#39ff14"  
+        size={50}  
+      />  
+
+      <div>  
+
+        <h3>  
+          Full Body Strength Workout  
+        </h3>  
+
+        <p style={{ color: "#aaa" }}>  
+          Build Power & Endurance  
+        </p>  
+
+      </div>  
+
+    </div>  
+
+    <button style={styles.resumeBtn}>  
+      Resume  
+    </button>  
+
+  </div>  
+
+  {/* BOTTOM NAV */}  
+
+  <div style={styles.bottomNav}>  
+
+    <Link href="/" style={styles.navItem}>  
+      <Home color="#39ff14" />  
+      <span style={{ color: "#39ff14" }}>  
+        Home  
+      </span>  
+    </Link>  
+
+    <Link  
+      href="/training"  
+      style={styles.navItem}  
+    >  
+      <Dumbbell color="white" />  
+      <span>Training</span>  
+    </Link>  
+
+    <Link  
+      href="/tournaments"  
+      style={styles.navItem}  
+    >  
+      <Trophy color="white" />  
+      <span>Tournaments</span>  
+    </Link>  
+
+    <Link  
+      href="/dp"  
+      style={styles.navItem}  
+    >  
+      <Flame color="white" />  
+      <span>DP</span>  
+    </Link>  
+
+    <Link  
+      href="/profile"  
+      style={styles.navItem}  
+    >  
+      <User color="white" />  
+      <span>Profile</span>  
+    </Link>  
+
+  </div>  
+
+</div>
+
+);
+
+}
+
+const styles = {
+
+page: {
+background: "#020817",
+minHeight: "100vh",
+color: "white",
+padding: 20,
+paddingBottom: 220,
+fontFamily: "sans-serif"
+},
+
+topBar: {
+display: "flex",
+justifyContent: "space-between",
+alignItems: "center"
+},
+
+topStats: {
+display: "flex",
+gap: 15,
+alignItems: "center"
+},
+
+stat: {
+display: "flex",
+gap: 5,
+alignItems: "center"
+},
+
+searchBox: {
+marginTop: 20,
+background: "#081120",
+borderRadius: 20,
+padding: 15,
+display: "flex",
+gap: 10,
+alignItems: "center",
+},
+
+searchInput: {
+background: "transparent",
+border: "none",
+outline: "none",
+color: "white",
+width: "100%",
+fontSize: 16,
+},
+
+redDot: {
+width: 10,
+height: 10,
+background: "red",
+borderRadius: "50%",
+position: "absolute",
+top: 0,
+right: 0
+},
+
+notificationBox: {
+position: "absolute",
+top: 120,
+right: 20,
+width: 280,
+background: "#081120",
+border:
+"1px solid #1d2b44",
+borderRadius: 20,
+padding: 15,
+zIndex: 999
+},
+
+notificationItem: {
+background: "#111827",
+padding: 12,
+borderRadius: 12,
+marginBottom: 10
+},
+
+dashboardContainer: {
+marginTop: 25,
+},
+
+greetingRow: {
+display: "flex",
+justifyContent: "space-between",
+gap: 15
+},
+
+welcome: {
+color: "#aaa"
+},
+
+greetingTitle: {
+fontSize: 52,
+fontWeight: "bold",
+},
+
+greetingSub: {
+color: "#aaa",
+marginTop: 10,
+fontSize: 20
+},
+
+streakCard: {
+background: "#081120",
+border:
+"1px solid #1d2b44",
+borderRadius: 24,
+padding: 20,
+width: 180
+},
+
+xpCard: {
+marginTop: 25,
+background:
+"linear-gradient(135deg,#081120,#0d1b2e)",
+border:
+"1px solid #1d2b44",
+borderRadius: 30,
+padding: 25
+},
+
+xpTop: {
+display: "flex",
+justifyContent: "space-between",
+},
+
+progressBar: {
+marginTop: 20,
+height: 12,
+width: "100%",
+background: "#1d2b44",
+borderRadius: 20,
+overflow: "hidden"
+},
+
+progressFill: {
+width: "68%",
+height: "100%",
+background: "#39ff14",
+},
+
+quickActions: {
+display: "flex",
+gap: 10,
+marginTop: 25,
+},
+
+quickBtn: {
+flex: 1,
+background: "#39ff14",
+border: "none",
+padding: 14,
+borderRadius: 16,
+fontWeight: "bold",
+},
+
+challengeCard: {
+marginTop: 25,
+background:
+"linear-gradient(90deg,#081120,#102400)",
+borderRadius: 24,
+padding: 20,
+display: "flex",
+justifyContent: "space-between",
+alignItems: "center",
+},
+
+healthGrid: {
+marginTop: 25,
+display: "grid",
+gridTemplateColumns:
+"repeat(2,1fr)",
+gap: 15,
+},
+
+healthCard: {
+background: "#081120",
+padding: 20,
+borderRadius: 24,
+textAlign: "center",
+},
+
+featureBox: {
+marginTop: 30,
+background: "#081120",
+borderRadius: 30,
+padding: 25,
+},
+
+featureGrid: {
+display: "grid",
+gridTemplateColumns:
+"repeat(2,1fr)",
+gap: 20
+},
+
+featureItem: {
+textAlign: "center",
+textDecoration: "none",
+color: "white"
+},
+
+featureText: {
+marginTop: 10,
+fontSize: 15
+},
+
+leaderboard: {
+marginTop: 30,
+background: "#081120",
+borderRadius: 25,
+padding: 20,
+},
+
+leaderItem: {
+display: "flex",
+justifyContent: "space-between",
+marginTop: 15,
+background: "#111827",
+padding: 14,
+borderRadius: 14,
+},
+
+sectionHeader: {
+marginTop: 35,
+display: "flex",
+justifyContent: "space-between",
+alignItems: "center"
+},
+
+sessionCard: {
+marginTop: 20,
+background: "#081120",
+borderRadius: 25,
+padding: 15,
+display: "flex",
+gap: 15,
+alignItems: "center",
+},
+
+sessionImage: {
+width: 120,
+height: 120,
+objectFit: "cover",
+borderRadius: 20
+},
+
+timeRow: {
+display: "flex",
+gap: 10,
+alignItems: "center"
+},
+
+liveBadge: {
+background: "red",
+padding: "5px 10px",
+borderRadius: 10,
+fontSize: 12
+},
+
+player: {
+position. This is current page js
