@@ -89,12 +89,12 @@ const Icons = {
     </svg>
   ),
   DP: () => (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <circle cx="12" cy="12" r="10"></circle>
-      <circle cx="12" cy="10" r="3"></path>
-      <path d="M7 20.662V19a5 5 0 0 1 10 0v1.662"></path>
-    </svg>
-  ),
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+    <circle cx="12" cy="12" r="10" />
+    <circle cx="12" cy="10" r="3" />
+    <path d="M7 20.662V19a5 5 0 0 1 10 0v1.662" />
+  </svg>
+),
   Profile: () => (
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
