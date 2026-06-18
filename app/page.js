@@ -757,4 +757,4 @@ color:"#aaa"
 }
 
 };
-export default function HomePage() {
+
