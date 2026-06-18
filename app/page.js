@@ -1249,4 +1249,4 @@ player: {
     justifyContent: "space-around",
     marginTop: 20
   }
-        };
+      
