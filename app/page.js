@@ -621,7 +621,6 @@ ALL FEATURES
 </div>
 </div>
 
-    </>
   );
     }
 const styles = {
