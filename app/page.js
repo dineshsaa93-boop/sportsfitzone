@@ -1248,6 +1248,5 @@ player: {
     display: "flex",
     justifyContent: "space-around",
     marginTop: 20
-  },
-
-};
+  }
+        };
