@@ -1,87 +1,19 @@
-"use client";
-
-import React, { useState } from "react";
-import {
-  Menu, Bell, Search, SlidersHorizontal, CheckCircle2, ChevronRight,
-  Flame, Activity, Droplet, Target, Timer, Play, Brain, Trophy,
-  Apple, BarChart3, Zap, Moon, Watch, HelpCircle, Calendar, ClipboardList,
-  Crown, GraduationCap, Gamepad2, Video, Gift, User, MessageSquare,
-  FileText, Book, Users, Bot, CalendarCheck, Home, Dumbbell
-} from "lucide-react";
-
-// ==========================================
-// 1. DYNAMIC DATA SOURCE (NO HARDCODING)
-// ==========================================
-const APP_DATA = {
-  user: {
-    name: "DINESH",
-    level: "Elite Athlete",
-    quoteLine1: "Discipline today,",
-    quoteLine2: "Domination tomorrow.",
-    readiness: 92,
-    streak: 7,
-    recovery: 85,
-    xp: 468,
-    flames: 7,
-    trophies: 12
-  },
-  rank: {
-    title: "LEVEL 1 ATHLETE",
-    subtitle: "Top 15% Among All Athletes",
-    global: { rank: "#24", percentile: "Top 15%" },
-    india: { rank: "#5", percentile: "Top 5%" },
-    academy: { rank: "#1", percentile: "Top 1%" }
-  },
-  challenge: {
-    title: "100 Pushups 💪",
-    progress: 80,
-    reward: "+50 XP",
-  },
-  plan: {
-    title: "Full Body Strength",
-    duration: "45 min",
-    calories: "420 kcal",
-    level: "Advanced"
-  },
-  metrics: [
-    { id: 1, type: "xp", title: "XP TODAY", value: "120", sub: "+12%", color: "#39ff14", points: "0,25 20,20 40,15 60,18 80,5 100,2" },
-    { id: 2, type: "calories", title: "CALORIES", value: "2,450", sub: "Goal: 2,800", color: "#ff7b00", points: "0,25 20,15 40,20 60,10 80,15 100,5" },
-    { id: 3, type: "recovery", title: "RECOVERY", value: "85%", sub: "Good", color: "#39ff14", points: "0,20 20,25 40,15 60,20 80,10 100,5" },
-    { id: 4, type: "sleep", title: "SLEEP SCORE", value: "78", sub: "Good", color: "#9d4edd", points: "0,15 20,20 40,10 60,18 80,12 100,22" },
-    { id: 5, type: "water", title: "WATER INTAKE", value: "2.6 L", sub: "Goal: 3.0 L", color: "#3ea6ff", points: "0,22 20,15 40,20 60,10 80,15 100,8" },
-    { id: 6, type: "streak", title: "STREAK", value: "7", sub: "Days", color: "#ffaa00", points: "0,25 20,22 40,18 60,15 80,10 100,5" }
-  ],
-  leaderboard: [
-    { rank: 2, name: "Dinesh", xp: "1,100 XP", img: "https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=150&h=150&fit=crop", color: "#c0c0c0" },
-    { rank: 1, name: "Pragati", xp: "1,250 XP", img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop", color: "#ffd700" },
-    { rank: 3, name: "Athlete X", xp: "980 XP", img: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&h=150&fit=crop", color: "#cd7f32" }
-  ],
-  features: [
-    { id: 1, title: "Diet Planner", icon: Apple, color: "#39ff14" },
-    { id: 2, title: "Progress", icon: BarChart3, color: "#39ff14" },
-    { id: 3, title: "Transformation", icon: Zap, color: "#3ea6ff" },
-    { id: 4, title: "Sleep", icon: Moon, color: "#9d4edd" },
-    { id: 5, title: "Water Tracker", icon: Droplet, color: "#3ea6ff" },
-    { id: 6, title: "Workout Timer", icon: Timer, color: "#e2e8f0" },
-    { id: 7, title: "Quiz", icon: Brain, color: "#ff4d88" },
-    { id: 8, title: "Workout Schedule", icon: Calendar, color: "#ff4d88" },
-    { id: 9, title: "Notes", icon: ClipboardList, color: "#ffaa00" },
-    { id: 10, title: "Leaderboard", icon: Crown, color: "#ffd700" },
-    { id: 11, title: "Courses", icon: GraduationCap, color: "#3ea6ff" },
-    { id: 12, title: "Tournaments", icon: Trophy, color: "#ffd700" },
-    { id: 13, title: "Match Room", icon: Gamepad2, color: "#94a3b8" },
-    { id: 14, title: "Live Match", icon: Video, color: "#ff4d88" },
-    { id: 15, title: "Rewards", icon: Gift, color: "#39ff14" },
-    { id: 16, title: "Athlete Profile", icon: User, color: "#3ea6ff" },
-    { id: 17, title: "Team Chat", icon: MessageSquare, color: "#39ff14" },
-    { id: 18, title: "All Training", icon: Play, color: "#9d4edd" },
-    { id: 19, title: "All Tests", icon: FileText, color: "#3ea6ff" },
-    { id: 20, title: "My Doubts", icon: HelpCircle, color: "#9d4edd" },
-    { id: 21, title: "Sports Books", icon: Book, color: "#ff7b00" },
-    { id: 22, title: "Community", icon: Users, color: "#ffd700" },
-    { id: 23, title: "Challenges", icon: Target, color: "#ff4d88" },
-    { id: 24, title: "AI Coach", icon: Bot, color: "#3ea6ff" },
-    { id: 25, title: "Events", icon: CalendarCheck, color: "#9d4edd" },
+Leaderboard", icon: Crown, color: "#ffd700", imgSrc: "" },
+    { id: 11, title: "Courses", icon: GraduationCap, color: "#e2e8f0", imgSrc: "" },
+    { id: 12, title: "Tournaments", icon: Trophy, color: "#ffd700", imgSrc: "" },
+    { id: 13, title: "Match Room", icon: Gamepad2, color: "#94a3b8", imgSrc: "" },
+    { id: 14, title: "Live Match", icon: Video, color: "#ff4d88", imgSrc: "" },
+    { id: 15, title: "Rewards", icon: Gift, color: "#ffaa00", imgSrc: "" },
+    { id: 16, title: "Athlete Profile", icon: User, color: "#3ea6ff", imgSrc: "" },
+    { id: 17, title: "Team Chat", icon: MessageCircle, color: "#39ff14", imgSrc: "" },
+    { id: 18, title: "All Training", icon: MonitorPlay, color: "#9d4edd", imgSrc: "" },
+    { id: 19, title: "All Tests", icon: FileText, color: "#3ea6ff", imgSrc: "" },
+    { id: 20, title: "My Doubts", icon: MessageCircleQuestion, color: "#9d4edd", imgSrc: "" },
+    { id: 21, title: "Sports Books", icon: BookOpen, color: "#ff7b00", imgSrc: "" },
+    { id: 22, title: "Community", icon: Users, color: "#ffd700", imgSrc: "" },
+    { id: 23, title: "Challenges", icon: Target, color: "#ff4d88", imgSrc: "" },
+    { id: 24, title: "AI Coach", icon: Bot, color: "#3ea6ff", imgSrc: "" },
+    { id: 25, title: "Events", icon: CalendarCheck, color: "#9d4edd", imgSrc: "" },
   ]
 };
 
@@ -89,33 +21,13 @@ const APP_DATA = {
 // 2. REUSABLE CUSTOM SVG COMPONENTS 
 // ==========================================
 
-// Custom 3D Shield (for Your Rank card)
-const Shield3D = () => (
-  <svg width="80" height="90" viewBox="0 0 100 110" fill="none" style={{ filter: "drop-shadow(0px 10px 15px rgba(157, 78, 221, 0.4))" }}>
-    <path d="M50 5 L90 20 L90 60 C90 85 50 105 50 105 C50 105 10 85 10 60 L10 20 L50 5Z" fill="url(#shieldGrad)" stroke="#c27dff" strokeWidth="2"/>
-    <path d="M50 15 L80 27 L80 58 C80 78 50 93 50 93 C50 93 20 78 20 58 L20 27 L50 15Z" fill="#3b0764"/>
-    <polygon points="50,30 56,42 69,44 60,54 62,67 50,60 38,67 40,54 31,44 44,42" fill="url(#starGrad)"/>
-    <defs>
-      <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stopColor="#9d4edd" />
-        <stop offset="100%" stopColor="#240046" />
-      </linearGradient>
-      <linearGradient id="starGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stopColor="#ffffff" />
-        <stop offset="100%" stopColor="#c084fc" />
-      </linearGradient>
-    </defs>
-    <ellipse cx="50" cy="100" rx="35" ry="8" fill="rgba(157,78,221,0.2)" />
-    <ellipse cx="50" cy="105" rx="25" ry="5" fill="rgba(157,78,221,0.4)" />
+// Custom Sparkline
+const Sparkline = ({ color, points }) => (
+  <svg width="100%" height="30" viewBox="0 0 100 30" preserveAspectRatio="none" className="mt-auto">
+    <polyline points={points} fill="none" stroke={color} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ filter: `drop-shadow(0px 4px 4px ${color}40)` }} />
   </svg>
 );
 
-// Custom Metric Sparkline
-const Sparkline = ({ color, points }) => (
-  <svg width="100%" height="30" viewBox="0 0 100 30" preserveAspectRatio="none" className="mt-auto">
-    <polyline points={points} fill="none" stroke={color} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
-  </svg>
-);
 // Progress Circle
 const CircularProgress = ({ percentage }) => {
   const radius = 55;
@@ -124,15 +36,22 @@ const CircularProgress = ({ percentage }) => {
 
   return (
     <div className="relative flex flex-col items-center justify-center w-[160px] h-[160px]">
-      <svg width="160" height="160" viewBox="0 0 160 160" className="-rotate-90 drop-shadow-[0_0_15px_rgba(57,255,20,0.3)]">
+      <svg width="160" height="160" viewBox="0 0 160 160" className="-rotate-90">
         <defs>
           <linearGradient id="progGrad" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stopColor="#3ea6ff" />
             <stop offset="100%" stopColor="#39ff14" />
           </linearGradient>
+          <filter id="glow">
+            <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+            <feMerge>
+              <feMergeNode in="coloredBlur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
         </defs>
         <circle cx="80" cy="80" r={radius} stroke="rgba(255,255,255,0.05)" strokeWidth="10" fill="none" />
-        <circle cx="80" cy="80" r={radius} stroke="url(#progGrad)" strokeWidth="10" fill="none" strokeDasharray={circumference} strokeDashoffset={strokeDashoffset} strokeLinecap="round" />
+        <circle cx="80" cy="80" r={radius} stroke="url(#progGrad)" strokeWidth="10" fill="none" strokeDasharray={circumference} strokeDashoffset={strokeDashoffset} strokeLinecap="round" filter="url(#glow)" />
       </svg>
       <div className="absolute flex flex-col items-center justify-center inset-0 z-10 pt-2">
         <Activity size={24} color="#39ff14" strokeWidth={2.5} className="mb-[-2px]" />
@@ -149,13 +68,13 @@ const CircularProgress = ({ percentage }) => {
 export default function SportsFitZoneExact() {
   const [showAllFeatures, setShowAllFeatures] = useState(false);
 
-  // Toggle Logic (Show 8 features max initially, or all if toggled)
-  const displayedFeatures = showAllFeatures ? APP_DATA.features : APP_DATA.features.slice(0, 8);
+  // Exactly 16 items visible by default (as per typical 4x4 grid in image)
+  const displayedFeatures = showAllFeatures ? APP_DATA.features : APP_DATA.features.slice(0, 16);
 
   return (
     <div className="exact-app-wrapper">
       
-      {/* --- MASTER CSS STYLESHEET (Handles 100% pixel-perfect scaling & mobile) --- */}
+      {/* --- MASTER CSS STYLESHEET --- */}
       <style>{`
         * { box-sizing: border-box; font-family: 'Inter', system-ui, sans-serif; }
         .exact-app-wrapper { background: #0b0e14; min-height: 100vh; color: white; padding-bottom: 90px; }
@@ -164,71 +83,19 @@ export default function SportsFitZoneExact() {
         /* Utility */
         .flex-center { display: flex; align-items: center; justify-content: center; }
         .flex-between { display: flex; align-items: center; justify-content: space-between; }
-        .text-gradient-green { background: linear-gradient(90deg, #3ea6ff 0%, #39ff14 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .card-panel { background: #121824; border: 1px solid rgba(255,255,255,0.06); border-radius: 20px; padding: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); }
         
         /* Header */
         .top-stats-pill { background: #1a2235; border: 1px solid rgba(255,255,255,0.08); padding: 6px 14px; border-radius: 30px; display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 800; }
         .xp-box { background: #39ff14; color: #000; font-size: 11px; padding: 2px 6px; border-radius: 4px; font-weight: 900; }
 
-        /* Grids */
+        /* Grids (Responsive & Safe) */
         .grid-hero { display: grid; grid-template-columns: 1.6fr 1fr; gap: 20px; margin-bottom: 20px; }
         .grid-mid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 20px; margin-bottom: 20px; }
-        .grid-stats { display: grid; grid-template-columns: repeat(6, 1fr); gap: 15px; margin-bottom: 20px; }
+        .grid-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-bottom: 20px; }
         .grid-widgets { display: grid; grid-template-columns: 1fr 1.5fr 1fr; gap: 20px; margin-bottom: 30px; }
-        .grid-features { display: grid; grid-template-columns: repeat(8, 1fr); gap: 15px; transition: all 0.3s ease; }
+        .grid-features { display: grid; grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); gap: 15px 10px; transition: all 0.3s ease; justify-items: center; }
         
-        /* Custom Elements */
-        .hero-banner { 
-          background: linear-gradient(90deg, #0d1321 40%, rgba(13,19,33,0.3) 100%), url('https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?q=80&w=1200&auto=format&fit=crop'); 
-          background-size: cover; background-position: top right; border-radius: 20px; padding: 30px; 
-          border: 1px solid rgba(57,255,20,0.1); display: flex; justify-content: space-between; align-items: center;
-        }
-        .workout-banner {
-          background: linear-gradient(90deg, #0d1321 60%, rgba(13,19,33,0.1) 100%), url('https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?q=80&w=1200&auto=format&fit=crop');
-          background-size: cover; background-position: center right;
-        }
-        .rank-card { background: linear-gradient(180deg, #16112a 0%, #121824 100%); border: 1px solid rgba(157,78,221,0.3); }
-        .search-bar { background: #121824; border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 16px 20px; display: flex; align-items: center; gap: 15px; margin-bottom: 25px; }
-        
-        .stat-card-small { display: flex; flex-direction: column; justify-content: space-between; height: 160px; }
-        .feature-item { 
-          background: #121824; border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; 
-          padding: 15px 5px; display: flex; flex-direction: column; align-items: center; gap: 12px; cursor: pointer; transition: all 0.2s;
-        }
-        .feature-item:hover { border-color: rgba(255,255,255,0.2); transform: translateY(-2px); }
-        
-        .progress-bar-bg { width: 100%; height: 8px; background: rgba(255,255,255,0.1); border-radius: 10px; overflow: hidden; margin: 15px 0; }
-        .progress-bar-fill { height: 100%; background: linear-gradient(90deg, #84ff00, #39ff14); border-radius: 10px; box-shadow: 0 0 10px rgba(57,255,20,0.4); }
-        
-        .btn-green { background: #39ff14; color: #000; padding: 12px 24px; border-radius: 12px; font-weight: 900; font-size: 15px; border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; }
-        
-        .podium-avatar { border-radius: 50%; object-fit: cover; border: 2px solid; }
-        .podium-rank-badge { position: absolute; top: -8px; left: -8px; width: 24px; height: 24px; border-radius: 50%; color: #000; font-weight: 900; font-size: 12px; display: flex; justify-content: center; align-items: center; z-index: 5; }
-
-        /* Bottom Nav */
-        .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(11, 14, 20, 0.95); backdrop-filter: blur(10px); border-top: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-around; padding: 15px 10px 25px; z-index: 1000; }
-        
-        /* 📱 RESPONSIVE MAGIC (Laptops, Tablets, Mobiles) */
-        @media (max-width: 1100px) {
-          .grid-stats { grid-template-columns: repeat(3, 1fr); }
-          .grid-features { grid-template-columns: repeat(6, 1fr); }
-        }
-        @media (max-width: 850px) {
-          .grid-hero { grid-template-columns: 1fr; }
-          .grid-mid { grid-template-columns: 1fr; }
-          .grid-widgets { grid-template-columns: 1fr; }
-          .hero-banner { flex-direction: column; align-items: flex-start; gap: 30px; }
-          .hero-circular-wrap { align-self: center; } /* Center circle on mobile */
-          .grid-features { grid-template-columns: repeat(4, 1fr); }
-          .top-stats { width: 100%; overflow-x: auto; padding-bottom: 5px; }
-        }
-        @media (max-width: 480px) {
-          .grid-stats { grid-template-columns: repeat(2, 1fr); }
-          .grid-features { grid-template-columns: repeat(3, 1fr); }
-          .feature-item { padding: 12px 5px; }
-        }
-      `}</style>
 
       <div className="container">
         
@@ -243,11 +110,14 @@ export default function SportsFitZoneExact() {
           </div>
           
           <div className="flex-center top-stats" style={{ gap: '12px' }}>
+            {/* Same Top Stats */}
             <div className="top-stats-pill">
-              <Trophy color="#ffd700" size={18} fill="#ffd700" /><span style={{ color: "#ffd700" }}>{APP_DATA.user.trophies}</span>
+              <Trophy color="#ffd700" size={18} style={{ filter: "drop-shadow(0 0 5px #ffd700)" }} />
+              <span style={{ color: "#ffd700" }}>{APP_DATA.user.trophies}</span>
             </div>
             <div className="top-stats-pill">
-              <Flame color="#ff7b00" size={18} fill="#ff7b00" /><span style={{ color: "#ff7b00" }}>{APP_DATA.user.flames}</span>
+              <Flame color="#ff7b00" size={18} fill="#ff7b00" style={{ filter: "drop-shadow(0 0 5px #ff7b00)" }} />
+              <span style={{ color: "#ff7b00" }}>{APP_DATA.user.flames}</span>
             </div>
             <div className="top-stats-pill">
               <span className="xp-box">XP</span><span style={{ color: "white" }}>{APP_DATA.user.xp}</span>
@@ -289,15 +159,15 @@ export default function SportsFitZoneExact() {
 
               <div className="flex-center" style={{ gap: 25, flexWrap: "wrap", justifyContent: 'flex-start' }}>
                 <div className="flex-center" style={{ gap: 10 }}>
-                  <Flame color="#ff7b00" size={24} fill="#ff7b00"/>
+                  <Flame color="#ff7b00" size={24} fill="#ff7b00" style={{ filter: "drop-shadow(0 0 5px #ff7b00)" }}/>
                   <div><div style={{ color: "white", fontWeight: 900, fontSize: 16 }}>{APP_DATA.user.streak}</div><div style={{ color: "#94a3b8", fontSize: 12 }}>Day Streak</div></div>
                 </div>
                 <div className="flex-center" style={{ gap: 10 }}>
-                  <Activity color="#39ff14" size={24}/>
+                  <Activity color="#39ff14" size={24} style={{ filter: "drop-shadow(0 0 5px #39ff14)" }}/>
                   <div><div style={{ color: "white", fontWeight: 900, fontSize: 16 }}>{APP_DATA.user.readiness}%</div><div style={{ color: "#94a3b8", fontSize: 12 }}>Readiness</div></div>
                 </div>
                 <div className="flex-center" style={{ gap: 10 }}>
-                  <Droplet color="#3ea6ff" size={24}/>
+                  <Droplet color="#3ea6ff" size={24} style={{ filter: "drop-shadow(0 0 5px #3ea6ff)" }}/>
                   <div><div style={{ color: "white", fontWeight: 900, fontSize: 16 }}>{APP_DATA.user.recovery}%</div><div style={{ color: "#94a3b8", fontSize: 12 }}>Recovery</div></div>
                 </div>
               </div>
@@ -313,7 +183,10 @@ export default function SportsFitZoneExact() {
           {/* Rank Card */}
           <div className="card-panel rank-card" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
             <div className="flex-center" style={{ justifyContent: 'flex-start', gap: 20, marginBottom: 25 }}>
-              <Shield3D />
+              {/* SHIELD ICON: Replace src with your exact image if needed */}
+              <div style={{ width: 70, height: 80, background: "linear-gradient(180deg, #9d4edd 0%, #240046 100%)", clipPath: "polygon(50% 0%, 100% 20%, 100% 70%, 50% 100%, 0% 70%, 0% 20%)", display: 'flex', justifyContent: 'center', alignItems: 'center', border: '2px solid #c27dff', filter: "drop-shadow(0 0 10px rgba(157,78,221,0.5))" }}>
+                <div style={{ color: "white", fontSize: 30 }}>⭐</div>
+              </div>
               <div>
                 <p style={{ color: "#c27dff", fontSize: 12, fontWeight: "bold", margin: "0 0 5px", letterSpacing: 1.5 }}>YOUR RANK</p>
                 <h2 style={{ color: "white", fontSize: 20, fontWeight: 900, margin: "0 0 5px" }}>{APP_DATA.rank.title}</h2>
@@ -322,6 +195,7 @@ export default function SportsFitZoneExact() {
             </div>
             
             <div style={{ display: "flex", justifyContent: "space-between", background: "rgba(0,0,0,0.25)", padding: 15, borderRadius: 16 }}>
+              {/* Rank Sub-items */}
               <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 5 }}>
                 <span style={{ fontSize: 10, color: "#94a3b8", fontWeight: "bold" }}>🌐 GLOBAL RANK</span>
                 <span style={{ fontSize: 18, color: "white", fontWeight: 900 }}>{APP_DATA.rank.global.rank}</span>
@@ -342,7 +216,8 @@ export default function SportsFitZoneExact() {
             </div>
           </div>
         </div>
-{/* --- MID GRID (Challenges & Plan) --- */}
+
+        {/* --- MID GRID (Challenges & Plan) --- */}
         <div className="grid-mid">
           {/* Daily Challenge */}
           <div className="card-panel" style={{ border: "1px solid rgba(57,255,20,0.2)" }}>
@@ -351,7 +226,7 @@ export default function SportsFitZoneExact() {
                 <p style={{ color: "#39ff14", fontSize: 12, fontWeight: "bold", margin: "0 0 8px", letterSpacing: 1 }}>DAILY CHALLENGE</p>
                 <h2 style={{ color: "white", fontSize: 26, fontWeight: 900, margin: 0 }}>{APP_DATA.challenge.title}</h2>
               </div>
-              <Target color="#39ff14" size={45} strokeWidth={1.5} />
+              <Target color="#39ff14" size={45} strokeWidth={1.5} style={{ filter: "drop-shadow(0 0 8px #39ff14)" }} />
             </div>
             
             <div className="progress-bar-bg">
@@ -374,7 +249,7 @@ export default function SportsFitZoneExact() {
               <div className="flex-center" style={{ gap: 20, justifyContent: "flex-start", margin: "15px 0 25px" }}>
                 <span className="flex-center" style={{ gap: 6, color: "#e2e8f0", fontSize: 14, fontWeight: "600" }}><Timer size={16}/> {APP_DATA.plan.duration}</span>
                 <span className="flex-center" style={{ gap: 6, color: "#e2e8f0", fontSize: 14, fontWeight: "600" }}><Flame size={16}/> {APP_DATA.plan.calories}</span>
-                <span className="flex-center" style={{ gap: 6, color: "#e2e8f0", fontSize: 14, fontWeight: "600" }}><BarChart3 size={16}/> {APP_DATA.plan.level}</span>
+                <span className="flex-center" style={{ gap: 6, color: "#e2e8f0", fontSize: 14, fontWeight: "600" }}><LineChart size={16}/> {APP_DATA.plan.level}</span>
               </div>
               <button className="btn-green">
                 Resume Workout <Play fill="#000" size={18} />
@@ -390,11 +265,11 @@ export default function SportsFitZoneExact() {
               <div className="flex-center" style={{ gap: 8, justifyContent: "flex-start", marginBottom: 15 }}>
                 <div style={{ border: `1px solid ${stat.color}40`, padding: 8, borderRadius: 12 }}>
                   {stat.type === 'xp' && <span className="xp-box" style={{ background: stat.color, color: "#000" }}>XP</span>}
-                  {stat.type === 'calories' && <Flame color={stat.color} size={20} fill={stat.color}/>}
-                  {stat.type === 'recovery' && <Activity color={stat.color} size={20}/>}
-                  {stat.type === 'sleep' && <Moon color={stat.color} size={20} fill={stat.color}/>}
-                  {stat.type === 'water' && <Droplet color={stat.color} size={20} fill={stat.color}/>}
-                  {stat.type === 'streak' && <Watch color={stat.color} size={20}/>}
+                  {stat.type === 'calories' && <Flame color={stat.color} size={20} fill={stat.color} style={{ filter: `drop-shadow(0 0 5px ${stat.color})` }}/>}
+                  {stat.type === 'recovery' && <Activity color={stat.color} size={20} style={{ filter: `drop-shadow(0 0 5px ${stat.color})` }}/>}
+                  {stat.type === 'sleep' && <Moon color={stat.color} size={20} fill={stat.color} style={{ filter: `drop-shadow(0 0 5px ${stat.color})` }}/>}
+                  {stat.type === 'water' && <Droplet color={stat.color} size={20} fill={stat.color} style={{ filter: `drop-shadow(0 0 5px ${stat.color})` }}/>}
+                  {stat.type === 'streak' && <Watch color={stat.color} size={20} style={{ filter: `drop-shadow(0 0 5px ${stat.color})` }}/>}
                 </div>
                 <span style={{ color: "#94a3b8", fontSize: 12, fontWeight: "bold", letterSpacing: 1 }}>{stat.title}</span>
               </div>
@@ -411,7 +286,7 @@ export default function SportsFitZoneExact() {
           <div className="card-panel" style={{ border: "1px solid rgba(62,166,255,0.3)" }}>
             <h3 style={{ color: "#3ea6ff", fontSize: 13, fontWeight: "bold", margin: "0 0 20px", letterSpacing: 1 }}>AI COACH INSIGHT</h3>
             <div className="flex-center" style={{ gap: 15, alignItems: "flex-start", marginBottom: 25 }}>
-              <Brain size={60} color="#3ea6ff" strokeWidth={1} style={{ flexShrink: 0 }} />
+              <Brain size={65} color="#3ea6ff" strokeWidth={1} style={{ flexShrink: 0, filter: "drop-shadow(0 0 10px rgba(62,166,255,0.8))" }} />
               <p style={{ color: "#e2e8f0", fontSize: 14, lineHeight: 1.6, margin: 0, fontWeight: "500" }}>
                 Your recovery is excellent and energy is high.<br/><br/>Perfect day to push your limits! 🚀
               </p>
@@ -443,7 +318,7 @@ export default function SportsFitZoneExact() {
           <div className="card-panel">
             <h3 style={{ color: "#c27dff", fontSize: 13, fontWeight: "bold", margin: "0 0 20px", letterSpacing: 1 }}>UPCOMING EVENT</h3>
             <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginBottom: 20 }}>
-              <Trophy size={60} color="#c27dff" strokeWidth={1} style={{ marginBottom: 15 }} />
+              <Trophy size={60} color="#c27dff" strokeWidth={1} style={{ marginBottom: 15, filter: "drop-shadow(0 0 8px #c27dff)" }} />
               <h4 style={{ color: "white", fontSize: 16, margin: "0 0 5px", fontWeight: "bold", textAlign: "center", lineHeight: 1.4 }}>State Powerlifting<br/>Championship 2025</h4>
               <p style={{ color: "#c27dff", fontSize: 13, margin: 0, fontWeight: "600" }}>12 May 2025</p>
             </div>
@@ -451,30 +326,33 @@ export default function SportsFitZoneExact() {
           </div>
         </div>
 
-        {/* --- ALL FEATURES (View All / Less Logic) --- */}
-        <div style={{ marginBottom: 40 }}>
-          <div className="flex-between" style={{ marginBottom: 25 }}>
-            <h2 style={{ color: "white", fontSize: 18, margin: 0, fontWeight: 900, letterSpacing: 1 }}>ALL FEATURES</h2>
-            <span 
-              onClick={() => setShowAllFeatures(!showAllFeatures)} 
-              style={{ color: "#94a3b8", fontSize: 14, cursor: "pointer", display: "flex", alignItems: "center", fontWeight: "600", transition: "color 0.2s" }}
-              onMouseEnter={(e) => e.target.style.color = 'white'}
-              onMouseLeave={(e) => e.target.style.color = '#94a3b8'}
-            >
-              {showAllFeatures ? "Show Less" : "View All"} <ChevronRight size={18} style={{ transform: showAllFeatures ? "rotate(-90deg)" : "rotate(0)" , transition: "0.3s"}}/>
-            </span>
-          </div>
+        {/* --- ALL FEATURES (DYNAMIC GRID WITH EXACT SHOW MORE/LESS BUTTON) --- */}
+        <div style={{ marginBottom: 40, background: "#121824", borderRadius: 24, padding: "25px 20px" }}>
           
           <div className="grid-features">
             {displayedFeatures.map((item) => (
-              <div key={item.id} className="feature-item">
-                <div style={{ width: 60, height: 60, borderRadius: 16, border: `1px solid ${item.color}40`, display: "flex", justifyContent: "center", alignItems: "center", background: "rgba(255,255,255,0.02)" }}>
-                  <item.icon color={item.color} size={30} strokeWidth={1.5} />
+              <div key={item.id} className="feature-item-wrapper">
+                <div className="feature-icon-box" style={{ border: `1px solid ${item.color}40` }}>
+                  {/* LOGIC FOR EXACT ICONS: If imgSrc is provided, it uses your exact image. Otherwise, glowing vector fallback. */}
+                  {item.imgSrc ? (
+                    <img src={item.imgSrc} alt={item.title} style={{ width: 32, height: 32, objectFit: 'contain' }} />
+                  ) : (
+                    <item.icon color={item.color} size={32} strokeWidth={1.5} style={{ filter: `drop-shadow(0 0 6px ${item.color}80)` }} />
+                  )}
                 </div>
-                <span style={{ color: "#94a3b8", fontSize: 12, textAlign: "center", fontWeight: "600", lineHeight: 1.2 }}>{item.title}</span>
+                <span style={{ color: "#94a3b8", fontSize: 12, textAlign: "center", fontWeight: "600", lineHeight: 1.2, marginTop: 5 }}>{item.title}</span>
               </div>
             ))}
           </div>
+
+          {/* EXACT Show More / Show Less Button */}
+          <button className="show-more-btn" onClick={() => setShowAllFeatures(!showAllFeatures)}>
+            {showAllFeatures ? (
+              <>Show Less <span style={{ color: "#ffaa00", fontSize: 18 }}>🔼</span></>
+            ) : (
+              <>Show More <span style={{ color: "#ffaa00", fontSize: 18 }}>🔽</span></>
+            )}
+          </button>
         </div>
       </div>
 
@@ -504,4 +382,4 @@ export default function SportsFitZoneExact() {
 
     </div>
   );
-}
+  }
