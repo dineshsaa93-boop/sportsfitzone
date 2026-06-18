@@ -1185,6 +1185,7 @@ background: "red",
 padding: "5px 10px",
 borderRadius: 10,
 fontSize: 12,
+      },
 player: {
     position: "fixed",
     bottom: 90,
