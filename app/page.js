@@ -1,760 +1,399 @@
 "use client";
 
-import { useState, useEffect } from "react";
-
-import Link from "next/link";
-
-import { onAuthStateChanged } from "firebase/auth";
-
+import React, { useState } from "react";
 import {
-doc,
-getDoc,
-updateDoc
-} from "firebase/firestore";
-
-import { auth, db } from "./firebase";
-
-import {
-
-Menu,
-Search,
-Bell,
-
-Trophy,
-Flame,
-Hexagon,
-
-Brain,
-Target,
-HeartPulse,
-MoonStar,
-Droplets,
-
-Clock3,
-Play,
-
-BarChart3,
-
-Shield,
-Crown,
-Medal,
-
-Calendar,
-
-Apple,
-
-LineChart,
-
-Zap,
-
-Timer,
-
-BookOpen,
-
-Users,
-
-Bot,
-
-NotebookPen,
-
-GraduationCap,
-
-Gamepad2,
-
-Gift,
-
-User,
-
-MessageCircle,
-
-MonitorPlay,
-
-ClipboardList,
-
-CircleHelp,
-
-Dumbbell,
-
-Home,
-
-Activity,
-
-Award,
-
-SlidersHorizontal
-
+  Menu, Search, Bell, SlidersHorizontal, Trophy, Flame, Hexagon, Shield, Target,
+  Clock3, Play, BarChart3, HeartPulse, MoonStar, Droplets, RefreshCcw, Brain, Crown, Medal,
+  Award, Activity, Apple, LineChart, Zap, Timer, Calendar, NotebookPen, GraduationCap,
+  Gamepad2, MonitorPlay, Gift, User, MessageCircle, Dumbbell, ClipboardList, CircleHelp,
+  BookOpen, Users, Bot, Home, ChevronRight
 } from "lucide-react";
-export default function HomePage() {
 
-const [profileData, setProfileData] = useState(null);
-
-useEffect(() => {
-
-const unsubscribe = onAuthStateChanged(auth, async (user) => {
-
-if (!user) return;
-
-const ref = doc(db, "users", user.uid);
-
-const snap = await getDoc(ref);
-
-if (snap.exists()) {
-
-setProfileData(snap.data());
-
-}
-
-});
-
-return () => unsubscribe();
-
-}, []);
-
-return (
-
-<div style={styles.container}>
-{/* TOP BAR */}
-
-<div style={styles.topBar}>
-
-<Menu size={30} color="white"/>
-
-<img
-src="/logo.png"
-style={{height:45}}
-/>
-
-<div style={styles.topStats}>
-
-<div style={styles.topBadge}>
-<Trophy size={20} color="#ffb300"/>
-<span>{profileData?.trophies || 0}</span>
-</div>
-
-<div style={styles.topBadge}>
-<Flame size={20} color="#ff7300"/>
-<span>{profileData?.streak || 0}</span>
-</div>
-
-<div style={styles.topBadge}>
-<Hexagon size={20} color="#39ff14"/>
-<span>{profileData?.xp || 0}</span>
-</div>
-
-<div style={styles.notificationIcon}>
-<Bell size={24}/>
-<div style={styles.greenDot}></div>
-</div>
-
-</div>
-
-</div>
-
-
-{/* SEARCH BAR */}
-
-<div style={styles.searchBar}>
-
-<Search size={22} color="#777"/>
-
-<input
-placeholder="Search workouts, plans, tournaments..."
-style={styles.searchInput}
-/>
-
-<SlidersHorizontal size={22} color="#8f8f8f"/>
-
-</div>
-<div style={styles.heroGrid}>
-
-{/* LEFT CARD */}
-
-<div style={styles.heroCard}>
-
-<h3 style={{color:"white"}}>
-
-Good Evening,
-
-<br/>
-
-<span style={{fontSize:50,fontWeight:800}}>
-{profileData?.name || "ATHLETE"}
-</span>
-
-</h3>
-
-<div style={{color:"#bbb",fontSize:22}}>
-{profileData?.athleteTitle || "Elite Athlete"}
-</div>
-
-<h2 style={{marginTop:40}}>
-<span style={{color:"#39ff14"}}>Discipline</span> today,
-<br/>
-Domination tomorrow.
-</h2>
-
-</div>
-
-
-{/* READINESS CARD */}
-
-<div style={styles.heroCard}>
-
-<div style={styles.readinessCircle}>
-
-<h1 style={{fontSize:60}}>
-{profileData?.readiness || 92}%
-</h1>
-
-<div style={{color:"#39ff14"}}>
-READINESS
-</div>
-
-</div>
-
-<h2>Optimal</h2>
-
-</div>
-
-
-{/* RANK CARD */}
-
-<div style={styles.heroCard}>
-
-<Shield
-size={90}
-color="#8f4fff"
-/>
-
-<h2 style={{color:"white"}}>
-LEVEL 1 ATHLETE
-</h2>
-
-<div style={{color:"#999"}}>
-Top 15% Among Athletes
-</div>
-
-<br/>
-
-<div style={{
-display:"flex",
-justifyContent:"space-around"
-}}>
-
-<div>
-🌍
-<h3>#24</h3>
-Top 15%
-</div>
-
-<div>
-🇮🇳
-<h3>#5</h3>
-Top 5%
-</div>
-
-<div>
-🏆
-<h3>#1</h3>
-Top 1%
-</div>
-
-</div>
-
-</div>
-
-</div>
-<div style={styles.middleGrid}>
-
-{/* DAILY CHALLENGE */}
-
-<div style={styles.heroCard}>
-
-<h2 style={{color:"#39ff14"}}>
-DAILY CHALLENGE
-</h2>
-
-<h1>
-100 Pushups 💪
-</h1>
-
-<div
-style={{
-height:12,
-background:"#222",
-borderRadius:20,
-overflow:"hidden",
-marginTop:25
-}}
->
-
-<div
-style={{
-width:"80%",
-height:"100%",
-background:"#39ff14"
-}}
-></div>
-
-</div>
-
-<h2 style={{marginTop:20}}>
-+50 XP Reward
-</h2>
-
-</div>
-
-
-
-{/* WORKOUT CARD */}
-
-<div style={styles.heroCard}>
-
-<h2 style={{color:"#39ff14"}}>
-TODAY'S PLAN
-</h2>
-
-<h1>
-Full Body Strength
-</h1>
-
-<div
-style={{
-display:"flex",
-gap:25,
-marginTop:20
-}}
->
-
-<div>
-<Clock3 size={20}/>
-45 min
-</div>
-
-<div>
-<Flame size={20}/>
-420 kcal
-</div>
-
-<div>
-<BarChart3 size={20}/>
-Advanced
-</div>
-
-</div>
-
-<button style={styles.workoutButton}>
-
-Resume Workout
-
-<Play size={20}/>
-
-</button>
-
-</div>
-
-</div>
-<div style={styles.statsGrid}>
-
-<div style={styles.statCard}>
-<Hexagon size={32} color="#39ff14"/>
-<h3>XP TODAY</h3>
-<h1>{profileData?.xp || 120}</h1>
-<div style={{color:"#39ff14"}}>+12%</div>
-</div>
-
-<div style={styles.statCard}>
-<Flame size={32} color="#ff8800"/>
-<h3>CALORIES</h3>
-<h1>{profileData?.caloriesBurned || 2450}</h1>
-<div>Goal: 2800</div>
-</div>
-
-<div style={styles.statCard}>
-<HeartPulse size={32} color="#39ff14"/>
-<h3>RECOVERY</h3>
-<h1>{profileData?.recovery || 85}%</h1>
-<div>Good</div>
-</div>
-
-<div style={styles.statCard}>
-<MoonStar size={32} color="#bb66ff"/>
-<h3>SLEEP SCORE</h3>
-<h1>{profileData?.sleepScore || 78}</h1>
-<div>Good</div>
-</div>
-
-<div style={styles.statCard}>
-<Droplets size={32} color="#00bfff"/>
-<h3>WATER INTAKE</h3>
-<h1>{profileData?.water || 2.6} L</h1>
-<div>Goal: 3.0 L</div>
-</div>
-
-<div style={styles.statCard}>
-<Flame size={32} color="#ffaa00"/>
-<h3>STREAK</h3>
-<h1>{profileData?.streak || 7}</h1>
-<div>Days</div>
-</div>
-
-</div>
-<div style={styles.bottomGrid}>
-
-{/* AI COACH */}
-
-<div style={styles.heroCard}>
-
-<Brain size={60} color="#00bfff"/>
-
-<h2 style={{color:"#00bfff"}}>
-AI COACH INSIGHT
-</h2>
-
-<p>
-Your recovery is excellent and energy is high.
-Perfect day to push your limits 🚀
-</p>
-
-<button style={styles.outlineButton}>
-View Full Report
-</button>
-
-</div>
-
-
-
-{/* LEADERBOARD */}
-
-<div style={styles.heroCard}>
-
-<h2 style={{color:"#ffb300"}}>
-LEADERBOARD TOP 3
-</h2>
-
-<div style={styles.leaderboardRow}>
-
-<div>
-🥈
-<h3>Dinesh</h3>
-1100 XP
-</div>
-
-<div>
-🥇
-<h2>Pragati</h2>
-1250 XP
-</div>
-
-<div>
-🥉
-<h3>Athlete X</h3>
-980 XP
-</div>
-
-</div>
-
-</div>
-
-
-
-{/* EVENT */}
-
-<div style={styles.heroCard}>
-
-<Calendar size={60} color="#bb66ff"/>
-
-<h2 style={{color:"#bb66ff"}}>
-UPCOMING EVENT
-</h2>
-
-<h3>
-State Powerlifting Championship
-</h3>
-
-<div>
-12 May 2025
-</div>
-
-<button style={styles.outlineButton}>
-Register Now
-</button>
-
-</div>
-
-</div>
-<div style={styles.heroCard}>
-
-<h2 style={{color:"white"}}>
-ALL FEATURES
-</h2>
-
-<div style={styles.featureGrid}>
-
-<div style={styles.featureItem}>
-<Apple size={35} color="#39ff14"/>
-<div>Diet Planner</div>
-</div>
-
-<div style={styles.featureItem}>
-<LineChart size={35} color="#39ff14"/>
-<div>Progress</div>
-</div>
-
-<div style={styles.featureItem}>
-<Zap size={35} color="#00bfff"/>
-<div>Transformation</div>
-</div>
-
-<div style={styles.featureItem}>
-<MoonStar size={35} color="#bb66ff"/>
-<div>Sleep</div>
-</div>
-
-<div style={styles.featureItem}>
-<Droplets size={35} color="#00bfff"/>
-<div>Water Tracker</div>
-</div>
-
-<div style={styles.featureItem}>
-<Timer size={35} color="#ffaa00"/>
-<div>Workout Timer</div>
-</div>
-
-<div style={styles.featureItem}>
-<BookOpen size={35} color="#ffaa00"/>
-<div>Sports Books</div>
-</div>
-
-<div style={styles.featureItem}>
-<Users size={35} color="#ffaa00"/>
-<div>Community</div>
-</div>
-
-<div style={styles.featureItem}>
-<Bot size={35} color="#bb66ff"/>
-<div>AI Coach</div>
-</div>
-
-<div style={styles.featureItem}>
-<NotebookPen size={35} color="#ffaa00"/>
-<div>Notes</div>
-</div>
-
-<div style={styles.featureItem}>
-<GraduationCap size={35} color="#00bfff"/>
-<div>Courses</div>
-</div>
-
-<div style={styles.featureItem}>
-<Gamepad2 size={35} color="#888"/>
-<div>Match Room</div>
-</div>
-
-<div style={styles.featureItem}>
-<Gift size={35} color="#ffaa00"/>
-<div>Rewards</div>
-</div>
-
-<div style={styles.featureItem}>
-<User size={35} color="#00bfff"/>
-<div>Athlete Profile</div>
-</div>
-
-<div style={styles.featureItem}>
-<MessageCircle size={35} color="#39ff14"/>
-<div>Team Chat</div>
-</div>
-
-<div style={styles.featureItem}>
-<MonitorPlay size={35} color="#8f4fff"/>
-<div>Live Match</div>
-</div>
-
-<div style={styles.featureItem}>
-<ClipboardList size={35} color="#00bfff"/>
-<div>All Tests</div>
-</div>
-
-<div style={styles.featureItem}>
-<CircleHelp size={35} color="#bb66ff"/>
-<div>My Doubts</div>
-</div>
-
-<div style={styles.featureItem}>
-<Dumbbell size={35} color="#39ff14"/>
-<div>All Training</div>
-</div>
-
-</div>
-
-</div>
-{/* BOTTOM NAVIGATION */}
-
-<div style={styles.bottomNav}>
-
-<div style={styles.navItem}>
-<Home size={28} color="#39ff14"/>
-<div>Home</div>
-</div>
-
-<div style={styles.navItem}>
-<Dumbbell size={28} color="#aaa"/>
-<div>Training</div>
-</div>
-
-<div style={styles.navItem}>
-<Award size={28} color="#aaa"/>
-<div>Tournaments</div>
-</div>
-
-<div style={styles.navItem}>
-<Flame size={28} color="#aaa"/>
-<div>DP</div>
-</div>
-
-<div style={styles.navItem}>
-<User size={28} color="#aaa"/>
-<div>Profile</div>
-</div>
-
-</div>
-</div>
-
-  );
-    }
-const styles = {
-    container:{
-background:"#05070b",
-minHeight:"100vh",
-padding:20,
-color:"white"
-},
-
-topBar:{
-display:"flex",
-justifyContent:"space-between",
-alignItems:"center",
-marginBottom:25
-},
-
-topStats:{
-display:"flex",
-gap:12,
-alignItems:"center"
-},
-
-topBadge:{
-display:"flex",
-alignItems:"center",
-gap:8,
-padding:"10px 18px",
-background:"#09111d",
-border:"1px solid rgba(255,255,255,.1)",
-borderRadius:30
-},
-
-notificationIcon:{
-position:"relative"
-},
-
-greenDot:{
-width:10,
-height:10,
-background:"#39ff14",
-borderRadius:"50%",
-position:"absolute",
-right:-2,
-top:0
-},
-
-searchBar:{
-display:"flex",
-alignItems:"center",
-gap:15,
-background:"#09111d",
-padding:18,
-borderRadius:30,
-marginBottom:25
-},
-
-searchInput:{
-flex:1,
-background:"transparent",
-border:"none",
-outline:"none",
-color:"white",
-fontSize:16
-},
-    heroCard:{
-background:"#09111d",
-padding:25,
-borderRadius:30,
-marginBottom:20,
-border:"1px solid rgba(255,255,255,.08)"
-},
-
-statCard:{
-background:"#09111d",
-padding:20,
-borderRadius:25,
-border:"1px solid rgba(255,255,255,.08)"
-},
-
-featureGrid:{
-display:"grid",
-gridTemplateColumns:"repeat(auto-fit,minmax(120px,1fr))",
-gap:15,
-marginTop:25
-},
-
-featureItem:{
-background:"#09111d",
-padding:20,
-borderRadius:20,
-display:"flex",
-flexDirection:"column",
-alignItems:"center",
-gap:10,
-border:"1px solid rgba(255,255,255,.08)"
-},
-
-workoutButton:{
-background:"#39ff14",
-color:"black",
-padding:"18px 25px",
-border:"none",
-borderRadius:20,
-fontWeight:"bold",
-fontSize:18
-},
-
-outlineButton:{
-background:"transparent",
-border:"1px solid #bb66ff",
-color:"#bb66ff",
-padding:"15px 25px",
-borderRadius:20
-},
-    bottomNav:{
-position:"fixed",
-bottom:0,
-left:0,
-right:0,
-background:"#09111d",
-display:"flex",
-justifyContent:"space-around",
-padding:15,
-borderTop:"1px solid rgba(255,255,255,.08)"
-},
-
-navItem:{
-display:"flex",
-flexDirection:"column",
-alignItems:"center",
-gap:8,
-color:"#aaa"
-}
-
+// ==========================================
+// 1. DYNAMIC DATA SOURCE 
+// ==========================================
+const APP_DATA = {
+  user: {
+    name: "DINESH",
+    level: "Elite Athlete",
+    quoteLine1: "Discipline today,",
+    quoteLine2: "Domination tomorrow.",
+    readiness: 92,
+    streak: 7,
+    recovery: 85,
+    xp: 468,
+    flames: 7,
+    trophies: 12
+  },
+  rank: {
+    title: "LEVEL 1 ATHLETE",
+    subtitle: "Top 15% Among All Athletes",
+    global: { rank: "#24", percentile: "Top 15%" },
+    india: { rank: "#5", percentile: "Top 5%" },
+    academy: { rank: "#1", percentile: "Top 1%" }
+  },
+  challenge: {
+    title: "100 Pushups 💪",
+    progress: 80,
+    reward: "+50 XP",
+  },
+  plan: {
+    title: "Full Body Strength",
+    duration: "45 min",
+    calories: "420 kcal",
+    level: "Advanced"
+  },
+  metrics: [
+    { id: 1, type: "xp", title: "XP TODAY", value: "120", sub: "+12%", color: "#39ff14", points: "0,25 20,20 40,15 60,18 80,5 100,2" },
+    { id: 2, type: "calories", title: "CALORIES", value: "2,450", sub: "Goal: 2,800", color: "#ff7300", points: "0,25 20,15 40,20 60,10 80,15 100,5" },
+    { id: 3, type: "recovery", title: "RECOVERY", value: "85%", sub: "Good", color: "#39ff14", points: "0,20 20,25 40,15 60,20 80,10 100,5" },
+    { id: 4, type: "sleep", title: "SLEEP SCORE", value: "78", sub: "Good", color: "#b266ff", points: "0,15 20,20 40,10 60,18 80,12 100,22" },
+    { id: 5, type: "water", title: "WATER INTAKE", value: "2.6 L", sub: "Goal: 3.0 L", color: "#00bfff", points: "0,22 20,15 40,20 60,10 80,15 100,8" },
+    { id: 6, type: "streak", title: "STREAK", value: "7", sub: "Days", color: "#ffb300", points: "0,25 20,22 40,18 60,15 80,10 100,5" }
+  ],
+  leaderboard: [
+    { rank: 2, name: "Athlete Y", xp: "1,100 XP", img: "https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=150&h=150&fit=crop", color: "#c0c0c0" },
+    { rank: 1, name: "Pragati", xp: "1,250 XP", img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop", color: "#ffd700" },
+    { rank: 3, name: "Athlete X", xp: "980 XP", img: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&h=150&fit=crop", color: "#cd7f32" }
+  ],
+  features: [
+    { id: 1, title: "Diet Planner", icon: Apple, color: "#39FF14" },
+    { id: 2, title: "Progress", icon: LineChart, color: "#39FF14" },
+    { id: 3, title: "Transformation", icon: Zap, color: "#00BFFF" },
+    { id: 4, title: "Sleep", icon: MoonStar, color: "#B266FF" },
+    { id: 5, title: "Water Tracker", icon: Droplets, color: "#00BFFF" },
+    { id: 6, title: "Workout Timer", icon: Timer, color: "#3EA6FF" },
+    { id: 7, title: "Quiz", icon: Brain, color: "#FF4D88" },
+    { id: 8, title: "Schedule", icon: Calendar, color: "#FF6666" },
+    { id: 9, title: "Notes", icon: NotebookPen, color: "#FFD700" },
+    { id: 10, title: "Leaderboard", icon: Crown, color: "#FFD700" },
+    { id: 11, title: "Courses", icon: GraduationCap, color: "#00BFFF" },
+    { id: 12, title: "Tournaments", icon: Trophy, color: "#FFD700" },
+    { id: 13, title: "Match Room", icon: Gamepad2, color: "#C0C0C0" },
+    { id: 14, title: "Live Match", icon: MonitorPlay, color: "#FF4D88" },
+    { id: 15, title: "Rewards", icon: Gift, color: "#FFD700" },
+    { id: 16, title: "Athlete Profile", icon: User, color: "#3EA6FF" },
+    { id: 17, title: "Team Chat", icon: MessageCircle, color: "#39FF14" },
+    { id: 18, title: "All Training", icon: Dumbbell, color: "#7B61FF" },
+    { id: 19, title: "All Tests", icon: ClipboardList, color: "#00BFFF" },
+    { id: 20, title: "My Doubts", icon: CircleHelp, color: "#B266FF" },
+    { id: 21, title: "Sports Books", icon: BookOpen, color: "#FFB300" },
+    { id: 22, title: "Community", icon: Users, color: "#FFD700" },
+    { id: 23, title: "Challenges", icon: Trophy, color: "#FF4D88" },
+    { id: 24, title: "AI Coach", icon: Bot, color: "#00E5FF" },
+    { id: 25, title: "Events", icon: Calendar, color: "#B266FF" },
+  ]
 };
 
+// Custom Sparkline Component
+const Sparkline = ({ color, points }) => (
+  <svg width="100%" height="30" viewBox="0 0 100 30" preserveAspectRatio="none" className="mt-auto">
+    <polyline points={points} fill="none" stroke={color} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ filter: `drop-shadow(0px 4px 4px ${color}40)` }} />
+  </svg>
+);
+
+// Progress Circle Component
+const CircularProgress = ({ percentage }) => {
+  const radius = 55;
+  const circumference = 2 * Math.PI * radius;
+  const strokeDashoffset = circumference - (percentage / 100) * circumference;
+
+  return (
+    <div className="relative flex flex-col items-center justify-center w-[160px] h-[160px]">
+      <svg width="160" height="160" viewBox="0 0 160 160" className="-rotate-90">
+        <defs>
+          <linearGradient id="progGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#39FF14" />
+            <stop offset="100%" stopColor="#00BFFF" />
+          </linearGradient>
+          <filter id="glow">
+            <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+            <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+        <circle cx="80" cy="80" r={radius} stroke="rgba(255,255,255,0.05)" strokeWidth="10" fill="none" />
+        <circle cx="80" cy="80" r={radius} stroke="url(#progGrad)" strokeWidth="10" fill="none" strokeDasharray={circumference} strokeDashoffset={strokeDashoffset} strokeLinecap="round" filter="url(#glow)" />
+      </svg>
+      <div className="absolute flex flex-col items-center justify-center inset-0 z-10 pt-2">
+        <Activity size={30} color="#39FF14" strokeWidth={2.5} className="mb-[-2px]" />
+        <span className="text-white text-4xl font-black leading-none">{percentage}%</span>
+        <span className="text-[#39FF14] text-[10px] font-bold tracking-widest mt-1">READINESS</span>
+      </div>
+    </div>
+  );
+};
+
+export default function SportsFitZone() {
+  const [showAllFeatures, setShowAllFeatures] = useState(false);
+  const displayedFeatures = showAllFeatures ? APP_DATA.features : APP_DATA.features.slice(0, 16);
+
+  return (
+    <div className="exact-app-wrapper">
+      <style>{`
+        * { box-sizing: border-box; font-family: 'Inter', system-ui, sans-serif; }
+        .exact-app-wrapper { background: #020817; min-height: 100vh; color: white; padding-bottom: 90px; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; width: 100%; overflow-x: hidden; }
+        
+        .flex-center { display: flex; align-items: center; justify-content: center; }
+        .flex-between { display: flex; align-items: center; justify-content: space-between; }
+        .card-panel { background: #081120; border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); }
+        
+        .top-stats-pill { background: #081120; border: 1px solid rgba(255,255,255,0.08); padding: 6px 14px; border-radius: 30px; display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 800; }
+        
+        .grid-hero { display: grid; grid-template-columns: 1.6fr 1fr; gap: 20px; margin-bottom: 20px; }
+        .grid-mid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 20px; margin-bottom: 20px; }
+        .grid-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-bottom: 20px; }
+        .grid-widgets { display: grid; grid-template-columns: 1fr 1.5fr 1fr; gap: 20px; margin-bottom: 30px; }
+        .grid-features { display: grid; grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); gap: 20px 10px; transition: all 0.3s ease; justify-items: center; }
+        
+        .hero-banner { 
+          background: linear-gradient(90deg, #020817 40%, rgba(2,8,23,0.3) 100%), url('https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?q=80&w=1200&auto=format&fit=crop'); 
+          background-size: cover; background-position: top right; border-radius: 20px; padding: 30px; 
+          border: 1px solid rgba(57,255,20,0.1); display: flex; justify-content: space-between; align-items: center;
+        }
+        .workout-banner {
+          background: linear-gradient(90deg, #020817 60%, rgba(2,8,23,0.1) 100%), url('https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?q=80&w=1200&auto=format&fit=crop');
+          background-size: cover; background-position: center right;
+        }
+        
+        .search-bar { background: #081120; border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 16px 20px; display: flex; align-items: center; gap: 15px; margin-bottom: 25px; }
+        .stat-card-small { display: flex; flex-direction: column; justify-content: space-between; height: 160px; }
+        
+        .feature-icon-box {
+          width: 65px; height: 65px; border-radius: 16px; 
+          display: flex; justify-content: center; align-items: center; 
+          background: rgba(255,255,255,0.02); transition: all 0.2s; margin-bottom: 8px;
+        }
+        .feature-item-wrapper { display: flex; flex-direction: column; align-items: center; cursor: pointer; width: 100%; max-width: 90px; }
+        .feature-item-wrapper:hover .feature-icon-box { transform: translateY(-3px); background: rgba(255,255,255,0.05); }
+        
+        .progress-bar-bg { width: 100%; height: 8px; background: rgba(255,255,255,0.1); border-radius: 10px; overflow: hidden; margin: 15px 0; }
+        .progress-bar-fill { height: 100%; background: linear-gradient(90deg, #84ff00, #39FF14); border-radius: 10px; box-shadow: 0 0 10px rgba(57,255,20,0.4); }
+        
+        .btn-green { background: #39FF14; color: #000; padding: 12px 24px; border-radius: 12px; font-weight: 900; font-size: 15px; border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; }
+        .show-more-btn { width: 100%; background: #081120; border: 1px solid rgba(255,255,255,0.08); color: white; padding: 15px; border-radius: 16px; font-weight: bold; font-size: 16px; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 10px; margin-top: 20px; }
+        
+        .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(2, 8, 23, 0.95); backdrop-filter: blur(10px); border-top: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-around; padding: 15px 10px 25px; z-index: 1000; }
+
+        @media (max-width: 850px) {
+          .grid-hero, .grid-mid { grid-template-columns: 1fr; }
+          .hero-banner { flex-direction: column; align-items: flex-start; gap: 30px; }
+          .hero-circular-wrap { align-self: center; } 
+          .top-stats { width: 100%; overflow-x: auto; padding-bottom: 5px; justify-content: flex-start; }
+          .grid-features { grid-template-columns: repeat(4, 1fr); }
+        }
+      `}</style>
+     <div className="container">
+        
+        {/* TOP HEADER */}
+        <header className="flex-between" style={{ flexWrap: 'wrap', gap: '20px', marginBottom: '25px' }}>
+          <div className="flex-center" style={{ gap: '15px' }}>
+            <Menu color="white" size={32} strokeWidth={2.5} />
+            <div style={{ display: 'flex', flexDirection: 'column', lineHeight: 1 }}>
+              <span style={{ color: "white", fontSize: 20, fontWeight: 900, fontStyle: "italic", letterSpacing: 1.5 }}>SPORTS</span>
+              <span style={{ color: "#39FF14", fontSize: 20, fontWeight: 900, fontStyle: "italic", letterSpacing: 1.5 }}>FIT ZONE</span>
+            </div>
+          </div>
+          
+          <div className="flex-center top-stats" style={{ gap: '12px' }}>
+            <div className="top-stats-pill">
+              <Trophy size={24} color="#FFD700" style={{ filter: 'drop-shadow(0 0 15px #FFD700)' }} />
+              <span style={{ color: "#FFD700" }}>{APP_DATA.user.trophies}</span>
+            </div>
+            <div className="top-stats-pill">
+              <Flame size={24} color="#FF7300" style={{ filter: 'drop-shadow(0 0 15px #FF7300)' }} />
+              <span style={{ color: "#FF7300" }}>{APP_DATA.user.flames}</span>
+            </div>
+            <div className="top-stats-pill">
+              <Hexagon size={24} color="#39FF14" style={{ filter: 'drop-shadow(0 0 15px #39FF14)' }} />
+              <span style={{ color: "white" }}>{APP_DATA.user.xp}</span>
+            </div>
+            <div style={{ position: 'relative', marginLeft: '5px' }}>
+              <div style={{ width: 45, height: 45, borderRadius: '50%', background: '#081120', border: '1px solid rgba(255,255,255,0.08)', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <Bell size={24} color="white" />
+              </div>
+              <div style={{ position: 'absolute', top: 2, right: 2, width: 12, height: 12, background: '#39FF14', borderRadius: '50%', border: '2px solid #020817' }}></div>
+            </div>
+          </div>
+        </header>
+
+        {/* SEARCH BAR */}
+        <div className="search-bar">
+          <Search color="#94a3b8" size={22} />
+          <input type="text" placeholder="Search workouts, plans, tournaments..." style={{ flex: 1, background: 'transparent', border: 'none', color: 'white', fontSize: 16, outline: 'none' }} />
+          <SlidersHorizontal size={22} color="#B266FF" />
+        </div>
+
+        {/* HERO GRID */}
+        <div className="grid-hero">
+          <div className="hero-banner">
+            <div style={{ zIndex: 2 }}>
+              <p style={{ color: "#e2e8f0", fontSize: 16, margin: "0 0 5px", fontWeight: "500" }}>Good Evening,</p>
+              <h1 style={{ color: "white", fontSize: 48, fontWeight: 900, margin: "0 0 8px", letterSpacing: 1.5 }}>{APP_DATA.user.name}</h1>
+              
+              <div className="flex-center" style={{ gap: 6, marginBottom: 20, width: 'fit-content' }}>
+                <span style={{ color: "white", fontSize: 15, fontWeight: "bold" }}>{APP_DATA.user.level}</span>
+                <Award size={20} color="#39FF14" />
+              </div>
+              
+              <p style={{ color: "white", fontSize: 16, lineHeight: 1.6, margin: "0 0 25px" }}>
+                {APP_DATA.user.quoteLine1}<br/>
+                <span style={{ color: "#39FF14", fontWeight: "bold" }}>{APP_DATA.user.quoteLine2}</span>
+              </p>
+
+              <div className="flex-center" style={{ gap: 25, flexWrap: "wrap", justifyContent: 'flex-start' }}>
+                <div className="flex-center" style={{ gap: 10 }}>
+                  <Flame size={30} color="#FF7300" />
+                  <div><div style={{ color: "white", fontWeight: 900, fontSize: 16 }}>{APP_DATA.user.streak}</div><div style={{ color: "#94a3b8", fontSize: 12 }}>Day Streak</div></div>
+                </div>
+                <div className="flex-center" style={{ gap: 10 }}>
+                  <Activity size={30} color="#39FF14" />
+                  <div><div style={{ color: "white", fontWeight: 900, fontSize: 16 }}>{APP_DATA.user.readiness}%</div><div style={{ color: "#94a3b8", fontSize: 12 }}>Readiness</div></div>
+                </div>
+                <div className="flex-center" style={{ gap: 10 }}>
+                  <HeartPulse size={30} color="#39FF14" />
+                  <div><div style={{ color: "white", fontWeight: 900, fontSize: 16 }}>{APP_DATA.user.recovery}%</div><div style={{ color: "#94a3b8", fontSize: 12 }}>Recovery</div></div>
+                </div>
+              </div>
+            </div>
+            <div className="hero-circular-wrap" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+              <CircularProgress percentage={APP_DATA.user.readiness} />
+            </div>
+          </div>
+
+          <div className="card-panel rank-card" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+            <div className="flex-center" style={{ justifyContent: 'flex-start', gap: 20, marginBottom: 25 }}>
+              <Shield size={60} color="#B266FF" style={{ filter: "drop-shadow(0 0 25px #B266FF)" }} />
+              <div>
+                <p style={{ color: "#B266FF", fontSize: 12, fontWeight: "bold", margin: "0 0 5px", letterSpacing: 1.5 }}>YOUR RANK</p>
+                <h2 style={{ color: "white", fontSize: 20, fontWeight: 900, margin: "0 0 5px" }}>{APP_DATA.rank.title}</h2>
+                <p style={{ color: "#94a3b8", fontSize: 13, margin: 0 }}>{APP_DATA.rank.subtitle}</p>
+              </div>
+            </div>
+            <div style={{ display: "flex", justifyContent: "space-between", background: "rgba(0,0,0,0.3)", padding: 15, borderRadius: 16 }}>
+              <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 5 }}>
+                <span style={{ fontSize: 10, color: "#94a3b8", fontWeight: "bold" }}>GLOBAL RANK</span>
+                <span style={{ fontSize: 18, color: "white", fontWeight: 900, display: "flex", alignItems: "center", gap: 5 }}><Trophy size={20} color="#39FF14" /> {APP_DATA.rank.global.rank}</span>
+              </div>
+              <div style={{ width: 1, background: 'rgba(255,255,255,0.1)' }}></div>
+              <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 5 }}>
+                <span style={{ fontSize: 10, color: "#94a3b8", fontWeight: "bold" }}>ACADEMY RANK</span>
+                <span style={{ fontSize: 18, color: "white", fontWeight: 900, display: "flex", alignItems: "center", gap: 5 }}><Crown size={20} color="#FFD700" /> {APP_DATA.rank.academy.rank}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* MID GRID */}
+        <div className="grid-mid">
+          <div className="card-panel">
+            <div className="flex-between" style={{ alignItems: "flex-start" }}>
+              <div>
+                <p style={{ color: "#39FF14", fontSize: 12, fontWeight: "bold", margin: "0 0 8px", letterSpacing: 1 }}>DAILY CHALLENGE</p>
+                <h2 style={{ color: "white", fontSize: 26, fontWeight: 900, margin: 0 }}>{APP_DATA.challenge.title}</h2>
+              </div>
+              <Target size={55} color="#39FF14" style={{ filter: "drop-shadow(0 0 15px #39FF14)" }} />
+            </div>
+            <div className="progress-bar-bg"><div className="progress-bar-fill" style={{ width: `${APP_DATA.challenge.progress}%` }}></div></div>
+            <div style={{ textAlign: "right", color: "white", fontSize: 14, fontWeight: "bold", marginTop: -5 }}>{APP_DATA.challenge.progress}%</div>
+            <div className="flex-between" style={{ marginTop: 15 }}>
+              <span style={{ color: "#39FF14", fontSize: 15, fontWeight: "bold" }}>{APP_DATA.challenge.reward}</span>
+              <button style={{ background: "transparent", border: "1px solid #39FF14", color: "#39FF14", padding: "8px 18px", borderRadius: 20, fontSize: 13, fontWeight: "bold" }}>Join</button>
+            </div>
+          </div>
+
+          <div className="card-panel workout-banner" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+            <div style={{ zIndex: 2, position: "relative" }}>
+              <p style={{ color: "#39FF14", fontSize: 12, fontWeight: "bold", margin: "0 0 8px" }}>TODAY'S PLAN</p>
+              <h2 style={{ color: "white", fontSize: 30, fontWeight: 900, margin: 0 }}>{APP_DATA.plan.title}</h2>
+              <div className="flex-center" style={{ gap: 20, justifyContent: "flex-start", margin: "15px 0 25px" }}>
+                <span className="flex-center" style={{ gap: 6, color: "#e2e8f0", fontSize: 14 }}><Clock3 size={20} color="white" /> {APP_DATA.plan.duration}</span>
+                <span className="flex-center" style={{ gap: 6, color: "#e2e8f0", fontSize: 14 }}><Flame size={20} color="#FF7300" /> {APP_DATA.plan.calories}</span>
+                <span className="flex-center" style={{ gap: 6, color: "#e2e8f0", fontSize: 14 }}><BarChart3 size={20} color="#B266FF" /> {APP_DATA.plan.level}</span>
+              </div>
+              <button className="btn-green">Resume Workout <Play size={28} color="black" fill="black" /></button>
+            </div>
+          </div>
+        </div>
+
+        {/* HEALTH STATS GRID */}
+        <div className="grid-stats">
+          {APP_DATA.metrics.map((stat) => {
+            const Icon = stat.type === 'xp' ? Hexagon : stat.type === 'calories' ? Flame : stat.type === 'recovery' ? HeartPulse : stat.type === 'sleep' ? MoonStar : stat.type === 'water' ? Droplets : RefreshCcw;
+            return (
+              <div key={stat.id} className="card-panel stat-card-small">
+                <div className="flex-center" style={{ gap: 8, justifyContent: "flex-start", marginBottom: 15 }}>
+                  <Icon size={40} color={stat.color} />
+                  <span style={{ color: "#94a3b8", fontSize: 12, fontWeight: "bold" }}>{stat.title}</span>
+                </div>
+                <h2 style={{ color: "white", fontSize: 32, fontWeight: 900, margin: "0 0 5px" }}>{stat.value}</h2>
+                <Sparkline color={stat.color} points={stat.points} />
+              </div>
+            );
+          })}
+        </div>
+
+        {/* WIDGETS GRID */}
+        <div className="grid-widgets">
+          <div className="card-panel">
+            <h3 style={{ color: "#3EA6FF", fontSize: 13, fontWeight: "bold", margin: "0 0 20px" }}>AI COACH INSIGHT</h3>
+            <div className="flex-center" style={{ gap: 15, alignItems: "flex-start", marginBottom: 25 }}>
+              <Brain size={60} color="#3EA6FF" style={{ flexShrink: 0 }} />
+              <p style={{ color: "#e2e8f0", fontSize: 14, lineHeight: 1.6, margin: 0 }}>Recovery is excellent. Perfect day to push limits! 🚀</p>
+            </div>
+            <button style={{ width: "100%", background: "transparent", border: "1px solid rgba(62,166,255,0.3)", color: "#3EA6FF", padding: "12px", borderRadius: 12 }}>Full Report</button>
+          </div>
+
+          <div className="card-panel">
+            <h3 style={{ color: "#FFD700", fontSize: 13, fontWeight: "bold", margin: "0 0 30px" }}>LEADERBOARD</h3>
+            <div className="flex-center" style={{ justifyContent: "space-around", alignItems: "flex-end", height: 120 }}>
+              {APP_DATA.leaderboard.map((lb) => (
+                <div key={lb.rank} style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                  <Medal size={30} color={lb.rank === 1 ? "#FFD700" : lb.rank === 2 ? "#C0C0C0" : "#CD7F32"} style={{ marginBottom: 5 }} />
+                  <img src={lb.img} alt={`Rank ${lb.rank}`} className="podium-avatar" style={{ width: lb.rank === 1 ? 65 : 50, height: lb.rank === 1 ? 65 : 50, borderColor: lb.color, marginBottom: 10 }} />
+                  <span style={{ color: "white", fontSize: lb.rank === 1 ? 16 : 14, fontWeight: "bold" }}>{lb.name}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="card-panel">
+            <h3 style={{ color: "#B266FF", fontSize: 13, fontWeight: "bold", margin: "0 0 20px" }}>UPCOMING EVENT</h3>
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginBottom: 20 }}>
+              <Trophy size={60} color="#B266FF" style={{ marginBottom: 15 }} />
+              <h4 style={{ color: "white", fontSize: 16, margin: "0 0 5px", fontWeight: "bold", textAlign: "center" }}>State Powerlifting</h4>
+            </div>
+            <button style={{ width: "100%", background: "rgba(178,102,255,0.15)", border: "1px solid #B266FF", color: "white", padding: "12px", borderRadius: 12 }}>Register</button>
+          </div>
+        </div>
+
+        {/* EXACT FEATURES GRID (SIZE 42) */}
+        <div className="card-panel" style={{ marginBottom: 40, padding: "25px 20px" }}>
+          <div className="grid-features">
+            {displayedFeatures.map((item) => (
+              <div key={item.id} className="feature-item-wrapper">
+                <div className="feature-icon-box" style={{ border: `1px solid ${item.color}40` }}>
+                  <item.icon color={item.color} size={42} strokeWidth={1.5} style={{ filter: `drop-shadow(0 0 10px ${item.color}80)` }} />
+                </div>
+                <span style={{ color: "#94a3b8", fontSize: 12, textAlign: "center", fontWeight: "600", marginTop: 5 }}>{item.title}</span>
+              </div>
+            ))}
+          </div>
+
+          <button className="show-more-btn" onClick={() => setShowAllFeatures(!showAllFeatures)}>
+            {showAllFeatures ? <>Show Less <span style={{ color: "#FFD700" }}>🔼</span></> : <>Show More <span style={{ color: "#FFD700" }}>🔽</span></>}
+          </button>
+        </div>
+      </div>
+
+      {/* BOTTOM NAVIGATION */}
+      <div className="bottom-nav">
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}><Home color="#39FF14" size={26} /><span style={{ color: "#39FF14", fontSize: 12, marginTop: 6, fontWeight: "bold" }}>Home</span></div>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', opacity: 0.6 }}><Dumbbell color="#94a3b8" size={26} /><span style={{ color: "#94a3b8", fontSize: 12, marginTop: 6 }}>Training</span></div>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', opacity: 0.6 }}><Trophy color="#94a3b8" size={26} /><span style={{ color: "#94a3b8", fontSize: 12, marginTop: 6 }}>Tournaments</span></div>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', opacity: 0.6 }}><Flame color="#94a3b8" size={26} /><span style={{ color: "#94a3b8", fontSize: 12, marginTop: 6 }}>DP</span></div>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', opacity: 0.6 }}><User color="#94a3b8" size={26} /><span style={{ color: "#94a3b8", fontSize: 12, marginTop: 6 }}>Profile</span></div>
+      </div>
+    </div>
+  );
+  }
