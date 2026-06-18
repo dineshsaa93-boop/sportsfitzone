@@ -102,7 +102,7 @@ const Icons = {
     </svg>
   )
 };
-/ ==========================================
+// ==========================================
 // CENTRAL APPLICATION ENGINE & ROOT EXPORT
 // ==========================================
 export default function SportsFitZoneApp() {
