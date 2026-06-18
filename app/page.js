@@ -1185,3 +1185,69 @@ background: "red",
 padding: "5px 10px",
 borderRadius: 10,
 fontSize: 12,
+player: {
+    position: "fixed",
+    bottom: 90,
+    left: 10,
+    right: 10,
+    background: "#111827",
+    borderRadius: 20,
+    padding: 15,
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+
+  playerLeft: {
+    display: "flex",
+    gap: 15,
+    alignItems: "center"
+  },
+
+  resumeBtn: {
+    background: "#39ff14",
+    border: "none",
+    padding: "12px 20px",
+    borderRadius: 15,
+    fontWeight: "bold"
+  },
+
+  bottomNav: {
+    position: "fixed",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    background: "#020817",
+    display: "flex",
+    justifyContent: "space-around",
+    padding: 15,
+    borderTop:
+      "1px solid #1d2b44"
+  },
+
+  navItem: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    gap: 5,
+    color: "white",
+    textDecoration: "none",
+    fontSize: 12
+  },
+  
+  heroCard: {
+    marginTop: 25,
+    background: "linear-gradient(135deg,#1a1f3a,#2d1b69)",
+    borderRadius: 30,
+    padding: 25,
+    border: "1px solid #3d4a7a",
+    textAlign: "center"
+  },
+
+  heroStats: {
+    display: "flex",
+    justifyContent: "space-around",
+    marginTop: 20
+  },
+
+};
