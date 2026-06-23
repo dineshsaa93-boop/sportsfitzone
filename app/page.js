@@ -366,102 +366,96 @@ return (
 
   {/* TOP BAR */}  
 
-  <div style={styles.topBar}>  
+<div style={styles.topBar}>
 
-    <Menu  
-      color="white"  
-      size={30}  
-    />  
+  <div style={styles.logoSection}>
+    <Menu color="white" size={30} />
+    <h2 style={styles.logo}>
+      SPORTS <span style={{ color: "#39ff14" }}>FIT ZONE</span>
+    </h2>
+  </div>
 
-    <div style={styles.topStats}>  
+  <div style={styles.topStats}>
 
-      <div style={styles.stat}>  
-        <Trophy color="#ffd633" />  
-        <span>{profileData?.level || 1}</span>
-      </div>  
+    <div style={styles.statCard}>
+      <Trophy color="#ffd633" size={18}/>
+      <span>{profileData?.level || 1}</span>
+    </div>
 
-      <div style={styles.stat}>  
-        <Flame color="#39ff14" />  
-        <span>{profileData?.streak || 0}</span>
-      </div>  
+    <div style={styles.statCard}>
+      <Flame color="#ff9900" size={18}/>
+      <span>{profileData?.streak || 0}</span>
+    </div>
 
-      <div style={styles.stat}>  
-        <Brain color="#66ff66" />  
-        <span>{profileData?.xp || 0}</span>
-      </div>  
+    <div style={styles.statCard}>
+      <Brain color="#39ff14" size={18}/>
+      <span>{profileData?.xp || 0}</span>
+    </div>
 
-      <div  
-        style={{  
-          position: "relative"  
-        }}  
-      >  
+    <div
+      style={styles.notificationBtn}
+      onClick={() =>
+        setShowNotifications(!showNotifications)
+      }
+    >
+      <Bell color="white" size={24}/>
+      <div style={styles.greenDot}></div>
+    </div>
 
-        <Bell  
-          color="white"  
-          size={28}  
-          onClick={() =>  
-            setShowNotifications(  
-              !showNotifications  
-            )  
-          }  
-        />  
+  </div>
 
-        <div style={styles.redDot}>  
-        </div>  
-
-      </div>  
-
-    </div>  
-
-  </div>  
+</div>
 
   {/* SEARCH */}  
 
-  <div style={styles.searchBox}>  
+<div style={styles.searchBox}>
 
-    <Search  
-      color="#888"  
-      size={20}  
-    />  
+  <Search
+    color="#777"
+    size={25}
+  />
 
-    <input  
-      placeholder="Search workouts..."  
-      style={styles.searchInput}  
-    />  
+  <input
+    placeholder="Search workouts, plans, tournaments..."
+    style={styles.searchInput}
+  />
 
-  </div>  
+</div>
 
   {/* NOTIFICATIONS */}  
+{showNotifications && (
 
-  {showNotifications && (  
+  <div style={styles.notificationBox}>
 
-    <div style={styles.notificationBox}>  
+    <div style={styles.notificationHeader}>
+      <h3 style={styles.notificationTitle}>
+        Notifications
+      </h3>
+    </div>
 
-      <h3  
-        style={{  
-          marginBottom: 15  
-        }}  
-      >  
-        Notifications  
-      </h3>  
+    {notifications.map((item, index) => (
 
-      {notifications.map(  
-        (item, index) => (  
+      <div
+        key={index}
+        style={styles.notificationItem}
+      >
 
-        <div  
-          key={index}  
-          style={  
-            styles.notificationItem  
-          }  
-        >  
-          {item}  
-        </div>  
+        <Bell
+          size={18}
+          color="#39ff14"
+        />
 
-      ))}  
+        <span>
+          {item}
+        </span>
 
-    </div>  
+      </div>
 
-  )}  
+    ))}
+
+  </div>
+
+)}
 
   {/* DASHBOARD */}  
 
