@@ -79,7 +79,7 @@ return () => unsubscribe();
 }, []);
 const handleWorkout = async () => {
 try {
-ntUser || !profileData) return;  
+if (!auth.currentUser || !profileData) return;
 
 const newXP = (profileData.xp || 0) + 10;  
 const newLevel = Math.floor(newXP / 100) + 1;  
