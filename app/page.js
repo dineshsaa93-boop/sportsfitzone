@@ -32,6 +32,7 @@ Crown,
 Target,
 } from "lucide-react";
 
+
 export default function HomePage() {
 
 const [profileData, setProfileData] =
@@ -78,10 +79,7 @@ return () => unsubscribe();
 }, []);
 const handleWorkout = async () => {
 try {
-
-alert("Clicked");  
-
-if (!auth.currentUser || !profileData) return;  
+ntUser || !profileData) return;  
 
 const newXP = (profileData.xp || 0) + 10;  
 const newLevel = Math.floor(newXP / 100) + 1;  
@@ -379,17 +377,17 @@ return (
 
       <div style={styles.stat}>  
         <Trophy color="#ffd633" />  
-        <span>12</span>  
+        <span>{profileData?.level || 1}</span>
       </div>  
 
       <div style={styles.stat}>  
         <Flame color="#39ff14" />  
-        <span>7</span>  
+        <span>{profileData?.streak || 0}</span>
       </div>  
 
       <div style={styles.stat}>  
         <Brain color="#66ff66" />  
-        <span>468</span>  
+        <span>{profileData?.xp || 0}</span>
       </div>  
 
       <div  
@@ -477,11 +475,9 @@ return (
           Good to see you,  
         </p>  
 
-        <h1  
-          style={styles.greetingTitle}  
-        >  
-          Dinesh 👋  
-        </h1>  
+        <h1 style={styles.greetingTitle}>
+  {profileData?.name || "Athlete"} 👋
+</h1>
 
         <p style={styles.greetingSub}>  
           Focus today.  
@@ -507,7 +503,7 @@ return (
         <div>  
 
           <h2>  
-            7 DAY STREAK  
+            {profileData?.streak || 0} DAY STREAK
           </h2>  
 
           <p  
