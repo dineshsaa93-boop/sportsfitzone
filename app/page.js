@@ -948,7 +948,7 @@ gap:15
 
 logo:{
 color:"white",
-fontSize:26,
+fontSize:16,
 fontWeight:"900",
 letterSpacing:1
 },
@@ -999,6 +999,8 @@ alignItems:"center",
 background:"#07111d",
 border:"1px solid #16273d",
 padding:"18px 20px",
+width:"100%",
+boxSizing:"border-box"
 borderRadius:35,
 marginTop:20,
 gap:15
