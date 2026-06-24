@@ -892,7 +892,6 @@ display:"flex",
 justifyContent:"space-between",
 gap:20,
 marginTop:25,
-flexWrap:"wrap"
 },
 
 heroLeft:{
@@ -946,7 +945,7 @@ boxShadow:"0 0 15px #39ff14"
 },
 
 readinessCard:{
-width:260,
+width:100,
 background:"#091423",
 border:"1px solid #1a2d45",
 borderRadius:30,
