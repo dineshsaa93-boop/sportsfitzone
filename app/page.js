@@ -927,16 +927,64 @@ paddingBottom: 220,
 fontFamily: "sans-serif"
 },
 
-topBar: {
-display: "flex",
-justifyContent: "space-between",
-alignItems: "center"
+topBar:{
+display:"flex",
+justifyContent:"space-between",
+alignItems:"center",
+marginBottom:25
 },
 
-topStats: {
-display: "flex",
-gap: 15,
-alignItems: "center"
+topStats:{
+display:"flex",
+gap:12,
+alignItems:"center"
+ },
+     
+logoSection:{
+display:"flex",
+alignItems:"center",
+gap:15
+},
+
+logo:{
+color:"white",
+fontSize:26,
+fontWeight:"900",
+letterSpacing:1
+},
+
+statCard:{
+display:"flex",
+alignItems:"center",
+gap:8,
+padding:"12px 18px",
+borderRadius:25,
+background:"#07111d",
+border:"1px solid #1a2d45",
+boxShadow:"0 0 15px rgba(57,255,20,.15)"
+},
+
+notificationBtn:{
+position:"relative",
+width:52,
+height:52,
+borderRadius:"50%",
+display:"flex",
+justifyContent:"center",
+alignItems:"center",
+border:"1px solid #1a2d45",
+background:"#07111d",
+cursor:"pointer"
+},
+
+greenDot:{
+position:"absolute",
+top:10,
+right:10,
+width:10,
+height:10,
+borderRadius:"50%",
+background:"#39ff14"
 },
 
 stat: {
@@ -945,23 +993,24 @@ gap: 5,
 alignItems: "center"
 },
 
-searchBox: {
-marginTop: 20,
-background: "#081120",
-borderRadius: 20,
-padding: 15,
-display: "flex",
-gap: 10,
-alignItems: "center",
+searchBox:{
+display:"flex",
+alignItems:"center",
+background:"#07111d",
+border:"1px solid #16273d",
+padding:"18px 20px",
+borderRadius:35,
+marginTop:20,
+gap:15
 },
 
-searchInput: {
-background: "transparent",
-border: "none",
-outline: "none",
-color: "white",
-width: "100%",
-fontSize: 16,
+searchInput:{
+flex:1,
+background:"transparent",
+border:"none",
+outline:"none",
+color:"white",
+fontSize:17
 },
 
 redDot: {
