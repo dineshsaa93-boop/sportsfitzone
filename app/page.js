@@ -461,95 +461,65 @@ return (
 
   <div style={styles.dashboardContainer}>  
 
-    <div style={styles.greetingRow}>  
+    <div style={styles.heroSection}>
 
-      <div>  
+  <div style={styles.heroLeft}>
 
-        <p style={styles.welcome}>  
-          Good to see you,  
-        </p>  
+    <div style={styles.statusBar}></div>
 
-        <h1 style={styles.greetingTitle}>
-  {profileData?.name || "Athlete"} 👋
-</h1>
+    <h1 style={styles.heroName}>
+      {profileData?.name || "Athlete"}
+    </h1>
 
-        <p style={styles.greetingSub}>  
-          Focus today.  
-          <span  
-            style={{  
-              color: "#39ff14"  
-            }}  
-          >  
-            {" "}Conquer  
-          </span>  
-          {" "}tomorrow.  
-        </p>  
+    <p style={styles.heroRole}>
+      Elite Athlete ✅
+    </p>
 
-      </div>  
+    <p style={styles.heroQuote}>
+      Discipline today,
+      <br />
+      <span style={{ color: "#39ff14" }}>
+        Domination
+      </span>{" "}
+      tomorrow.
+    </p>
 
-      <div style={styles.streakCard}>  
+    <div style={styles.readyCard}>
+      <div style={styles.readyDot}></div>
 
-        <Flame  
-          color="#39ff14"  
-          size={40}  
-        />  
+      <div>
+        <h3>Ready To Train</h3>
+        <p>Your body. Your mind. Your moment.</p>
+      </div>
+    </div>
 
-        <div>  
+  </div>
 
-          <h2>  
-            {profileData?.streak || 0} DAY STREAK
-          </h2>  
+  <div style={styles.readinessCard}>
 
-          <p  
-            style={{  
-              color: "#aaa"  
-            }}  
-          >  
-            Keep it up!  
-          </p>  
-
-        </div>  
-
-      </div>  
-
-    </div>  
-
-    <div style={styles.heroCard}>  
-
-      <h2>🏆 Athlete Rank</h2>  
-
+    <div style={styles.readinessCircle}>
       <h1>
+        {Math.min(
+          100,
+          50 +
+          (profileData?.streak || 0) * 5 +
+          Math.floor((profileData?.xp || 0) / 20)
+        )}
+        %
+      </h1>
 
-Level {profileData?.level || 1} Athlete
+      <p>READINESS</p>
+    </div>
 
-</h1>  <p>Top 15% Athletes</p>  
+    <h3 style={{ color: "#39ff14" }}>
+      OPTIMAL
+    </h3>
 
-      <div style={styles.heroStats}>  
+    <p>You are in the zone!</p>
 
-        <div>  
-          <h3>
+  </div>
 
-{profileData?.xp || 0}
-
-</h3>  
-              <p>XP</p>  
-            </div>  <div>  
-          <h3>
-
-{profileData?.streak || 0}
-
-</h3>  
-              <p>Streak</p>  
-            </div>  <div>  
-          <h3>
-
-{profileData?.wins || 0}
-
-</h3>  
-              <p>Trophies</p>  
-            </div>  </div>  
-
-    </div>  
+</div>
 
     {/* XP */}  
 
@@ -917,7 +887,85 @@ Start working
 }
 
 const styles = {
+heroSection:{
+display:"flex",
+justifyContent:"space-between",
+gap:20,
+marginTop:25,
+flexWrap:"wrap"
+},
 
+heroLeft:{
+flex:1,
+minWidth:250
+},
+
+statusBar:{
+width:8,
+height:60,
+borderRadius:20,
+background:"#39ff14",
+marginBottom:15
+},
+
+heroName:{
+fontSize:52,
+fontWeight:"900",
+margin:0
+},
+
+heroRole:{
+fontSize:20,
+color:"#ddd",
+marginTop:10
+},
+
+heroQuote:{
+fontSize:18,
+lineHeight:1.6,
+marginTop:25
+},
+
+readyCard:{
+marginTop:25,
+background:"#091423",
+border:"1px solid #1a2d45",
+borderRadius:25,
+padding:20,
+display:"flex",
+gap:15,
+alignItems:"center"
+},
+
+readyDot:{
+width:18,
+height:18,
+borderRadius:"50%",
+background:"#39ff14",
+boxShadow:"0 0 15px #39ff14"
+},
+
+readinessCard:{
+width:260,
+background:"#091423",
+border:"1px solid #1a2d45",
+borderRadius:30,
+padding:25,
+textAlign:"center"
+},
+
+readinessCircle:{
+width:180,
+height:180,
+borderRadius:"50%",
+border:"10px solid #39ff14",
+display:"flex",
+flexDirection:"column",
+justifyContent:"center",
+alignItems:"center",
+margin:"0 auto 20px auto",
+boxShadow:"0 0 25px rgba(57,255,20,.4)"
+},
 page: {
 background: "#020817",
 minHeight: "100vh",
