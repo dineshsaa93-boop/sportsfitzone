@@ -896,7 +896,7 @@ marginTop:25,
 
 heroLeft:{
 flex:1,
-minWidth:250
+minWidth:250,
 width:"100%",
 },
 
