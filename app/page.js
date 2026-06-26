@@ -897,6 +897,7 @@ marginTop:25,
 heroLeft:{
 flex:1,
 minWidth:250
+width:"100%",
 },
 
 statusBar:{
@@ -945,7 +946,9 @@ boxShadow:"0 0 15px #39ff14"
 },
 
 readinessCard:{
-width:100,
+width:"100%",
+maxWidth:380,
+margin:"0 auto",
 background:"#091423",
 border:"1px solid #1a2d45",
 borderRadius:30,
@@ -954,8 +957,8 @@ textAlign:"center"
 },
 
 readinessCircle:{
-width:180,
-height:180,
+width:220,
+height:220,
 borderRadius:"50%",
 border:"10px solid #39ff14",
 display:"flex",
