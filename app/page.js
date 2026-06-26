@@ -525,29 +525,8 @@ return (
   </div>
 
 </div>
-    {/* QUICK ACTIONS */}  
 
-    <div style={styles.quickActions}>  
 
-      <button
-
-style={styles.quickBtn}
-onClick={handleWorkout}
-
-> 
-
-Start working   
-      </button>  
-
-      <button style={styles.quickBtn}>  
-        Upload DP  
-      </button>  
-
-      <button style={styles.quickBtn}>  
-        AI Coach  
-      </button>  
-
-    </div>  
 
     {/* DAILY CHALLENGE */}  
 
