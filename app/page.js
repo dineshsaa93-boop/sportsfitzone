@@ -608,7 +608,6 @@ Start working
 
     </div>  
 
-  </div>  
 
   {/* FEATURES */}  
 
