@@ -459,130 +459,72 @@ return (
 
   {/* DASHBOARD */}  
 
-  <div style={styles.dashboardContainer}>  
+  <div style={styles.dashboardContainer}>
 
-    <div style={styles.heroSection}>
+  <div style={styles.heroSection}>
 
-  <div style={styles.heroLeft}>
+    <div style={styles.heroLeft}>
 
-    <div style={styles.statusBar}></div>
+      <div style={styles.statusBar}></div>
 
-    <h1 style={styles.heroName}>
-      {profileData?.name || "Athlete"}
-    </h1>
-
-    <p style={styles.heroRole}>
-      Elite Athlete ✅
-    </p>
-
-    <p style={styles.heroQuote}>
-      Discipline today,
-      <br />
-      <span style={{ color: "#39ff14" }}>
-        Domination
-      </span>{" "}
-      tomorrow.
-    </p>
-
-    <div style={styles.readyCard}>
-      <div style={styles.readyDot}></div>
-
-      <div>
-        <h3>Ready To Train</h3>
-        <p>Your body. Your mind. Your moment.</p>
-      </div>
-    </div>
-
-  </div>
-
-  <div style={styles.readinessCard}>
-
-    <div style={styles.readinessCircle}>
-      <h1>
-        {Math.min(
-          100,
-          50 +
-          (profileData?.streak || 0) * 5 +
-          Math.floor((profileData?.xp || 0) / 20)
-        )}
-        %
+      <h1 style={styles.heroName}>
+        {profileData?.name || "Athlete"}
       </h1>
 
-      <p>READINESS</p>
+      <p style={styles.heroRole}>
+        Elite Athlete ✅
+      </p>
+
+      <p style={styles.heroQuote}>
+        Discipline today,
+        <br />
+        <span style={{ color:"#39ff14" }}>
+          Domination
+        </span>{" "}
+        tomorrow.
+      </p>
+
+      <div style={styles.readyCard}>
+
+        <div style={styles.readyDot}></div>
+
+        <div>
+          <h3>Ready To Train</h3>
+          <p>Your body. Your mind. Your moment.</p>
+        </div>
+
+      </div>
+
     </div>
 
-    <h3 style={{ color: "#39ff14" }}>
-      OPTIMAL
-    </h3>
+    <div style={styles.readinessCard}>
 
-    <p>You are in the zone!</p>
+      <div style={styles.readinessCircle}>
+
+        <h1>
+          {Math.min(
+            100,
+            50 +
+            (profileData?.streak || 0) * 5 +
+            Math.floor((profileData?.xp || 0) / 20)
+          )}%
+        </h1>
+
+        <p>READINESS</p>
+
+      </div>
+
+      <h2 style={{color:"#39ff14"}}>
+        OPTIMAL
+      </h2>
+
+      <p>You are in the zone!</p>
+
+    </div>
 
   </div>
 
 </div>
-
-    {/* XP */}  
-
-    <div style={styles.xpCard}>  
-
-      <div style={styles.xpTop}>  
-
-        <div>  
-
-          <p  
-            style={{  
-              color: "#aaa"  
-            }}  
-          >  
-            XP PROGRESS  
-          </p>
-
-  <h2                
-  style={{  
-    color: "#39ff14"  
-  }}  
->  
-  {profileData?.xp || 0}  <span
-style={{
-color: "white"
-}}
-
-> 
-
-{" "}/1000 XP
-
-  </span>  
-</h2>  </div>  
-
-        <div>  
-
-          <p  
-            style={{  
-              color: "#aaa"  
-            }}  
-          >  
-            LEVEL  
-          </p>  
-
-          <h1  
-            style={{  
-              color: "#39ff14"  
-            }}  
-          >  
-            {profileData?.level || 1}  
-          </h1>  
-
-        </div>  
-
-      </div>  
-
-      <div style={styles.progressBar}>  
-        <div style={styles.progressFill}>  
-        </div>  
-      </div>  
-
-    </div>  
-
     {/* QUICK ACTIONS */}  
 
     <div style={styles.quickActions}>  
