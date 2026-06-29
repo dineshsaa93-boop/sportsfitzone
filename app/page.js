@@ -550,6 +550,200 @@ return (
       />  
 
     </div>  
+{/* RANK CARD */}
+
+<div
+  style={{
+    marginTop: 25,
+    background: "linear-gradient(135deg,#2b0d45,#17192d)",
+    borderRadius: 24,
+    padding: 20,
+    border: "1px solid rgba(180,80,255,.25)"
+  }}
+>
+  <p style={{ color: "#b86cff", fontWeight: "bold" }}>
+    YOUR RANK
+  </p>
+
+  <h2 style={{ color: "white", marginTop: 8 }}>
+    LEVEL {profileData?.level || 1} ATHLETE
+  </h2>
+
+  <p style={{ color: "#aaa" }}>
+    Top 15% Among All Athletes
+  </p>
+
+  <div
+    style={{
+      height: 8,
+      background: "#2a2a40",
+      borderRadius: 10,
+      marginTop: 15
+    }}
+  >
+    <div
+      style={{
+        width: "40%",
+        height: "100%",
+        background: "#9b4dff",
+        borderRadius: 10
+      }}
+    />
+  </div>
+
+  <div
+    style={{
+      display: "flex",
+      justifyContent: "space-between",
+      marginTop: 20,
+      textAlign: "center"
+    }}
+  >
+    <div>
+      <h3 style={{ color: "white" }}>#24</h3>
+      <p style={{ color: "#39ff14" }}>Global</p>
+    </div>
+
+    <div>
+      <h3 style={{ color: "white" }}>#5</h3>
+      <p style={{ color: "#39ff14" }}>India</p>
+    </div>
+
+    <div>
+      <h3 style={{ color: "white" }}>#1</h3>
+      <p style={{ color: "#39ff14" }}>Academy</p>
+    </div>
+  </div>
+</div>
+{/* TODAY'S PLAN */}
+
+<div
+  style={{
+    marginTop: 20,
+    background: "#081120",
+    borderRadius: 24,
+    overflow: "hidden",
+    border: "1px solid rgba(57,255,20,.15)"
+  }}
+>
+  <img
+    src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=900"
+    style={{
+      width: "100%",
+      height: 180,
+      objectFit: "cover"
+    }}
+  />
+
+  <div style={{ padding: 18 }}>
+    <p
+      style={{
+        color: "#39ff14",
+        fontWeight: "bold"
+      }}
+    >
+      TODAY'S PLAN
+    </p>
+
+    <h2 style={{ color: "white" }}>
+      Full Body Strength
+    </h2>
+
+    <p style={{ color: "#aaa" }}>
+      ⏱ 45 min
+    </p>
+
+    <p style={{ color: "#aaa" }}>
+      🔥 420 kcal
+    </p>
+
+    <button
+      style={{
+        marginTop: 15,
+        width: "100%",
+        background: "#39ff14",
+        color: "#000",
+        border: "none",
+        padding: 14,
+        borderRadius: 14,
+        fontWeight: "bold",
+        cursor: "pointer"
+      }}
+    >
+      Resume Workout ▶
+    </button>
+  </div>
+</div>
+{/* AI COACH */}
+
+<div
+  style={{
+    marginTop: 20,
+    background: "#081120",
+    borderRadius: 24,
+    padding: 20,
+    border: "1px solid #2146ff"
+  }}
+>
+  <h3 style={{ color: "#3ea6ff" }}>
+    🧠 AI COACH INSIGHT
+  </h3>
+
+  <p
+    style={{
+      color: "#ddd",
+      marginTop: 10
+    }}
+  >
+    Readiness is excellent today.
+    It's a great day to push your limits! ⚡
+  </p>
+
+  <button
+    style={{
+      marginTop: 15,
+      background: "transparent",
+      color: "#3ea6ff",
+      border: "1px solid #3ea6ff",
+      padding: 12,
+      borderRadius: 12,
+      width: "100%"
+    }}
+  >
+    View Full Report →
+  </button>
+</div>
+
+{/* LEADERBOARD */}
+
+<div
+  style={{
+    marginTop: 20,
+    background: "#081120",
+    borderRadius: 24,
+    padding: 20
+  }}
+>
+  <h3 style={{ color: "#ffb000" }}>
+    🏆 LEADERBOARD TOP 3
+  </h3>
+
+  <div style={{ marginTop: 18 }}>
+
+    <p style={{ color: "white" }}>
+      🥇 Pragati — 1250 XP
+    </p>
+
+    <p style={{ color: "white" }}>
+      🥈 Dinesh — 1100 XP
+    </p>
+
+    <p style={{ color: "white" }}>
+      🥉 Athlete X — 980 XP
+    </p>
+
+  </div>
+</div>
 
     {/* HEALTH */}  
 
