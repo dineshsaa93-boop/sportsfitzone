@@ -464,7 +464,22 @@ return (
   <div style={styles.heroSection}>
 
     <div style={styles.heroLeft}>
+<div style={styles.heroTop}>
 
+  <div style={styles.heroAvatar}>
+
+    <img
+      src={
+        profileData?.profileImage ||
+        "https://images.unsplash.com/photo-1566753323558-f4e0952af115?w=500"
+      }
+      alt="Athlete"
+      style={styles.heroAvatarImg}
+    />
+
+  </div>
+
+  <div style={styles.heroInfo}>
       <div style={styles.statusBar}></div>
 
       <h1 style={styles.heroName}>
@@ -483,7 +498,9 @@ return (
         </span>{" "}
         tomorrow.
       </p>
+</div>
 
+</div>
       <div style={styles.readyCard}>
 
         <div style={styles.readyDot}></div>
@@ -1001,6 +1018,31 @@ return (
 }
 
 const styles = {
+heroTop:{
+display:"flex",
+alignItems:"center",
+gap:18,
+marginBottom:25
+},
+
+heroAvatar:{
+width:90,
+height:90,
+borderRadius:"50%",
+overflow:"hidden",
+border:"4px solid #39ff14",
+boxShadow:"0 0 25px rgba(57,255,20,.45)"
+},
+
+heroAvatarImg:{
+width:"100%",
+height:"100%",
+objectFit:"cover"
+},
+
+heroInfo:{
+flex:1
+},
 heroSection:{
 display:"flex",
 justifyContent:"space-between",
