@@ -102,6 +102,36 @@ export default function HomeDashboardV2({
 </header>
       <div
   style={{
+    marginTop: 20,
+    marginBottom: 24,
+    display: "flex",
+    alignItems: "center",
+    background: "#0d1324",
+    border: "1px solid rgba(57,255,20,.15)",
+    borderRadius: 18,
+    padding: "14px 18px",
+    boxShadow: "0 0 20px rgba(57,255,20,.08)"
+  }}
+>
+  <span style={{ color: "#7a8497", fontSize: 22 }}>🔍</span>
+
+  <input
+    placeholder="Search workouts, plans, tournaments..."
+    style={{
+      flex: 1,
+      marginLeft: 12,
+      background: "transparent",
+      border: "none",
+      outline: "none",
+      color: "#fff",
+      fontSize: 16
+    }}
+  />
+
+  <span style={{ color: "#8b5cf6", fontSize: 22 }}>⚙️</span>
+</div>
+      <div
+  style={{
     background:
       "linear-gradient(135deg,#0f172a,#111827,#1e293b)",
     borderRadius: 30,
