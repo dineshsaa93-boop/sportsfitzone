@@ -101,6 +101,43 @@ export default function HomeDashboardV2({
       
 </header>
       <div
+        <div
+  style={{
+    marginTop: 20,
+    background: "#0d1324",
+    border: "1px solid rgba(57,255,20,.15)",
+    borderRadius: 22,
+    padding: 20,
+    textAlign: "center",
+    boxShadow: "0 0 25px rgba(57,255,20,.08)"
+  }}
+>
+  <div
+    style={{
+      width: 180,
+      height: 180,
+      margin: "0 auto",
+      borderRadius: "50%",
+      border: "10px solid #39ff14",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      color: "#fff",
+      fontSize: 42,
+      fontWeight: "800"
+    }}
+  >
+    92%
+  </div>
+
+  <h2 style={{ color: "#39ff14", marginTop: 18 }}>
+    READINESS
+  </h2>
+
+  <p style={{ color: "#9ca3af" }}>
+    OPTIMAL
+  </p>
+</div>
   style={{
     marginTop: 20,
     marginBottom: 24,
