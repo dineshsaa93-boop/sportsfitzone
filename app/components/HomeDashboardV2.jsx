@@ -188,7 +188,7 @@ export default function HomeDashboardV2({
       🏆
     </div>
 
-  </div>
+  
 </div>
 </div>
 </div>
