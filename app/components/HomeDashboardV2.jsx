@@ -165,8 +165,15 @@ export default function HomeDashboardV2({
     }}
   />
 
-  <span style={{ color: "#8b5cf6", fontSize: 22 }}>⚙️</span>
+  <span style={{ color: "#8b5cf6", fontSize: 22 }}>
+  ⚙️
+</span>
+
 </div>
+    <div
+  style={{
+    background:
+      "linear-gradient(135deg,#0f172a,#111827,#1e293b)",
       <div
   style={{
     background:
