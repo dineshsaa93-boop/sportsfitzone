@@ -150,7 +150,9 @@ export default function HomeDashboardV2({
     boxShadow: "0 0 20px rgba(57,255,20,.08)"
   }}
 >
-  <span style={{ color: "#7a8497", fontSize: 22 }}>🔍</span>
+  <span style={{ color:"#7a8497", fontSize:22 }}>
+  🔍
+</span>
 
   <input
     placeholder="Search workouts, plans, tournaments..."
