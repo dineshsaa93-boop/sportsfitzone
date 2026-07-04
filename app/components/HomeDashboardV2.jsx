@@ -229,6 +229,84 @@ export default function HomeDashboardV2({
 </div>
 </div>
 </div>
-  
+  <div
+  style={{
+    display: "grid",
+    gridTemplateColumns: "1fr 1fr",
+    gap: 18,
+    marginTop: 22
+  }}
+>
+<div
+  style={{
+    background: "#0d1324",
+    borderRadius: 24,
+    padding: 18,
+    border: "1px solid rgba(153,69,255,.25)",
+    boxShadow: "0 0 30px rgba(153,69,255,.15)"
+  }}
+>
+  <div
+    style={{
+      width: 90,
+      height: 90,
+      margin: "0 auto 14px",
+      borderRadius: "50%",
+      background:
+        "linear-gradient(135deg,#7b2cff,#c44dff)",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      fontSize: 42
+    }}
+  >
+    🛡️
+  </div>
+
+  <p
+    style={{
+      color: "#b26cff",
+      margin: 0,
+      fontSize: 13
+    }}
+  >
+    YOUR RANK
+  </p>
+
+  <h2
+    style={{
+      color: "#fff",
+      margin: "6px 0"
+    }}
+  >
+    LEVEL 1 ATHLETE
+  </h2>
+
+  <p
+    style={{
+      color: "#9ca3af",
+      marginBottom: 18
+    }}
+  >
+    Top 15% Among All Athletes
+  </p>
+
+  <div
+    style={{
+      height: 8,
+      borderRadius: 10,
+      background: "#1c2338",
+      overflow: "hidden"
+    }}
+  >
+    <div
+      style={{
+        width: "72%",
+        height: "100%",
+        background:
+          "linear-gradient(90deg,#8b5cf6,#c026d3)"
+      }}
+    />
+  </div>
   );
 }
