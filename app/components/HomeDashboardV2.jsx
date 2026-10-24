@@ -136,17 +136,17 @@ export default function HomeDashboardV2({
   <p style={{ color: "#9ca3af" }}>
     OPTIMAL
   </p>
-</div>
+<div
   style={{
     marginTop: 20,
     marginBottom: 24,
     display: "flex",
     alignItems: "center",
     background: "#0d1324",
-    border: "1px solid rgba(57,255,20,.15)",
+    border: "1px solid rgba(57,255,20,.1)",
     borderRadius: 18,
     padding: "14px 18px",
-    boxShadow: "0 0 20px rgba(57,255,20,.08)"
+    boxShadow: "0 0 20px rgba(57,255,20,.05)",
   }}
 >
   <span style={{ color: "#7a8497", fontSize: 22 }}>🔍</span>
