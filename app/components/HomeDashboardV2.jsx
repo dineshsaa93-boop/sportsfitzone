@@ -168,8 +168,7 @@ export default function HomeDashboardV2({
 </div>
       <div
   style={{
-    background:
-      "linear-gradient(135deg,#0f172a,#111827,#1e293b)",
+    background: "linear-gradient(135deg, #0f172a, #1e293b)",
     borderRadius: 30,
     padding: 24,
     marginBottom: 25,
