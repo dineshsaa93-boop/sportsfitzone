@@ -100,7 +100,6 @@ export default function HomeDashboardV2({
   </div>
       
 </header>
-      <div
         <div
   style={{
     marginTop: 20,
